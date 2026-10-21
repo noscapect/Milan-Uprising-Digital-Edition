@@ -2,7 +2,7 @@
 
 Onafhankelijk project voor een modulair digitaal tabletop-platform met Vampire: The Masquerade – Milan Uprising als eerste afzonderlijke game-module. Doel is eerst een zo getrouw mogelijke functionele 2D-reproductie voor privégebruik, bij voorkeur met behoud van de officiële app.
 
-De doelarchitectuur scheidt generieke engine, spelregels, spelgegevens, gebruikersinterface en grafische presentatie. De volgorde is **2D-reproductie → automatisering → optionele 3D-uitbreiding**. Een toekomstige sandboxmodus ondersteunt handmatig spelen zonder volledige regels. Andere spellen en uitgeversreleases kunnen later via eigen modules en gegevenspakketten worden toegevoegd. Dit is het ontwerp; de huidige demo is nog niet naar deze lagen gemigreerd.
+De architectuur scheidt generieke engine, spelregels, spelgegevens, gebruikersinterface en grafische presentatie. De volgorde is **2D-reproductie → automatisering → optionele 3D-uitbreiding**. De eerste doorsnede is geïmplementeerd: een configureerbare engine met afzonderlijke Milan-sandboxmodule en JSON-profiel. Andere spellen en uitgeversreleases kunnen later via eigen modules en gegevenspakketten worden toegevoegd. Volledige regels, kaarten en scenario's zijn nog niet geïmplementeerd.
 
 **Status: lokaal bordprototype. Geen werkende vervanging van Teburu en geen verbinding met de officiële app.** Emulatie is onbewezen. De haalbaarheid van volledige bordvervanging is nog onbekend.
 
@@ -19,19 +19,26 @@ Open http://127.0.0.1:5178. Stop met Ctrl+C. Testen: `node --test`. Als npm besc
 
 ## Prototype gebruiken
 
-Kies een van vier neutrale pionnen en klik op een cel om die te plaatsen of verplaatsen. Iedere cel ondersteunt één pion. Verwijder de geselecteerde pion, draai een demo-d6/d10, of herstel de beginsituatie. Exporteer de bordstand en het eigen eventlog als JSON. Met Tab en Enter zijn de bordcellen bedienbaar. De sessie staat alleen in het geheugen; herladen wist de stand. JSON importeren is nog niet beschikbaar.
+Kies een van vier neutrale pionnen en klik op een cel om die te plaatsen of verplaatsen. Iedere cel ondersteunt één pion in dit profiel; de engine ondersteunt ook andere zones en capaciteiten. Verwijder de geselecteerde pion, draai een demo-d6/d10, of herstel de beginsituatie. Exporteer de sessie en het eigen eventlog als JSON (tabletop-session v1). Met Tab en Enter zijn de bordcellen bedienbaar. De sessie staat alleen in het geheugen; herladen wist de stand. JSON importeren is nog niet beschikbaar. De oorspronkelijke demo en haar oude exportformaat blijven beschikbaar op http://127.0.0.1:5178/legacy/index.html.
 
 De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1–H5 is onze eigen coördinatienotatie; officiële sensorvolgorde, oriëntatie en Milan-locatiemapping zijn onbekend. Het prototype implementeert geen spelregels, verhaal of campagne en is nog geen speelbare digitale editie.
 
 ## Projectstructuur
 
-- `src/model.js`: bordmodel en lokale demo-events, los van transport.
-- `index.html`, `src/style.css`, `src/app.js`: lokale interface.
+- `src/engine/`: headless zone-/componentmodel, profielvalidatie en atomische opdrachten.
+- `src/application/`: sessiebediening, projecties en exportcontract.
+- `src/games/milan-uprising/`: afzonderlijke module, uitsluitend sandbox.
+- `data/games/milan-uprising/demo.json`: neutrale componenten en sensorprofiel.
+- `src/ui/`, `src/presentation/2d/`: bediening en aparte bordrenderer.
+- `src/adapters/`: cryptografische demo-worpen en JSON-download.
+- `src/app.js`: samenstellen van module, gegevens en adapters.
+- `legacy/`, `src/model.js`: behouden oorspronkelijke demo/referentiemodel.
 - `docs/PLAN.md`: fasen en acceptatiecriteria.
 - `docs/ONDERZOEK.md`: bronnen, feiten, onzekerheden en onderzoeksvragen.
 - `docs/ARCHITECTUUR.md`: laaggrenzen, contracten en presentatie-onafhankelijke engine.
 - `docs/BESLUITEN.md`: gewijzigde architectuurbeslissingen en behoud van bestaande werkzaamheden.
-- `tests/model.test.js`: modelcontroles.
+- `docs/CONTRACTEN.md`: v1-contracten, componentinventaris en referentiesessie.
+- `tests/`: oorspronkelijke regressies plus engine-, module- en replaycontroles.
 - `AGENTS.md`: instructies voor verder werken in Codex.
 
 ## Grenzen en rechten

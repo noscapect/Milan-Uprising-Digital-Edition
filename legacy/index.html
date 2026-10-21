@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Milan Uprising — lokaal prototype</title><link rel="stylesheet" href="style.css"></head>
+<body><main><header><p class="eyebrow">DIGITAL EDITION · PROTOTYPE 0.1</p><h1>Milan Uprising</h1><p class="intro">Een virtuele tafel voor het onderzoek naar een digitaal speelbord.</p><p class="badge">Lokale demo · officiële app niet verbonden</p></header>
+<div class="layout"><section class="surface"><div class="section-title"><h2>Virtueel bord</h2><span>8 × 5 sensoren</span></div><p>Sensorindeling bevestigd. Locaties en oriëntatie in Milan zijn nog niet geverifieerd.</p><div class="scroll"><div id="board" aria-label="Virtueel sensorbord"></div></div><p id="status" role="status">Kies een pion en daarna een cel.</p></section>
+<aside><section><h2>Pionnen</h2><label for="piece">Geselecteerde pion</label><select id="piece"><option value="p1">Pion 1 · koraal</option><option value="p2">Pion 2 · goud</option><option value="p3">Pion 3 · mint</option><option value="p4">Pion 4 · lila</option></select><p>Klik een cel om te plaatsen of verplaatsen. Eén pion per sensor.</p><button id="remove">Verwijder geselecteerde pion</button></section>
+<section><h2>Demo-dobbelstenen</h2><p>Lokale toevalswaarden, zonder spelregels of hardwarekoppeling.</p><div class="actions"><button id="d6">Gooi d6</button><button id="d10">Gooi d10</button></div><output id="roll" aria-live="polite">—</output></section>
+<section><h2>Sessie</h2><div class="actions"><button id="export">Exporteer JSON</button><button id="reset">Leeg bord</button></div><p>Alleen in het geheugen. Herladen wist de sessie.</p></section></aside></div>
+<section class="history"><h2>Activiteiten <small id="count">0</small></h2><ol id="events"></ol></section><footer>Onafhankelijke privéproef · neutrale demo-inhoud · geen Teburu-emulatie</footer></main>
+<script type="module" src="app.js"></script></body></html>
+

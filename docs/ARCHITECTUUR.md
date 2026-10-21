@@ -1,17 +1,17 @@
 # Architectuur — modulair tabletop-platform
 
-Doelarchitectuur vastgesteld op 21 oktober 2026; nog niet geïmplementeerd. Milan Uprising wordt de eerste afzonderlijke game-module. Prioriteit: getrouwe functionele 2D-reproductie, daarna automatisering en optionele visuele uitbreiding.
+Architectuur vastgesteld en eerste sandboxdoorsnede geïmplementeerd op 21 oktober 2026. Milan Uprising heeft een afzonderlijke game-module met neutrale profieldata; echte spelregels en locaties ontbreken nog. Prioriteit: getrouwe functionele 2D-reproductie, daarna automatisering en optionele visuele uitbreiding.
 
 ## Bestaand prototype
 
-Huidig: browserinterface → bordmodel → eigen lokaal eventlog → JSON-download.
+Huidig: browserinvoer → applicatie → generieke engine en sandboxmodule → toestand/events → projectie → 2D-renderer. JSON-download is een aparte adapter.
 Geen netwerktransport, BLE of officiële app-integratie in de applicatie.
 
 De lokale Node-server serveert alleen expliciet toegestane statische bestanden op loopback.
 
-Het model bewaart vier synthetische pion-ID's en nulgebaseerde coördinaten. Iedere cel bevat maximaal één pion, conform de gedocumenteerde sensorcapaciteit; dit is geen uitspraak over Milan-spelregels. Coördinaten zijn niet naar hardware vertaald.
+Het oude model met vier pionnen en coördinaten blijft beschikbaar in legacy/ en src/model.js. De actieve engine gebruikt component- en zone-ID's; aantallen en capaciteit komen uit gevalideerde profieldata. Dit is geen uitspraak over Milan-spelregels. Er is geen hardwaremapping.
 
-Het prototype blijft als werkende referentie behouden tijdens een latere stapsgewijze migratie. Vaste pionnen, rastervorm en bezetting zijn huidige demo-beperkingen, geen universele engine-eisen.
+De oorspronkelijke demo blijft als referentie behouden. De actieve Milan-demo is naar de lagen hieronder gemigreerd. Een synthetisch profiel met drie onregelmatige zones en capaciteit groter dan één wordt headless getest; dit bewijst geen tweede complete game of 3D-ondersteuning.
 
 ## Lagen en afhankelijkheden
 
@@ -56,7 +56,7 @@ src/presentation/3d/         # pas in fase 3
 src/adapters/                # opslag, toeval, optionele integratie
 ```
 
-Dit is een mapplan. Maak nu geen lege modules of extra toolchain. Begin met contracten en één werkende doorsnede, behoud bestaande functies tijdens migratie.
+De eerste modules in dit mapplan bestaan nu; 3D ontbreekt bewust. Geen extra toolchain. Contracten en huidige beperkingen staan in CONTRACTEN.md. Opslagimport, complexe componenttypen, regels, stapelvolgorde en oriëntatie volgen later.
 
 ## App en hardware
 

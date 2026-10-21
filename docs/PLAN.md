@@ -1,26 +1,27 @@
 # Gefaseerd ontwikkelplan
 
-Bijgesteld op 21 oktober 2026: generiek tabletop-platform met Milan als eerste game-module. De eerdere uitvoeringsvolgorde hieronder is vervangen door de volgende drie fasen. Bestaande resultaten blijven behouden; de nieuwe architectuur is nog niet geïmplementeerd.
+Bijgesteld op 21 oktober 2026: generiek tabletop-platform met Milan als eerste game-module. De eerdere uitvoeringsvolgorde hieronder is vervangen door de volgende drie fasen. Bestaande resultaten blijven behouden. De eerste sandboxdoorsnede is geïmplementeerd; geverifieerde Milan-reproductie blijft open. Zie CONTRACTEN.md.
 
 ## Fase 1 — Getrouwe digitale reproductie in 2D
 
 ### 1A — Eerstvolgend: specificatie vóór implementatie
 
 - [ ] Inventariseer fysieke componenten, opstelling, handelingen en Milan-locaties met legale bronnen; markeer geverifieerd, onbekend en placeholder.
-- [ ] Definieer een beperkte referentiesessie met pionnen, kaarten/fiches en worpen. Verzin geen ontbrekende regels of scenario-inhoud.
-- [ ] Specificeer engineopdrachten, toestand, events, game-modulecontract en presentatieprojecties volgens ARCHITECTUUR.md.
+- [x] Definieer de bestaande demoreferentiesessie met pionnen en worpen; zie CONTRACTEN.md.
+- [ ] Breid de referentiesessie uit met kaarten/fiches zodra inventaris, schemas en gebruiksrechten zijn vastgesteld. Verzin geen ontbrekende regels of scenario-inhoud.
+- [x] Specificeer engineopdrachten, toestand, events, game-modulecontract en presentatieprojecties volgens ARCHITECTUUR.md.
 - [ ] Specificeer versieerbare schema's voor borden, kaarten, fiches, personages, scenario's en releases met herkomst/rechten.
-- [ ] Leg vast welke toestand handmatig, door de Milan-module of eventueel door de officiële app wordt beheerd.
+- [x] Leg vast welke toestand handmatig, door de Milan-module of eventueel door de officiële app wordt beheerd.
 
 Acceptatie: reviewbare contracten en synthetische voorbeelden zonder Milan-afhankelijkheid in de kern; geverifieerde reproductiescope en open hiaten zijn traceerbaar.
 
 ### 1B — Kern, module en 2D-doorsnede
 
-- [ ] Migreer het bestaande prototype stapsgewijs naar engine, applicatie, Milan-module, data, UI, presentatie en adapters; behoud functies en regressietests.
-- [ ] Maak rastervorm, componenten, bezetting en dobbelsteentypen configureerbaar. Behandel 8 × 5 als sensorprofiel, niet als universeel spelbord.
-- [ ] Realiseer handmatige tafelopdrachten en bereid expliciete sandboxmodus voor.
-- [ ] Toets met een tweede synthetisch profiel met afwijkende geometrie/bezetting, zonder kernwijziging.
-- [ ] Rond browsercontrole en toetsenbordbediening af; de eerdere visuele controle staat nog open.
+- [x] Migreer het bestaande prototype stapsgewijs naar engine, applicatie, Milan-module, data, UI, presentatie en adapters; behoud functies en regressietests.
+- [x] Maak rastervorm, componenten, bezetting en dobbelsteentypen configureerbaar. Behandel 8 × 5 als sensorprofiel, niet als universeel spelbord.
+- [x] Realiseer handmatige tafelopdrachten en bereid expliciete sandboxmodus voor.
+- [x] Toets met een tweede synthetisch profiel met afwijkende geometrie/bezetting, zonder kernwijziging.
+- [x] Rond browsercontrole en toetsenbordbediening af; de eerdere visuele controle is nu uitgevoerd, zie VALIDATIE.md.
 
 Acceptatie: engine en module werken headless; UI en 2D gebruiken dezelfde opdrachten/projecties. Een neutrale doorsnede telt nog niet als geverifieerde Milan-reproductie.
 

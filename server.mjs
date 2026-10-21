@@ -1,6 +1,19 @@
 import http from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 const files = new Map([['/', ['index.html','text/html']], ['/index.html',['index.html','text/html']], ['/src/style.css',['src/style.css','text/css']], ['/src/app.js',['src/app.js','text/javascript']], ['/src/model.js',['src/model.js','text/javascript']]]);
+// Register only public assets at startup; never serve repository/private files.
+async function registerAssets(directory) {
+  for (const entry of await readdir(new URL(`${directory}/`, import.meta.url), { withFileTypes: true })) {
+    const path = `${directory}/${entry.name}`;
+    if (entry.isDirectory()) await registerAssets(path);
+    else if (entry.isFile()) {
+      const extension = entry.name.split('.').at(-1);
+      const type = { js: 'text/javascript', css: 'text/css', json: 'application/json', html: 'text/html' }[extension];
+      if (type) files.set(`/${path}`, [path, type]);
+    }
+  }
+}
+for (const directory of ['src', 'data/games', 'legacy']) await registerAssets(directory);
 const server = http.createServer(async (req, res) => {
   const entry = files.get(req.url?.split('?')[0]);
   if (!entry || !['GET','HEAD'].includes(req.method)) { res.writeHead(404); res.end('Niet gevonden'); return; }

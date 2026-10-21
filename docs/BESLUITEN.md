@@ -1,6 +1,6 @@
 # Architectuurbeslissingen — 21 oktober 2026
 
-Status: vastgesteld ontwerp; implementatie volgt later.
+Status: eerste modulaire sandboxdoorsnede geïmplementeerd. Regels, fysieke inhoud, 3D en appintegratie blijven open.
 
 | Onderwerp | Vorige richting | Nieuwe beslissing |
 | --- | --- | --- |
@@ -14,6 +14,6 @@ Status: vastgesteld ontwerp; implementatie volgt later.
 | Opslag | JSON-demo-export | Versieerbare saves en gevalideerde import in fase 2; demoformaat blijft apart. |
 | Uitbreiding | Andere spellen niet gespecificeerd | Modulecontracten en pakketten; generiek ontwerp toetsen met tweede synthetisch profiel. |
 
-Alle bestaande code, tests, neutrale vormgeving, prototypefuncties en onderzoeksbevindingen blijven behouden. Deze wijziging betreft uitsluitend planning, architectuurdocumentatie en ontwikkelinstructies. Sensorverificatie bewijst geen Milan-locatiemapping of appcompatibiliteit. Rechten- en beveiligingsgrenzen blijven gelden.
+Alle bestaande code, tests, neutrale vormgeving, prototypefuncties en onderzoeksbevindingen blijven behouden. De actieve demo gebruikt nu de gescheiden lagen; legacy/ bewaart de oorspronkelijke demo. CONTRACTEN.md beschrijft het geïmplementeerde contract en de open fysieke inventaris. Sensorverificatie bewijst geen Milan-locatiemapping of appcompatibiliteit. Rechten- en beveiligingsgrenzen blijven gelden.
 
 Afweging: leg kleine expliciete contracten vast en migreer stapsgewijs. Bouw geen algemene regelscripting, pluginmarktplaats of 3D-toolchain voordat concrete spelhandelingen dit nodig maken.
