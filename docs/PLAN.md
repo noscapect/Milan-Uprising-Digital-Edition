@@ -1,12 +1,70 @@
 # Gefaseerd ontwikkelplan
 
+Bijgesteld op 21 oktober 2026: generiek tabletop-platform met Milan als eerste game-module. De eerdere uitvoeringsvolgorde hieronder is vervangen door de volgende drie fasen. Bestaande resultaten blijven behouden; de nieuwe architectuur is nog niet geïmplementeerd.
+
+## Fase 1 — Getrouwe digitale reproductie in 2D
+
+### 1A — Eerstvolgend: specificatie vóór implementatie
+
+- [ ] Inventariseer fysieke componenten, opstelling, handelingen en Milan-locaties met legale bronnen; markeer geverifieerd, onbekend en placeholder.
+- [ ] Definieer een beperkte referentiesessie met pionnen, kaarten/fiches en worpen. Verzin geen ontbrekende regels of scenario-inhoud.
+- [ ] Specificeer engineopdrachten, toestand, events, game-modulecontract en presentatieprojecties volgens ARCHITECTUUR.md.
+- [ ] Specificeer versieerbare schema's voor borden, kaarten, fiches, personages, scenario's en releases met herkomst/rechten.
+- [ ] Leg vast welke toestand handmatig, door de Milan-module of eventueel door de officiële app wordt beheerd.
+
+Acceptatie: reviewbare contracten en synthetische voorbeelden zonder Milan-afhankelijkheid in de kern; geverifieerde reproductiescope en open hiaten zijn traceerbaar.
+
+### 1B — Kern, module en 2D-doorsnede
+
+- [ ] Migreer het bestaande prototype stapsgewijs naar engine, applicatie, Milan-module, data, UI, presentatie en adapters; behoud functies en regressietests.
+- [ ] Maak rastervorm, componenten, bezetting en dobbelsteentypen configureerbaar. Behandel 8 × 5 als sensorprofiel, niet als universeel spelbord.
+- [ ] Realiseer handmatige tafelopdrachten en bereid expliciete sandboxmodus voor.
+- [ ] Toets met een tweede synthetisch profiel met afwijkende geometrie/bezetting, zonder kernwijziging.
+- [ ] Rond browsercontrole en toetsenbordbediening af; de eerdere visuele controle staat nog open.
+
+Acceptatie: engine en module werken headless; UI en 2D gebruiken dezelfde opdrachten/projecties. Een neutrale doorsnede telt nog niet als geverifieerde Milan-reproductie.
+
+### 1C — Reproductie verifiëren
+
+- [ ] Vergelijk de referentiesessie stap voor stap met fysiek spel en toegestane officiële documentatie.
+- [ ] Onderbouw locatie-, component- en actiegedrag; documenteer verschillen en ontbrekende informatie/rechten.
+- [ ] Lever functionele handmatige 2D-reproductie van de geverifieerde scope met zichtbare beperkingen.
+
+Acceptatie: ondersteunde fysieke handelingen hebben aantoonbare digitale equivalenten. Claim geen volledige reproductie of officiële appcompatibiliteit bij open hiaten. Ontbrekende inhoud blokkeert die inhoud, niet de generieke engine.
+
+## Fase 2 — Automatisering en duurzame sessies
+
+- [ ] Implementeer Milan-regels, beurten, kaartacties, doelen en validatie uitsluitend in de game-module, met bronverwijzingen en tests per regelgroep.
+- [ ] Maak sandbox volwaardig met handmatige handelingen en structurele controles zonder volledige spelregelautomatisering.
+- [ ] Voeg versieerbare opslag, gevalideerde import, migraties en herstel toe; behandel de huidige demo-export als apart legacyformaat.
+- [ ] Bewaar worpuitkomsten/events en toets deterministische toestandsovergangen en replay.
+- [ ] Overweeg AI na stabiele regels; AI gebruikt hetzelfde opdrachtcontract als spelers.
+
+Acceptatie: regels zonder grafische dependencies, fouten zonder gedeeltelijke mutatie, hervatbare sessies en blijvend bruikbare sandbox.
+
+## Fase 3 — Optionele visuele uitbreiding
+
+- [ ] Voeg 3D toe boven dezelfde projecties; map logische zones naar presentatieposities.
+- [ ] Voeg optionele animaties, effecten en interactieve omgevingen toe zonder regeluitkomsten van timing afhankelijk te maken.
+- [ ] Behoud 2D en toets prestaties/toegankelijkheid.
+
+Acceptatie: dezelfde referentiesessie en worpen leveren headless, met 2D en met 3D dezelfde toestand op zonder herschrijven van spelregels.
+
+## Zelfstandig onderzoeksspoor — officiële app en Teburu
+
+De eerdere compatibiliteits- en hardwaretaken blijven open en staan hieronder ter behoud. Ze mogen naast fase 1 lopen. Appbehoud blijft voorkeur; ontbrekende interoperabiliteit blokkeert de generieke kern of sandbox niet. Een echte adapter vereist een toegestane interface en reproduceerbare appvalidatie. Contracten en mocks bevatten eigen events, geen verondersteld Teburu-protocol.
+
+## Bewaarde oorspronkelijke werkpakketten
+
+Onderstaande nummers zijn historische werkpakketnummers, niet de nieuwe ontwikkelfasen. Opslag/gebruikersgemak schuiven naar fase 2; de eerdere uitsluiting van volledige regels is vervangen door bovenstaande fasering.
+
 ## 0 — Fundament (gereed)
 - [x] Nederlandse documentatie en Codex-instructies.
 - [x] Sensorindeling via fabrikant verifiëren; eigen notatie onderscheiden.
 - [x] Lokaal 8 × 5 bord met pionnen, demo-dobbelstenen en export.
 - [x] Domeinmodel isoleren en grenzen/bezetting testen.
 
-## 1 — Compatibiliteitsroute onderzoeken (eerstvolgend)
+## Werkpakket 1 — Compatibiliteitsroute onderzoeken
 - [ ] Zoek officiële SDK/API, ontwikkelaarsondersteuning of gedocumenteerde alternatieve invoer. Leg ook een negatieve zoekuitkomst vast; geen API veronderstellen.
 - [ ] Inventariseer met eigenaar appplatform/versie, beschikbare Core, bord en dobbelstenen wanneer hardwaretests nodig zijn.
 - [ ] Controleer of de officiële app een bruikbare handmatige invoermodus heeft.
@@ -33,4 +91,4 @@ Acceptatie: reproduceerbare end-to-end sessie met echte app, versies en beperkin
 - [ ] Alleen met toestemming eigen locatieprofiel/kaart toevoegen, inclusief herkomst.
 - [ ] Installatie/starten vereenvoudigen; toegankelijkheid en grotere schermen toetsen.
 
-Acceptatie: gebruiker kan starten, bord beheren en een sessie herstellen; compatibiliteitsstatus blijft zichtbaar. Volledige spelimplementatie valt buiten deze eerste scope.
+Acceptatie: gebruiker kan starten, bord beheren en een sessie herstellen; compatibiliteitsstatus blijft zichtbaar. Regelautomatisering volgt nu in fase 2 van de herziene planning.

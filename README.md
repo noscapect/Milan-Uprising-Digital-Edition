@@ -1,6 +1,8 @@
 # Milan Uprising: Digital Edition
 
-Onafhankelijk privé-onderzoeksproject om het fysieke Teburu-speelbord voor Vampire: The Masquerade – Milan Uprising digitaal te vervangen, bij voorkeur met behoud van de officiële app.
+Onafhankelijk project voor een modulair digitaal tabletop-platform met Vampire: The Masquerade – Milan Uprising als eerste afzonderlijke game-module. Doel is eerst een zo getrouw mogelijke functionele 2D-reproductie voor privégebruik, bij voorkeur met behoud van de officiële app.
+
+De doelarchitectuur scheidt generieke engine, spelregels, spelgegevens, gebruikersinterface en grafische presentatie. De volgorde is **2D-reproductie → automatisering → optionele 3D-uitbreiding**. Een toekomstige sandboxmodus ondersteunt handmatig spelen zonder volledige regels. Andere spellen en uitgeversreleases kunnen later via eigen modules en gegevenspakketten worden toegevoegd. Dit is het ontwerp; de huidige demo is nog niet naar deze lagen gemigreerd.
 
 **Status: lokaal bordprototype. Geen werkende vervanging van Teburu en geen verbinding met de officiële app.** Emulatie is onbewezen. De haalbaarheid van volledige bordvervanging is nog onbekend.
 
@@ -27,7 +29,8 @@ De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1�
 - `index.html`, `src/style.css`, `src/app.js`: lokale interface.
 - `docs/PLAN.md`: fasen en acceptatiecriteria.
 - `docs/ONDERZOEK.md`: bronnen, feiten, onzekerheden en onderzoeksvragen.
-- `docs/ARCHITECTUUR.md`: toekomstige integratiegrens.
+- `docs/ARCHITECTUUR.md`: laaggrenzen, contracten en presentatie-onafhankelijke engine.
+- `docs/BESLUITEN.md`: gewijzigde architectuurbeslissingen en behoud van bestaande werkzaamheden.
 - `tests/model.test.js`: modelcontroles.
 - `AGENTS.md`: instructies voor verder werken in Codex.
 
