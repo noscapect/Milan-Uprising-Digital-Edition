@@ -1,5 +1,13 @@
 # Validatie — 21 oktober 2026
 
+## Interactiestudie 0.3
+
+- Dertien tests geslaagd: eerdere negen plus gescheiden identiteit/contact/positie, gedeelde zones, herhaalde interactie, foutafhandeling en expliciet verwijderen.
+- Browser: contact zonder registratie geweigerd; p1 en p2 na afzonderlijke registratie via dezelfde A1-sensor in dezelfde zone geplaatst; vrijgeven behield beide posities. Herhaald contact via Enter maakte een interactie-event zonder verplaatsing. D10 en JSON-download werkten.
+- Profielkeuze met expliciete startknop getest: referentieprofiel toont d6/d10 en normale pionplaatsing; simulatorcontrols verdwijnen. Profielstart wist bewust de sessie, vooraf zichtbaar aangegeven.
+- Officiële Windows-download via HEAD gecontroleerd: HTTP 200, doel VTMTEBURU_v1.0.9.zip. Geen appdownload/installatie/runtime- of compatibiliteitstest uitgevoerd.
+- De inputtrace is eigen demo-invoer, geen hardwarecapture. Echte sensormapping, protocol en officiële appverbinding blijven onbekend.
+
 ## Modulaire doorsnede 0.2
 
 - `node --test`: negen tests geslaagd, inclusief oorspronkelijke regressies, headless referentiesessie, tweede profiel met afwijkende geometrie/capaciteit, ongeldige data/opdrachten, revisie/actorcontrole, beschermde snapshots en deterministische replay met vastgelegde worpen.

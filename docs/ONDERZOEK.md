@@ -2,6 +2,12 @@
 
 Gecontroleerd: 21 oktober 2026. Openbare informatie bewijst geen interoperabiliteit.
 
+## Verdieping en correcties
+
+Zie [TEBURU-DEEPSEARCH.md](TEBURU-DEEPSEARCH.md) voor het uitgevoerde bronnenonderzoek en de toegepaste wijzigingen. Een officiële SDK-aanvraagroute bestaat; ondersteuning voor virtuele invoer in bestaande apps is niet vastgesteld. Sensorcontact, identiteit en blijvende spelpositie zijn afzonderlijke zaken. De één-pion-per-sensorgrens is geen universele één-pion-per-zonegrens. De officiële Milan-versiegeschiedenis noemt digitale worpen en nieuwere diagnostiek via de aparte Teburu-app. Oudere algemene hardwareclaims moeten daarom per appversie worden getoetst.
+
+Einddoel: ongewijzigde officiële game-app gebruiken zonder fysieke spelonderdelen. Sandbox is een onderzoeksinstrument. Echte Core-emulatie en de terugkoppeling van app-toestand naar de virtuele tafel blijven onbewezen.
+
 ## Bevestigde basis
 
 Primaire bron: [Xplored — Teburu Hardware](https://teburu.zendesk.com/hc/en-us/articles/25458765821979-Teburu-Hardware).
@@ -31,4 +37,4 @@ De [officiële gamepagina](https://games.teburu.com/vtm-milan-uprising) beschrij
 
 ## Beslisregel
 
-Een BLE-radio of bekend raster is onvoldoende om een Core te emuleren. UUID's, payloads, identity en eventuele beveiliging zijn hier niet vastgesteld. Er is nog geen ondersteunde API vastgesteld in dit onderzoek. Kies bij ontbreken van een toegestane integratieroute een handmatige companion/sandbox; claim dan niet dat het fysieke bord is vervangen. Geen app-extractie, firmwarepatching of beveiligingsomzeiling.
+Een BLE-radio of bekend raster is onvoldoende om een Core te emuleren. UUID's, payloads, identity en eventuele beveiliging zijn hier niet vastgesteld. De SDK bestaat, maar is niet aangevraagd of beoordeeld als oplossing voor bestaande officiële apps. Zonder toegestane integratieroute blijft het einddoel onvervuld; gebruik sandbox alleen als expliciet tussenresultaat. Geen app-extractie, firmwarepatching of beveiligingsomzeiling.

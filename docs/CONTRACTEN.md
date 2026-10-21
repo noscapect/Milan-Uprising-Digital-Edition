@@ -1,5 +1,13 @@
 # Contracten v1 — eerste doorsnede
 
+## Uitbreiding 0.3 — lokale interactiestudie
+
+Nieuw opdracht-type component.interact {componentId, zoneId}: vereist dat de pion al in de genoemde zone staat, legt alleen een intentie vast en verandert geen plaatsing. De sandbox voert geen Milan-actie of regel uit. Bestaande commandotypes en referentieprofiel blijven behouden.
+
+De virtual-core-adapter gebruikt onze eigen expliciete demomapping en demopion-ID's. Register selecteert identiteit, touch maakt een eigen domeinopdracht en release beëindigt alleen tijdelijk contact. Contact moet worden vrijgegeven vóór volgende invoer/identiteitsselectie. Dit is een vereenvoudigde testworkflow, geen vastgestelde Core-statemachine. Capabilities tonen BLE/RFID/appverbinding als false. Trace is eigen simulatorlog, geen pakketdump.
+
+Het interaction-study-pakket biedt d10 en capaciteit vier als demo-keuze; neutral-demo blijft ongewijzigd. Export krijgt bij de simulator een inputSimulation-veld naast de bestaande sessie-envelop. Import/herstel blijven niet ondersteund. Er worden geen officiële RFID-identiteiten aangemaakt, gekloond of geëxporteerd.
+
 Vastgelegd vóór migratie. Scope: uitsluitend bestaande neutrale demo; geen nieuwe aannames over het fysieke spel. Engineversie 1, modulecontract 1, gegevensschema 1. Uitbreidingen vereisen expliciete versie- en compatibiliteitskeuzes.
 
 ## Inventaris en autoriteit

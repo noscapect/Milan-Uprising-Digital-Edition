@@ -13,7 +13,7 @@ export function renderBoard(container, projection, onZone) {
     cell.dataset.zone = id; cell.className = 'cell';
     const colorIndex = projection.components.findIndex(c => c.id === zone.occupants[0]?.id);
     if (colorIndex >= 0) cell.classList.add(`p${colorIndex % 4 + 1}`);
-    cell.textContent = zone.label + (zone.occupants.length ? ` · ${zone.occupants.map(c => c.label).join(', ')}` : '');
+    cell.textContent = zone.label + (zone.occupants.length ? ` · ${zone.occupants.map(c => projection.components.findIndex(item => item.id === c.id) + 1).join(' + ')}` : '');
     cell.setAttribute('aria-label', `${zone.label}, ${zone.occupants.map(c => c.label).join(', ') || 'leeg'}`);
     cell.onclick = () => onZone(zone.id);
     return cell;

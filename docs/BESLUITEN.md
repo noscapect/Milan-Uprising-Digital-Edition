@@ -1,5 +1,15 @@
 # Architectuurbeslissingen — 21 oktober 2026
 
+## Verdieping na bronnenonderzoek
+
+- Officiële app gebruiken zonder fysieke spelonderdelen is het einddoel; sandbox en eigen regels zijn ondersteunend, geen stilzwijgende vervanging van dat doel.
+- Sensorcontact is niet hetzelfde als spelzonebezetting. De nieuwe studie scheidt die, behoudt de oorspronkelijke demo en laat meerdere demopionnen één zone delen.
+- SDK-aanvraagroute is gevonden, maar niet bewezen geschikt voor bestaande apps en niet aangevraagd. Eventuele vertrouwelijke inhoud blijft buiten de publieke repo.
+- Officiële Milan-digitale dice zijn de eerste te testen route; hardwaredice nabootsen krijgt geen automatische prioriteit.
+- Een browser-Central API bewijst geen virtuele Core/peripheral. Transportkeuze wacht op bewijs en toegestane interfaces.
+
+Onderbouwing: TEBURU-DEEPSEARCH.md. Echte appcompatibiliteit blijft onbewezen.
+
 Status: eerste modulaire sandboxdoorsnede geïmplementeerd. Regels, fysieke inhoud, 3D en appintegratie blijven open.
 
 | Onderwerp | Vorige richting | Nieuwe beslissing |

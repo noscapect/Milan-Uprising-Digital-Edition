@@ -60,6 +60,10 @@ De eerste modules in dit mapplan bestaan nu; 3D ontbreekt bewust. Geen extra too
 
 ## App en hardware
 
+Het einddoel is nu expliciet de officiële app gebruiken zonder fysieke spelonderdelen. De app is daarbij regel-/campagneautoriteit; de engine levert de generieke virtuele tafel en presentatie. Toekomstige app-updates naar onze tafel moeten via een bewezen adapter binnenkomen, niet via dubbel uitgevoerde Milan-regels. De zelfstandige sandbox blijft ondersteunend.
+
+De lokale virtual-core-adapter is uitsluitend een gedragssimulator. Identiteitsselectie, tijdelijk sensorcontact en logische zoneplaatsing zijn gescheiden. Vrijgeven van een sensor verwijdert geen pion. Herhaald contact geeft een interactie-intentie, geen spelregelactie. Werkelijke hardware-identiteitstoewijzing, sensorvolgorde en handshake zijn niet gereproduceerd. Publieke bronnen en beperkingen staan in TEBURU-DEEPSEARCH.md.
+
 Behoud van de officiële app blijft voorkeur, maar is geen engine-afhankelijkheid. Voeg pas een adapter toe zodra een gedocumenteerde/toegestane interface bewezen is. De UI maakt geen GATT-payloads. Houd mock, hardware-aanwezigheid en bewezen appcompatibiliteit afzonderlijk zichtbaar. Onderzoek blijft in ONDERZOEK.md; geen beveiligingsomzeiling of beschermde assets zonder toestemming.
 
 ## Acceptatie van de architectuur

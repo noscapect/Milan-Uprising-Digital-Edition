@@ -1,5 +1,19 @@
 # Gefaseerd ontwikkelplan
 
+## Hoofddoel en eerstvolgende integratiemijlpalen
+
+De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke spelonderdelen met de virtuele tafel werken. De app beheert regels en verhaal. Een eigen geautomatiseerde Milan-implementatie is optioneel en heeft lagere prioriteit dan een toegestane officiële-appbrug. De eerdere fasen hieronder beschrijven de tafelarchitectuur, niet de voltooiing van deze brug.
+
+- [x] Verdiep openbare systeemwerking, appversiegeschiedenis, SDK-route en downloadbronnen; zie TEBURU-DEEPSEARCH.md.
+- [x] Scheid tijdelijk sensorcontact, expliciete demo-identiteit en blijvende zoneplaatsing in een lokale simulatie; behoud referentieprofiel.
+- [x] Voeg d10-interactieprofiel en herhaalde generieke interactie toe; geen echte sensor-/locatiemapping claimen.
+- [ ] Inspecteer normale setupflow van de officiële Windows-app en test de gedocumenteerde digitale dice; installatie/starten hoort bij een concrete vervolgstap.
+- [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. Nog niets aangevraagd/geaccepteerd.
+- [ ] Specificeer pas daarna een echte bridge: identiteit, positie/contact, sessiestart, capabilities en appgestuurde visuele updates; wijs regelautoriteit expliciet toe aan de officiële app.
+- [ ] Bewijs campagne starten, interactie, worp en hervatten met ongewijzigde officiële app zonder fysieke spelonderdelen. Herhaal voor volgende release.
+
+De publieke SDK-aanvraag is gevonden. Dat voltooit niet het onderzoek naar een toegestane bridge. Onbewezen protocolstappen blijven open; geen verzonnen BLE-payloads of automatische SDK-aanmelding.
+
 Bijgesteld op 21 oktober 2026: generiek tabletop-platform met Milan als eerste game-module. De eerdere uitvoeringsvolgorde hieronder is vervangen door de volgende drie fasen. Bestaande resultaten blijven behouden. De eerste sandboxdoorsnede is geïmplementeerd; geverifieerde Milan-reproductie blijft open. Zie CONTRACTEN.md.
 
 ## Fase 1 — Getrouwe digitale reproductie in 2D

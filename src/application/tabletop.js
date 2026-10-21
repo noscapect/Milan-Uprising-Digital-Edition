@@ -6,6 +6,7 @@ export function createTabletop({ profile, module, random }) {
   return Object.freeze({
     place: (componentId, zoneId) => send('component.place', { componentId, zoneId }),
     remove: componentId => send('component.remove', { componentId }),
+    interact: (componentId, zoneId) => send('component.interact', { componentId, zoneId }),
     roll(sides) { const value = random(sides); send('dice.record', { sides, value }); return value; },
     reset() { state = createSession(profile, module); },
     snapshot: () => structuredClone(state),

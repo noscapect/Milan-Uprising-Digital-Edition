@@ -28,6 +28,10 @@ export function applyCommand(state, command, profile, module) {
       if (!Object.hasOwn(state.placements, payload.componentId)) throw Error('Onbekende pion');
       next.placements[payload.componentId] = null;
       break;
+    case 'component.interact':
+      if (!Object.hasOwn(state.placements, payload.componentId) || !profile.zones.some(zone => zone.id === payload.zoneId) || state.placements[payload.componentId] !== payload.zoneId) throw Error('Pion staat niet in deze zone');
+      // Generic interaction intent. The game/app decides its actual meaning.
+      break;
     case 'dice.record':
       if (!profile.dice.includes(payload.sides) || !Number.isInteger(payload.value) || payload.value < 1 || payload.value > payload.sides) throw Error('Ongeldige worp');
       break;
