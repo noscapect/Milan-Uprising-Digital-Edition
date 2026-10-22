@@ -4,7 +4,7 @@ Onafhankelijk project voor een modulair digitaal tabletop-platform met Vampire: 
 
 De architectuur scheidt generieke engine, spelregels, spelgegevens, gebruikersinterface en grafische presentatie. De volgorde is **2D-reproductie → automatisering → optionele 3D-uitbreiding**. De eerste doorsnede is geïmplementeerd: een configureerbare engine met afzonderlijke Milan-sandboxmodule en JSON-profiel. Andere spellen en uitgeversreleases kunnen later via eigen modules en gegevenspakketten worden toegevoegd. Volledige regels, kaarten en scenario's zijn nog niet geïmplementeerd.
 
-**Status: lokaal bordprototype met een geslaagde private verbindingsproef met de ongewijzigde officiële app.** De app bereikt de campagnevoorbereiding en personagekeuze. Personageregistratie, spelinvoer en automatische tafelupdates zijn nog niet bewezen; een volledige bordvervanging is nog niet speelbaar. Zie [actuele appvalidatie](docs/APP-VALIDATIE.md#private-verbindingsproef-met-de-officiële-app).
+**Status: lokaal bordprototype met een beperkte bordloze spelsessie in de ongewijzigde officiële app aangetoond.** In de private proef zijn vier personages geselecteerd en geplaatst, een campagne gestart, een spelactie en digitale worp uitgevoerd, een personage verplaatst en de sessie opgeslagen en hervat. De bediening van onze tafel en automatische updates vanuit de app zijn nog niet gekoppeld. Eén beurtwissel gaf een foutmelding; de oorzaak is nog onbekend. Zie [actuele appvalidatie](docs/APP-VALIDATIE.md#bordloze-spelproef-en-hervatten).
 
 ## Starten
 
@@ -41,7 +41,7 @@ De vier pionnen, twaalf kubussen, acht fiches en capaciteit 32 in de neutrale we
 
 **Ongedaan maken** en **Opnieuw uitvoeren** herstellen maximaal honderd lokale handelingen, inclusief bord leegmaken. Opnieuw uitvoeren behoudt de oorspronkelijke worp. Een nieuwe handeling na teruggaan vervangt de redo-reeks. De herstelgeschiedenis blijft alleen in het tabblad; een JSON-export bewaart de actieve tafel en het openen van JSON begint een nieuwe herstelgeschiedenis. Deze knoppen zijn niet beschikbaar in de sensorstudie.
 
-Kies voor de **interactiestudie** het bijbehorende tafelprofiel: kies een demopion, druk op **Registreer demopion**, klik een sensor en druk op **Maak sensor vrij**. De pion blijft logisch in de zone. Registreer daarna een andere pion en gebruik dezelfde sensor: beide mogen de demozone delen. Opnieuw dezelfde zone aanraken registreert alleen een generieke interactie. Dit is expliciete lokale selectie, geen RFID-scan of echte Core-emulatie. Het d10-profiel volgt de Milan-inventaris; capaciteit vier is alleen een demokeuze. De officiële Milan-app heeft zelf digitale worpen; deze zijn nog niet tijdens een Windows-spelsessie getest.
+Kies voor de **interactiestudie** het bijbehorende tafelprofiel: kies een demopion, druk op **Registreer demopion**, klik een sensor en druk op **Maak sensor vrij**. De pion blijft logisch in de zone. Registreer daarna een andere pion en gebruik dezelfde sensor: beide mogen de demozone delen. Opnieuw dezelfde zone aanraken registreert alleen een generieke interactie. Dit is expliciete lokale selectie, geen RFID-scan of echte Core-emulatie. Het d10-profiel volgt de Milan-inventaris; capaciteit vier is alleen een demokeuze. Digitale worpen van de officiële Windows-app zijn inmiddels afzonderlijk gevalideerd in de private spelproef; deze sandbox stuurt ze niet aan.
 
 Het tafelprofielmenu kan terug naar het oorspronkelijke referentieprofiel hieronder. Kies het profiel en klik **Start lege tafel met dit profiel**; exporteer eerst wat je wilt bewaren. De JSON-export van de interactiestudie bevat ook een afzonderlijk lokaal inputlog, zonder echte hardware-identifiers.
 
@@ -51,7 +51,7 @@ De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1�
 
 ## Onderzoek naar appkoppeling
 
-De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert onderzoek naar een optionele native helper voor appinvoer en een afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; de lokale resultaten blijven privaat. De private verbindingsproef is inmiddels geslaagd tot aan de personagekeuze. Spelinvoer, automatische cityrondes en een publieke adapter blijven open.
+De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert onderzoek naar een optionele native helper voor appinvoer en een afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; de lokale resultaten blijven privaat. De private proef heeft inmiddels ook personageregistratie, locatie-invoer, digitale worpen en hervatten in de officiële app aangetoond. Automatische cityrondes, directe tafelbediening en een publieke adapter blijven open.
 
 ## Projectstructuur
 

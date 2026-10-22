@@ -22,16 +22,18 @@ De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke
 - [x] Download en installeer op gebruikersopdracht de officiële Windows-build; leg statische metadata en beperkingen vast in INSTALLATIE-ONDERZOEK.md. Geen runtimevalidatie.
 - [x] Bereid normale appvalidatie en gerichte fabrikantvragen voor; zie APP-VALIDATIE.md. Concept niet verzonden; uitgevoerde controles staan hieronder en in het testverslag.
 - [x] Inspecteer normale setupflow van de geïnstalleerde officiële Windows-app: Single/Main wachten op een Core, Controller vraagt een bestaande Main. Zie APP-VALIDATIE.md.
-- [ ] Test de gedocumenteerde digitale dice zodra de voorafgaande setup bereikbaar is; nu geblokkeerd vóór campagneaanvang.
+- [x] Test de digitale dice in de Windows-app tijdens een echte spelactie; de app bepaalt de worp zonder fysieke dobbelstenen in de private proef.
 - [x] Neem de door de gebruiker beschikbaar gestelde SDK lokaal in en beoordeel deze statisch; alle bron en inhoudelijke bevindingen blijven onder private/sdk/.
 - [x] Bouw en valideer de private SDK-testproef, afzonderlijk van de officiële app. De lokale proef is geslaagd; bron, builds en technische bevindingen blijven privaat.
 - [x] Toon een verbinding met de ongewijzigde officiële app aan in een private proef; campagnevoorbereiding en personagekeuze zijn bereikbaar. Dit bewijst nog geen speelbare sessie.
-- [ ] Registreer personages via een toegestane invoerroute en verifieer vervolgens plaatsing en herhaald contact in de officiële app. Geen fysieke tagidentiteiten kopiëren.
+- [x] Registreer vier personages met eigen synthetische identiteiten en verifieer plaatsing, verplaatsen en herhaald contact in de officiële app. Geen fysieke tagidentiteiten gekopieerd; technische uitvoering blijft privaat.
 - [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. De agent heeft geen aanvraag gedaan of overeenkomst aanvaard.
 - [ ] Specificeer pas daarna een echte bridge: identiteit, positie/contact, sessiestart, capabilities en appgestuurde visuele updates; wijs regelautoriteit expliciet toe aan de officiële app.
-- [ ] Bewijs campagne starten, interactie, worp en hervatten met ongewijzigde officiële app zonder fysieke spelonderdelen. Herhaal voor volgende release.
+- [x] Toon campagne starten, interactie, worp en hervatten met de ongewijzigde officiële app zonder fysieke spelonderdelen aan in een beperkte private proef. Geen volledige spelvalidatie; één foutmelding bij beurtwissel blijft te onderzoeken.
+- [ ] Verbind de bediening van onze fysieke tafelweergave met de private invoerroute en neem geaccepteerde appwijzigingen terug over. De huidige overgenomen opstelling is een momentopname.
+- [ ] Onderzoek de foutmelding bij beurtwissel en toets verdere spelrondes, cityrondes en volgende releases.
 
-Huidige integratiestatus: import, voorbeeldbuilds en de afzonderlijke SDK-runtimeproef zijn geslaagd. Een daaropvolgende private verbindingsproef bereikt ook de campagnevoorbereiding en personagekeuze in de ongewijzigde officiële app. Personageregistratie, een speelbare campagne en automatische tafelupdates blijven open. Technische inhoud, screenshots en logs blijven privaat.
+Huidige integratiestatus: de SDK-runtimeproef en een beperkte bordloze spelproef met de officiële app zijn geslaagd, inclusief hervatten met behoud van positie en actiepunten. De app toonde een foutmelding bij een beurtwissel; na sluiten was de volgende speler actief. Oorzaak en volledige spelcompatibiliteit blijven te onderzoeken. Rechtstreekse tafelbediening en automatische tafelupdates ontbreken nog. Technische inhoud, screenshots en logs blijven privaat.
 
 De publieke SDK-aanvraag is gevonden. Dat voltooit niet het onderzoek naar een toegestane bridge. Onbewezen protocolstappen blijven open; geen verzonnen BLE-payloads of automatische SDK-aanmelding.
 

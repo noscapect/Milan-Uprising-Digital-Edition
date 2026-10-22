@@ -79,3 +79,11 @@ De vervolgproef op 22 oktober 2026 heeft een verbinding met de ongewijzigde Wind
 Bij de personagekeuze vraagt de app nog om een scan. Klikken op een portret opent personage-informatie en voltooit de selectie niet. Personageregistratie, plaatsing, herhaald contact, digitale worpen tijdens het spel en hervatten zijn nog niet gevalideerd. Er is nog geen speelbare campagne of automatische koppeling met onze tafel aangetoond.
 
 Dit is de actuele beperkte conclusie; de eerdere tabellen en proefverslagen hierboven beschrijven de voorafgaande controles. SDK-bron, helper, technische verbindingsgegevens, screenshots en waarnemingen blijven uitsluitend onder genegeerd `private/`. Deze private proef is geen publiek beschikbare integratieadapter of bewijs van ondersteuning door de fabrikant.
+
+## Bordloze spelproef en hervatten
+
+De private vervolgproef met de ongewijzigde Windows-app 1.0.9 heeft inmiddels vier personageselecties met plaatsing, een campagnestart, een spelactie, een digitale worp en een verplaatsing aangetoond. De app bepaalde de worp en de kosten van de verplaatsing zelf. Herhaald contact met dezelfde locatie kostte in de waargenomen situatie geen extra actiepunt. Bij Save & Quit en Load game bleven de verplaatste pion en de resterende actiepunten behouden. De eigen synthetische identiteiten zijn opnieuw gebruikt; geen fysieke tagidentiteiten gekopieerd.
+
+Bij een beurtwissel verscheen een foutmelding over een ongeldige collectie-index. De aangeboden herlaadknop verholp de melding niet zichtbaar; na sluiten van de melding was de volgende speler actief en kon de verplaatsing worden uitgevoerd. Dit is geen bewijs dat de fout onafhankelijk van de testopstelling optreedt. De oorzaak en betrouwbaarheid over meerdere rondes blijven open.
+
+De fysieke tafelweergave is afzonderlijk geopend met een overgenomen momentopname van de waargenomen speelstand. De bordknoppen sturen de app nog niet aan en wijzigingen vanuit de app werken de tafel nog niet automatisch bij. De eerste proef bewijst dus beperkte bordloze spelinvoer, geen voltooide digitale editie, volledige spelcompatibiliteit of publieke adapter. Technische gegevens en het lokale opstellingsbestand blijven privaat.
