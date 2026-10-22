@@ -2,12 +2,22 @@
 
 ## Hoofddoel en eerstvolgende integratiemijlpalen
 
+Bijsturing op 22 oktober 2026: bouw actief aan de virtuele fysieke tafel; fabrikantcontact is geen voorwaarde voor deze ontwikkeling. Onderzoek naar een echte emulator mag zelfstandig verder op beschikbare informatie, binnen de bestaande grenzen voor beveiliging en assets. Appcompatibiliteit blijft afzonderlijk te bewijzen.
+
+- [x] Handmatige virtuele tafel met afzonderlijke pionnen, invloedskubussen en fiches, gedeelde zones, voorraadbediening en JSON-herstel voor hetzelfde profiel; zie CONTRACTEN.md uitbreiding 0.4.
+- [x] Ongedaan maken en opnieuw uitvoeren van maximaal honderd lokale handelingen, inclusief leegmaken en behoud van worpuitkomsten; herstelgeschiedenis gescheiden van domeinevents.
+- [x] Voeg de brongecontroleerde retailvoorraad toe met echte personage-/NPC-namen, factiekubussen, fichecombinaties en omkeerbare fiches; behoud aparte demo’s. Zie MILAN-CONTENT.md.
+- [ ] Onderbouw Milan-locaties en de fysieke inventaris verder en vervang neutrale werkvoorraad/mapping waar geverifieerde gegevens beschikbaar zijn.
+- [ ] Onderzoek zelfstandig welke echte appinvoer en terugkoppeling technisch beschikbaar zijn; houd de functionele tafelontwikkeling gaande.
+
 De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke spelonderdelen met de virtuele tafel werken. De app beheert regels en verhaal. Een eigen geautomatiseerde Milan-implementatie is optioneel en heeft lagere prioriteit dan een toegestane officiële-appbrug. De eerdere fasen hieronder beschrijven de tafelarchitectuur, niet de voltooiing van deze brug.
 
 - [x] Verdiep openbare systeemwerking, appversiegeschiedenis, SDK-route en downloadbronnen; zie TEBURU-DEEPSEARCH.md.
 - [x] Scheid tijdelijk sensorcontact, expliciete demo-identiteit en blijvende zoneplaatsing in een lokale simulatie; behoud referentieprofiel.
 - [x] Voeg d10-interactieprofiel en herhaalde generieke interactie toe; geen echte sensor-/locatiemapping claimen.
-- [ ] Inspecteer normale setupflow van de officiële Windows-app en test de gedocumenteerde digitale dice; installatie/starten hoort bij een concrete vervolgstap.
+- [x] Download en installeer op gebruikersopdracht de officiële Windows-build; leg statische metadata en beperkingen vast in INSTALLATIE-ONDERZOEK.md. Geen runtimevalidatie.
+- [x] Bereid normale appvalidatie en gerichte fabrikantvragen voor; zie APP-VALIDATIE.md. Concept niet verzonden; tests niet uitgevoerd.
+- [ ] Inspecteer normale setupflow van de geïnstalleerde officiële Windows-app en test de gedocumenteerde digitale dice zodra zichtbare bediening mogelijk is.
 - [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. Nog niets aangevraagd/geaccepteerd.
 - [ ] Specificeer pas daarna een echte bridge: identiteit, positie/contact, sessiestart, capabilities en appgestuurde visuele updates; wijs regelautoriteit expliciet toe aan de officiële app.
 - [ ] Bewijs campagne starten, interactie, worp en hervatten met ongewijzigde officiële app zonder fysieke spelonderdelen. Herhaal voor volgende release.

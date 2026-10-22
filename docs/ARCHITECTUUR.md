@@ -2,6 +2,8 @@
 
 Architectuur vastgesteld en eerste sandboxdoorsnede geïmplementeerd op 21 oktober 2026. Milan Uprising heeft een afzonderlijke game-module met neutrale profieldata; echte spelregels en locaties ontbreken nog. Prioriteit: getrouwe functionele 2D-reproductie, daarna automatisering en optionele visuele uitbreiding.
 
+Uitbreiding 0.5 op 22 oktober: een apart schema-2-retailpakket bevat brongecontroleerde fysieke onderdelen en identiteiten. Generieke componentzijden worden als IDs in de engine bijgehouden; categorieën, bronverwijzingen en kleuren blijven in data/projecties. Regels en volledige locatiekaart blijven open. De oudere neutrale profielen en hun saves blijven werken.
+
 ## Bestaand prototype
 
 Huidig: browserinvoer → applicatie → generieke engine en sandboxmodule → toestand/events → projectie → 2D-renderer. JSON-download is een aparte adapter.
@@ -56,7 +58,7 @@ src/presentation/3d/         # pas in fase 3
 src/adapters/                # opslag, toeval, optionele integratie
 ```
 
-De eerste modules in dit mapplan bestaan nu; 3D ontbreekt bewust. Geen extra toolchain. Contracten en huidige beperkingen staan in CONTRACTEN.md. Opslagimport, complexe componenttypen, regels, stapelvolgorde en oriëntatie volgen later.
+De eerste modules in dit mapplan bestaan nu; 3D ontbreekt bewust. Geen extra toolchain. Contracten en huidige beperkingen staan in CONTRACTEN.md. Sinds uitbreiding 0.4 zijn losse kubussen/fiches en gevalideerd JSON-herstel via eventreplay beschikbaar voor hetzelfde profiel. Migraties, complexe componenttypen, regels, stapelvolgorde en oriëntatie volgen later.
 
 ## App en hardware
 

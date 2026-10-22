@@ -2,7 +2,13 @@
 
 Gecontroleerd: 21 oktober 2026. Openbare informatie bewijst geen interoperabiliteit.
 
+Vervolg 22 oktober 2026: [statische controle van de officiële Windows-installatie](INSTALLATIE-ONDERZOEK.md) bevestigt Windows x64, Unity-runtime en de aanwezigheid van een Bluetooth WinRT-plug-in. Geen app gestart of officiële-appcompatibiliteit bewezen. De normale setupflow en digitale worpen blijven te testen.
+
 ## Verdieping en correcties
+
+Op 22 oktober 2026 is de openbare retailinventaris verwerkt tot een apart pakket met 132 losse onderdelen. De huidige officiële gamepagina onderbouwt de personagenamen; de handleiding is visueel gecontroleerd op pagina 6, 12 en 13 voor kleuren en onderdeelbetekenis. Zie [MILAN-CONTENT.md](MILAN-CONTENT.md) voor bronnen en de expliciete grens tussen geverifieerde voorraad en nog onbekende locatiekaart/opstelling.
+
+Op 22 oktober 2026 zijn de publieke SDK-pagina, documentatie-index, systeemeisen, FAQ en Milan-versiegeschiedenis opnieuw gecontroleerd. De FAQ beschrijft remote deelname met fysieke hardware bij de host; dit is geen bordloze route. Een publieke invoerinterface voor bestaande apps is niet gevonden binnen deze controle. [APP-VALIDATIE.md](APP-VALIDATIE.md) bevat directe bronnen, een nog niet uitgevoerd testprotocol en niet-verzonden fabrikantvragen.
 
 Zie [TEBURU-DEEPSEARCH.md](TEBURU-DEEPSEARCH.md) voor het uitgevoerde bronnenonderzoek en de toegepaste wijzigingen. Een officiële SDK-aanvraagroute bestaat; ondersteuning voor virtuele invoer in bestaande apps is niet vastgesteld. Sensorcontact, identiteit en blijvende spelpositie zijn afzonderlijke zaken. De één-pion-per-sensorgrens is geen universele één-pion-per-zonegrens. De officiële Milan-versiegeschiedenis noemt digitale worpen en nieuwere diagnostiek via de aparte Teburu-app. Oudere algemene hardwareclaims moeten daarom per appversie worden getoetst.
 

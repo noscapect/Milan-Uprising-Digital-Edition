@@ -1,5 +1,27 @@
 # Contracten v1 — eerste doorsnede
 
+## Uitbreiding 0.5 — retailinhoud en componentzijden
+
+Nieuw profiel `retail-core` versie `0.5.0`, gegevensschema 2; schema 1 blijft geaccepteerd en oudere profielen blijven ongewijzigd. Schema 2 vereist `sources` (unieke id, titel, HTTPS-url), `componentGroups` (unieke id, label, optionele beschrijving) en per component een geldige `sourceId` en `groupId`. Optionele `color` en `shortLabel` zijn presentatiegegevens. `faces` is optioneel en bevat precies twee unieke `{id, label, color?}`-objecten. Bronnen en inventaris staan in MILAN-CONTENT.md. De collecties `characters`, `cards`, `tokens` en `scenarios` blijven gereserveerd voor latere inhoudsschema’s; deze fysieke personages en fiches staan in `components`.
+
+Alleen schema-2-sessies krijgen `state.faces`, met voor elk tweezijdig onderdeel de ID van de actieve zijde. Beginwaarde is de eerste profielzijde, geen voorgeschreven spelopstelling. Nieuwe opdracht: `component.flip {componentId}`. Deze wisselt de zijde zonder plaatsing te veranderen; onbekende of eenzijdige onderdelen worden atomair geweigerd. De applicatie biedt `flip(componentId)`. Projecties leveren afgeleide `faceId`, `faceLabel` en kleur; de domeintoestand bevat uitsluitend zijde-IDs, geen kleuren of grafische objecten. Undo/redo, reset en gevalideerde import gebruiken dezelfde toestand/eventreplay. Het sessie-exportformaat blijft schema 1, met de bestaande exacte pakket-/moduleversiecontrole; oude profielen en exports krijgen niet stilzwijgend een `faces`-veld.
+
+## Herstelgeschiedenis — aanvulling op 0.4
+
+De applicatie biedt `undo()` en `redo()` met maximaal honderd lokale stappen. Geldige opdrachten en `reset()` bewaren de voorgaande onveranderlijke toestand. Fouten bewaren ook de bestaande herstelmogelijkheden. Een nieuwe geslaagde handeling wist de redo-reeks; opnieuw uitvoeren gebruikt de eerdere toestand en genereert geen nieuwe willekeur.
+
+Herstelgeschiedenis is applicatietoestand, geen engine-event of Teburu-protocol. De projectie bevat `canUndo` en `canRedo`. Export bevat alleen de actieve sessietoestand en bijbehorende eventreeks. Een geslaagde import en het starten van een nieuw profiel beginnen zonder herstelgeschiedenis; een mislukte import verandert niets. Ongedaan gemaakte handelingen worden niet meegeëxporteerd. De UI biedt herstel uitsluitend op de handmatige tafel en het referentieprofiel; sensorcontact en inputtrace worden niet teruggedraaid.
+
+## Uitbreiding 0.4 — virtuele tafel en hervatten
+
+Componenten ondersteunen nu `kind: piece | cube | token` met dezelfde generieke plaats/verplaats/verwijder-opdrachten. Het type bepaalt uitsluitend de presentatie; geen Milan-regel of capaciteit wordt door het type opgelegd. Optioneel `shortLabel` is een presentatielabel. De inhoudscollectie `tokens` blijft leeg en gereserveerd voor latere spelgegevens; losse fiches zijn nu expliciete componenten in `components`, geen nieuw tokenschema.
+
+Het nieuwe profiel `virtual-table` versie `0.4.0` gebruikt een synthetische werkvoorraad van vier pionnen, twaalf invloedskubussen en acht fiches; zonecapaciteit 32 is een werktafelkeuze. De veertig zones zijn eigen A1–H5-sensorlabels, geen geverifieerde Milan-locatiekaart. Referentie- en sensorstudieprofielen blijven behouden. De projectie levert ook zonecapaciteit en alle individuele bewoners; vormgeving blijft buiten de domeintoestand.
+
+`restoreSession(saved)` ondersteunt nu `tabletop-session` schema 1 voor hetzelfde geregistreerde module-/pakket-ID en dezelfde versies. De applicatie voert de complete eventreeks uit vanaf een lege sessie en vergelijkt de gereconstrueerde toestand met de opgeslagen toestand. Volgorde, eventschema, actor, opdrachtvalidatie en vastgelegde worpen worden gecontroleerd. Alleen na volledig slagen wordt de lopende sessie vervangen. Geen nieuwe willekeur bij hervatten. Onbekende/legacyformaten, afwijkende eindtoestand en `inputSimulation` worden geweigerd. De browser begrenst het bestand op 2 MB; de applicatie accepteert maximaal 10.000 events. Sensorstudies kunnen nog niet worden hervat. Migraties en automatische opslag ontbreken. Dit is herstel van onze eigen tafel, geen import van officiële app-saves.
+
+Onderstaande oudere doorsneden beschrijven de historische scope; deze uitbreiding vervangt de beperkingen tot uitsluitend `piece` en uitsluitend export.
+
 ## Uitbreiding 0.3 — lokale interactiestudie
 
 Nieuw opdracht-type component.interact {componentId, zoneId}: vereist dat de pion al in de genoemde zone staat, legt alleen een intentie vast en verandert geen plaatsing. De sandbox voert geen Milan-actie of regel uit. Bestaande commandotypes en referentieprofiel blijven behouden.
@@ -17,7 +39,8 @@ Vastgelegd vóór migratie. Scope: uitsluitend bestaande neutrale demo; geen nie
 | 8 × 5 sensorraster | geverifieerd in ONDERZOEK.md | profieldata, geen engineconstante |
 | Sensororiëntatie en Milan-locaties | onbekend | geen mapping geïmplementeerd |
 | Vier pionnen en d6/d10 | bestaande synthetische demo, geen complete componentenlijst | lokale sandbox |
-| Kaarten, fiches, personages en scenario's | fysieke inventaris nog open | lege collecties, geen beschermde inhoud |
+| Retailminiaturen, invloedskubussen en fiches | aantallen en identiteiten geverifieerd in uitbreiding 0.5 | afzonderlijk retailpakket, handmatige plaatsing/zijden |
+| Kaarten, karakterstatistieken en scenario's | niet geïmplementeerd | geen beschermde verhaalinhoud; officiële app blijft beoogde autoriteit |
 | Spelregels en beurtverloop | niet geïmplementeerd | alleen sandbox beschikbaar |
 | Officiële app | niet verbonden | beheert geen lokale toestand |
 

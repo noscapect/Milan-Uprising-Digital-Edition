@@ -2,6 +2,8 @@
 
 Onderzocht op 21 oktober 2026. Alleen openbare bronnen; geen app uitgepakt, hardware uitgelezen, SDK aangevraagd of overeenkomst geaccepteerd. Dit verslag vervangt eerdere aannames waar hieronder expliciet aangegeven.
 
+Vervolg op 22 oktober 2026: de officiële Windows-build is inmiddels op gebruikersopdracht gedownload en uitgepakt voor lokale installatie. Statische installatiebevindingen staan in [INSTALLATIE-ONDERZOEK.md](INSTALLATIE-ONDERZOEK.md). De historische downloadbevindingen hieronder blijven gedateerd op 21 oktober; de app is ook bij dit vervolg niet gestart. Geen SDK aangevraagd of overeenkomst geaccepteerd.
+
 ## Einddoel en conclusie
 
 Het einddoel is de officiële Milan-app, en later andere officiële releases, gebruiken met een virtuele tafel zonder fysieke spelonderdelen. De officiële app blijft eigenaar van verhaal, spelregels en campagne. Onze tafel moet uiteindelijk een toegestane invoer-/weergavebrug bieden. Een eigen spelimplementatie of losse sandbox vervult dit einddoel niet.

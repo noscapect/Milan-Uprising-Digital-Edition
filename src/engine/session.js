@@ -5,7 +5,8 @@ export function createSession(profile, module, mode = 'sandbox') {
   if (module?.id !== profile.gameId || module.contractVersion !== 1 || !module.modes.includes(mode)) throw Error('Module of modus niet ondersteund');
   const placements = module.setup(structuredClone(profile));
   if (Object.keys(placements).length !== profile.components.length || profile.components.some(c => placements[c.id] !== null)) throw Error('Ongeldige beginopstelling');
-  return { engineVersion: ENGINE_VERSION, gameId: profile.gameId, moduleVersion: module.version, packageVersion: profile.version, mode, revision: 0, placements, events: [] };
+  return { engineVersion: ENGINE_VERSION, gameId: profile.gameId, moduleVersion: module.version, packageVersion: profile.version, mode, revision: 0, placements,
+    ...(profile.schemaVersion === 2 ? { faces: Object.fromEntries(profile.components.filter(c => c.faces).map(c => [c.id, c.faces[0].id])) } : {}), events: [] };
 }
 export function applyCommand(state, command, profile, module) {
   if (state.gameId !== profile.gameId || module.id !== state.gameId || state.moduleVersion !== module.version || state.packageVersion !== profile.version) throw Error('Sessie past niet bij module of gegevens');
@@ -32,6 +33,14 @@ export function applyCommand(state, command, profile, module) {
       if (!Object.hasOwn(state.placements, payload.componentId) || !profile.zones.some(zone => zone.id === payload.zoneId) || state.placements[payload.componentId] !== payload.zoneId) throw Error('Pion staat niet in deze zone');
       // Generic interaction intent. The game/app decides its actual meaning.
       break;
+    case 'component.flip': {
+      const component = profile.components.find(c => c.id === payload.componentId);
+      if (!component?.faces || !Object.hasOwn(state.faces || {}, component.id)) throw Error('Onderdeel heeft geen omkeerbare zijde');
+      const currentIndex = component.faces.findIndex(face => face.id === state.faces[component.id]);
+      if (currentIndex < 0) throw Error('Onbekende componentzijde');
+      next.faces[component.id] = component.faces[1 - currentIndex].id;
+      break;
+    }
     case 'dice.record':
       if (!profile.dice.includes(payload.sides) || !Number.isInteger(payload.value) || payload.value < 1 || payload.value > payload.sides) throw Error('Ongeldige worp');
       break;

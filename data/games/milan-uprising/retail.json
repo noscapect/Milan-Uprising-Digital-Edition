@@ -1,0 +1,2039 @@
+{
+  "cards": [],
+  "zones": [
+    {
+      "label": "A1",
+      "capacity": 132,
+      "id": "A1"
+    },
+    {
+      "label": "B1",
+      "capacity": 132,
+      "id": "B1"
+    },
+    {
+      "label": "C1",
+      "capacity": 132,
+      "id": "C1"
+    },
+    {
+      "label": "D1",
+      "capacity": 132,
+      "id": "D1"
+    },
+    {
+      "label": "E1",
+      "capacity": 132,
+      "id": "E1"
+    },
+    {
+      "label": "F1",
+      "capacity": 132,
+      "id": "F1"
+    },
+    {
+      "label": "G1",
+      "capacity": 132,
+      "id": "G1"
+    },
+    {
+      "label": "H1",
+      "capacity": 132,
+      "id": "H1"
+    },
+    {
+      "label": "A2",
+      "capacity": 132,
+      "id": "A2"
+    },
+    {
+      "label": "B2",
+      "capacity": 132,
+      "id": "B2"
+    },
+    {
+      "label": "C2",
+      "capacity": 132,
+      "id": "C2"
+    },
+    {
+      "label": "D2",
+      "capacity": 132,
+      "id": "D2"
+    },
+    {
+      "label": "E2",
+      "capacity": 132,
+      "id": "E2"
+    },
+    {
+      "label": "F2",
+      "capacity": 132,
+      "id": "F2"
+    },
+    {
+      "label": "G2",
+      "capacity": 132,
+      "id": "G2"
+    },
+    {
+      "label": "H2",
+      "capacity": 132,
+      "id": "H2"
+    },
+    {
+      "label": "A3",
+      "capacity": 132,
+      "id": "A3"
+    },
+    {
+      "label": "B3",
+      "capacity": 132,
+      "id": "B3"
+    },
+    {
+      "label": "C3",
+      "capacity": 132,
+      "id": "C3"
+    },
+    {
+      "label": "D3",
+      "capacity": 132,
+      "id": "D3"
+    },
+    {
+      "label": "E3",
+      "capacity": 132,
+      "id": "E3"
+    },
+    {
+      "label": "F3",
+      "capacity": 132,
+      "id": "F3"
+    },
+    {
+      "label": "G3",
+      "capacity": 132,
+      "id": "G3"
+    },
+    {
+      "label": "H3",
+      "capacity": 132,
+      "id": "H3"
+    },
+    {
+      "label": "A4",
+      "capacity": 132,
+      "id": "A4"
+    },
+    {
+      "label": "B4",
+      "capacity": 132,
+      "id": "B4"
+    },
+    {
+      "label": "C4",
+      "capacity": 132,
+      "id": "C4"
+    },
+    {
+      "label": "D4",
+      "capacity": 132,
+      "id": "D4"
+    },
+    {
+      "label": "E4",
+      "capacity": 132,
+      "id": "E4"
+    },
+    {
+      "label": "F4",
+      "capacity": 132,
+      "id": "F4"
+    },
+    {
+      "label": "G4",
+      "capacity": 132,
+      "id": "G4"
+    },
+    {
+      "label": "H4",
+      "capacity": 132,
+      "id": "H4"
+    },
+    {
+      "label": "A5",
+      "capacity": 132,
+      "id": "A5"
+    },
+    {
+      "label": "B5",
+      "capacity": 132,
+      "id": "B5"
+    },
+    {
+      "label": "C5",
+      "capacity": 132,
+      "id": "C5"
+    },
+    {
+      "label": "D5",
+      "capacity": 132,
+      "id": "D5"
+    },
+    {
+      "label": "E5",
+      "capacity": 132,
+      "id": "E5"
+    },
+    {
+      "label": "F5",
+      "capacity": 132,
+      "id": "F5"
+    },
+    {
+      "label": "G5",
+      "capacity": 132,
+      "id": "G5"
+    },
+    {
+      "label": "H5",
+      "capacity": 132,
+      "id": "H5"
+    }
+  ],
+  "characters": [],
+  "presentation": {
+    "zoneOrder": [
+      "A1",
+      "B1",
+      "C1",
+      "D1",
+      "E1",
+      "F1",
+      "G1",
+      "H1",
+      "A2",
+      "B2",
+      "C2",
+      "D2",
+      "E2",
+      "F2",
+      "G2",
+      "H2",
+      "A3",
+      "B3",
+      "C3",
+      "D3",
+      "E3",
+      "F3",
+      "G3",
+      "H3",
+      "A4",
+      "B4",
+      "C4",
+      "D4",
+      "E4",
+      "F4",
+      "G4",
+      "H4",
+      "A5",
+      "B5",
+      "C5",
+      "D5",
+      "E5",
+      "F5",
+      "G5",
+      "H5"
+    ],
+    "columns": 8
+  },
+  "tokens": [],
+  "components": [
+    {
+      "id": "character-brujah",
+      "label": "Simona Ferrari · Brujah",
+      "shortLabel": "SF",
+      "kind": "piece",
+      "groupId": "characters",
+      "sourceId": "characters",
+      "color": "#657e85"
+    },
+    {
+      "id": "character-gangrel",
+      "label": "Rosa De Lorenzo · Gangrel",
+      "shortLabel": "RD",
+      "kind": "piece",
+      "groupId": "characters",
+      "sourceId": "characters",
+      "color": "#657e85"
+    },
+    {
+      "id": "character-malkavian",
+      "label": "Arianna Zanni · Malkavian",
+      "shortLabel": "AZ",
+      "kind": "piece",
+      "groupId": "characters",
+      "sourceId": "characters",
+      "color": "#657e85"
+    },
+    {
+      "id": "character-nosferatu",
+      "label": "Orlando Bianchi · Nosferatu",
+      "shortLabel": "OB",
+      "kind": "piece",
+      "groupId": "characters",
+      "sourceId": "characters",
+      "color": "#657e85"
+    },
+    {
+      "id": "character-toreador",
+      "label": "Latebra Uberto Ascheri · Toreador",
+      "shortLabel": "UA",
+      "kind": "piece",
+      "groupId": "characters",
+      "sourceId": "characters",
+      "color": "#657e85"
+    },
+    {
+      "id": "character-tremere",
+      "label": "Dante Brunieri · Tremere",
+      "shortLabel": "DB",
+      "kind": "piece",
+      "groupId": "characters",
+      "sourceId": "characters",
+      "color": "#657e85"
+    },
+    {
+      "id": "character-ventrue",
+      "label": "Chao-Yang Marco Hu · Ventrue",
+      "shortLabel": "MH",
+      "kind": "piece",
+      "groupId": "characters",
+      "sourceId": "characters",
+      "color": "#657e85"
+    },
+    {
+      "id": "ally-carabinieri-officer",
+      "label": "Carabinieri Officer",
+      "shortLabel": "CO",
+      "kind": "piece",
+      "groupId": "allies",
+      "sourceId": "physical-inventory",
+      "color": "#427c70"
+    },
+    {
+      "id": "ally-reporter",
+      "label": "Reporter",
+      "shortLabel": "RE",
+      "kind": "piece",
+      "groupId": "allies",
+      "sourceId": "physical-inventory",
+      "color": "#427c70"
+    },
+    {
+      "id": "ghoul-con-artist",
+      "label": "Con Artist",
+      "shortLabel": "CA",
+      "kind": "piece",
+      "groupId": "ghouls",
+      "sourceId": "physical-inventory",
+      "color": "#7c6548"
+    },
+    {
+      "id": "ghoul-fixer",
+      "label": "Fixer",
+      "shortLabel": "FX",
+      "kind": "piece",
+      "groupId": "ghouls",
+      "sourceId": "physical-inventory",
+      "color": "#7c6548"
+    },
+    {
+      "id": "influence-anarchs-1",
+      "label": "Anarchs · invloed 1",
+      "shortLabel": "A1",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-2",
+      "label": "Anarchs · invloed 2",
+      "shortLabel": "A2",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-3",
+      "label": "Anarchs · invloed 3",
+      "shortLabel": "A3",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-4",
+      "label": "Anarchs · invloed 4",
+      "shortLabel": "A4",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-5",
+      "label": "Anarchs · invloed 5",
+      "shortLabel": "A5",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-6",
+      "label": "Anarchs · invloed 6",
+      "shortLabel": "A6",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-7",
+      "label": "Anarchs · invloed 7",
+      "shortLabel": "A7",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-8",
+      "label": "Anarchs · invloed 8",
+      "shortLabel": "A8",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-9",
+      "label": "Anarchs · invloed 9",
+      "shortLabel": "A9",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-10",
+      "label": "Anarchs · invloed 10",
+      "shortLabel": "A10",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-11",
+      "label": "Anarchs · invloed 11",
+      "shortLabel": "A11",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-12",
+      "label": "Anarchs · invloed 12",
+      "shortLabel": "A12",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-13",
+      "label": "Anarchs · invloed 13",
+      "shortLabel": "A13",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-14",
+      "label": "Anarchs · invloed 14",
+      "shortLabel": "A14",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-15",
+      "label": "Anarchs · invloed 15",
+      "shortLabel": "A15",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-16",
+      "label": "Anarchs · invloed 16",
+      "shortLabel": "A16",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-17",
+      "label": "Anarchs · invloed 17",
+      "shortLabel": "A17",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-18",
+      "label": "Anarchs · invloed 18",
+      "shortLabel": "A18",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-19",
+      "label": "Anarchs · invloed 19",
+      "shortLabel": "A19",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-20",
+      "label": "Anarchs · invloed 20",
+      "shortLabel": "A20",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-21",
+      "label": "Anarchs · invloed 21",
+      "shortLabel": "A21",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-22",
+      "label": "Anarchs · invloed 22",
+      "shortLabel": "A22",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-23",
+      "label": "Anarchs · invloed 23",
+      "shortLabel": "A23",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-24",
+      "label": "Anarchs · invloed 24",
+      "shortLabel": "A24",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-25",
+      "label": "Anarchs · invloed 25",
+      "shortLabel": "A25",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-26",
+      "label": "Anarchs · invloed 26",
+      "shortLabel": "A26",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-27",
+      "label": "Anarchs · invloed 27",
+      "shortLabel": "A27",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-28",
+      "label": "Anarchs · invloed 28",
+      "shortLabel": "A28",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-29",
+      "label": "Anarchs · invloed 29",
+      "shortLabel": "A29",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-anarchs-30",
+      "label": "Anarchs · invloed 30",
+      "shortLabel": "A30",
+      "kind": "cube",
+      "groupId": "anarch-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#ad433d"
+    },
+    {
+      "id": "influence-camarilla-1",
+      "label": "Camarilla · invloed 1",
+      "shortLabel": "C1",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-2",
+      "label": "Camarilla · invloed 2",
+      "shortLabel": "C2",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-3",
+      "label": "Camarilla · invloed 3",
+      "shortLabel": "C3",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-4",
+      "label": "Camarilla · invloed 4",
+      "shortLabel": "C4",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-5",
+      "label": "Camarilla · invloed 5",
+      "shortLabel": "C5",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-6",
+      "label": "Camarilla · invloed 6",
+      "shortLabel": "C6",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-7",
+      "label": "Camarilla · invloed 7",
+      "shortLabel": "C7",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-8",
+      "label": "Camarilla · invloed 8",
+      "shortLabel": "C8",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-9",
+      "label": "Camarilla · invloed 9",
+      "shortLabel": "C9",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-10",
+      "label": "Camarilla · invloed 10",
+      "shortLabel": "C10",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-11",
+      "label": "Camarilla · invloed 11",
+      "shortLabel": "C11",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-12",
+      "label": "Camarilla · invloed 12",
+      "shortLabel": "C12",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-13",
+      "label": "Camarilla · invloed 13",
+      "shortLabel": "C13",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-14",
+      "label": "Camarilla · invloed 14",
+      "shortLabel": "C14",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-15",
+      "label": "Camarilla · invloed 15",
+      "shortLabel": "C15",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-16",
+      "label": "Camarilla · invloed 16",
+      "shortLabel": "C16",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-17",
+      "label": "Camarilla · invloed 17",
+      "shortLabel": "C17",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-18",
+      "label": "Camarilla · invloed 18",
+      "shortLabel": "C18",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-19",
+      "label": "Camarilla · invloed 19",
+      "shortLabel": "C19",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-camarilla-20",
+      "label": "Camarilla · invloed 20",
+      "shortLabel": "C20",
+      "kind": "cube",
+      "groupId": "camarilla-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#79509b"
+    },
+    {
+      "id": "influence-ambrose-1",
+      "label": "Hand of St. Ambrose · invloed 1",
+      "shortLabel": "H1",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-2",
+      "label": "Hand of St. Ambrose · invloed 2",
+      "shortLabel": "H2",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-3",
+      "label": "Hand of St. Ambrose · invloed 3",
+      "shortLabel": "H3",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-4",
+      "label": "Hand of St. Ambrose · invloed 4",
+      "shortLabel": "H4",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-5",
+      "label": "Hand of St. Ambrose · invloed 5",
+      "shortLabel": "H5",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-6",
+      "label": "Hand of St. Ambrose · invloed 6",
+      "shortLabel": "H6",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-7",
+      "label": "Hand of St. Ambrose · invloed 7",
+      "shortLabel": "H7",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-8",
+      "label": "Hand of St. Ambrose · invloed 8",
+      "shortLabel": "H8",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-9",
+      "label": "Hand of St. Ambrose · invloed 9",
+      "shortLabel": "H9",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-10",
+      "label": "Hand of St. Ambrose · invloed 10",
+      "shortLabel": "H10",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-11",
+      "label": "Hand of St. Ambrose · invloed 11",
+      "shortLabel": "H11",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-12",
+      "label": "Hand of St. Ambrose · invloed 12",
+      "shortLabel": "H12",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-13",
+      "label": "Hand of St. Ambrose · invloed 13",
+      "shortLabel": "H13",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-14",
+      "label": "Hand of St. Ambrose · invloed 14",
+      "shortLabel": "H14",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "influence-ambrose-15",
+      "label": "Hand of St. Ambrose · invloed 15",
+      "shortLabel": "H15",
+      "kind": "cube",
+      "groupId": "ambrose-cubes",
+      "sourceId": "physical-inventory",
+      "color": "#b99c30"
+    },
+    {
+      "id": "control-anarchs-camarilla-1",
+      "label": "Controle Anarchs / Camarilla 1",
+      "shortLabel": "AC1",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-2",
+      "label": "Controle Anarchs / Camarilla 2",
+      "shortLabel": "AC2",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-3",
+      "label": "Controle Anarchs / Camarilla 3",
+      "shortLabel": "AC3",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-4",
+      "label": "Controle Anarchs / Camarilla 4",
+      "shortLabel": "AC4",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-5",
+      "label": "Controle Anarchs / Camarilla 5",
+      "shortLabel": "AC5",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-6",
+      "label": "Controle Anarchs / Camarilla 6",
+      "shortLabel": "AC6",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-7",
+      "label": "Controle Anarchs / Camarilla 7",
+      "shortLabel": "AC7",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-8",
+      "label": "Controle Anarchs / Camarilla 8",
+      "shortLabel": "AC8",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-9",
+      "label": "Controle Anarchs / Camarilla 9",
+      "shortLabel": "AC9",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-10",
+      "label": "Controle Anarchs / Camarilla 10",
+      "shortLabel": "AC10",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-11",
+      "label": "Controle Anarchs / Camarilla 11",
+      "shortLabel": "AC11",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-12",
+      "label": "Controle Anarchs / Camarilla 12",
+      "shortLabel": "AC12",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-13",
+      "label": "Controle Anarchs / Camarilla 13",
+      "shortLabel": "AC13",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-14",
+      "label": "Controle Anarchs / Camarilla 14",
+      "shortLabel": "AC14",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-15",
+      "label": "Controle Anarchs / Camarilla 15",
+      "shortLabel": "AC15",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-16",
+      "label": "Controle Anarchs / Camarilla 16",
+      "shortLabel": "AC16",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-17",
+      "label": "Controle Anarchs / Camarilla 17",
+      "shortLabel": "AC17",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-18",
+      "label": "Controle Anarchs / Camarilla 18",
+      "shortLabel": "AC18",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-camarilla-19",
+      "label": "Controle Anarchs / Camarilla 19",
+      "shortLabel": "AC19",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-1",
+      "label": "Controle Anarchs / Hand of St. Ambrose 1",
+      "shortLabel": "AH1",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-2",
+      "label": "Controle Anarchs / Hand of St. Ambrose 2",
+      "shortLabel": "AH2",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-3",
+      "label": "Controle Anarchs / Hand of St. Ambrose 3",
+      "shortLabel": "AH3",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-4",
+      "label": "Controle Anarchs / Hand of St. Ambrose 4",
+      "shortLabel": "AH4",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-5",
+      "label": "Controle Anarchs / Hand of St. Ambrose 5",
+      "shortLabel": "AH5",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-6",
+      "label": "Controle Anarchs / Hand of St. Ambrose 6",
+      "shortLabel": "AH6",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-7",
+      "label": "Controle Anarchs / Hand of St. Ambrose 7",
+      "shortLabel": "AH7",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-8",
+      "label": "Controle Anarchs / Hand of St. Ambrose 8",
+      "shortLabel": "AH8",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-anarchs-ambrose-9",
+      "label": "Controle Anarchs / Hand of St. Ambrose 9",
+      "shortLabel": "AH9",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "anarchs",
+          "label": "Anarchs",
+          "color": "#ad433d"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "control-camarilla-ambrose-1",
+      "label": "Controle Camarilla / Hand of St. Ambrose 1",
+      "shortLabel": "CH1",
+      "kind": "token",
+      "groupId": "control",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "camarilla",
+          "label": "Camarilla",
+          "color": "#79509b"
+        },
+        {
+          "id": "ambrose",
+          "label": "Hand of St. Ambrose",
+          "color": "#b99c30"
+        }
+      ]
+    },
+    {
+      "id": "investigation-1",
+      "label": "Onderzoek / afgesloten locatie 1",
+      "shortLabel": "O1",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-2",
+      "label": "Onderzoek / afgesloten locatie 2",
+      "shortLabel": "O2",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-3",
+      "label": "Onderzoek / afgesloten locatie 3",
+      "shortLabel": "O3",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-4",
+      "label": "Onderzoek / afgesloten locatie 4",
+      "shortLabel": "O4",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-5",
+      "label": "Onderzoek / afgesloten locatie 5",
+      "shortLabel": "O5",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-6",
+      "label": "Onderzoek / afgesloten locatie 6",
+      "shortLabel": "O6",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-7",
+      "label": "Onderzoek / afgesloten locatie 7",
+      "shortLabel": "O7",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-8",
+      "label": "Onderzoek / afgesloten locatie 8",
+      "shortLabel": "O8",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-9",
+      "label": "Onderzoek / afgesloten locatie 9",
+      "shortLabel": "O9",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-10",
+      "label": "Onderzoek / afgesloten locatie 10",
+      "shortLabel": "O10",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-11",
+      "label": "Onderzoek / afgesloten locatie 11",
+      "shortLabel": "O11",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-12",
+      "label": "Onderzoek / afgesloten locatie 12",
+      "shortLabel": "O12",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-13",
+      "label": "Onderzoek / afgesloten locatie 13",
+      "shortLabel": "O13",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-14",
+      "label": "Onderzoek / afgesloten locatie 14",
+      "shortLabel": "O14",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-15",
+      "label": "Onderzoek / afgesloten locatie 15",
+      "shortLabel": "O15",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-16",
+      "label": "Onderzoek / afgesloten locatie 16",
+      "shortLabel": "O16",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-17",
+      "label": "Onderzoek / afgesloten locatie 17",
+      "shortLabel": "O17",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "investigation-18",
+      "label": "Onderzoek / afgesloten locatie 18",
+      "shortLabel": "O18",
+      "kind": "token",
+      "groupId": "investigation",
+      "sourceId": "physical-inventory",
+      "faces": [
+        {
+          "id": "investigation",
+          "label": "Onderzoek",
+          "color": "#486b72"
+        },
+        {
+          "id": "restricted",
+          "label": "Afgesloten locatie",
+          "color": "#363b45"
+        }
+      ]
+    },
+    {
+      "id": "masquerade",
+      "label": "Masquerade Encounter",
+      "shortLabel": "ME",
+      "kind": "token",
+      "groupId": "masquerade",
+      "sourceId": "physical-inventory",
+      "color": "#486b72"
+    },
+    {
+      "id": "npc-agnese-della-luna",
+      "label": "Agnese Della Luna",
+      "shortLabel": "AD",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    },
+    {
+      "id": "npc-hasanah",
+      "label": "Hasanah",
+      "shortLabel": "HA",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    },
+    {
+      "id": "npc-helena-varga",
+      "label": "Helena Varga",
+      "shortLabel": "HV",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    },
+    {
+      "id": "npc-il-dottore",
+      "label": "Il Dottore",
+      "shortLabel": "ID",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    },
+    {
+      "id": "npc-lafcadio",
+      "label": "Lafcadio",
+      "shortLabel": "LA",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    },
+    {
+      "id": "npc-leandro-costa",
+      "label": "Leandro Costa",
+      "shortLabel": "LC",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    },
+    {
+      "id": "npc-ruslana",
+      "label": "Ruslana",
+      "shortLabel": "RU",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    },
+    {
+      "id": "npc-salvador-espartelo",
+      "label": "Salvador Espartelo",
+      "shortLabel": "SE",
+      "kind": "token",
+      "groupId": "npcs",
+      "sourceId": "physical-inventory",
+      "color": "#5c6774"
+    }
+  ],
+  "releaseId": "retail-core",
+  "scenarios": [],
+  "provenance": "Namen en fysieke aantallen uit openbare Xplored-inventaris; personagenamen uit de officiële gamepagina. Eigen geometrische symbolen, geen overgenomen artwork. Schema 2.",
+  "gameId": "milan-uprising",
+  "version": "0.5.0",
+  "schemaVersion": 2,
+  "dice": [
+    10
+  ],
+  "title": "Milan Uprising · retail-basisspel",
+  "contentNote": "Officiële retailvoorraad: 132 losse onderdelen en één d10. Kies vier van de zeven personages voor een spel. De sensorzones A1–H5 zijn nog geen geverifieerde Milan-locatiekaart. Plaatsingen en ficheszijden worden handmatig beheerd; beginopstelling en regels komen niet automatisch uit de app.",
+  "sources": [
+    {
+      "id": "physical-inventory",
+      "title": "Xplored · fysieke componenten (retail)",
+      "url": "https://teburu.zendesk.com/hc/en-us/articles/25458904976667-Physical-components-VTM"
+    },
+    {
+      "id": "characters",
+      "title": "Xplored · personages Milan Uprising",
+      "url": "https://teburu.com/game/Vampire%3A%20The%20Masquerade%20-%20Milan%20Uprising/"
+    },
+    {
+      "id": "manual",
+      "title": "Officiële handleiding · onderdelen en invloed, p. 6 en 12",
+      "url": "https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf"
+    }
+  ],
+  "componentGroups": [
+    {
+      "id": "characters",
+      "label": "Personages",
+      "description": "Zeven clanminiaturen beschikbaar; een spel gebruikt vier personages."
+    },
+    {
+      "id": "allies",
+      "label": "Bondgenoten",
+      "description": "Bondgenootminiaturen voor plaatsing volgens de app."
+    },
+    {
+      "id": "ghouls",
+      "label": "Ghouls",
+      "description": "Ghoulminiaturen voor plaatsing volgens de app."
+    },
+    {
+      "id": "anarch-cubes",
+      "label": "Invloed · Anarchs",
+      "description": "Rode invloedskubussen van de Anarchs."
+    },
+    {
+      "id": "camarilla-cubes",
+      "label": "Invloed · Camarilla",
+      "description": "Paarse invloedskubussen van de Camarilla."
+    },
+    {
+      "id": "ambrose-cubes",
+      "label": "Invloed · Hand of St. Ambrose",
+      "description": "Gele invloedskubussen van de Hand of St. Ambrose."
+    },
+    {
+      "id": "control",
+      "label": "Controlefiches",
+      "description": "Geven de controlerende factie aan. Keer het fiche om voor de andere factie."
+    },
+    {
+      "id": "investigation",
+      "label": "Onderzoek / afgesloten locatie",
+      "description": "Fiches voor onderzoek of een afgesloten locatie. Nummering van fysieke onderzoeksfiches is nog niet gereproduceerd."
+    },
+    {
+      "id": "masquerade",
+      "label": "Masquerade",
+      "description": "Markeert de locatie van een Masquerade Encounter."
+    },
+    {
+      "id": "npcs",
+      "label": "NPC’s",
+      "description": "Acht afzonderlijke NPC-fiches; verhaal en acties blijven in de officiële app."
+    }
+  ]
+}
