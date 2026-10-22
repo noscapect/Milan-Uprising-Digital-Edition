@@ -1,7 +1,16 @@
+import { withArtwork, artworkImage } from '../presentation/artwork.js';
 import { renderBoard } from '../presentation/2d/board.js';
-export function mountTabletop(tabletop, download, core = null) {
+export function mountTabletop(tabletop, download, core = null, artwork = null, locationArtwork = false) {
   const $ = id => document.getElementById(id);
-  const initial = tabletop.project();
+  const project = () => withArtwork(tabletop.project(), artwork, { locationArtwork });
+  const initial = project();
+  $('artwork-status').textContent = artwork?.available ? 'Origineel artwork uit de lokaal geïnstalleerde app · alleen op deze computer' : 'Geen lokaal artwork gevonden. De tafel werkt met symbolen.';
+  const logo = artwork?.assets?.[artwork?.branding?.logo];
+  $('game-logo').hidden = !logo;
+  if (logo) { $('game-logo').src = logo; $('game-logo').onerror = () => { $('game-logo').hidden = true; }; }
+  const map = artwork?.assets?.[artwork?.branding?.map];
+  $('map-reference').hidden = !map || !locationArtwork;
+  if (map) $('original-map').src = map;
   $('core-controls').hidden = !core;
   $('board-label').textContent = initial.presentation.boardLabel || '8 × 5 sensoren';
   $('board-note').textContent = initial.presentation.boardNote || 'Sensorindeling bevestigd. Locaties en oriëntatie in Milan zijn nog niet geverifieerd.';
@@ -12,7 +21,7 @@ export function mountTabletop(tabletop, download, core = null) {
     const link = document.createElement('a'); link.href = source.url; link.textContent = source.title;
     link.target = '_blank'; link.rel = 'noopener noreferrer'; return link;
   }));
-  $('inventory-note').textContent = initial.title ? 'Namen en aantallen zijn brongecontroleerd voor retail. Symbolen zijn zelfgemaakt. Lege starttafel en zonecapaciteit zijn werktafelkeuzes; volg voor de opstelling de app.' : 'Neutrale werkvoorraad. Aantallen en zonecapaciteit zijn geen geverifieerde Milan-inventaris of spelregels.';
+  $('inventory-note').textContent = initial.title ? 'Namen en aantallen zijn brongecontroleerd voor retail. Artwork is optioneel lokaal; zonder afbeeldingen gebruiken we symbolen. Lege starttafel en zonecapaciteit zijn werktafelkeuzes; volg voor de opstelling de app.' : 'Neutrale werkvoorraad. Aantallen en zonecapaciteit zijn geen geverifieerde Milan-inventaris of spelregels.';
   $('inventory-search').value = '';
   $('inventory').dataset.catalog = String(Boolean(initial.title));
   const groups = [{ id: 'all', label: 'Alle onderdelen' }, ...initial.componentGroups];
@@ -27,13 +36,14 @@ export function mountTabletop(tabletop, download, core = null) {
     const option = document.createElement('option'); option.value = component.id; option.textContent = component.label; return option;
   }));
   function update() {
-    const view = tabletop.project();
+    const view = project();
     renderBoard($('board'), view, zoneId => act(() => core ? core.touch(zoneId) : tabletop.place($('piece').value, zoneId), core ? `Demo-interactie op ${zoneId} geregistreerd. Maak nu het sensorcontact vrij.` : `Onderdeel geplaatst op ${zoneId}.`));
     const positions = new Map(view.zones.flatMap(zone => zone.occupants.map(c => [c.id, zone.id])));
     const locationLabel = componentId => view.zones.find(zone => zone.id === positions.get(componentId))?.label || 'in voorraad';
     const selected = view.components.find(c => c.id === $('piece').value);
     $('selection-status').textContent = `${selected.label}${selected.faceLabel ? ` · ${selected.faceLabel}` : ''} · ${locationLabel(selected.id)}`;
     $('component-description').textContent = view.componentGroups.find(group => group.id === selected.groupId)?.description || '';
+    $('component-artwork').replaceChildren(...(selected.portrait || selected.icon ? [artworkImage(selected.portrait || selected.icon, 'selected-portrait')] : []));
     $('flip').disabled = Boolean(core) || !selected.faces;
     $('stock-count').textContent = `${view.components.length - positions.size} in voorraad · ${positions.size} op het bord`;
     const activeInventory = document.activeElement?.dataset.component;
@@ -45,6 +55,7 @@ export function mountTabletop(tabletop, download, core = null) {
       const button = document.createElement('button'); button.type = 'button'; button.dataset.component = component.id;
       button.className = `inventory-piece ${component.kind}`;
       button.textContent = `${initial.title ? component.label : component.shortLabel || component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''} · ${locationLabel(component.id)}`;
+      if (component.icon) button.prepend(artworkImage(component.icon, 'inventory-icon'));
       button.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
       if (component.color) button.style.borderLeft = `5px solid ${component.color}`;
       button.setAttribute('aria-label', `${button.title}, ${locationLabel(component.id)}`);

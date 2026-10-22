@@ -27,3 +27,9 @@ Status: eerste modulaire sandboxdoorsnede geïmplementeerd. Regels, fysieke inho
 Alle bestaande code, tests, neutrale vormgeving, prototypefuncties en onderzoeksbevindingen blijven behouden. De actieve demo gebruikt nu de gescheiden lagen; legacy/ bewaart de oorspronkelijke demo. CONTRACTEN.md beschrijft het geïmplementeerde contract en de open fysieke inventaris. Sensorverificatie bewijst geen Milan-locatiemapping of appcompatibiliteit. Rechten- en beveiligingsgrenzen blijven gelden.
 
 Afweging: leg kleine expliciete contracten vast en migreer stapsgewijs. Bouw geen algemene regelscripting, pluginmarktplaats of 3D-toolchain voordat concrete spelhandelingen dit nodig maken.
+
+## 0.7 — lokaal app-artwork
+
+Originele, leesbare textures uit de lokaal geïnstalleerde app worden uitsluitend onder genegeerd `private/artwork/` bewaard. De server heeft een beperkte PNG-allowlist en een gefilterde catalogus; domeinstate en sessie-export bevatten geen afbeeldingen of lokale paden. Geen externe demo-dependencies. De optionele UnityPy-extractor staat los van de runtime. Details: [ARTWORK.md](ARTWORK.md).
+
+Kaartnamen Portello, Sempione en Argonne zijn gecorrigeerd op basis van de scherpe appkaart. Nieuw standaardpakket `city.json` 0.7.0 met eigen release-ID; `campaign.json` 0.6 blijft intact voor bestaande sessies. Geen stille sessiemigratie.

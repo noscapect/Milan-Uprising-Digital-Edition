@@ -17,9 +17,13 @@ node server.mjs
 
 Open http://127.0.0.1:5178. Stop met Ctrl+C. Testen: `node --test`. Als npm beschikbaar is, werken ook `npm start` en `npm test`. Open de pagina via de lokale server: rechtstreeks openen als bestand kan JavaScript-modules blokkeren.
 
+## Lokaal artwork
+
+Op deze computer zijn 79 originele afbeeldingen uit de geïnstalleerde app toegevoegd: alle dertig locatiebeelden, portretten, fiches, logo en originele kaart. Ze staan alleen onder genegeerd `private/artwork/`. De publieke code werkt ook zonder deze beelden. Zie [voorbereiding, bron en gebruik](docs/ARTWORK.md). Het vorige kaartprofiel 0.6 blijft beschikbaar voor oude sessies.
+
 ## Prototype gebruiken
 
-Standaard opent nu **locatiekaart 0.6**: dertig benoemde stadsdistricten en tien Havenvelden, met de retailonderdelen uit 0.5. De kaart is een eigen schema op basis van officiële bordfoto’s; exacte grenzen, aangrenzendheid en sensorindex zijn nog niet geverifieerd. Onder het bord staat **Campagne-opstelling overnemen** voor vier personages, invloed, controle, afgesloten locaties, NPC’s, bondgenoten, ghouls en Masquerade. Toepassen is één handeling, inclusief undo/redo en JSON-herstel. Er is **nog geen geverifieerde officiële campagnebeginstand** ingevuld. Zie [kaart, bronnen en opstellingsstatus](docs/KAART-EN-OPSTELLING.md).
+Standaard opent nu **locatiekaart 0.7**: dertig benoemde stadsdistricten en tien Havenvelden, met de retailonderdelen uit 0.5. De kaart is een eigen schema met op de appkaart gecontroleerde districtnamen; exacte grenzen, aangrenzendheid en sensorindex zijn nog niet geverifieerd. Onder het bord staat **Campagne-opstelling overnemen** voor vier personages, invloed, controle, afgesloten locaties, NPC’s, bondgenoten, ghouls en Masquerade. Toepassen is één handeling, inclusief undo/redo en JSON-herstel. Er is **nog geen geverifieerde officiële campagnebeginstand** ingevuld. Zie [kaart, bronnen en opstellingsstatus](docs/KAART-EN-OPSTELLING.md).
 
 **Milan-content 0.5: retail-basisspel** blijft als apart profiel beschikbaar met de echte namen en aantallen: zeven personages, twee bondgenoten, twee ghouls, 65 factiekubussen en 56 fiches, samen 132 losse onderdelen. Categorieën en zoeken maken de voorraad doorzoekbaar. Controle- en onderzoek/afgesloten-locatiefiches kun je omkeren; zijde en positie worden samen bewaard en hersteld. De eigen symbolen vervangen geen officiële illustraties. Zie [inhoud en bronnen](docs/MILAN-CONTENT.md). Dit oudere profiel behoudt het voorlopige sensorraster voor bestaande sessies.
 
@@ -61,6 +65,6 @@ De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1�
 
 ## Grenzen en rechten
 
-Dit project is niet verbonden aan Xplored, Teburu of de rechthebbenden van Vampire: The Masquerade. Namen dienen ter identificatie. Vormgeving is zelfgemaakt; de retailvoorraad bevat bronverwezen feitelijke namen en aantallen. Geen kaartscans, appbestanden, audio, verhaallijnen of andere beschermde assets overnemen zonder toestemming. Privégebruik vormt geen automatische toestemming voor hergebruik of verspreiding. Geen beveiliging, authenticatie of licentiecontrole omzeilen. Een publieke softwarelicentie is nog niet gekozen.
+Dit project is niet verbonden aan Xplored, Teburu of de rechthebbenden van Vampire: The Masquerade. Namen dienen ter identificatie. De tafel heeft eigen schematische vormgeving met optioneel lokaal app-artwork; de retailvoorraad bevat bronverwezen feitelijke namen en aantallen. Geen kaartscans, appbestanden, audio, verhaallijnen of andere beschermde assets overnemen zonder toestemming. Privégebruik vormt geen automatische toestemming voor hergebruik of verspreiding. Geen beveiliging, authenticatie of licentiecontrole omzeilen. Een publieke softwarelicentie is nog niet gekozen.
 
 Begin een volgende Codex-sessie met: “Lees AGENTS.md en werk de eerstvolgende open stap in docs/PLAN.md uit.”

@@ -67,3 +67,7 @@ Opdracht: {type, actorId, expectedRevision, payload}. Eén lokale actor: local. 
 Toestand: engineVersion, gameId, moduleVersion, packageVersion, mode, revision, placements (componentId → zoneId of null), events. Alles JSON-serialiseerbaar. De renderer krijgt een afgeleide kopie van zones, labels en bezetting, plus afzonderlijke presentatiegegevens. Alleen opdrachten wijzigen de sessie.
 
 Export: format tabletop-session, schemaVersion 1, module-identiteit, pakket-identiteit en state. Alleen export in deze doorsnede; nog geen import, migratie of herstel. De oude demo-export blijft beschikbaar via de bewaarde legacydemo. Verwar beide formaten niet.
+
+## Uitbreiding 0.7 — optioneel lokaal artwork
+
+`GET /local-artwork/catalog.json` geeft een gefilterde catalogus met `available`, `assets`, `components`, `zones`, `groups`, `faces` en `branding`; ontbrekend/ongeldig lokaal pakket geeft `available:false`. Assetwaarden zijn uitsluitend lokale PNG-routes. Geen private bronpaden in deze response. `withArtwork` verrijkt alleen de afgeleide presentatie; engine, opdrachten en sessie-envelop veranderen niet. Locatiebeelden staan alleen aan voor het gecorrigeerde `city.json`-profiel 0.7.0. Zie [ARTWORK.md](ARTWORK.md).

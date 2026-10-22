@@ -1,4 +1,6 @@
+import { loadLocalArtwork } from './server/local-artwork.mjs';
 import http from 'node:http';
+import { fileURLToPath } from 'node:url';
 import { readFile, readdir } from 'node:fs/promises';
 const files = new Map([['/', ['index.html','text/html']], ['/index.html',['index.html','text/html']], ['/src/style.css',['src/style.css','text/css']], ['/src/app.js',['src/app.js','text/javascript']], ['/src/model.js',['src/model.js','text/javascript']]]);
 // Register only public assets at startup; never serve repository/private files.
@@ -14,8 +16,22 @@ async function registerAssets(directory) {
   }
 }
 for (const directory of ['src', 'data/games', 'legacy']) await registerAssets(directory);
+const artwork = await loadLocalArtwork(fileURLToPath(new URL('./private/artwork/', import.meta.url)));
 const server = http.createServer(async (req, res) => {
-  const entry = files.get(req.url?.split('?')[0]);
+  const route = req.url?.split('?')[0];
+  if (['GET','HEAD'].includes(req.method) && route === '/local-artwork/catalog.json') {
+    res.writeHead(200, { 'Content-Type':'application/json', 'Cache-Control':'no-store' });
+    res.end(req.method === 'HEAD' ? undefined : JSON.stringify(artwork.catalog)); return;
+  }
+  if (['GET','HEAD'].includes(req.method) && artwork.files.has(route)) {
+    try {
+      const data = await readFile(artwork.files.get(route));
+      res.writeHead(200, { 'Content-Type':'image/png', 'Cache-Control':'private, max-age=3600' });
+      res.end(req.method === 'HEAD' ? undefined : data);
+    } catch { res.writeHead(404); res.end(); }
+    return;
+  }
+  const entry = files.get(route);
   if (!entry || !['GET','HEAD'].includes(req.method)) { res.writeHead(404); res.end('Niet gevonden'); return; }
   try { const data = await readFile(new URL(entry[0], import.meta.url)); res.writeHead(200, { 'Content-Type': `${entry[1]}; charset=utf-8`, 'Cache-Control':'no-store' }); res.end(req.method === 'HEAD' ? undefined : data); }
   catch { res.writeHead(500); res.end('Bestand niet beschikbaar'); }

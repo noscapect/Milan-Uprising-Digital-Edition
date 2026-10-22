@@ -71,3 +71,7 @@ De [openbare gamehandleiding](https://teburu.com/downloads/VtM/VTM_MU_GameManual
 5. Herhaal voor een andere release met alleen een nieuw profiel/adapterconfiguratie waar mogelijk. Pas dan spreken van een werkende digitale bordvervanger.
 
 Tot die test blijft de status: lokale gedragsstudie, geen werkende officiële-appbrug. Een gebrek aan ondersteunde integratie wordt een expliciet haalbaarheidsprobleem, niet stilzwijgend een verschuiving naar een eigen spelclone.
+
+## Aanvulling 0.7
+
+De geïnstalleerde Windows-app 1.0.9 is nu uitsluitend als leesbare lokale artworkbron onderzocht. 79 geselecteerde texture-exporten staan buiten Git, waaronder de scherpe kaart die Portello, Sempione en Argonne bevestigt. Eerdere onderzoeksnotities over niet geïnspecteerde appbestanden beschrijven de toenmalige fase. Er is nog steeds geen officiële app gestart of protocol-/hardwarecompatibiliteit getest. Zie [ARTWORK.md](ARTWORK.md).

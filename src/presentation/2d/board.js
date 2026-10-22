@@ -1,3 +1,4 @@
+import { artworkImage } from '../artwork.js';
 export function renderBoard(container, projection, onZone) {
   const columns = projection.presentation?.columns;
   if (!Number.isInteger(columns) || columns < 1 || columns > 40) throw Error('Ongeldige 2D-indeling');
@@ -12,6 +13,7 @@ export function renderBoard(container, projection, onZone) {
     if (!zone) throw Error('Onbekende presentatiezone');
     const cell = existing.get(id) || document.createElement('button');
     cell.dataset.zone = id; cell.className = 'cell';
+    cell.style.backgroundImage = zone.background ? `linear-gradient(#07101b55,#07101bd9),url("${zone.background}")` : '';
     if (zone.area === 'haven') cell.classList.add('haven-zone');
     const title = document.createElement('span'); title.className = 'zone-label'; title.textContent = zone.label;
     const occupants = document.createElement('span'); occupants.className = 'zone-pieces';
@@ -21,6 +23,7 @@ export function renderBoard(container, projection, onZone) {
       piece.className = `board-piece ${component.kind} p${colorIndex % 4 + 1}`;
       if (component.color) piece.style.backgroundColor = component.color;
       piece.textContent = component.shortLabel || `${colorIndex + 1}`;
+      if (component.icon) piece.prepend(artworkImage(component.icon, 'piece-icon'));
       piece.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
       return piece;
     }));
