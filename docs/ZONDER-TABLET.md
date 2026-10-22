@@ -4,7 +4,13 @@ Onderzocht op 22 oktober 2026. Dit is een keuze voor de volgende integratieproef
 
 ## Uitkomst
 
-De kansrijkste nieuwe route om de fysieke tablet geheel weg te halen is de **ongewijzigde Android-versie van Milan in Android Emulator, met een afzonderlijke virtuele Core via Netsim/Bumble**. De radioverbinding wordt dan softwarematig tussen twee virtuele apparaten opgebouwd. Dit is een onderbouwde technische kandidaat; Milan is hier nog niet in gestart of verbonden.
+**Gekozen vervolgrichting:** de gebruiker heeft na dit onderzoek gekozen voor de officiële Milan-app op een fysieke Android-tablet, met de virtuele tafel en Core-helper op de pc. De emulatorroute blijft een alternatief. De Windows-helper is inmiddels lokaal gebouwd; de antwoorden zijn vergeleken met tien bestaande testfixtures van de private Android-helper. De fysieke Windows-radio accepteert de benodigde GATT-service en beide characteristics. Dit bewijst nog geen verbinding met Milan op de tablet.
+
+De officiële Android-app 1.0.9 is op de aangesloten tablet aangetroffen en via de normale UI tot de Core-zoekstap geopend. USB-schermuitlezing is met gebruikersbevestigde foutopsporing getest. De aparte oude helper is gestopt. De nieuwe invoerroute en schermbron zijn afzonderlijk selecteerbaar; er wordt niet stilzwijgend op de oude Windows-app teruggevallen. Bluetooth-ontdekking en een echte spelactie vanaf de tablet moeten nog worden bewezen. Technische bron, gegevens en beelden blijven privaat.
+
+De fysieke tablet ontvangt de connecteerbare pc-advertentie, maar met de Windows-computernaam. De tijdelijke wijziging van de gewone Bluetoothnaam en een herstart van de radio corrigeren die BLE-naam niet. Ook een naamcorrectie binnen uitsluitend ons helperproces bereikt de advertentienaam niet. Zowel Milan als de officiële Teburu-app blijven bij hun zoekstap zonder verbinding; er zijn geen appopdrachten ontvangen. De gebruiker heeft een wijziging van de Windows-computernaam afgewezen; die route valt af. Het vervolg is een afzonderlijke USB-radio met eigen stack, mits passende hardware beschikbaar is. De extra scan-app is uitsluitend diagnostiek en hoort niet bij de beoogde speelopstelling.
+
+De kansrijkste onderzochte route om de fysieke tablet geheel weg te halen is de **ongewijzigde Android-versie van Milan in Android Emulator, met een afzonderlijke virtuele Core via Netsim/Bumble**. De radioverbinding wordt dan softwarematig tussen twee virtuele apparaten opgebouwd. Dit is een onderbouwde technische kandidaat; Milan is hier nog niet in gestart of verbonden. Dit is niet de door de gebruiker gekozen hoofdroute.
 
 De officiële Milan-app op een fysieke Android-tablet is ook een optie. Dat verplaatst echter de Core-functie naar de pc of een ander apparaat; de huidige helper en Milan op dezelfde tablet zetten levert niet vanzelf een verbinding op. Bovendien moet de automatische toestandsterugkoppeling dan het tabletscherm kunnen lezen.
 
@@ -32,7 +38,13 @@ De bestaande private Windows-proef heeft wel een GATT-service kunnen adverteren 
 
 De officiële [Android-app staat op Google Play](https://play.google.com/store/apps/details?id=com.xplored.teburu.vtm). Beschikbaarheid voor deze specifieke tablet of emulator moet via de normale installatie worden vastgesteld. De huidige helper is aan een Activity gekoppeld en stopt bij `onDestroy`; hij is niet als blijvende achtergrondservice gebouwd. Alleen tussen apps wisselen is dus geen geteste oplossing. Bij Milan op tablet plus Core op pc vervalt die helper daar, maar onze huidige Windows-vensterlezer werkt dan niet meer: een afzonderlijke, door de gebruiker toegestane schermbron is nodig. Windows-saves overzetten naar Android is niet gevalideerd.
 
-## Eerstvolgende proef en acceptatie
+## Eerstvolgende proef voor de gekozen tabletopstelling
+
+1. Corrigeer de werkelijk uitgezonden pc-naam via een door de gebruiker toegestane route en controleer die opnieuw op de fysieke tablet.
+2. Bewijs een verbinding en echte spelinvoer met de ongewijzigde Milan-app op de tablet, zonder de oude Android-helper te gebruiken.
+3. Kalibreer de afzonderlijke Android-schermlezer op een echte kaart en herhaal verplaatsing, invloedwijziging en hervatten. De bestaande Windows-proef bewijst deze Android-keten niet.
+
+## Alternatieve emulatorproef en acceptatie
 
 1. Bereid een geïsoleerde Android Emulator met passende image voor en controleer versnelling. Houd de huidige Windows-campagne intact.
 2. Bewijs eerst generieke ontdekking, GATT write en notification tussen emulator en een eigen virtueel apparaat via Netsim, zonder Milan-identiteit of SDK-inhoud in publieke code.
