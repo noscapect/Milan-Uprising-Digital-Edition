@@ -32,6 +32,7 @@ De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke
 - [x] Toon campagne starten, interactie, worp en hervatten met de ongewijzigde officiële app zonder fysieke spelonderdelen aan in een beperkte private proef. Geen volledige spelvalidatie; één foutmelding bij beurtwissel blijft te onderzoeken.
 - [x] Verbind de bediening van onze fysieke tafelweergave met de private invoerroute en neem geaccepteerde appwijzigingen terug over. Eén verplaatsing en een echte invloedwijziging zijn live bevestigd; zie APP-VALIDATIE.md. Brede spelvalidatie blijft open.
 - [ ] Onderzoek de foutmelding bij beurtwissel en toets verdere spelrondes, cityrondes en volgende releases.
+- [ ] Toets de tabletvrije Android Emulator/Netsim-route eerst met generieke GATT-invoer en daarna met de ongewijzigde Android-app. Vergelijk met Milan op tablet en Core op pc; zie [ZONDER-TABLET.md](ZONDER-TABLET.md).
 
 Huidige integratiestatus: beperkte bordloze spelinvoer, hervatten, rechtstreekse tafelbediening met appbevestiging en automatische invloedsoverdracht zijn aangetoond. De app toonde een foutmelding bij een beurtwissel; na sluiten was de volgende speler actief. Oorzaak, volledige cityrondes en betrouwbaarheid over andere situaties blijven te onderzoeken. Vensterherkenning is alleen op het geteste formaat gevalideerd. Technische inhoud, screenshots en logs blijven privaat; de publieke demo blijft een sandbox.
 

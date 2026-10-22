@@ -34,7 +34,7 @@ De installatie bevat ook USB- en deep-linkbibliotheeknamen. Die zijn geen bewijs
 | Venster vastleggen + OCR/beeldherkenning | Geen Core-invoer; eventueel normale UI-bediening apart | Kandidatuur voor zichtbare opdrachten zoals invloed plaatsen | Terugvalroute voor uitgaande automatisering. Onduidelijke herkenning eerst ter controle aanbieden. Kan geen hardwareblokkade oplossen. |
 | Officiële SDK | Onbewezen voor bestaande apps | Onbewezen voor bestaande apps | Parallelle documentatieroute. De [aanvraagpagina](https://www.teburu.com/request-sdk/) richt zich op eigen amateurgames; geen aanvraag gedaan of overeenkomst geaccepteerd. |
 
-Een Android-emulator voert de Android-app uit, maar vervangt daarmee nog niet de Core en het registratie-/sensorprotocol. Er is al een native Windows-build; een extra emulatorlaag heeft nu geen aangetoond voordeel.
+Een Android-emulator voert de Android-app uit, maar vervangt daarmee nog niet de Core en het registratie-/sensorprotocol. Vervolgonderzoek heeft een concreet mogelijk voordeel gevonden: Netsim/Bumble kan een afzonderlijke virtuele Bluetooth-Core op dezelfde pc met Android verbinden, zonder fysieke radio-loopback. Dit is nog niet met Milan getest. Zie [tablet vervangen of anders gebruiken](ZONDER-TABLET.md).
 
 ## Waarom de browser niet de hele bridge kan zijn
 
