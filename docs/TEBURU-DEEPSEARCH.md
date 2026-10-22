@@ -1,5 +1,7 @@
 # Teburu en Milan Uprising — technisch onderzoek
 
+Actuele runtime-uitkomst op 22 oktober 2026: de ongewijzigde Windows-app is normaal gestart en de aangeboden setupkeuzes zijn bekeken. Single/Main wachten op een Core; Controller vraagt koppeling met een bestaande Main. Geen campagne of virtuele invoerverbinding bewezen. Zie [APP-VALIDATIE.md](APP-VALIDATIE.md). De onderstaande historische onderzoeksfasen zijn geen actuele verklaring dat de app nog nooit is gestart.
+
 Onderzocht op 21 oktober 2026. Alleen openbare bronnen; geen app uitgepakt, hardware uitgelezen, SDK aangevraagd of overeenkomst geaccepteerd. Dit verslag vervangt eerdere aannames waar hieronder expliciet aangegeven.
 
 Vervolg op 22 oktober 2026: de officiële Windows-build is inmiddels op gebruikersopdracht gedownload en uitgepakt voor lokale installatie. Statische installatiebevindingen staan in [INSTALLATIE-ONDERZOEK.md](INSTALLATIE-ONDERZOEK.md). De historische downloadbevindingen hieronder blijven gedateerd op 21 oktober; de app is ook bij dit vervolg niet gestart. Geen SDK aangevraagd of overeenkomst geaccepteerd.

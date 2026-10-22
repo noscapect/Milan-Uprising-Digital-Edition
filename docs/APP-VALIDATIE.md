@@ -1,6 +1,6 @@
 # Officiële app — verificatieprotocol
 
-Opgesteld op 22 oktober 2026. Status: voorbereid, niet uitgevoerd. Doel: de ongewijzigde Windows-app met een virtuele tafel gebruiken, zonder fysieke spelonderdelen. Dit protocol beschrijft onderzoeksvragen, geen veronderstelde appschermen of ondersteunde interface.
+Opgesteld op 22 oktober 2026. Status: normale Windows-setup deels uitgevoerd; gekoppeld spelen nog niet bewezen. Doel: de ongewijzigde Windows-app met een virtuele tafel gebruiken, zonder fysieke spelonderdelen. Dit protocol beschrijft onderzoeksvragen, geen veronderstelde appschermen of ondersteunde interface.
 
 ## Openbare bevindingen
 
@@ -23,14 +23,14 @@ Eventuele screenshots, logs, apparaatnamen, identifiers en eigen hardwarewaarnem
 
 | ID | Handeling via normale UI | Vast te stellen | Huidige status |
 | --- | --- | --- | --- |
-| A01 | Start via de bestaande snelkoppeling | Bereikbaar startscherm en getoonde gameversie; eventuele opstartfout | Niet uitgevoerd |
-| A02 | Bekijk de aangeboden setupkeuzes | Werkelijk beschikbare rollen, handmatige invoer en hardwarevrije opties | Niet uitgevoerd |
-| A03 | Probeer een nieuwe testsessie zonder Core | Laatst bereikbare stap en expliciete hardwarevereiste | Niet uitgevoerd |
-| A04 | Bekijk remote deelname als die wordt aangeboden | Vereist deze een actieve host of fysieke tafel? Geen joincode publiceren | Niet uitgevoerd |
-| A05 | Bereik een ability check via de aangeboden normale route | Klik op het dobbelsteengebied van het Main Device; noteer of de app zelf resultaten bepaalt | Niet uitgevoerd |
-| A06 | Test registratie, plaatsing en herhaald contact via een gedocumenteerde invoerroute, als die beschikbaar is | Welke invoer accepteert de app zonder fysieke onderdelen? Zonder zo'n route: geblokkeerd | Niet uitgevoerd |
-| A07 | Observeer een appgestuurde wijziging | Welke locatie-/marker-/componenttoestand kan via een ondersteunde route naar onze tafel? Alleen visueel zien bewijst geen adapter | Niet uitgevoerd |
-| A08 | Sluit normaal af en hervat de testsessie | App bewaart en herstelt voortgang; daarna consistentie met de virtuele tafel vaststellen | Niet uitgevoerd |
+| A01 | Start via de bestaande snelkoppeling | Bereikbaar startscherm en getoonde gameversie; eventuele opstartfout | Geslaagd: startscherm bereikbaar; UI toont V.1.0.9. |
+| A02 | Bekijk de aangeboden setupkeuzes | Werkelijk beschikbare rollen, handmatige invoer en hardwarevrije opties | Geslaagd voor menukeuzes: Single/Multiple Devices, Main/Controller. Geen bordloze invoer in de bekeken instellingen. |
+| A03 | Probeer een nieuwe testsessie zonder Core | Laatst bereikbare stap en expliciete hardwarevereiste | Geblokkeerd: Single Device en Main blijven bij Plug the board / Searching; geen campagne gestart. |
+| A04 | Bekijk remote deelname als die wordt aangeboden | Vereist deze een actieve host of fysieke tafel? Geen joincode publiceren | Deels bekeken: Controller vraagt QR- of verbindingscode van een Main. Geen host gekoppeld; remote sessie niet getest. |
+| A05 | Bereik een ability check via de aangeboden normale route | Klik op het dobbelsteengebied van het Main Device; noteer of de app zelf resultaten bepaalt | Geblokkeerd door voorafgaande setup; Windows-digitale worp niet getest. |
+| A06 | Test registratie, plaatsing en herhaald contact via een gedocumenteerde invoerroute, als die beschikbaar is | Welke invoer accepteert de app zonder fysieke onderdelen? Zonder zo'n route: geblokkeerd | Geblokkeerd; geen werkende virtuele invoerverbinding. |
+| A07 | Observeer een appgestuurde wijziging | Welke locatie-/marker-/componenttoestand kan via een ondersteunde route naar onze tafel? Alleen visueel zien bewijst geen adapter | Geblokkeerd; geen echte game-toestand ontvangen. |
+| A08 | Sluit normaal af en hervat de testsessie | App bewaart en herstelt voortgang; daarna consistentie met de virtuele tafel vaststellen | Campagnehervatting niet uitgevoerd; er is nog geen campagne gestart. |
 
 Geen firmwarewijziging, apppatch, verborgen debugmodus of verondersteld BLE-bericht gebruiken om een geblokkeerde test alsnog te laten slagen.
 
@@ -56,3 +56,12 @@ Wij onderzoeken een onafhankelijke virtuele tafel die de officiële Milan Uprisi
 4. Kunnen digitale worpen in de Windows-app zonder fysieke dice worden gebruikt, en blijven daarvoor een Core of andere hardwarechecks vereist?
 5. Wat mag in een openbare onafhankelijke implementatie worden gedeeld, zonder vertrouwelijke SDK-inhoud of beschermde spelassets op te nemen?
 6. Als deze route niet wordt ondersteund: bestaat er een officieel alternatief dat wel bij dit doel aansluit?
+
+
+## Uitgevoerde normale Windows-controle
+
+Op 22 oktober 2026 is de ongewijzigde Windows-app normaal gestart en via de zichtbare menu's bediend. De eerste-startmelding is met expliciete gebruikersbevestiging afgehandeld. De versieaanduiding op het setupscherm is V.1.0.9. Single Device en Multiple Devices → Main Device leiden naar de Core-zoekstap. Multiple Devices → Controller Device toont koppeling via een QR-code of verbindingscode van een bestaande Main. Er is geen werkende bordloze sessie gestart.
+
+In deze Windows-build is Hardware Test zichtbaar in het instellingenmenu; de bekeken pagina zoekt eveneens een Core. Dit wijkt af van de eerder geraadpleegde App Store-versienotities en bevestigt dat platformgelijkheid niet mag worden aangenomen. De bekeken instellingen bevatten taal/audio/privacy en tutorials, zonder aangetroffen handmatige bordloze invoeroptie. Dit bewijst niet dat iedere mogelijke approute is uitgesloten.
+
+Screenshots en runtimegegevens staan uitsluitend in de genegeerde private werkmap. Vertrouwelijke SDK-bevindingen blijven afzonderlijk privaat. Geen firmware, appbinary of verborgen configuratie gewijzigd. SDK-voorbeeldtests zijn een afzonderlijke stap en worden niet als officiële-appcompatibiliteit beschouwd.
