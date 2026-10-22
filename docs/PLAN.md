@@ -7,6 +7,8 @@ Bijsturing op 22 oktober 2026: bouw actief aan de virtuele fysieke tafel; fabrik
 - [x] Handmatige virtuele tafel met afzonderlijke pionnen, invloedskubussen en fiches, gedeelde zones, voorraadbediening en JSON-herstel voor hetzelfde profiel; zie CONTRACTEN.md uitbreiding 0.4.
 - [x] Ongedaan maken en opnieuw uitvoeren van maximaal honderd lokale handelingen, inclusief leegmaken en behoud van worpuitkomsten; herstelgeschiedenis gescheiden van domeinevents.
 - [x] Voeg de brongecontroleerde retailvoorraad toe met echte personage-/NPC-namen, factiekubussen, fichecombinaties en omkeerbare fiches; behoud aparte demo’s. Zie MILAN-CONTENT.md.
+- [x] Voeg de dertig districtslabels en tien Havenvelden toe in een apart schematisch profiel, met handmatige opstellingsinvoer en atomaire voorraadtoewijzing. Zie KAART-EN-OPSTELLING.md.
+- [ ] Verifieer de exacte retailkaartverbindingen, Havenwerking en officiële campagnebeginstand; de opstellingshulp is nog geen geverifieerde startpreset.
 - [ ] Onderbouw Milan-locaties en de fysieke inventaris verder en vervang neutrale werkvoorraad/mapping waar geverifieerde gegevens beschikbaar zijn.
 - [ ] Onderzoek zelfstandig welke echte appinvoer en terugkoppeling technisch beschikbaar zijn; houd de functionele tafelontwikkeling gaande.
 

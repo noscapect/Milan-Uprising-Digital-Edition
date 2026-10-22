@@ -10,7 +10,11 @@ export function validateProfile(profile) {
     check(new Set(list.map(item => item?.id)).size === list.length, `Dubbele IDs in ${field}`);
     for (const item of list) {
       check(id(item?.id) && typeof item.label === 'string', `Ongeldig item in ${field}`);
-      if (field === 'zones') check(Number.isSafeInteger(item.capacity) && item.capacity > 0, 'Ongeldige capaciteit');
+      if (field === 'zones') {
+        check(Number.isSafeInteger(item.capacity) && item.capacity > 0, 'Ongeldige capaciteit');
+        if (item.area !== undefined) check(id(item.area), 'Ongeldig zonegebied');
+        if (item.attributes !== undefined) check(Array.isArray(item.attributes) && item.attributes.every(id) && new Set(item.attributes).size === item.attributes.length, 'Ongeldige zoneattributen');
+      }
       else {
         check(['piece', 'token', 'cube'].includes(item.kind), 'Niet ondersteund componenttype');
         if (item.faces !== undefined) {
@@ -36,6 +40,7 @@ export function validateProfile(profile) {
       check(profile.componentGroups.some(group => group.id === component.groupId), 'Onbekende onderdeelgroep');
       check(profile.sources.some(source => source.id === component.sourceId), 'Onbekende componentbron');
     }
+    for (const zone of profile.zones) if (zone.sourceId !== undefined) check(profile.sources.some(source => source.id === zone.sourceId), 'Onbekende zonebron');
   }
   check(Array.isArray(profile.dice) && profile.dice.every(n => Number.isSafeInteger(n) && n >= 2 && n <= 1000), 'Ongeldige dobbelstenen');
   // Content schemas are intentionally deferred; never silently accept unimplemented content.

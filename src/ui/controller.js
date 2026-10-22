@@ -3,6 +3,8 @@ export function mountTabletop(tabletop, download, core = null) {
   const $ = id => document.getElementById(id);
   const initial = tabletop.project();
   $('core-controls').hidden = !core;
+  $('board-label').textContent = initial.presentation.boardLabel || '8 × 5 sensoren';
+  $('board-note').textContent = initial.presentation.boardNote || 'Sensorindeling bevestigd. Locaties en oriëntatie in Milan zijn nog niet geverifieerd.';
   $('content-info').hidden = !initial.title;
   $('content-title').textContent = initial.title;
   $('content-note').textContent = initial.contentNote;
@@ -28,8 +30,9 @@ export function mountTabletop(tabletop, download, core = null) {
     const view = tabletop.project();
     renderBoard($('board'), view, zoneId => act(() => core ? core.touch(zoneId) : tabletop.place($('piece').value, zoneId), core ? `Demo-interactie op ${zoneId} geregistreerd. Maak nu het sensorcontact vrij.` : `Onderdeel geplaatst op ${zoneId}.`));
     const positions = new Map(view.zones.flatMap(zone => zone.occupants.map(c => [c.id, zone.id])));
+    const locationLabel = componentId => view.zones.find(zone => zone.id === positions.get(componentId))?.label || 'in voorraad';
     const selected = view.components.find(c => c.id === $('piece').value);
-    $('selection-status').textContent = `${selected.label}${selected.faceLabel ? ` · ${selected.faceLabel}` : ''} · ${positions.get(selected.id) || 'in voorraad'}`;
+    $('selection-status').textContent = `${selected.label}${selected.faceLabel ? ` · ${selected.faceLabel}` : ''} · ${locationLabel(selected.id)}`;
     $('component-description').textContent = view.componentGroups.find(group => group.id === selected.groupId)?.description || '';
     $('flip').disabled = Boolean(core) || !selected.faces;
     $('stock-count').textContent = `${view.components.length - positions.size} in voorraad · ${positions.size} op het bord`;
@@ -41,10 +44,10 @@ export function mountTabletop(tabletop, download, core = null) {
     $('inventory').replaceChildren(...filtered.map(component => {
       const button = document.createElement('button'); button.type = 'button'; button.dataset.component = component.id;
       button.className = `inventory-piece ${component.kind}`;
-      button.textContent = `${initial.title ? component.label : component.shortLabel || component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''} · ${positions.get(component.id) || 'voorraad'}`;
+      button.textContent = `${initial.title ? component.label : component.shortLabel || component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''} · ${locationLabel(component.id)}`;
       button.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
       if (component.color) button.style.borderLeft = `5px solid ${component.color}`;
-      button.setAttribute('aria-label', `${button.title}, ${positions.get(component.id) || 'in voorraad'}`);
+      button.setAttribute('aria-label', `${button.title}, ${locationLabel(component.id)}`);
       button.setAttribute('aria-pressed', String(component.id === selected.id));
       button.onclick = () => { $('piece').value = component.id; update(); };
       return button;
@@ -61,7 +64,8 @@ export function mountTabletop(tabletop, download, core = null) {
     $('events').replaceChildren(...view.events.slice(-12).reverse().map(event => {
       const li = document.createElement('li'), p = event.payload;
       const label = view.components.find(c => c.id === p.componentId)?.label;
-      li.textContent = event.type === 'component.place' ? `${label} naar ${p.zoneId}` : event.type === 'component.remove' ? `${label} verwijderd` : event.type === 'component.flip' ? `${label}: fiche omgekeerd` : event.type === 'component.interact' ? `${label}: interactie in ${p.zoneId} (zonder spelregelactie)` : `Demo d${p.sides}: ${p.value}`;
+      const zoneLabel = view.zones.find(zone => zone.id === p.zoneId)?.label || p.zoneId;
+      li.textContent = event.type === 'table.arrange' ? `Handmatige opstelling: ${p.placements.length} onderdelen geplaatst` : event.type === 'component.place' ? `${label} naar ${zoneLabel}` : event.type === 'component.remove' ? `${label} verwijderd` : event.type === 'component.flip' ? `${label}: fiche omgekeerd` : event.type === 'component.interact' ? `${label}: interactie in ${zoneLabel} (zonder spelregelactie)` : `Demo d${p.sides}: ${p.value}`;
       return li;
     }));
     const roll = view.events.findLast(event => event.type === 'dice.record')?.payload;
@@ -107,4 +111,5 @@ export function mountTabletop(tabletop, download, core = null) {
     finally { if (input.onchange === readHandler) input.value = ''; }
   };
   update();
+  return update;
 }

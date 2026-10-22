@@ -19,11 +19,13 @@ Open http://127.0.0.1:5178. Stop met Ctrl+C. Testen: `node --test`. Als npm besc
 
 ## Prototype gebruiken
 
-Standaard opent **Milan-content 0.5: retail-basisspel** met de echte namen en aantallen: zeven personages, twee bondgenoten, twee ghouls, 65 factiekubussen en 56 fiches, samen 132 losse onderdelen. Categorieën en zoeken maken de voorraad doorzoekbaar. Controle- en onderzoek/afgesloten-locatiefiches kun je omkeren; zijde en positie worden samen bewaard en hersteld. De eigen symbolen vervangen geen officiële illustraties. Zie [inhoud, bronnen en open kaartgegevens](docs/MILAN-CONTENT.md). De locatiekaart en scenario-opstelling zijn nog niet gereconstrueerd; het raster blijft een voorlopige werktafel.
+Standaard opent nu **locatiekaart 0.6**: dertig benoemde stadsdistricten en tien Havenvelden, met de retailonderdelen uit 0.5. De kaart is een eigen schema op basis van officiële bordfoto’s; exacte grenzen, aangrenzendheid en sensorindex zijn nog niet geverifieerd. Onder het bord staat **Campagne-opstelling overnemen** voor vier personages, invloed, controle, afgesloten locaties, NPC’s, bondgenoten, ghouls en Masquerade. Toepassen is één handeling, inclusief undo/redo en JSON-herstel. Er is **nog geen geverifieerde officiële campagnebeginstand** ingevuld. Zie [kaart, bronnen en opstellingsstatus](docs/KAART-EN-OPSTELLING.md).
+
+**Milan-content 0.5: retail-basisspel** blijft als apart profiel beschikbaar met de echte namen en aantallen: zeven personages, twee bondgenoten, twee ghouls, 65 factiekubussen en 56 fiches, samen 132 losse onderdelen. Categorieën en zoeken maken de voorraad doorzoekbaar. Controle- en onderzoek/afgesloten-locatiefiches kun je omkeren; zijde en positie worden samen bewaard en hersteld. De eigen symbolen vervangen geen officiële illustraties. Zie [inhoud en bronnen](docs/MILAN-CONTENT.md). Dit oudere profiel behoudt het voorlopige sensorraster voor bestaande sessies.
 
 De **neutrale werktafel 0.4** blijft als apart profiel beschikbaar. In beide handmatige profielen: kies een onderdeel uit de voorraad of keuzelijst en klik op een zone. Pionnen, invloedskubussen en fiches zijn afzonderlijk te plaatsen en te verplaatsen, ook samen in één zone. **Terug naar voorraad** verwijdert alleen het geselecteerde onderdeel. De voorraad toont waar ieder onderdeel staat. Gebruik **Bewaar JSON** en later **Open JSON** om dezelfde tafel met dezelfde vastgelegde worpen te hervatten. Laden controleert profiel/versie, events en eindtoestand vóór vervanging; fouten laten de bestaande sessie intact. Geen automatische opslag of migraties. Sensorstudies blijven alleen export ondersteunen.
 
-De vier pionnen, twaalf kubussen, acht fiches en capaciteit 32 zijn een neutrale werkvoorraad, geen geverifieerde Milan-inventaris of locatiecapaciteit. De 8 × 5 indeling volgt de sensorlaag; een echte Milan-locatiekaart en officiële appkoppeling ontbreken nog. Deze uitbreiding bouwt aan de virtuele fysieke tafel zonder fabrikantcontact als voorwaarde voor de lokale ontwikkeling.
+De vier pionnen, twaalf kubussen, acht fiches en capaciteit 32 in de neutrale werktafel zijn een demovoorraad, geen geverifieerde Milan-inventaris of locatiecapaciteit. Die 8 × 5 indeling volgt de sensorlaag. De ontwikkeling van de fysieke tafel blijft onafhankelijk van fabrikantcontact; een officiële appkoppeling ontbreekt nog.
 
 **Ongedaan maken** en **Opnieuw uitvoeren** herstellen maximaal honderd lokale handelingen, inclusief bord leegmaken. Opnieuw uitvoeren behoudt de oorspronkelijke worp. Een nieuwe handeling na teruggaan vervangt de redo-reeks. De herstelgeschiedenis blijft alleen in het tabblad; een JSON-export bewaart de actieve tafel en het openen van JSON begint een nieuwe herstelgeschiedenis. Deze knoppen zijn niet beschikbaar in de sensorstudie.
 
@@ -42,6 +44,7 @@ De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1�
 - `src/games/milan-uprising/`: afzonderlijke module, uitsluitend sandbox.
 - `data/games/milan-uprising/demo.json`: neutrale componenten en sensorprofiel.
 - `data/games/milan-uprising/retail.json`: geverifieerde basisspelvoorraad, personage-/NPC-namen, facties, ficheszijden en bronverwijzingen.
+- `data/games/milan-uprising/campaign.json`: benoemde districts-/Havenvelden, bronstatus en handmatige campagne-opstelling; geen officiële startpreset.
 - `src/ui/`, `src/presentation/2d/`: bediening en aparte bordrenderer.
 - `src/adapters/`: cryptografische demo-worpen en JSON-download.
 - `src/adapters/virtual-core.js`: lokale simulatie met gescheiden identiteit, sensorcontact en spelpositie; geen netwerktransport.

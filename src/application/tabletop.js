@@ -15,6 +15,7 @@ export function createTabletop({ profile, module, random }) {
     remove: componentId => send('component.remove', { componentId }),
     interact: (componentId, zoneId) => send('component.interact', { componentId, zoneId }),
     flip: componentId => send('component.flip', { componentId }),
+    arrange: arrangement => send('table.arrange', arrangement),
     roll(sides) { const value = random(sides); send('dice.record', { sides, value }); return value; },
     reset() { commit(createSession(profile, module)); },
     undo() {
@@ -56,7 +57,7 @@ export function createTabletop({ profile, module, random }) {
       });
       return structuredClone({ mode: state.mode, revision: state.revision, canUndo: past.length > 0, canRedo: future.length > 0, components, dice: profile.dice, presentation: profile.presentation,
         componentGroups: profile.componentGroups || [], sources: profile.sources || [], title: profile.title || '', contentNote: profile.contentNote || '',
-        zones: profile.zones.map(zone => ({ id: zone.id, label: zone.label, capacity: zone.capacity, occupants: components.filter(c => state.placements[c.id] === zone.id) })), events: state.events });
+        zones: profile.zones.map(zone => ({ id: zone.id, label: zone.label, capacity: zone.capacity, area: zone.area, attributes: zone.attributes || [], occupants: components.filter(c => state.placements[c.id] === zone.id) })), events: state.events });
     },
     exportSession: () => ({ format: 'tabletop-session', schemaVersion: 1, module: { id: module.id, version: module.version }, package: { gameId: profile.gameId, releaseId: profile.releaseId, version: profile.version }, state: structuredClone(state) })
   });

@@ -1,5 +1,13 @@
 # Contracten v1 — eerste doorsnede
 
+## Uitbreiding 0.6 — benoemde kaart en atomaire opstelling
+
+Afzonderlijk pakket `milan-city` versie `0.6.0`, profielschema 2. De retail- en demopakketten blijven behouden. Zones hebben optioneel `area` (ID), `attributes` (unieke IDs) en `sourceId` (bestaande bron). De presentatie kiest een eigen schematische indeling; deze velden maken geen sensorprotocol of aangrenzendheidsgraaf. `boardEvidence` en `campaignSetup` zijn versie-1-Milan-metadata; officiële beginstand en sensormapping zijn daarin expliciet onbewezen. Zie KAART-EN-OPSTELLING.md.
+
+Nieuwe generieke opdracht `table.arrange {placements: [{componentId, zoneId}], faces: [{componentId, faceId}]}` vervangt alle plaatsingen en ficheszijden atomair. Niet genoemde onderdelen gaan naar voorraad; niet genoemde zijden krijgen hun eerste profielwaarde. IDs, duplicaten, zonecapaciteit en toegestane zijden worden gecontroleerd vóór commit. Bestaande events en worpen blijven behouden; de opstelling voegt één event en revisie toe. De applicatie biedt `arrange(payload)`. Undo/redo en export/import volgen dezelfde toestand en replay.
+
+De afzonderlijke Milan-builder `buildCampaignArrangement(profile, input)` vertaalt handmatige setupinvoer naar deze generieke opdracht. Vier verschillende personages, lokale invoergrenzen en eindige retailvoorraden worden daar gecontroleerd. De engine kent geen factienamen of Milan-startregels. Een volledige matching wijst de controlefiches toe zonder ongewenste gulzige tekorten. Het formulier is geen automatische campagne- of regelmodus; `sandbox` blijft de enige modus.
+
 ## Uitbreiding 0.5 — retailinhoud en componentzijden
 
 Nieuw profiel `retail-core` versie `0.5.0`, gegevensschema 2; schema 1 blijft geaccepteerd en oudere profielen blijven ongewijzigd. Schema 2 vereist `sources` (unieke id, titel, HTTPS-url), `componentGroups` (unieke id, label, optionele beschrijving) en per component een geldige `sourceId` en `groupId`. Optionele `color` en `shortLabel` zijn presentatiegegevens. `faces` is optioneel en bevat precies twee unieke `{id, label, color?}`-objecten. Bronnen en inventaris staan in MILAN-CONTENT.md. De collecties `characters`, `cards`, `tokens` en `scenarios` blijven gereserveerd voor latere inhoudsschema’s; deze fysieke personages en fiches staan in `components`.

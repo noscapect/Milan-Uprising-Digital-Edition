@@ -1,5 +1,13 @@
 # Validatie — 21 oktober 2026
 
+## Locatiekaart en opstellingshulp 0.6 — 22 oktober 2026
+
+- `node --test`: 32 tests geslaagd. Toegevoegd: dertig district-ID’s plus tien Havenvelden, atomaire toepassing/undo/redo/replay, onbewezen-bronstatus, vier verschillende personages, eindige voorraden en componentzijden. Een lastige controleverdeling van 21 Anarchs en acht Camarilla wordt correct gematcht; onmogelijke verdelingen worden geweigerd. Zonecapaciteit en beschadigde opstellingen muteren niets.
+- Browser: stadsprofiel standaard; veertig vakken, waarvan tien Havenvelden, districtslabels en attribuuttekst. Vier handmatig gekozen testpersonages met testlocaties, invloed/controle, afgesloten locatie, NPC en Masquerade via het formulier toegepast als één event. Undo maakte alle plaatsingen ongedaan; redo en JSON-import herstelden ook de zijden. Dubbel gekozen personage geweigerd met behoud van de opstelling.
+- Toegankelijke labels van de opstellingskeuzes gecontroleerd. Desktop 1440 px en mobiel 390 px bekeken; geen pagina-overloop, ook niet met geopende districtentabel. Bronbeelden en screenshots blijven in genegeerd `work/`.
+- Retail- en neutrale browserregressies, sensorstudie, referentiebezetting, JSON-herstel, herstelgeschiedenis en afgeschermde bestanden blijven slagen. Geen browserfouten.
+- De formulierinvoer in deze tests is synthetisch. Geen claim dat deze de echte Chronicle-start voorstelt; geen officiële app/hardware gestart of gewijzigd. Exacte kaartgrenzen, Havenwerking en appgestuurde campagnebeginstand blijven open.
+
 ## Milan-content 0.5 — 22 oktober 2026
 
 - `node --test`: 26 tests geslaagd. Retailaantallen en drie controlefichecombinaties gecontroleerd, plus bron-/groep-/zijdevalidatie. Gemengde retailonderdelen geplaatst; fiche omgekeerd, verplaatst, teruggenomen, ongedaan/opnieuw uitgevoerd en na JSON-export via replay hersteld. Onjuiste eindzijde geweigerd zonder toestandverlies. Geen kleuren in de domeintoestand.

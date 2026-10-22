@@ -41,6 +41,26 @@ export function applyCommand(state, command, profile, module) {
       next.faces[component.id] = component.faces[1 - currentIndex].id;
       break;
     }
+    case 'table.arrange': {
+      if (!Array.isArray(payload.placements) || payload.placements.length > profile.components.length || !Array.isArray(payload.faces) || payload.faces.length > profile.components.length) throw Error('Ongeldige tafelopstelling');
+      next.placements = Object.fromEntries(profile.components.map(c => [c.id, null]));
+      if (next.faces) next.faces = Object.fromEntries(profile.components.filter(c => c.faces).map(c => [c.id, c.faces[0].id]));
+      const placed = new Set(), faced = new Set(), occupancy = new Map();
+      for (const item of payload.placements) {
+        if (!Object.hasOwn(next.placements, item?.componentId) || placed.has(item.componentId)) throw Error('Onbekend of dubbel onderdeel in opstelling');
+        const zone = profile.zones.find(z => z.id === item.zoneId);
+        if (!zone) throw Error('Onbekende zone in opstelling');
+        const count = (occupancy.get(zone.id) || 0) + 1;
+        if (count > zone.capacity) throw Error('Zonecapaciteit overschreden in opstelling');
+        occupancy.set(zone.id, count); placed.add(item.componentId); next.placements[item.componentId] = zone.id;
+      }
+      for (const item of payload.faces) {
+        const component = profile.components.find(c => c.id === item?.componentId);
+        if (!component?.faces?.some(face => face.id === item.faceId) || faced.has(component.id) || !Object.hasOwn(next.faces || {}, component.id)) throw Error('Ongeldige of dubbele fichezijde in opstelling');
+        faced.add(component.id); next.faces[component.id] = item.faceId;
+      }
+      break;
+    }
     case 'dice.record':
       if (!profile.dice.includes(payload.sides) || !Number.isInteger(payload.value) || payload.value < 1 || payload.value > payload.sides) throw Error('Ongeldige worp');
       break;

@@ -6,6 +6,8 @@ Vervolg 22 oktober 2026: [statische controle van de officiële Windows-installat
 
 ## Verdieping en correcties
 
+Vervolg kaartonderzoek op 22 oktober 2026: officiële bordfoto’s in Gamefound-updates 42 en 59 tonen dertig stadsdistricten naast tien Havenvelden. De districtnamen, globale plaatsing en attribuuticonen zijn verwerkt in een eigen schematisch profiel; geen foto/artwork overgenomen. De exacte grensverbindingen, sensorindex en volledige officiële campagnebeginstand blijven ongeverifieerd. [KAART-EN-OPSTELLING.md](KAART-EN-OPSTELLING.md) beschrijft de bronbewijzen en onderscheidt de nieuwe handmatige opstellingshulp van een echte startpreset.
+
 Op 22 oktober 2026 is de openbare retailinventaris verwerkt tot een apart pakket met 132 losse onderdelen. De huidige officiële gamepagina onderbouwt de personagenamen; de handleiding is visueel gecontroleerd op pagina 6, 12 en 13 voor kleuren en onderdeelbetekenis. Zie [MILAN-CONTENT.md](MILAN-CONTENT.md) voor bronnen en de expliciete grens tussen geverifieerde voorraad en nog onbekende locatiekaart/opstelling.
 
 Op 22 oktober 2026 zijn de publieke SDK-pagina, documentatie-index, systeemeisen, FAQ en Milan-versiegeschiedenis opnieuw gecontroleerd. De FAQ beschrijft remote deelname met fysieke hardware bij de host; dit is geen bordloze route. Een publieke invoerinterface voor bestaande apps is niet gevonden binnen deze controle. [APP-VALIDATIE.md](APP-VALIDATIE.md) bevat directe bronnen, een nog niet uitgevoerd testprotocol en niet-verzonden fabrikantvragen.

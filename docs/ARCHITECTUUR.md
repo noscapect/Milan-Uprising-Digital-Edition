@@ -4,6 +4,8 @@ Architectuur vastgesteld en eerste sandboxdoorsnede geïmplementeerd op 21 oktob
 
 Uitbreiding 0.5 op 22 oktober: een apart schema-2-retailpakket bevat brongecontroleerde fysieke onderdelen en identiteiten. Generieke componentzijden worden als IDs in de engine bijgehouden; categorieën, bronverwijzingen en kleuren blijven in data/projecties. Regels en volledige locatiekaart blijven open. De oudere neutrale profielen en hun saves blijven werken.
 
+Uitbreiding 0.6: een apart stadsprofiel bevat dertig districtslabels en tien Havenvelden in een eigen schema. De Milan-opstellingsbuilder en zijn UI staan buiten de engine; de engine ontvangt uitsluitend de generieke atomaire opdracht `table.arrange`. Er is geen vaste campagnebeginstand ingebouwd en geen automatische aangrenzendheids-/bewegingsregel toegevoegd.
+
 ## Bestaand prototype
 
 Huidig: browserinvoer → applicatie → generieke engine en sandboxmodule → toestand/events → projectie → 2D-renderer. JSON-download is een aparte adapter.

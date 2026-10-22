@@ -2,6 +2,7 @@ export function renderBoard(container, projection, onZone) {
   const columns = projection.presentation?.columns;
   if (!Number.isInteger(columns) || columns < 1 || columns > 40) throw Error('Ongeldige 2D-indeling');
   container.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+  container.dataset.layout = projection.presentation.layout || 'grid';
   // Reuse cells to preserve keyboard focus across state changes.
   const existing = new Map([...container.children].map(cell => [cell.dataset.zone, cell]));
   const order = projection.presentation.zoneOrder;
@@ -11,6 +12,7 @@ export function renderBoard(container, projection, onZone) {
     if (!zone) throw Error('Onbekende presentatiezone');
     const cell = existing.get(id) || document.createElement('button');
     cell.dataset.zone = id; cell.className = 'cell';
+    if (zone.area === 'haven') cell.classList.add('haven-zone');
     const title = document.createElement('span'); title.className = 'zone-label'; title.textContent = zone.label;
     const occupants = document.createElement('span'); occupants.className = 'zone-pieces';
     occupants.replaceChildren(...zone.occupants.map(component => {
@@ -22,7 +24,10 @@ export function renderBoard(container, projection, onZone) {
       piece.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
       return piece;
     }));
-    cell.replaceChildren(title, occupants);
+    const attributes = document.createElement('span'); attributes.className = 'zone-attributes';
+    const labels = { physical: 'Fysiek', mental: 'Mentaal', social: 'Sociaal' };
+    attributes.textContent = (zone.attributes || []).map(attribute => labels[attribute] || attribute).join(' · ');
+    cell.replaceChildren(title, attributes, occupants);
     cell.setAttribute('aria-label', `${zone.label}, ${zone.occupants.map(c => `${c.label}${c.faceLabel ? ` (${c.faceLabel})` : ''}`).join(', ') || 'leeg'}`);
     cell.onclick = () => onZone(zone.id);
     return cell;

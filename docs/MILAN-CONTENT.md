@@ -1,5 +1,7 @@
 # Milan-content 0.5 — retail-basisspel
 
+Aanvulling 0.6: de benoemde districts-/Havenkaart en handmatige opstellingshulp zijn nu beschikbaar als afzonderlijk pakket. Zie [KAART-EN-OPSTELLING.md](KAART-EN-OPSTELLING.md). Onderstaande beschrijving blijft de scope van retailpakket 0.5; bestaande saves daarvan blijven bruikbaar.
+
 Broncontrole en implementatie: 22 oktober 2026. Gegevenspakket: `data/games/milan-uprising/retail.json`, `releaseId: retail-core`, pakketversie `0.5.0`, profielschemaversie 2. Alleen sandbox; echte fysieke inhoud maakt de tafel nog geen complete of automatisch gevalideerde spelsessie.
 
 ## Geïmplementeerde inhoud
