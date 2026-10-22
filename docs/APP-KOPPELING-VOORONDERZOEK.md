@@ -88,3 +88,8 @@ Het rapport staat onder genegeerd `private/integration/prerequisites.json`. Alle
 ## Zoeken naar bestaande implementaties
 
 Openbare zoekopdrachten op Teburu + BLE/protocol/emulator/SDK en een GitHub-repositoryzoekopdracht op `teburu` en `teburu xplored` leverden binnen deze controle geen geverifieerde Milan/Core-emulator op. Een gecontroleerde naamgenoot, [BigJk/teburu](https://github.com/BigJk/teburu), is een spreadsheet-API. Dit is geen bewijs dat relevante implementaties nergens bestaan. Er is geen SDK of code van een onbekende emulator geïnstalleerd.
+
+
+## Statusupdate: SDK lokaal beschikbaar
+
+Op 22 oktober 2026 heeft de gebruiker een SDK-archief lokaal beschikbaar gesteld. Inname en eerste statische beoordeling zijn uitgevoerd onder genegeerd `private/sdk/`. De aanvullende technische bevindingen en testprioritering blijven daar; er wordt geen vertrouwelijke SDK-inhoud gepubliceerd. Eerdere passages over ontbrekende SDK-toegang beschrijven de voorafgaande onderzoeksfase. Geen SDK-code, berichten of configuraties aan de publieke implementatie toegevoegd. Officiële-appcompatibiliteit blijft niet bewezen.

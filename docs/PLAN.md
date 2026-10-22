@@ -22,7 +22,9 @@ De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke
 - [x] Download en installeer op gebruikersopdracht de officiële Windows-build; leg statische metadata en beperkingen vast in INSTALLATIE-ONDERZOEK.md. Geen runtimevalidatie.
 - [x] Bereid normale appvalidatie en gerichte fabrikantvragen voor; zie APP-VALIDATIE.md. Concept niet verzonden; tests niet uitgevoerd.
 - [ ] Inspecteer normale setupflow van de geïnstalleerde officiële Windows-app en test de gedocumenteerde digitale dice zodra zichtbare bediening mogelijk is.
-- [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. Nog niets aangevraagd/geaccepteerd.
+- [x] Neem de door de gebruiker beschikbaar gestelde SDK lokaal in en beoordeel deze statisch; alle bron en inhoudelijke bevindingen blijven onder private/sdk/.
+- [ ] Valideer de private SDK-testproef en daarna de normale officiële appflow; leg runtimecompatibiliteit en een eventueel bruikbare verbinding afzonderlijk vast.
+- [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. De agent heeft geen aanvraag gedaan of overeenkomst aanvaard.
 - [ ] Specificeer pas daarna een echte bridge: identiteit, positie/contact, sessiestart, capabilities en appgestuurde visuele updates; wijs regelautoriteit expliciet toe aan de officiële app.
 - [ ] Bewijs campagne starten, interactie, worp en hervatten met ongewijzigde officiële app zonder fysieke spelonderdelen. Herhaal voor volgende release.
 

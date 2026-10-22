@@ -82,3 +82,8 @@ De geïnstalleerde Windows-app 1.0.9 is nu uitsluitend als leesbare lokale artwo
 [APP-KOPPELING-VOORONDERZOEK.md](APP-KOPPELING-VOORONDERZOEK.md) vergelijkt de verbindingsroutes en beschrijft nieuwe statische aanwijzingen: BLE-/netwerk-/WebRTC-assemblies in het installatiemanifest en 45 locatie-presentatiebestanden. Geen bestanden of configuraties overgenomen als protocolmapping. Een read-only Windows-probe bewaart eigen randvoorwaarden en Bluetooth-capabilities uitsluitend onder `private/integration/`.
 
 Voorkeursrichting voor onderzoek is een optionele native helper met afzonderlijke appinvoer en toestandsterugkoppeling. Normale appflow eerst testen; remote deelname en de SDK bewijzen nog geen bordloze sessie. Een BLE-Core-route alleen garandeert geen invloedstoestand. App niet gestart, gewijzigd of verbonden; er zijn geen serviceprofielen of officiële berichten geïmplementeerd. Het advies en de volgende experimenten vereisen geen voorafgaand fabrikantcontact.
+
+
+## Statusupdate: SDK lokaal beschikbaar
+
+Op 22 oktober 2026 heeft de gebruiker een SDK-archief lokaal beschikbaar gesteld. Inname en eerste statische beoordeling zijn uitgevoerd onder genegeerd `private/sdk/`. De aanvullende technische bevindingen en testprioritering blijven daar; er wordt geen vertrouwelijke SDK-inhoud gepubliceerd. Eerdere passages over ontbrekende SDK-toegang beschrijven de voorafgaande onderzoeksfase. Geen SDK-code, berichten of configuraties aan de publieke implementatie toegevoegd. Officiële-appcompatibiliteit blijft niet bewezen.
