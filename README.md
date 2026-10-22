@@ -4,7 +4,7 @@ Onafhankelijk project voor een modulair digitaal tabletop-platform met Vampire: 
 
 De architectuur scheidt generieke engine, spelregels, spelgegevens, gebruikersinterface en grafische presentatie. De volgorde is **2D-reproductie → automatisering → optionele 3D-uitbreiding**. De eerste doorsnede is geïmplementeerd: een configureerbare engine met afzonderlijke Milan-sandboxmodule en JSON-profiel. Andere spellen en uitgeversreleases kunnen later via eigen modules en gegevenspakketten worden toegevoegd. Volledige regels, kaarten en scenario's zijn nog niet geïmplementeerd.
 
-**Status: lokaal bordprototype. Geen werkende vervanging van Teburu en geen verbinding met de officiële app.** Emulatie is onbewezen. De haalbaarheid van volledige bordvervanging is nog onbekend.
+**Status: lokaal bordprototype met een geslaagde private verbindingsproef met de ongewijzigde officiële app.** De app bereikt de campagnevoorbereiding en personagekeuze. Personageregistratie, spelinvoer en automatische tafelupdates zijn nog niet bewezen; een volledige bordvervanging is nog niet speelbaar. Zie [actuele appvalidatie](docs/APP-VALIDATIE.md#private-verbindingsproef-met-de-officiële-app).
 
 ## Starten
 
@@ -37,11 +37,11 @@ Standaard opent nu **locatiekaart 0.7**: dertig benoemde stadsdistricten en tien
 
 De **neutrale werktafel 0.4** blijft als apart profiel beschikbaar. In beide handmatige profielen: kies een onderdeel uit de voorraad of keuzelijst en klik op een zone. Pionnen, invloedskubussen en fiches zijn afzonderlijk te plaatsen en te verplaatsen, ook samen in één zone. **Terug naar voorraad** verwijdert alleen het geselecteerde onderdeel. De voorraad toont waar ieder onderdeel staat. Gebruik **Bewaar JSON** en later **Open JSON** om dezelfde tafel met dezelfde vastgelegde worpen te hervatten. Laden controleert profiel/versie, events en eindtoestand vóór vervanging; fouten laten de bestaande sessie intact. Geen automatische opslag of migraties. Sensorstudies blijven alleen export ondersteunen.
 
-De vier pionnen, twaalf kubussen, acht fiches en capaciteit 32 in de neutrale werktafel zijn een demovoorraad, geen geverifieerde Milan-inventaris of locatiecapaciteit. Die 8 × 5 indeling volgt de sensorlaag. De ontwikkeling van de fysieke tafel blijft onafhankelijk van fabrikantcontact; een officiële appkoppeling ontbreekt nog.
+De vier pionnen, twaalf kubussen, acht fiches en capaciteit 32 in de neutrale werktafel zijn een demovoorraad, geen geverifieerde Milan-inventaris of locatiecapaciteit. Die 8 × 5 indeling volgt de sensorlaag. De ontwikkeling van de fysieke tafel blijft onafhankelijk van fabrikantcontact; de verbinding met onze tafel moet nog worden geïmplementeerd.
 
 **Ongedaan maken** en **Opnieuw uitvoeren** herstellen maximaal honderd lokale handelingen, inclusief bord leegmaken. Opnieuw uitvoeren behoudt de oorspronkelijke worp. Een nieuwe handeling na teruggaan vervangt de redo-reeks. De herstelgeschiedenis blijft alleen in het tabblad; een JSON-export bewaart de actieve tafel en het openen van JSON begint een nieuwe herstelgeschiedenis. Deze knoppen zijn niet beschikbaar in de sensorstudie.
 
-Kies voor de **interactiestudie** het bijbehorende tafelprofiel: kies een demopion, druk op **Registreer demopion**, klik een sensor en druk op **Maak sensor vrij**. De pion blijft logisch in de zone. Registreer daarna een andere pion en gebruik dezelfde sensor: beide mogen de demozone delen. Opnieuw dezelfde zone aanraken registreert alleen een generieke interactie. Dit is expliciete lokale selectie, geen RFID-scan of echte Core-emulatie. Het d10-profiel volgt de Milan-inventaris; capaciteit vier is alleen een demokeuze. De officiële Milan-app heeft zelf digitale worpen, maar een echte appkoppeling is nog niet bewezen.
+Kies voor de **interactiestudie** het bijbehorende tafelprofiel: kies een demopion, druk op **Registreer demopion**, klik een sensor en druk op **Maak sensor vrij**. De pion blijft logisch in de zone. Registreer daarna een andere pion en gebruik dezelfde sensor: beide mogen de demozone delen. Opnieuw dezelfde zone aanraken registreert alleen een generieke interactie. Dit is expliciete lokale selectie, geen RFID-scan of echte Core-emulatie. Het d10-profiel volgt de Milan-inventaris; capaciteit vier is alleen een demokeuze. De officiële Milan-app heeft zelf digitale worpen; deze zijn nog niet tijdens een Windows-spelsessie getest.
 
 Het tafelprofielmenu kan terug naar het oorspronkelijke referentieprofiel hieronder. Kies het profiel en klik **Start lege tafel met dit profiel**; exporteer eerst wat je wilt bewaren. De JSON-export van de interactiestudie bevat ook een afzonderlijk lokaal inputlog, zonder echte hardware-identifiers.
 
@@ -51,7 +51,7 @@ De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1�
 
 ## Onderzoek naar appkoppeling
 
-De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert onderzoek naar een optionele native helper voor appinvoer en een afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; de lokale resultaten blijven privaat. Er is nog geen werkende appverbinding of automatische cityronde.
+De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert onderzoek naar een optionele native helper voor appinvoer en een afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; de lokale resultaten blijven privaat. De private verbindingsproef is inmiddels geslaagd tot aan de personagekeuze. Spelinvoer, automatische cityrondes en een publieke adapter blijven open.
 
 ## Projectstructuur
 

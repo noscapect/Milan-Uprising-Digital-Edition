@@ -71,3 +71,11 @@ Screenshots en runtimegegevens staan uitsluitend in de genegeerde private werkma
 Na normale Unity-aanmelding zijn de private SDK-voorbeeldbuilds en een afzonderlijke lokale runtimeproef op 22 oktober 2026 geslaagd. Er is een eigen testopstelling gebruikt; dit resultaat geldt niet voor Milan. Alle bron, configuratie, uitvoerbare bestanden, screenshots en technische testgegevens blijven onder genegeerd `private/sdk/`.
 
 Vervolgens is de eigen testopstelling gestopt en is Milan via de normale UI als Main ingesteld. Tijdens de aansluitende controle werd geen verbinding voor de testproef aangeboden of gevonden; Milan bleef in de Core-zoekstap. Er is geen campagne gestart. Dit is een beperkte waarneming van deze setup en build, geen bewijs dat iedere integratieroute onmogelijk is. De eerstvolgende integratiestap blijft een toegankelijke invoerroute naar de ongewijzigde app aantonen; de SDK-test op zichzelf vervult die stap niet.
+
+## Private verbindingsproef met de officiële app
+
+De vervolgproef op 22 oktober 2026 heeft een verbinding met de ongewijzigde Windows-app 1.0.9 aangetoond. De normale campagnevoorbereiding en personagekeuze zijn bereikbaar. De app biedt zelf de opties om zonder firmwareupdate en zonder aangesloten dobbelstenen door te gaan; deze zichtbare opties zijn gebruikt. De officiële app en firmware zijn niet gewijzigd.
+
+Bij de personagekeuze vraagt de app nog om een scan. Klikken op een portret opent personage-informatie en voltooit de selectie niet. Personageregistratie, plaatsing, herhaald contact, digitale worpen tijdens het spel en hervatten zijn nog niet gevalideerd. Er is nog geen speelbare campagne of automatische koppeling met onze tafel aangetoond.
+
+Dit is de actuele beperkte conclusie; de eerdere tabellen en proefverslagen hierboven beschrijven de voorafgaande controles. SDK-bron, helper, technische verbindingsgegevens, screenshots en waarnemingen blijven uitsluitend onder genegeerd `private/`. Deze private proef is geen publiek beschikbare integratieadapter of bewijs van ondersteuning door de fabrikant.

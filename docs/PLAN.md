@@ -25,12 +25,13 @@ De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke
 - [ ] Test de gedocumenteerde digitale dice zodra de voorafgaande setup bereikbaar is; nu geblokkeerd vóór campagneaanvang.
 - [x] Neem de door de gebruiker beschikbaar gestelde SDK lokaal in en beoordeel deze statisch; alle bron en inhoudelijke bevindingen blijven onder private/sdk/.
 - [x] Bouw en valideer de private SDK-testproef, afzonderlijk van de officiële app. De lokale proef is geslaagd; bron, builds en technische bevindingen blijven privaat.
-- [ ] Bewijs een bruikbare verbinding met de ongewijzigde officiële app; de normale Main-setup biedt tijdens de controle geen verbinding voor de testproef en blijft op een Core wachten.
+- [x] Toon een verbinding met de ongewijzigde officiële app aan in een private proef; campagnevoorbereiding en personagekeuze zijn bereikbaar. Dit bewijst nog geen speelbare sessie.
+- [ ] Registreer personages via een toegestane invoerroute en verifieer vervolgens plaatsing en herhaald contact in de officiële app. Geen fysieke tagidentiteiten kopiëren.
 - [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. De agent heeft geen aanvraag gedaan of overeenkomst aanvaard.
 - [ ] Specificeer pas daarna een echte bridge: identiteit, positie/contact, sessiestart, capabilities en appgestuurde visuele updates; wijs regelautoriteit expliciet toe aan de officiële app.
 - [ ] Bewijs campagne starten, interactie, worp en hervatten met ongewijzigde officiële app zonder fysieke spelonderdelen. Herhaal voor volgende release.
 
-Huidige SDK-teststatus: de passende Unity-editor en Hub zijn geïnstalleerd en de gebruiker heeft aangemeld. Import, voorbeeldbuilds en de afzonderlijke lokale runtimeproef zijn geslaagd. Dit bewijst uitsluitend de private testopstelling; officiële-appcompatibiliteit en automatische tafelupdates blijven onbewezen. Technische inhoud en logs blijven privaat.
+Huidige integratiestatus: import, voorbeeldbuilds en de afzonderlijke SDK-runtimeproef zijn geslaagd. Een daaropvolgende private verbindingsproef bereikt ook de campagnevoorbereiding en personagekeuze in de ongewijzigde officiële app. Personageregistratie, een speelbare campagne en automatische tafelupdates blijven open. Technische inhoud, screenshots en logs blijven privaat.
 
 De publieke SDK-aanvraag is gevonden. Dat voltooit niet het onderzoek naar een toegestane bridge. Onbewezen protocolstappen blijven open; geen verzonnen BLE-payloads of automatische SDK-aanmelding.
 
