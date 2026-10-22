@@ -65,3 +65,9 @@ Op 22 oktober 2026 is de ongewijzigde Windows-app normaal gestart en via de zich
 In deze Windows-build is Hardware Test zichtbaar in het instellingenmenu; de bekeken pagina zoekt eveneens een Core. Dit wijkt af van de eerder geraadpleegde App Store-versienotities en bevestigt dat platformgelijkheid niet mag worden aangenomen. De bekeken instellingen bevatten taal/audio/privacy en tutorials, zonder aangetroffen handmatige bordloze invoeroptie. Dit bewijst niet dat iedere mogelijke approute is uitgesloten.
 
 Screenshots en runtimegegevens staan uitsluitend in de genegeerde private werkmap. Vertrouwelijke SDK-bevindingen blijven afzonderlijk privaat. Geen firmware, appbinary of verborgen configuratie gewijzigd. SDK-voorbeeldtests zijn een afzonderlijke stap en worden niet als officiële-appcompatibiliteit beschouwd.
+
+## Afzonderlijke SDK-runtimecontrole
+
+Na normale Unity-aanmelding zijn de private SDK-voorbeeldbuilds en een afzonderlijke lokale runtimeproef op 22 oktober 2026 geslaagd. Er is een eigen testopstelling gebruikt; dit resultaat geldt niet voor Milan. Alle bron, configuratie, uitvoerbare bestanden, screenshots en technische testgegevens blijven onder genegeerd `private/sdk/`.
+
+Vervolgens is de eigen testopstelling gestopt en is Milan via de normale UI als Main ingesteld. Tijdens de aansluitende controle werd geen verbinding voor de testproef aangeboden of gevonden; Milan bleef in de Core-zoekstap. Er is geen campagne gestart. Dit is een beperkte waarneming van deze setup en build, geen bewijs dat iedere integratieroute onmogelijk is. De eerstvolgende integratiestap blijft een toegankelijke invoerroute naar de ongewijzigde app aantonen; de SDK-test op zichzelf vervult die stap niet.

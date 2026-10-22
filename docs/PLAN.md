@@ -20,17 +20,17 @@ De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke
 - [x] Scheid tijdelijk sensorcontact, expliciete demo-identiteit en blijvende zoneplaatsing in een lokale simulatie; behoud referentieprofiel.
 - [x] Voeg d10-interactieprofiel en herhaalde generieke interactie toe; geen echte sensor-/locatiemapping claimen.
 - [x] Download en installeer op gebruikersopdracht de officiële Windows-build; leg statische metadata en beperkingen vast in INSTALLATIE-ONDERZOEK.md. Geen runtimevalidatie.
-- [x] Bereid normale appvalidatie en gerichte fabrikantvragen voor; zie APP-VALIDATIE.md. Concept niet verzonden; tests niet uitgevoerd.
+- [x] Bereid normale appvalidatie en gerichte fabrikantvragen voor; zie APP-VALIDATIE.md. Concept niet verzonden; uitgevoerde controles staan hieronder en in het testverslag.
 - [x] Inspecteer normale setupflow van de geïnstalleerde officiële Windows-app: Single/Main wachten op een Core, Controller vraagt een bestaande Main. Zie APP-VALIDATIE.md.
 - [ ] Test de gedocumenteerde digitale dice zodra de voorafgaande setup bereikbaar is; nu geblokkeerd vóór campagneaanvang.
 - [x] Neem de door de gebruiker beschikbaar gestelde SDK lokaal in en beoordeel deze statisch; alle bron en inhoudelijke bevindingen blijven onder private/sdk/.
-- [ ] Valideer de private SDK-testproef en daarna de normale officiële appflow; leg runtimecompatibiliteit en een eventueel bruikbare verbinding afzonderlijk vast.
-
+- [x] Bouw en valideer de private SDK-testproef, afzonderlijk van de officiële app. De lokale proef is geslaagd; bron, builds en technische bevindingen blijven privaat.
+- [ ] Bewijs een bruikbare verbinding met de ongewijzigde officiële app; de normale Main-setup biedt tijdens de controle geen verbinding voor de testproef en blijft op een Core wachten.
 - [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. De agent heeft geen aanvraag gedaan of overeenkomst aanvaard.
 - [ ] Specificeer pas daarna een echte bridge: identiteit, positie/contact, sessiestart, capabilities en appgestuurde visuele updates; wijs regelautoriteit expliciet toe aan de officiële app.
 - [ ] Bewijs campagne starten, interactie, worp en hervatten met ongewijzigde officiële app zonder fysieke spelonderdelen. Herhaal voor volgende release.
 
-Huidige SDK-testblokkade: de passende Unity-editor is lokaal geïnstalleerd, maar stopt vóór import wegens ontbrekende actieve licentie. Normale activering door de gebruiker is gevraagd. Geen SDK-build of runtimecompatibiliteit bewezen; technische inhoud en logs blijven privaat.
+Huidige SDK-teststatus: de passende Unity-editor en Hub zijn geïnstalleerd en de gebruiker heeft aangemeld. Import, voorbeeldbuilds en de afzonderlijke lokale runtimeproef zijn geslaagd. Dit bewijst uitsluitend de private testopstelling; officiële-appcompatibiliteit en automatische tafelupdates blijven onbewezen. Technische inhoud en logs blijven privaat.
 
 De publieke SDK-aanvraag is gevonden. Dat voltooit niet het onderzoek naar een toegestane bridge. Onbewezen protocolstappen blijven open; geen verzonnen BLE-payloads of automatische SDK-aanmelding.
 

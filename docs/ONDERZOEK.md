@@ -2,7 +2,7 @@
 
 Gecontroleerd: 21 oktober 2026. Openbare informatie bewijst geen interoperabiliteit.
 
-Actuele runtime-uitkomst op 22 oktober 2026: de normale Windows-setup is inmiddels deels uitgevoerd. Single Device en Main Device wachten op een Core; Controller vraagt koppeling met een bestaande Main. Er is geen campagne gestart. Zie [APP-VALIDATIE.md](APP-VALIDATIE.md) voor de uitgevoerde stappen; eerdere passages over niet starten beschrijven de voorafgaande onderzoeksfase. De aangeleverde SDK wordt afzonderlijk en uitsluitend privaat getest.
+Actuele runtime-uitkomst op 22 oktober 2026: de normale Windows-setup is inmiddels deels uitgevoerd. Single Device en Main Device wachten op een Core; Controller vraagt koppeling met een bestaande Main. Er is geen campagne gestart. De afzonderlijke private SDK-builds en lokale runtimeproef zijn geslaagd; de normale Milan-Main-setup leverde geen verbinding met deze proef op. Zie [APP-VALIDATIE.md](APP-VALIDATIE.md) voor scope en uitkomsten; eerdere passages over niet starten beschrijven de voorafgaande onderzoeksfase.
 
 Vervolg 22 oktober 2026: [statische controle van de officiële Windows-installatie](INSTALLATIE-ONDERZOEK.md) bevestigt Windows x64, Unity-runtime en de aanwezigheid van een Bluetooth WinRT-plug-in. Geen app gestart of officiële-appcompatibiliteit bewezen. De normale setupflow en digitale worpen blijven te testen.
 
