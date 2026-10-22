@@ -75,3 +75,10 @@ Tot die test blijft de status: lokale gedragsstudie, geen werkende officiële-ap
 ## Aanvulling 0.7
 
 De geïnstalleerde Windows-app 1.0.9 is nu uitsluitend als leesbare lokale artworkbron onderzocht. 79 geselecteerde texture-exporten staan buiten Git, waaronder de scherpe kaart die Portello, Sempione en Argonne bevestigt. Eerdere onderzoeksnotities over niet geïnspecteerde appbestanden beschrijven de toenmalige fase. Er is nog steeds geen officiële app gestart of protocol-/hardwarecompatibiliteit getest. Zie [ARTWORK.md](ARTWORK.md).
+
+
+## Vervolg: tweerichtingskoppeling, 22 oktober 2026
+
+[APP-KOPPELING-VOORONDERZOEK.md](APP-KOPPELING-VOORONDERZOEK.md) vergelijkt de verbindingsroutes en beschrijft nieuwe statische aanwijzingen: BLE-/netwerk-/WebRTC-assemblies in het installatiemanifest en 45 locatie-presentatiebestanden. Geen bestanden of configuraties overgenomen als protocolmapping. Een read-only Windows-probe bewaart eigen randvoorwaarden en Bluetooth-capabilities uitsluitend onder `private/integration/`.
+
+Voorkeursrichting voor onderzoek is een optionele native helper met afzonderlijke appinvoer en toestandsterugkoppeling. Normale appflow eerst testen; remote deelname en de SDK bewijzen nog geen bordloze sessie. Een BLE-Core-route alleen garandeert geen invloedstoestand. App niet gestart, gewijzigd of verbonden; er zijn geen serviceprofielen of officiële berichten geïmplementeerd. Het advies en de volgende experimenten vereisen geen voorafgaand fabrikantcontact.

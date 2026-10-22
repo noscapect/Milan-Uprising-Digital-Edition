@@ -46,3 +46,10 @@ De [officiële gamepagina](https://games.teburu.com/vtm-milan-uprising) beschrij
 ## Beslisregel
 
 Een BLE-radio of bekend raster is onvoldoende om een Core te emuleren. UUID's, payloads, identity en eventuele beveiliging zijn hier niet vastgesteld. De SDK bestaat, maar is niet aangevraagd of beoordeeld als oplossing voor bestaande officiële apps. Zonder toegestane integratieroute blijft het einddoel onvervuld; gebruik sandbox alleen als expliciet tussenresultaat. Geen app-extractie, firmwarepatching of beveiligingsomzeiling.
+
+
+## Vervolg: tweerichtingskoppeling, 22 oktober 2026
+
+[APP-KOPPELING-VOORONDERZOEK.md](APP-KOPPELING-VOORONDERZOEK.md) vergelijkt de verbindingsroutes en beschrijft nieuwe statische aanwijzingen: BLE-/netwerk-/WebRTC-assemblies in het installatiemanifest en 45 locatie-presentatiebestanden. Geen bestanden of configuraties overgenomen als protocolmapping. Een read-only Windows-probe bewaart eigen randvoorwaarden en Bluetooth-capabilities uitsluitend onder `private/integration/`.
+
+Voorkeursrichting voor onderzoek is een optionele native helper met afzonderlijke appinvoer en toestandsterugkoppeling. Normale appflow eerst testen; remote deelname en de SDK bewijzen nog geen bordloze sessie. Een BLE-Core-route alleen garandeert geen invloedstoestand. App niet gestart, gewijzigd of verbonden; er zijn geen serviceprofielen of officiële berichten geïmplementeerd. Het advies en de volgende experimenten vereisen geen voorafgaand fabrikantcontact.

@@ -49,6 +49,10 @@ In het referentieprofiel: kies een van vier neutrale pionnen en klik op een cel 
 
 De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1–H5 is onze eigen coördinatienotatie; officiële sensorvolgorde, oriëntatie en Milan-locatiemapping zijn onbekend. Het prototype implementeert geen spelregels, verhaal of campagne en is nog geen speelbare digitale editie.
 
+## Onderzoek naar appkoppeling
+
+De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert onderzoek naar een optionele native helper voor appinvoer en een afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; de lokale resultaten blijven privaat. Er is nog geen werkende appverbinding of automatische cityronde.
+
 ## Projectstructuur
 
 - `src/engine/`: headless zone-/componentmodel, profielvalidatie en atomische opdrachten.

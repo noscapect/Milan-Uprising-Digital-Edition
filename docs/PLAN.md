@@ -11,6 +11,7 @@ Bijsturing op 22 oktober 2026: bouw actief aan de virtuele fysieke tafel; fabrik
 - [x] Herontwerp de UI rond de fysieke kaart met volledige schermbreedte, compacte voorraad/locatie/sessie, zoom en apart voorbereidingsvenster; koppel repaint aan sessiewijzigingen voor toekomstige adapters. Zie TAFEL-LAYOUT.md.
 - [ ] Verifieer de exacte retailkaartverbindingen, Havenwerking en officiële campagnebeginstand; de opstellingshulp is nog geen geverifieerde startpreset.
 - [ ] Onderbouw Milan-locaties en de fysieke inventaris verder en vervang neutrale werkvoorraad/mapping waar geverifieerde gegevens beschikbaar zijn.
+- [x] Vergelijk native BLE, remote/controller, SDK, logs/saves en vensterherkenning; voeg een read-only lokale randvoorwaardenprobe toe. Zie APP-KOPPELING-VOORONDERZOEK.md. Dit bewijst nog geen verbinding.
 - [ ] Onderzoek zelfstandig welke echte appinvoer en terugkoppeling technisch beschikbaar zijn; houd de functionele tafelontwikkeling gaande.
 
 De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke spelonderdelen met de virtuele tafel werken. De app beheert regels en verhaal. Een eigen geautomatiseerde Milan-implementatie is optioneel en heeft lagere prioriteit dan een toegestane officiële-appbrug. De eerdere fasen hieronder beschrijven de tafelarchitectuur, niet de voltooiing van deze brug.

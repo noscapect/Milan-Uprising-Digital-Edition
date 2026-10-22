@@ -37,3 +37,8 @@ Het concrete testprotocol en de niet-verzonden fabrikantvragen staan in [APP-VAL
 3. Verifieer bij Xplored of er een ondersteunde virtuele invoer-/testinterface voor bestaande officiële apps is en wat publiek geïmplementeerd mag worden. Geen aanvraag of bericht verstuurd.
 
 Pas daarna kan een echte adapter worden gespecificeerd. De lokale `virtual-core` blijft uitsluitend onze gedragssimulatie.
+
+
+## Latere statische verdieping
+
+De eerste controle hierboven is historisch. Op 22 oktober zijn op gebruikersopdracht originele textures uitsluitend lokaal geëxporteerd; zie [ARTWORK.md](ARTWORK.md). Vervolgens is het leesbare assemblymanifest nader bekeken voor BLE-, netwerk- en WebRTC-aanwijzingen, zijn 45 locatie-presentatiebestanden geteld en is een read-only randvoorwaardenprobe uitgevoerd. Zie [APP-KOPPELING-VOORONDERZOEK.md](APP-KOPPELING-VOORONDERZOEK.md). Dit is geen runtime-/protocolvalidatie. Ruwe waarnemingen en fingerprints blijven privaat.
