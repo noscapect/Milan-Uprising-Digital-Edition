@@ -33,3 +33,10 @@ Afweging: leg kleine expliciete contracten vast en migreer stapsgewijs. Bouw gee
 Originele, leesbare textures uit de lokaal geïnstalleerde app worden uitsluitend onder genegeerd `private/artwork/` bewaard. De server heeft een beperkte PNG-allowlist en een gefilterde catalogus; domeinstate en sessie-export bevatten geen afbeeldingen of lokale paden. Geen externe demo-dependencies. De optionele UnityPy-extractor staat los van de runtime. Details: [ARTWORK.md](ARTWORK.md).
 
 Kaartnamen Portello, Sempione en Argonne zijn gecorrigeerd op basis van de scherpe appkaart. Nieuw standaardpakket `city.json` 0.7.0 met eigen release-ID; `campaign.json` 0.6 blijft intact voor bestaande sessies. Geen stille sessiemigratie.
+
+
+## Tafel eerst, 22 oktober 2026
+
+De oorspronkelijke kaart wordt met lokaal artwork de interactieve hoofdweergave. Volledige schermbreedte, een compacte zijbalk, schaalbare kaart en aparte voorbereidingsvensters vervangen de lange informatiepagina. Visuele klikgebieden zijn eigen benaderingen, buiten de engine. Bekijken is de standaard; voorraadselectie schakelt naar plaatsen. De volledige locatie-inhoud blijft toegankelijk wanneer het bord meer dan vier onderdelen samenvat.
+
+De officiële app blijft het einddoel en de beoogde regelautoriteit. Automatisering kan dezelfde applicatie aansturen: observatie van statewijzigingen vernieuwt de UI ook zonder gebruikershandeling. Er is geen werkende officiële appadapter of automatisch overgenomen cityronde ingebouwd. Origineel artwork blijft uitsluitend lokaal.

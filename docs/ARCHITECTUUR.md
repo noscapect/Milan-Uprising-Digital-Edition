@@ -79,3 +79,12 @@ Behoud van de officiële app blijft voorkeur, maar is geen engine-afhankelijkhei
 5. Sandbox werkt zonder volledige Milan-regels of Teburu.
 
 Zie BESLUITEN.md voor de wijzigingen ten opzichte van het oorspronkelijke ontwerp.
+
+
+## Tafelweergave en toekomstige appupdates (22 oktober 2026)
+
+De fysieke renderer combineert het optionele lokale kaartbeeld met eigen visuele klikpolygonen en onderdeelankers uit `src/presentation/2d/milan-map.js`. Dit is uitsluitend presentatiegeometrie; geen sensorindex, adjacency of domeinpositie. De schematische renderer gebruikt dezelfde projecties en opdrachten. Voorraad, geselecteerde locatie, camerazoom, tabkeuze en plaatsmodus blijven UI-toestand buiten de sessie-export.
+
+`tabletop.subscribe(listener)` meldt geslaagde toestandwijzigingen, undo, redo, reset en import. Een listener leest een nieuwe projectie; de retourfunctie schrijft hem uit. Een adapter kan zo via dezelfde applicatieopdrachten werken als een speler; de renderer wordt bijgewerkt zonder DOM-toegang vanuit de adapter. Wisselen van tafelprofiel schrijft de oude UI uit en verwijdert zijn resize- en toetsenbordlisteners. Fouten in een observer draaien geen geslaagde domeinopdracht terug.
+
+De officiële app blijft beoogde bron van regels, campagne en opdrachten zoals invloed plaatsen tijdens een cityronde. Een toekomstige, bewezen bridge moet zulke instructies vertalen naar gevalideerde tafelwijzigingen, met behoud van de overige stukken, atomaire toepassing en verwerking van dubbele of verouderde berichten. Transport, berichtmapping en automatische invloedsoverdracht ontbreken nog. Er is geen fictief Teburu-protocol toegevoegd. Zie TAFEL-LAYOUT.md.

@@ -71,3 +71,8 @@ Export: format tabletop-session, schemaVersion 1, module-identiteit, pakket-iden
 ## Uitbreiding 0.7 — optioneel lokaal artwork
 
 `GET /local-artwork/catalog.json` geeft een gefilterde catalogus met `available`, `assets`, `components`, `zones`, `groups`, `faces` en `branding`; ontbrekend/ongeldig lokaal pakket geeft `available:false`. Assetwaarden zijn uitsluitend lokale PNG-routes. Geen private bronpaden in deze response. `withArtwork` verrijkt alleen de afgeleide presentatie; engine, opdrachten en sessie-envelop veranderen niet. Locatiebeelden staan alleen aan voor het gecorrigeerde `city.json`-profiel 0.7.0. Zie [ARTWORK.md](ARTWORK.md).
+
+
+## Presentatie-uitbreiding — fysieke tafelweergave
+
+Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde kaart 0.7 krijgt een optionele fysieke renderer met alleen presentatiegeometrie. De schematische renderer en oudere profielen blijven beschikbaar. `tabletop.subscribe(listener)` geeft een unsubscribe-functie en meldt geslaagde statewijzigingen, inclusief import en herstel; geen melding bij een geweigerde opdracht. De callback krijgt geen mutable domeintoestand. Dit is een eigen applicatiecontract voor andere invoerbronnen, geen app- of Teburu-protocol.

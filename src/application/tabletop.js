@@ -3,14 +3,24 @@ export function createTabletop({ profile, module, random }) {
   profile = structuredClone(profile);
   let state = createSession(profile, module);
   let past = [], future = [];
+  const listeners = new Set();
+  const notify = () => {
+    for (const listener of [...listeners]) {
+      try { listener(); } catch (error) { console.error('Tafelweergave bijwerken mislukt', error); }
+    }
+  };
   const commit = next => {
     past.push(state);
     if (past.length > 100) past.shift();
     future = [];
-    state = next;
+    state = next; notify();
   };
   const send = (type, payload) => commit(applyCommand(state, { type, payload, actorId: 'local', expectedRevision: state.revision }, profile, module));
   return Object.freeze({
+    subscribe(listener) {
+      if (typeof listener !== 'function') throw Error('Ongeldige tafelobserver');
+      listeners.add(listener); return () => listeners.delete(listener);
+    },
     place: (componentId, zoneId) => send('component.place', { componentId, zoneId }),
     remove: componentId => send('component.remove', { componentId }),
     interact: (componentId, zoneId) => send('component.interact', { componentId, zoneId }),
@@ -20,11 +30,11 @@ export function createTabletop({ profile, module, random }) {
     reset() { commit(createSession(profile, module)); },
     undo() {
       if (!past.length) throw Error('Geen handeling om ongedaan te maken');
-      future.push(state); state = past.pop();
+      future.push(state); state = past.pop(); notify();
     },
     redo() {
       if (!future.length) throw Error('Geen handeling om opnieuw uit te voeren');
-      past.push(state); state = future.pop();
+      past.push(state); state = future.pop(); notify();
     },
     restoreSession(saved) {
       if (saved?.format !== 'tabletop-session' || saved.schemaVersion !== 1) throw Error('Onbekend sessieformaat');
@@ -47,7 +57,7 @@ export function createTabletop({ profile, module, random }) {
       };
       if (!equivalent(replay, imported)) throw Error('Sessietoestand komt niet overeen met het activiteitenlog');
       state = replay;
-      past = []; future = [];
+      past = []; future = []; notify();
     },
     snapshot: () => structuredClone(state),
     project() {

@@ -4,6 +4,76 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
   const $ = id => document.getElementById(id);
   const project = () => withArtwork(tabletop.project(), artwork, { locationArtwork });
   const initial = project();
+  let selectedZone = null, placing = Boolean(core), zoom = 1, mapFailed = false;
+  const tabs = [...document.querySelectorAll('[role=tab]')];
+  function showPanel(name, focus = false) {
+    for (const tab of tabs) {
+      const active = tab.dataset.panel === name;
+      tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1;
+      $(`panel-${tab.dataset.panel}`).hidden = !active;
+      if (active && focus) tab.focus();
+    }
+  }
+  for (const tab of tabs) {
+    tab.onclick = () => showPanel(tab.dataset.panel);
+    tab.onkeydown = event => {
+      const index = tabs.indexOf(tab);
+      const next = event.key === 'ArrowRight' ? (index+1)%tabs.length : event.key === 'ArrowLeft' ? (index+tabs.length-1)%tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length-1 : null;
+      if (next !== null) { event.preventDefault(); showPanel(tabs[next].dataset.panel, true); }
+    };
+  }
+  showPanel('stock');
+  const mapUrl = artwork?.assets?.[artwork?.branding?.map];
+  const physicalAvailable = () => locationArtwork && Boolean(mapUrl) && !mapFailed;
+  const mapOption = $('board-view').querySelector('[value=map]');
+  mapOption.disabled = !physicalAvailable();
+  $('board-view').value = physicalAvailable() ? 'map' : 'grid';
+  function resizeBoard() {
+    const physical = $('board').dataset.layout === 'physical-map';
+    for (const id of ['zoom-out','zoom-in','fit-board']) $(id).disabled = !physical;
+    $('zoom-label').textContent = physical ? `${Math.round(zoom * 100)}%` : '—';
+    if (!physical) return;
+    const viewport = $('board-viewport');
+    const fit = Math.min(viewport.clientWidth, viewport.clientHeight * 2048/1295);
+    $('board').style.width = `${Math.max(1,fit * zoom)}px`;
+    $('zoom-out').disabled = zoom <= 1; $('zoom-in').disabled = zoom >= 3;
+  }
+  const observer = new ResizeObserver(resizeBoard); observer.observe($('board-viewport'));
+  function changeZoom(value) {
+    const viewport = $('board-viewport');
+    const centerX = (viewport.scrollLeft + viewport.clientWidth/2) / Math.max(1,viewport.scrollWidth);
+    const centerY = (viewport.scrollTop + viewport.clientHeight/2) / Math.max(1,viewport.scrollHeight);
+    zoom = Math.max(1,Math.min(3,value)); resizeBoard();
+    viewport.scrollLeft = viewport.scrollWidth * centerX - viewport.clientWidth/2;
+    viewport.scrollTop = viewport.scrollHeight * centerY - viewport.clientHeight/2;
+  }
+  $('zoom-out').onclick = () => changeZoom(zoom - .25);
+  $('zoom-in').onclick = () => changeZoom(zoom + .25);
+  $('fit-board').onclick = () => changeZoom(1);
+  $('board-view').onchange = () => { zoom = 1; update(); };
+  $('focus-board').onclick = () => {
+    const active = document.body.classList.toggle('board-focus');
+    $('focus-board').setAttribute('aria-pressed',String(active)); resizeBoard();
+  };
+  function selectComponent(id, arm = true) {
+    $('piece').value = id; placing = core ? true : arm; showPanel('stock'); update();
+  }
+  function inspectZone(id) { selectedZone = id; showPanel('location'); update(); }
+  function handleZone(id) {
+    selectedZone = id;
+    if (!placing && !core) { inspectZone(id); return; }
+    const label = initial.zones.find(zone => zone.id === id)?.label || id;
+    act(() => core ? core.touch(id) : tabletop.place($('piece').value,id), core ? `Demo-interactie op ${label}. Maak het sensorcontact vrij.` : `Geplaatst op ${label}.`);
+  }
+  $('mode-inspect').onclick = () => { placing = false; update(); };
+  $('mode-place').onclick = $('place-selected').onclick = () => { placing = true; update(); };
+  $('place-in-location').onclick = () => {
+    if (selectedZone) act(() => tabletop.place($('piece').value,selectedZone), `Geplaatst op ${initial.zones.find(z=>z.id===selectedZone)?.label}.`);
+  };
+  const cancelPlacement = event => {
+    if (event.key === 'Escape' && !document.querySelector('dialog[open]')) { placing = Boolean(core); update(); }
+  };
+  document.addEventListener('keydown',cancelPlacement);
   $('artwork-status').textContent = artwork?.available ? 'Origineel artwork uit de lokaal geïnstalleerde app · alleen op deze computer' : 'Geen lokaal artwork gevonden. De tafel werkt met symbolen.';
   const logo = artwork?.assets?.[artwork?.branding?.logo];
   $('game-logo').hidden = !logo;
@@ -37,11 +107,35 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
   }));
   function update() {
     const view = project();
-    renderBoard($('board'), view, zoneId => act(() => core ? core.touch(zoneId) : tabletop.place($('piece').value, zoneId), core ? `Demo-interactie op ${zoneId} geregistreerd. Maak nu het sensorcontact vrij.` : `Onderdeel geplaatst op ${zoneId}.`));
+    const physical = $('board-view').value === 'map' && physicalAvailable();
+    renderBoard($('board'), view, handleZone, {
+      map:physical ? mapUrl : null, selectedZone, selectedComponent:$('piece').value,
+      onComponent:(id,zoneId) => placing ? handleZone(zoneId) : selectComponent(id,false), onInspect:inspectZone,
+      onMapError:() => { mapFailed = true; mapOption.disabled = true; $('board-view').value = 'grid'; update(); }
+    });
+    $('map-caption').textContent = physical ? 'Originele kaart · klik een district' : 'Schematische weergave';
+    $('mode-inspect').setAttribute('aria-pressed',String(!placing));
+    $('mode-place').setAttribute('aria-pressed',String(placing));
+    $('board').classList.toggle('placing',placing);
+    $('tool-hint').textContent = placing ? 'Klik de bestemming op het bord. Esc om te stoppen.' : 'Klik een district om de inhoud te bekijken.';
+    resizeBoard();
     const positions = new Map(view.zones.flatMap(zone => zone.occupants.map(c => [c.id, zone.id])));
     const locationLabel = componentId => view.zones.find(zone => zone.id === positions.get(componentId))?.label || 'in voorraad';
     const selected = view.components.find(c => c.id === $('piece').value);
     $('selection-status').textContent = `${selected.label}${selected.faceLabel ? ` · ${selected.faceLabel}` : ''} · ${locationLabel(selected.id)}`;
+    const zone = view.zones.find(z=>z.id === selectedZone);
+    $('location-title').textContent = zone?.label || 'Kies een district';
+    $('location-image').hidden = !zone?.background;
+    if (zone?.background) { $('location-image').src = zone.background; $('location-image').onerror = () => { $('location-image').hidden = true; }; }
+    $('location-description').textContent = zone ? `${zone.occupants.length} onderdelen op deze locatie${zone.area === 'haven' ? ' · Haven' : ''}` : 'Klik op de kaart om onderdelen op die locatie te bekijken.';
+    $('place-in-location').hidden = !zone || Boolean(core);
+    $('place-in-location').textContent = `Plaats ${selected.shortLabel || selected.label} hier`;
+    $('location-pieces').replaceChildren(...(zone?.occupants || []).map(component => {
+      const button = document.createElement('button'); button.type = 'button';
+      if (component.icon) button.append(artworkImage(component.icon,'inventory-icon'));
+      const label = document.createElement('span'); label.textContent = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
+      button.append(label); button.onclick = () => selectComponent(component.id,false); return button;
+    }));
     $('component-description').textContent = view.componentGroups.find(group => group.id === selected.groupId)?.description || '';
     $('component-artwork').replaceChildren(...(selected.portrait || selected.icon ? [artworkImage(selected.portrait || selected.icon, 'selected-portrait')] : []));
     $('flip').disabled = Boolean(core) || !selected.faces;
@@ -54,13 +148,16 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     $('inventory').replaceChildren(...filtered.map(component => {
       const button = document.createElement('button'); button.type = 'button'; button.dataset.component = component.id;
       button.className = `inventory-piece ${component.kind}`;
-      button.textContent = `${initial.title ? component.label : component.shortLabel || component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''} · ${locationLabel(component.id)}`;
+      const text = document.createElement('span'); text.className = 'inventory-text';
+      const name = document.createElement('span'); name.textContent = `${initial.title ? component.label : component.shortLabel || component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
+      const position = document.createElement('small'); position.textContent = locationLabel(component.id);
+      text.append(name,position); button.append(text);
       if (component.icon) button.prepend(artworkImage(component.icon, 'inventory-icon'));
       button.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
       if (component.color) button.style.borderLeft = `5px solid ${component.color}`;
       button.setAttribute('aria-label', `${button.title}, ${locationLabel(component.id)}`);
       button.setAttribute('aria-pressed', String(component.id === selected.id));
-      button.onclick = () => { $('piece').value = component.id; update(); };
+      button.onclick = () => selectComponent(component.id);
       return button;
     }));
     if (activeInventory) [...$('inventory').children].find(button => button.dataset.component === activeInventory)?.focus();
@@ -90,7 +187,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
   $('release').onclick = () => act(() => core?.release(), 'Sensorcontact vrij; de logische spelpositie blijft bewaard.');
   $('piece').onchange = () => {
     $('inventory-group').value = initial.components.find(component => component.id === $('piece').value)?.groupId || 'all';
-    $('inventory-search').value = ''; update();
+    $('inventory-search').value = ''; placing = true; update();
   };
   $('inventory-group').onchange = update;
   $('inventory-search').oninput = update;
@@ -121,6 +218,8 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     } catch (error) { if (input.onchange === readHandler) $('status').textContent = `Openen mislukt: ${error.message}`; }
     finally { if (input.onchange === readHandler) input.value = ''; }
   };
+  const unsubscribe = tabletop.subscribe(update);
+  update.dispose = () => { unsubscribe(); observer.disconnect(); document.removeEventListener('keydown',cancelPlacement); };
   update();
   return update;
 }

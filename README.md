@@ -21,9 +21,17 @@ Open http://127.0.0.1:5178. Stop met Ctrl+C. Testen: `node --test`. Als npm besc
 
 Op deze computer zijn 79 originele afbeeldingen uit de geïnstalleerde app toegevoegd: alle dertig locatiebeelden, portretten, fiches, logo en originele kaart. Ze staan alleen onder genegeerd `private/artwork/`. De publieke code werkt ook zonder deze beelden. Zie [voorbereiding, bron en gebruik](docs/ARTWORK.md). Het vorige kaartprofiel 0.6 blijft beschikbaar voor oude sessies.
 
-## Prototype gebruiken
+## Speeltafel gebruiken
 
-Standaard opent nu **locatiekaart 0.7**: dertig benoemde stadsdistricten en tien Havenvelden, met de retailonderdelen uit 0.5. De kaart is een eigen schema met op de appkaart gecontroleerde districtnamen; exacte grenzen, aangrenzendheid en sensorindex zijn nog niet geverifieerd. Onder het bord staat **Campagne-opstelling overnemen** voor vier personages, invloed, controle, afgesloten locaties, NPC’s, bondgenoten, ghouls en Masquerade. Toepassen is één handeling, inclusief undo/redo en JSON-herstel. Er is **nog geen geverifieerde officiële campagnebeginstand** ingevuld. Zie [kaart, bronnen en opstellingsstatus](docs/KAART-EN-OPSTELLING.md).
+De tafel gebruikt de volledige beschikbare schermbreedte. Met lokaal artwork opent de originele fysieke kaart met veertig klikbare locatiegebieden. **Bekijken** toont de inhoud van een district; selecteer een onderdeel in de voorraad om het daarna op een bestemming te **plaatsen**. Met Escape ga je terug naar bekijken. In deze stand kun je een onderdeel op de kaart selecteren en via de zijbalk verplaatsen, omkeren of terugleggen. Bij meer dan vier onderdelen opent `+n` de volledige locatielijst.
+
+**Voorraad**, **Locatie** en **Sessie** staan in een compacte zijbalk. Gebruik de zoomknoppen voor details, **Passend** voor het hele bord en **Bordfocus** voor extra ruimte. Op tablet en telefoon staat de zijbalk onder de kaart. **Campagne-opstelling** en **Tafelinstellingen** openen aparte vensters. Bewaren, openen en activiteiten staan onder Sessie; undo/redo blijven direct onder het bord bereikbaar. Zonder lokaal artwork blijven dezelfde handelingen in de schematische weergave beschikbaar.
+
+De fysieke weergave benadert de gedrukte gebieden; dit is geen geverifieerde sensor- of aangrenzendheidsmapping. De officiële app blijft de beoogde regel- en campagneautoriteit. Opdrachten vanuit een toekomstige adapter kunnen dezelfde sessie bijwerken; de UI reageert automatisch via `tabletop.subscribe`. Een echte appkoppeling en automatische invloedsoverdracht zijn nog niet geïmplementeerd. Zie [layout en vervolgrichting](docs/TAFEL-LAYOUT.md).
+
+## Inhoud en bestaande profielen
+
+Standaard opent nu **locatiekaart 0.7**: dertig benoemde stadsdistricten en tien Havenvelden, met de retailonderdelen uit 0.5. De kaart is een eigen schema met op de appkaart gecontroleerde districtnamen; exacte grenzen, aangrenzendheid en sensorindex zijn nog niet geverifieerd. Via **Campagne-opstelling** open je **Campagne-opstelling overnemen** voor vier personages, invloed, controle, afgesloten locaties, NPC’s, bondgenoten, ghouls en Masquerade. Toepassen is één handeling, inclusief undo/redo en JSON-herstel. Er is **nog geen geverifieerde officiële campagnebeginstand** ingevuld. Zie [kaart, bronnen en opstellingsstatus](docs/KAART-EN-OPSTELLING.md).
 
 **Milan-content 0.5: retail-basisspel** blijft als apart profiel beschikbaar met de echte namen en aantallen: zeven personages, twee bondgenoten, twee ghouls, 65 factiekubussen en 56 fiches, samen 132 losse onderdelen. Categorieën en zoeken maken de voorraad doorzoekbaar. Controle- en onderzoek/afgesloten-locatiefiches kun je omkeren; zijde en positie worden samen bewaard en hersteld. De eigen symbolen vervangen geen officiële illustraties. Zie [inhoud en bronnen](docs/MILAN-CONTENT.md). Dit oudere profiel behoudt het voorlopige sensorraster voor bestaande sessies.
 

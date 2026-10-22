@@ -17,7 +17,7 @@ De tool selecteert uitsluitend textures met exact passende namen en afmetingen u
 
 ## Presentatie en grenzen
 
-Portretten verschijnen in de voorraad, bij het geselecteerde onderdeel en op het bord. Locatiebeelden worden op de nieuwe stadskaart getoond. Fiche-iconen volgen de gekozen zijde. De originele kaart is een uitklapbare visuele referentie; de interactieve kaart blijft schematisch. Afbeeldingen veranderen geen regels, posities, exports of undo/redo.
+Portretten verschijnen in de voorraad, bij het geselecteerde onderdeel en op het bord. Locatiebeelden worden op de nieuwe stadskaart getoond. Fiche-iconen volgen de gekozen zijde. De originele kaart is nu de interactieve hoofdweergave, met eigen benaderde klikgebieden en onderdelen bovenop het beeld. Een schematische weergave en uitklapbare kaartreferentie blijven beschikbaar; zie [TAFEL-LAYOUT.md](TAFEL-LAYOUT.md). Afbeeldingen veranderen geen regels, posities, exports of undo/redo.
 
 De server publiceert uitsluitend een gefilterde catalogus en geselecteerde PNG-routes onder `/local-artwork/`. Geen algemene toegang tot `private/`, bronmanifest of installatiebestanden. Bestandsnamen, PNG-header, grootte en opgeloste paden worden gecontroleerd. Ontbrekende beelden vallen terug op tekst en symbolen.
 

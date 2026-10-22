@@ -57,3 +57,13 @@
 - Geen hardware of officiële app aangesloten of gewijzigd. Appcompatibiliteit en emulatie niet getest.
 
 Omgeving bevat Node.js 24, maar geen npm op PATH. Gebruik daarom de directe Node-commando's uit README.md.
+
+## Tafelindeling — 22 oktober 2026
+
+- 37 Node-tests geslaagd, inclusief headless observatie van externe opdrachten, undo/redo/reset/import en controle van alle veertig visuele klikgebieden. Geen nieuwe domein-/saveversie.
+- Browser: daadwerkelijke klik op de veertig fysieke kaartankers selecteert steeds het verwachte district/Havenveld. Figuren en fiches renderen boven de oorspronkelijke kaart; selectie, verplaatsing, omkeren, voorraad, volle locatie met +n, undo/redo en JSON-herstel gecontroleerd.
+- Campagneformulier via apart venster: onvolledige invoer geweigerd, vier gekozen personages in één atomaire handeling geplaatst. Tabnavigatie, toetsenbordtabs en Escape, zoom, passend en bordfocus gecontroleerd.
+- Weergave op 2560×1440, 1600×1000, 1366×768, tablet 768×1024 en mobiel 390×844; geen horizontale pagina-overloop. Desktoptafel past binnen de schermhoogte. Tablet/mobiel hebben de zijbalk onder de kaart. Desktop- en mobiele screenshots visueel bekeken.
+- Een plaatsing en verplaatsing direct via de applicatie, buiten de UI, worden zonder expliciete refresh zichtbaar. Een lege artworkcatalogus houdt alle handelingen via het schema beschikbaar. Geen browserexceptions tijdens deze controles.
+- Oudere profielen (retail, neutrale tafel, sensorstudie en referentie) gecontroleerd via het instellingenvenster, inclusief zoeken, toetsenbordplaatsing met focusbehoud en vrijgeven van sensorcontact. Een ontbrekend kaartbestand valt eveneens terug op het schema; 320 px heeft geen horizontale pagina-overloop.
+- Geen officiële app gestart of aangepast. Geen echte cityronde-, protocol- of hardwaretest. Appcompatibiliteit en automatische invloedsoverdracht blijven open.
