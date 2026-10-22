@@ -86,4 +86,14 @@ De private vervolgproef met de ongewijzigde Windows-app 1.0.9 heeft inmiddels vi
 
 Bij een beurtwissel verscheen een foutmelding over een ongeldige collectie-index. De aangeboden herlaadknop verholp de melding niet zichtbaar; na sluiten van de melding was de volgende speler actief en kon de verplaatsing worden uitgevoerd. Dit is geen bewijs dat de fout onafhankelijk van de testopstelling optreedt. De oorzaak en betrouwbaarheid over meerdere rondes blijven open.
 
-De fysieke tafelweergave is afzonderlijk geopend met een overgenomen momentopname van de waargenomen speelstand. De bordknoppen sturen de app nog niet aan en wijzigingen vanuit de app werken de tafel nog niet automatisch bij. De eerste proef bewijst dus beperkte bordloze spelinvoer, geen voltooide digitale editie, volledige spelcompatibiliteit of publieke adapter. Technische gegevens en het lokale opstellingsbestand blijven privaat.
+De fysieke tafelweergave is aanvankelijk geopend met een overgenomen momentopname. De onderstaande vervolgproef vervangt die beperkte integratiestatus. Technische gegevens en lokale opstellingsbestanden blijven privaat.
+
+## Live tafelbediening en invloed
+
+De private vervolgproef op 22 oktober 2026 koppelt de bestaande tafelweergave aan de invoerroute en afzonderlijke vensterherkenning. Een echte klik op het digitale bord verplaatste de actieve pion van Portello naar QT8 in de ongewijzigde Windows-app. De tafel behield de oude positie tot de app de bestemming in twee opeenvolgende waarnemingen bevestigde. Een verzoek voor een niet-actief personage werd geweigerd zonder sensorinvoer te versturen.
+
+Vervolgens verhoogde een normale invloedactie in Milan de Anarch-invloed in QT8 van één naar twee. De zichtbare appkaart leverde dertig locatieobservaties, 22 controlefiches en twaalf invloedskubussen op; eerder waren er elf kubussen. De extra kubus verscheen automatisch op onze tafel. Een afzonderlijke browsercontrole bevestigde dat dezelfde overgang zonder herladen wordt getoond. Een onvolledige kaartwaarneming werd geweigerd; herhaalde identieke kaartwaarnemingen veranderden de sessierevisie niet.
+
+Lokaal is het gekoppelde bord bereikbaar via http://127.0.0.1:5180/board zolang de private services en de gekoppelde Android-helper draaien. De publieke demo op poort 5178 blijft zelfstandig bruikbaar. De gedeelde UI wacht nu op het resultaat van asynchrone opdrachten voordat zij succes meldt; de headless engine blijft ongewijzigd.
+
+Deze proef valideert de beschreven beweging en invloedactie, geen volledige campagne. Bewegen vereist de normale locatiepagina; invloed en controle worden gelezen wanneer de volledige appkaart zichtbaar is. Vensterherkenning is alleen op het geteste appformaat gevalideerd. Volledige cityrondes, alle aantallen/markers en andere personages of schermformaten moeten nog worden getoetst. De eerder waargenomen beurtwisselfout blijft open. SDK-afgeleide code, helper, configuraties, screenshots en testgegevens blijven genegeerd onder `private/`; er is geen publieke adapter toegevoegd.

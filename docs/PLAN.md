@@ -30,10 +30,10 @@ De officiële Milan-app (later andere releases) moet uiteindelijk zonder fysieke
 - [ ] Verifieer ondersteunde virtuele invoer of SDK-toepassing voor bestaande apps en voorwaarden voor publieke implementatie. De agent heeft geen aanvraag gedaan of overeenkomst aanvaard.
 - [ ] Specificeer pas daarna een echte bridge: identiteit, positie/contact, sessiestart, capabilities en appgestuurde visuele updates; wijs regelautoriteit expliciet toe aan de officiële app.
 - [x] Toon campagne starten, interactie, worp en hervatten met de ongewijzigde officiële app zonder fysieke spelonderdelen aan in een beperkte private proef. Geen volledige spelvalidatie; één foutmelding bij beurtwissel blijft te onderzoeken.
-- [ ] Verbind de bediening van onze fysieke tafelweergave met de private invoerroute en neem geaccepteerde appwijzigingen terug over. De huidige overgenomen opstelling is een momentopname.
+- [x] Verbind de bediening van onze fysieke tafelweergave met de private invoerroute en neem geaccepteerde appwijzigingen terug over. Eén verplaatsing en een echte invloedwijziging zijn live bevestigd; zie APP-VALIDATIE.md. Brede spelvalidatie blijft open.
 - [ ] Onderzoek de foutmelding bij beurtwissel en toets verdere spelrondes, cityrondes en volgende releases.
 
-Huidige integratiestatus: de SDK-runtimeproef en een beperkte bordloze spelproef met de officiële app zijn geslaagd, inclusief hervatten met behoud van positie en actiepunten. De app toonde een foutmelding bij een beurtwissel; na sluiten was de volgende speler actief. Oorzaak en volledige spelcompatibiliteit blijven te onderzoeken. Rechtstreekse tafelbediening en automatische tafelupdates ontbreken nog. Technische inhoud, screenshots en logs blijven privaat.
+Huidige integratiestatus: beperkte bordloze spelinvoer, hervatten, rechtstreekse tafelbediening met appbevestiging en automatische invloedsoverdracht zijn aangetoond. De app toonde een foutmelding bij een beurtwissel; na sluiten was de volgende speler actief. Oorzaak, volledige cityrondes en betrouwbaarheid over andere situaties blijven te onderzoeken. Vensterherkenning is alleen op het geteste formaat gevalideerd. Technische inhoud, screenshots en logs blijven privaat; de publieke demo blijft een sandbox.
 
 De publieke SDK-aanvraag is gevonden. Dat voltooit niet het onderzoek naar een toegestane bridge. Onbewezen protocolstappen blijven open; geen verzonnen BLE-payloads of automatische SDK-aanmelding.
 

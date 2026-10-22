@@ -179,8 +179,8 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const roll = view.events.findLast(event => event.type === 'dice.record')?.payload;
     $('roll').textContent = roll ? `d${roll.sides} → ${roll.value}` : '—';
   }
-  function act(action, message) {
-    try { action(); update(); $('status').textContent = message; }
+  async function act(action, message) {
+    try { await action(); update(); $('status').textContent = message; }
     catch (error) { $('status').textContent = error.message; }
   }
   $('register').onclick = () => act(() => core?.register($('piece').value), 'Demopion geselecteerd voor sensorinvoer. Dit is geen RFID-scan.');

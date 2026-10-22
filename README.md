@@ -4,7 +4,7 @@ Onafhankelijk project voor een modulair digitaal tabletop-platform met Vampire: 
 
 De architectuur scheidt generieke engine, spelregels, spelgegevens, gebruikersinterface en grafische presentatie. De volgorde is **2D-reproductie → automatisering → optionele 3D-uitbreiding**. De eerste doorsnede is geïmplementeerd: een configureerbare engine met afzonderlijke Milan-sandboxmodule en JSON-profiel. Andere spellen en uitgeversreleases kunnen later via eigen modules en gegevenspakketten worden toegevoegd. Volledige regels, kaarten en scenario's zijn nog niet geïmplementeerd.
 
-**Status: lokaal bordprototype met een beperkte bordloze spelsessie in de ongewijzigde officiële app aangetoond.** In de private proef zijn vier personages geselecteerd en geplaatst, een campagne gestart, een spelactie en digitale worp uitgevoerd, een personage verplaatst en de sessie opgeslagen en hervat. De bediening van onze tafel en automatische updates vanuit de app zijn nog niet gekoppeld. Eén beurtwissel gaf een foutmelding; de oorzaak is nog onbekend. Zie [actuele appvalidatie](docs/APP-VALIDATIE.md#bordloze-spelproef-en-hervatten).
+**Status: lokaal bordprototype met een beperkte live koppeling naar de ongewijzigde officiële app aangetoond.** De private proef omvat personageregistratie, campagne, spelactie, digitale worp en hervatten. Een klik op onze tafel verplaatste de actieve pion in Milan; pas na appbevestiging wijzigde de bordpositie. Een echte invloedactie werd automatisch overgenomen. Eén beurtwissel gaf een foutmelding; de oorzaak is nog onbekend. De publieke demo blijft een zelfstandige sandbox. Zie [actuele appvalidatie](docs/APP-VALIDATIE.md#live-tafelbediening-en-invloed).
 
 ## Starten
 
@@ -27,7 +27,7 @@ De tafel gebruikt de volledige beschikbare schermbreedte. Met lokaal artwork ope
 
 **Voorraad**, **Locatie** en **Sessie** staan in een compacte zijbalk. Gebruik de zoomknoppen voor details, **Passend** voor het hele bord en **Bordfocus** voor extra ruimte. Op tablet en telefoon staat de zijbalk onder de kaart. **Campagne-opstelling** en **Tafelinstellingen** openen aparte vensters. Bewaren, openen en activiteiten staan onder Sessie; undo/redo blijven direct onder het bord bereikbaar. Zonder lokaal artwork blijven dezelfde handelingen in de schematische weergave beschikbaar.
 
-De fysieke weergave benadert de gedrukte gebieden; dit is geen geverifieerde sensor- of aangrenzendheidsmapping. De officiële app blijft de beoogde regel- en campagneautoriteit. Opdrachten vanuit een toekomstige adapter kunnen dezelfde sessie bijwerken; de UI reageert automatisch via `tabletop.subscribe`. Een echte appkoppeling en automatische invloedsoverdracht zijn nog niet geïmplementeerd. Zie [layout en vervolgrichting](docs/TAFEL-LAYOUT.md).
+De fysieke weergave benadert de gedrukte gebieden; dit is geen geverifieerde aangrenzendheidsmapping. De officiële app blijft de regel- en campagneautoriteit bij de private koppeling. Andere invoerbronnen kunnen dezelfde sessie bijwerken; de UI reageert automatisch via `tabletop.subscribe`. Live tafelbediening en invloedsoverdracht zijn beperkt getest in de private proef, zonder publieke integratieadapter. Zie [layout en vervolgrichting](docs/TAFEL-LAYOUT.md).
 
 ## Inhoud en bestaande profielen
 
@@ -51,7 +51,7 @@ De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1�
 
 ## Onderzoek naar appkoppeling
 
-De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert onderzoek naar een optionele native helper voor appinvoer en een afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; de lokale resultaten blijven privaat. De private proef heeft inmiddels ook personageregistratie, locatie-invoer, digitale worpen en hervatten in de officiële app aangetoond. Automatische cityrondes, directe tafelbediening en een publieke adapter blijven open.
+De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert een optionele native helper voor appinvoer en afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; lokale resultaten blijven privaat. De private proef toont personageregistratie, tafelbediening, digitale worpen, invloedsoverdracht en hervatten binnen beperkte scope. Volledige cityrondes, andere schermformaten en een publieke adapter blijven open.
 
 ## Projectstructuur
 
