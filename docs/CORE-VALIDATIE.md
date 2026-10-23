@@ -37,6 +37,8 @@ De aansluitende fysieke proef met de ongewijzigde Android-app bevestigt herkenni
 
 ## Gerichte acceptatie na de hardwaretests
 
+Tijdens de Android-tutorial zijn ook werkelijke bordinstructies zichtbaar: de waargenomen kaartmelding bevestigt één Anarch-invloed in Portello en de volgende encounter in Sempione. Na controle van het scherm en gebruikersbevestiging zijn de kubus en het onderzoeksfiche op de private digitale tafel geplaatst. De verwerking behoudt andere onderdelen, weigert ongeldige combinaties atomair en voegt bij herhaling geen duplicaten toe. Een browsercontrole bevestigt de plaatsingen. Dit is expliciete overname van deze instructie, nog geen algemene automatische herkenning van de Android-kaart. Een tutorial kan echte bordwijzigingen vereisen; uitsluitend de aanwezigheid van tutorialuitleg is geen reden om een gevraagde bordhandeling over te slaan.
+
 Toets op Android achtereenvolgens ontdekking en herverbinding, personagescan, herhaald locatiecontact, een normale worp en een groepsworp. Controleer daarna een echte **Save & Quit** en **Load Game**, met behoud van positie en actiepunten. Houd deze uitkomst gescheiden van de eerdere Windows-proef, waarin hervatten wel is aangetoond.
 
 De laatste Android-sessie kwam via de tutorial tot spelacties en twee geslaagde digitale appworpen. Een groepsworp bleef vervolgens wachten; Save & Quit was nog uitgeschakeld. De oorzaak is onbekend. De ontbrekende fysieke dobbelsteeninvoer is een implementatiegat, geen bewezen verklaring van deze blokkade. Het digitale bord toont voorlopig een overgenomen beginstand met vier personages, geen volledig bijgewerkte Android-speltoestand.
