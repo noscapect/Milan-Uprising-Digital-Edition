@@ -37,6 +37,14 @@ De aansluitende fysieke proef met de ongewijzigde Android-app bevestigt herkenni
 
 ## Gerichte acceptatie na de hardwaretests
 
+### Opstelling bij een nieuwe campagne
+
+Een lege tafel met alleen vier personages is geen volledige spelopstelling. Op 23 oktober is de actuele Android-kaart voor alle dertig districten afzonderlijk uitgelezen en gecontroleerd: 22 controlefiches, twaalf invloedskubussen, vier personages en één onderzoeksfiche, samen 39 geplaatste onderdelen. Een tweede schermafbeelding bevestigde dezelfde invloed en controle vóór de atomaire overname. Orlando staat in deze momentopname in Portello; de andere drie personages op QT8. Dit betreft de huidige campagne tijdens Night 0, na de eerste handelingen, en is geen ongewijzigde beginopstelling of algemene startpreset.
+
+De private opstellingsimport behoudt het reeds bevestigde onderzoeksfiche, controleert voorraad en unieke locaties/personages en weigert een onvolledige of ongeldige invoer zonder gedeeltelijke wijzigingen. Herhaling verandert de sessie niet. De browsercontrole bevestigt alle 39 plaatsingen. De beelduitlezing is alleen op het gecontroleerde tabletscherm gekalibreerd; algemene automatische kaartovername is hiermee nog niet bewezen.
+
+Open acceptatie-eis voor iedere **New Chronicle**: beëindig de vorige tafelsessie, verzamel de complete door Milan gevraagde opstelling en toon pas gereed nadat alle benodigde componenten zijn gecontroleerd. Neem daarna de eerste bewegingen en nieuwe markers over. Die automatische initialisatieworkflow is nog niet geïmplementeerd; een opgeslagen momentopname van onze tafel vervangt ook geen save van de officiële app.
+
 Tijdens de Android-tutorial zijn ook werkelijke bordinstructies zichtbaar: de waargenomen kaartmelding bevestigt één Anarch-invloed in Portello en de volgende encounter in Sempione. Na controle van het scherm en gebruikersbevestiging zijn de kubus en het onderzoeksfiche op de private digitale tafel geplaatst. De verwerking behoudt andere onderdelen, weigert ongeldige combinaties atomair en voegt bij herhaling geen duplicaten toe. Een browsercontrole bevestigt de plaatsingen. Dit is expliciete overname van deze instructie, nog geen algemene automatische herkenning van de Android-kaart. Een tutorial kan echte bordwijzigingen vereisen; uitsluitend de aanwezigheid van tutorialuitleg is geen reden om een gevraagde bordhandeling over te slaan.
 
 Toets op Android achtereenvolgens ontdekking en herverbinding, personagescan, herhaald locatiecontact, een normale worp en een groepsworp. Controleer daarna een echte **Save & Quit** en **Load Game**, met behoud van positie en actiepunten. Houd deze uitkomst gescheiden van de eerdere Windows-proef, waarin hervatten wel is aangetoond.
