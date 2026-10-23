@@ -2,6 +2,8 @@
 
 ## Hoofddoel en eerstvolgende integratiemijlpalen
 
+Actuele prioriteit op 23 oktober 2026: bouw en test het Core-gedrag onafhankelijk van de Milan-campagne. De private offline regressiesuite is toegevoegd; onafhankelijke decodercontrole, virtuele Bluetooth-tests en fysieke Android-acceptatie blijven afzonderlijke bewijsniveaus. Zie [hardwaredekking en acceptatie](CORE-VALIDATIE.md). Volledige dobbelsteeninvoer, Android-kaartterugkoppeling en werkelijk opslaan/hervatten op Android blijven open.
+
 Bijsturing op 22 oktober 2026: bouw actief aan de virtuele fysieke tafel; fabrikantcontact is geen voorwaarde voor deze ontwikkeling. Onderzoek naar een echte emulator mag zelfstandig verder op beschikbare informatie, binnen de bestaande grenzen voor beveiliging en assets. Appcompatibiliteit blijft afzonderlijk te bewijzen.
 
 - [x] Handmatige virtuele tafel met afzonderlijke pionnen, invloedskubussen en fiches, gedeelde zones, voorraadbediening en JSON-herstel voor hetzelfde profiel; zie CONTRACTEN.md uitbreiding 0.4.
