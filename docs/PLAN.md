@@ -6,6 +6,7 @@ Actuele prioriteit op 23 oktober 2026: bouw en test het Core-gedrag onafhankelij
 
 - [x] Neem een gecontroleerde volledige momentopname van de huidige Android-kaart over: dertig districten en 39 onderdelen. Dit is de huidige spelstand, geen algemene campagnebeginstand.
 - [ ] Initialiseer bij iedere nieuwe campagne automatisch een eigen tafelsessie met alle door Milan gevraagde controlefiches, invloed, personages en overige markers; controleer volledigheid vóór de tafel als gereed wordt getoond. De gedeeltelijke vier-personagesopstelling voldoet hier niet aan.
+- [x] Neem de drie zichtbare Engelse invloedseindstanden van de huidige Android-dagfase automatisch en idempotent over; zie [onderzoek en beperkingen](DAGFASE-AUTOMATISERING.md). Volledige fasecontrole, controlewissels en verborgen instructies blijven open.
 
 Bijsturing op 22 oktober 2026: bouw actief aan de virtuele fysieke tafel; fabrikantcontact is geen voorwaarde voor deze ontwikkeling. Onderzoek naar een echte emulator mag zelfstandig verder op beschikbare informatie, binnen de bestaande grenzen voor beveiliging en assets. Appcompatibiliteit blijft afzonderlijk te bewijzen.
 

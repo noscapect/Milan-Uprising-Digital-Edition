@@ -12,6 +12,8 @@ Na loslaten verstuurt de adapter één tijdelijk contact op de bestemming en gee
 
 Een verstuurde zet blijft daarom lokaal bewaard zolang de bevestiging ontbreekt, ook na een adapterherstart. Een latere herkenbare appbevestiging werkt de tafel alsnog bij zonder het sensorcontact opnieuw te versturen. Tot die tijd wordt een volgende zet geblokkeerd. Voor de eerste gebruikersproef meldde de gebruiker dat Milan Simona's plaatsing in Haven 2L registreerde, terwijl de tafel achterbleef; die positie is op basis van deze bevestiging hersteld. De aangepaste verwerking van late bevestigingen is afzonderlijk getest met nagebootste waarnemingen.
 
+De overgang van het laatste Haven-personage naar de dagfase is eveneens toegevoegd als bevestigingsroute. Deze overgang werd oorspronkelijk gemist, waardoor Latebra op het bord achterbleef. Zie [onderzoek en automatische invloedsovername](DAGFASE-AUTOMATISERING.md).
+
 ## Verificatie op 23 oktober 2026
 
 | Controle | Resultaat en grens |

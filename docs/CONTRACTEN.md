@@ -80,3 +80,7 @@ Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde 
 ## Presentatie-uitbreiding — slepen
 
 `installPieceDrag` vertaalt pointerinvoer naar één bestaande plaatsingsopdracht na loslaten op een ander bordvak. De preview verandert geen domeintoestand. Een optionele `tabletop.canMove(componentId)` kan invoer vooraf beperken; de adapter blijft verantwoordelijk voor opdrachtvalidatie en bevestiging. Tijdens slepen stelt de controller externe hertekeningen uit. Miniaturen blijven op de fysieke kaart zichtbaar ongeacht het aantal overige onderdelen. Engine, profielen en sessieformaat veranderen niet.
+
+## Milan-module — expliciete invloedseindstanden
+
+`buildInfluenceArrangement(profile, state, updates)` accepteert unieke `{zoneId, faction, count}`-combinaties voor stadsdistricten, met gehele aantallen van nul tot drie. De pure builder controleert voorraad en geeft `{changed, placements, faces}` terug voor één bestaande `table.arrange`-opdracht. Alleen de benoemde factie-invloed verandert; andere plaatsingen en zijden blijven behouden. De aanroeper slaat de opdracht over bij `changed:false`. Dit is overname van expliciete gegevens, geen automatische Milan-regels. Zie [dagfase-onderzoek](DAGFASE-AUTOMATISERING.md).
