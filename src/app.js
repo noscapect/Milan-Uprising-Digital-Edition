@@ -10,7 +10,7 @@ try {
   const names = ['city', 'campaign', 'retail', 'table', 'interaction', 'demo'];
   const profiles = await Promise.all(names.map(async name => {
     const response = await fetch(`./data/games/milan-uprising/${name}.json`);
-    if (!response.ok) throw Error('Spelgegevens laden mislukt');
+    if (!response.ok) throw Error('Failed to load game data');
     return response.json();
   }));
   const artwork = await fetch('./local-artwork/catalog.json').then(r => r.ok ? r.json() : null).catch(() => null);
@@ -29,10 +29,10 @@ try {
     mountCampaignSetup(profile, tabletop, refresh);
     document.getElementById('open-setup').disabled = !profile.campaignSetup;
     document.getElementById('settings-dialog').close();
-    document.getElementById('status').textContent = simulation ? 'Lokale interactiestudie gestart. Registreer eerst een demopion.' : 'Bekijk een district, of kies een onderdeel uit de voorraad om het te plaatsen.';
+    document.getElementById('status').textContent = simulation ? 'Local interaction study started. Register a demo miniature first.' : 'Inspect a district, or select a component from stock to place it.';
   }
   document.getElementById('start-profile').onclick = start;
   start();
 } catch (error) {
-  document.getElementById('status').textContent = `Starten mislukt: ${error.message}`;
+  document.getElementById('status').textContent = `Startup failed: ${error.message}`;
 }

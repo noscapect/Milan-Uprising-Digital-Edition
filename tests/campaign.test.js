@@ -98,6 +98,6 @@ test('atomaire opstelling respecteert generieke zonecapaciteit buiten de campagn
   table.place('character-tremere', 'qt8'); const before = table.snapshot();
   assert.throws(() => table.arrange({ placements: [
     { componentId: 'character-brujah', zoneId: 'duomo' }, { componentId: 'character-gangrel', zoneId: 'duomo' }
-  ], faces: [] }), /capaciteit/);
+  ], faces: [] }), /capacity/);
   assert.deepEqual(table.snapshot(), before);
 });

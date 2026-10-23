@@ -12,7 +12,7 @@ function setup() {
 }
 test('identiteit, tijdelijk sensorcontact en blijvende spelpositie zijn gescheiden',()=>{
   const {table,core} = setup();
-  assert.throws(()=>core.touch('demoSensorA'),/Registreer/);
+  assert.throws(()=>core.touch('demoSensorA'),/Register/);
   core.register('p1'); core.touch('demoSensorA');
   assert.equal(table.snapshot().placements.p1,'A1');
   core.release();

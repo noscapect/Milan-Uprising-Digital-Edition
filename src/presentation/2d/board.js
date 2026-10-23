@@ -36,7 +36,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
   if (!Array.isArray(order) || order.length !== projection.zones.length || new Set(order).size !== order.length) throw Error('Ongeldige zonevolgorde');
   const cells = order.map(id => {
     const zone = projection.zones.find(z => z.id === id);
-    if (!zone) throw Error('Onbekende presentatiezone');
+    if (!zone) throw Error('Unknown presentation zone');
     const cell = existing.get(id) || document.createElement('button');
     cell.dataset.zone = id; cell.className = 'cell'; cell.type = 'button';
     cell.classList.toggle('selected-zone', zone.id === options.selectedZone);
@@ -46,7 +46,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
     const occupants = document.createElement('span'); occupants.className = 'zone-pieces';
     occupants.replaceChildren(...zone.occupants.map(component => pieceElement(component, projection.components.findIndex(c => c.id === component.id), options)));
     const attributes = document.createElement('span'); attributes.className = 'zone-attributes';
-    const labels = { physical:'Fysiek', mental:'Mentaal', social:'Sociaal' };
+    const labels = { physical:'Physical', mental:'Mental', social:'Social' };
     attributes.textContent = (zone.attributes || []).map(attribute => labels[attribute] || attribute).join(' · ');
     cell.replaceChildren(title, attributes, tileBadges(zone), occupants);
     cell.setAttribute('aria-label', zoneDescription(zone));
@@ -55,7 +55,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
   });
   if (cells.some((cell, index) => container.children[index] !== cell)) container.replaceChildren(...cells);
 }
-const zoneDescription = zone => `${zone.label}, ${zone.occupants.map(c => `${c.label}${c.faceLabel ? ` (${c.faceLabel})` : ''}`).join(', ') || 'leeg'}${Object.entries(zone.locationTiles||{}).filter(([,tile])=>tile.face==='visible').map(([kind,tile])=>', '+describeLocationTile(kind,tile,zone.label).title).join('')}`;
+const zoneDescription = zone => `${zone.label}, ${zone.occupants.map(c => `${c.label}${c.faceLabel ? ` (${c.faceLabel})` : ''}`).join(', ') || 'empty'}${Object.entries(zone.locationTiles||{}).filter(([,tile])=>tile.face==='visible').map(([kind,tile])=>', '+describeLocationTile(kind,tile,zone.label).title).join('')}`;
 
 function renderMap(container, projection, onZone, options) {
   container.style.gridTemplateColumns = ''; container.style.aspectRatio = `${milanMap.width} / ${milanMap.height}`;
@@ -92,7 +92,7 @@ function renderMap(container, projection, onZone, options) {
     pieces.replaceChildren(...visible.map(component => pieceElement(component,projection.components.findIndex(c=>c.id===component.id),{...options,zoneId:zone.id},true)));
     if (zone.occupants.length > visible.length) {
       const more=document.createElement('button'); more.type='button'; more.className='piece-overflow'; more.textContent=`+${zone.occupants.length-visible.length}`;
-      more.setAttribute('aria-label',`${zone.label}: toon alle ${zone.occupants.length} onderdelen`); more.onclick=()=>options.onInspect?.(zone.id); pieces.append(more);
+      more.setAttribute('aria-label',`${zone.label}: show all ${zone.occupants.length} components`); more.onclick=()=>options.onInspect?.(zone.id); pieces.append(more);
     }
     if (active) [...pieces.children].find(piece=>piece.dataset.component===active)?.focus({preventScroll:true});
   }

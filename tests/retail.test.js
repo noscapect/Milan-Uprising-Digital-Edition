@@ -59,7 +59,7 @@ test('retailsessie herstelt via replay ook ficheszijden en weigert onjuiste eind
   assert.equal(second.exportSession().package.releaseId, 'retail-core');
   const tampered = structuredClone(saved); tampered.state.faces['investigation-18'] = 'investigation';
   const before = second.snapshot();
-  assert.throws(() => second.restoreSession(tampered), /niet overeen/);
+  assert.throws(() => second.restoreSession(tampered), /does not match/);
   assert.deepEqual(second.snapshot(), before);
   assert.equal(JSON.stringify(second.snapshot()).includes('color'), false);
 });

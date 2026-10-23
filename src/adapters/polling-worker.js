@@ -1,6 +1,6 @@
 // Serial background work, independent of browser requests or UI lifecycles.
 export function createPollingWorker({run, interval=1000, onState=()=>{}}) {
-  if(typeof run!=='function'||!Number.isFinite(interval)||interval<0)throw Error('Ongeldige achtergrondtaak.');
+  if(typeof run!=='function'||!Number.isFinite(interval)||interval<0)throw Error('Invalid background task.');
   let timer=null,inFlight=null,stopped=true;
   const state={running:false,attempts:0,lastSuccessAt:null,error:null};
   const publish=()=>{try{onState({...state});}catch{/* Monitoring must not stop the worker. */}};

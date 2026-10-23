@@ -3,6 +3,6 @@ export const milanModule = Object.freeze({
   modes: Object.freeze(['sandbox']),
   setup: profile => Object.fromEntries(profile.components.map(component => [component.id, null])),
   validate(state) {
-    if (state.mode !== 'sandbox') throw Error('Milan-spelregels zijn nog niet geïmplementeerd');
+    if (state.mode !== 'sandbox') throw Error('Automated Milan rules are not implemented yet');
   }
 });

@@ -246,34 +246,35 @@
       "G5",
       "H5"
     ],
-    "columns": 8
+    "columns": 8,
+    "boardNote": "Independent interaction study based on public Xplored documentation. Four demo miniatures; capacity four is a demo choice. A1–H5 is not a proven physical sensor mapping."
   },
   "tokens": [],
   "components": [
     {
-      "label": "Pion 1 · koraal",
+      "label": "Miniature 1 · coral",
       "id": "p1",
       "kind": "piece"
     },
     {
-      "label": "Pion 2 · goud",
+      "label": "Miniature 2 · gold",
       "id": "p2",
       "kind": "piece"
     },
     {
-      "label": "Pion 3 · mint",
+      "label": "Miniature 3 · mint",
       "id": "p3",
       "kind": "piece"
     },
     {
-      "label": "Pion 4 · lila",
+      "label": "Miniature 4 · lilac",
       "id": "p4",
       "kind": "piece"
     }
   ],
   "releaseId": "interaction-study",
   "scenarios": [],
-  "provenance": "Zelfgemaakte interactiestudie op basis van openbare Xplored-documentatie. Vier demopionnen; capaciteit 4 is alleen een demo-keuze. A1-H5 is geen bewezen fysieke sensormapping.",
+  "provenance": "Independent interaction study based on public Xplored documentation. Four demo miniatures; capacity four is a demo choice. A1–H5 is not a proven physical sensor mapping.",
   "gameId": "milan-uprising",
   "version": "0.2.0",
   "schemaVersion": 1,

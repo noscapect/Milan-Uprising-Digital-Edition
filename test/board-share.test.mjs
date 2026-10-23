@@ -15,7 +15,7 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
   await new Promise(r=>share.server.listen(0,'127.0.0.1',r));
   const base='http://127.0.0.1:'+share.server.address().port;
   try{
-    const login=await fetch(base+'/board');assert.match(await login.text(),/Toegangscode/);assert.equal(received.length,0);
+    const login=await fetch(base+'/board');assert.match(await login.text(),/Access code/);assert.equal(received.length,0);
     assert.equal((await fetch(base+'/api/table-session')).status,401);
     assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,401);
     const joined=await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded',Origin:base},body:'pin=123456',redirect:'manual'});

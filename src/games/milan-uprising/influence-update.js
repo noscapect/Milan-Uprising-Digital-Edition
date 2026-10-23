@@ -1,12 +1,12 @@
 // Absolute, app-directed counts. No faction AI or phase rules are computed here.
 export function buildInfluenceArrangement(profile, state, updates) {
-  if (profile.gameId !== 'milan-uprising' || !Array.isArray(updates) || !updates.length || updates.length > 90) throw Error('Geef invloedseindstanden op.');
+  if (profile.gameId !== 'milan-uprising' || !Array.isArray(updates) || !updates.length || updates.length > 90) throw Error('Provide absolute Influence counts.');
   const groups = { anarchs: 'anarch-cubes', camarilla: 'camarilla-cubes', ambrose: 'ambrose-cubes' };
   const seen = new Set();
   for (const update of updates) {
     const key = `${update?.zoneId}:${update?.faction}`;
     if (!profile.zones.some(z => z.id === update?.zoneId && z.area === 'city') || !Object.hasOwn(groups, update?.faction) ||
-        !Number.isInteger(update.count) || update.count < 0 || update.count > 3 || seen.has(key)) throw Error('Ongeldige of dubbele invloedseindstand.');
+        !Number.isInteger(update.count) || update.count < 0 || update.count > 3 || seen.has(key)) throw Error('Invalid or duplicate Influence count.');
     seen.add(key);
   }
   const placements = { ...state.placements };
@@ -19,7 +19,7 @@ export function buildInfluenceArrangement(profile, state, updates) {
     const pool = profile.components.filter(c => c.groupId === groups[faction]);
     const present = pool.filter(c => placements[c.id] === zoneId).length;
     const free = pool.filter(c => !placements[c.id]);
-    if (free.length < count - present) throw Error('Onvoldoende vrije invloedskubussen.');
+    if (free.length < count - present) throw Error('Not enough free Influence cubes.');
     for (const cube of free.slice(0, count - present)) placements[cube.id] = zoneId;
   }
   return {

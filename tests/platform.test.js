@@ -11,7 +11,7 @@ test('headless referentiesessie: bewegen, bezetting, verwijderen en worp', () =>
   const table = createTabletop({ profile, module: milanModule, random: () => 4 });
   table.place('p1','A1'); table.place('p1','H5'); table.place('p2','A1');
   const before = table.snapshot();
-  assert.throws(() => table.place('p1','A1'), /bezet/);
+  assert.throws(() => table.place('p1','A1'), /occupied/);
   assert.deepEqual(table.snapshot(), before);
   table.remove('p2'); table.roll(6);
   assert.equal(table.snapshot().revision, 5);

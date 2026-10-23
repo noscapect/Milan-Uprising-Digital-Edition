@@ -246,34 +246,35 @@
       "G5",
       "H5"
     ],
-    "columns": 8
+    "columns": 8,
+    "boardNote": "Independent reference tabletop with placeholder miniatures. Grid based on Xplored hardware; Milan location mapping is unknown."
   },
   "tokens": [],
   "components": [
     {
-      "label": "Pion 1 · koraal",
+      "label": "Miniature 1 · coral",
       "id": "p1",
       "kind": "piece"
     },
     {
-      "label": "Pion 2 · goud",
+      "label": "Miniature 2 · gold",
       "id": "p2",
       "kind": "piece"
     },
     {
-      "label": "Pion 3 · mint",
+      "label": "Miniature 3 · mint",
       "id": "p3",
       "kind": "piece"
     },
     {
-      "label": "Pion 4 · lila",
+      "label": "Miniature 4 · lilac",
       "id": "p4",
       "kind": "piece"
     }
   ],
   "releaseId": "neutral-demo",
   "scenarios": [],
-  "provenance": "Zelfgemaakte placeholders. Raster: Xplored Hardware; Milan-locatiemapping onbekend.",
+  "provenance": "Independent reference tabletop with placeholder miniatures. Grid based on Xplored hardware; Milan location mapping is unknown.",
   "gameId": "milan-uprising",
   "version": "0.1.0",
   "schemaVersion": 1,

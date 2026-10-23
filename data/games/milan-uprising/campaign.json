@@ -435,8 +435,8 @@
       "vigentino",
       "corvetto"
     ],
-    "boardLabel": "30 districten · 10 Havenvelden",
-    "boardNote": "Schematische kaart van het fysieke bord. Fysieke sensorindex en exacte grensverbindingen blijven apart te verifiëren.",
+    "boardLabel": "30 districts · 10 Haven rooms",
+    "boardNote": "Thirty city districts and ten Haven rooms, schematically arranged from the board photograph. Haven 1L–5R are our own position labels. Adjacency and sensor indices are not verified. Copy setup from the official app; no starting preset is invented.",
     "layout": "milan-city"
   },
   "tokens": [],
@@ -542,7 +542,7 @@
     },
     {
       "id": "influence-anarchs-1",
-      "label": "Anarchs · invloed 1",
+      "label": "Anarchs · Influence 1",
       "shortLabel": "A1",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -551,7 +551,7 @@
     },
     {
       "id": "influence-anarchs-2",
-      "label": "Anarchs · invloed 2",
+      "label": "Anarchs · Influence 2",
       "shortLabel": "A2",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -560,7 +560,7 @@
     },
     {
       "id": "influence-anarchs-3",
-      "label": "Anarchs · invloed 3",
+      "label": "Anarchs · Influence 3",
       "shortLabel": "A3",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -569,7 +569,7 @@
     },
     {
       "id": "influence-anarchs-4",
-      "label": "Anarchs · invloed 4",
+      "label": "Anarchs · Influence 4",
       "shortLabel": "A4",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -578,7 +578,7 @@
     },
     {
       "id": "influence-anarchs-5",
-      "label": "Anarchs · invloed 5",
+      "label": "Anarchs · Influence 5",
       "shortLabel": "A5",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -587,7 +587,7 @@
     },
     {
       "id": "influence-anarchs-6",
-      "label": "Anarchs · invloed 6",
+      "label": "Anarchs · Influence 6",
       "shortLabel": "A6",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -596,7 +596,7 @@
     },
     {
       "id": "influence-anarchs-7",
-      "label": "Anarchs · invloed 7",
+      "label": "Anarchs · Influence 7",
       "shortLabel": "A7",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -605,7 +605,7 @@
     },
     {
       "id": "influence-anarchs-8",
-      "label": "Anarchs · invloed 8",
+      "label": "Anarchs · Influence 8",
       "shortLabel": "A8",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -614,7 +614,7 @@
     },
     {
       "id": "influence-anarchs-9",
-      "label": "Anarchs · invloed 9",
+      "label": "Anarchs · Influence 9",
       "shortLabel": "A9",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -623,7 +623,7 @@
     },
     {
       "id": "influence-anarchs-10",
-      "label": "Anarchs · invloed 10",
+      "label": "Anarchs · Influence 10",
       "shortLabel": "A10",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -632,7 +632,7 @@
     },
     {
       "id": "influence-anarchs-11",
-      "label": "Anarchs · invloed 11",
+      "label": "Anarchs · Influence 11",
       "shortLabel": "A11",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -641,7 +641,7 @@
     },
     {
       "id": "influence-anarchs-12",
-      "label": "Anarchs · invloed 12",
+      "label": "Anarchs · Influence 12",
       "shortLabel": "A12",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -650,7 +650,7 @@
     },
     {
       "id": "influence-anarchs-13",
-      "label": "Anarchs · invloed 13",
+      "label": "Anarchs · Influence 13",
       "shortLabel": "A13",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -659,7 +659,7 @@
     },
     {
       "id": "influence-anarchs-14",
-      "label": "Anarchs · invloed 14",
+      "label": "Anarchs · Influence 14",
       "shortLabel": "A14",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -668,7 +668,7 @@
     },
     {
       "id": "influence-anarchs-15",
-      "label": "Anarchs · invloed 15",
+      "label": "Anarchs · Influence 15",
       "shortLabel": "A15",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -677,7 +677,7 @@
     },
     {
       "id": "influence-anarchs-16",
-      "label": "Anarchs · invloed 16",
+      "label": "Anarchs · Influence 16",
       "shortLabel": "A16",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -686,7 +686,7 @@
     },
     {
       "id": "influence-anarchs-17",
-      "label": "Anarchs · invloed 17",
+      "label": "Anarchs · Influence 17",
       "shortLabel": "A17",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -695,7 +695,7 @@
     },
     {
       "id": "influence-anarchs-18",
-      "label": "Anarchs · invloed 18",
+      "label": "Anarchs · Influence 18",
       "shortLabel": "A18",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -704,7 +704,7 @@
     },
     {
       "id": "influence-anarchs-19",
-      "label": "Anarchs · invloed 19",
+      "label": "Anarchs · Influence 19",
       "shortLabel": "A19",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -713,7 +713,7 @@
     },
     {
       "id": "influence-anarchs-20",
-      "label": "Anarchs · invloed 20",
+      "label": "Anarchs · Influence 20",
       "shortLabel": "A20",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -722,7 +722,7 @@
     },
     {
       "id": "influence-anarchs-21",
-      "label": "Anarchs · invloed 21",
+      "label": "Anarchs · Influence 21",
       "shortLabel": "A21",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -731,7 +731,7 @@
     },
     {
       "id": "influence-anarchs-22",
-      "label": "Anarchs · invloed 22",
+      "label": "Anarchs · Influence 22",
       "shortLabel": "A22",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -740,7 +740,7 @@
     },
     {
       "id": "influence-anarchs-23",
-      "label": "Anarchs · invloed 23",
+      "label": "Anarchs · Influence 23",
       "shortLabel": "A23",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -749,7 +749,7 @@
     },
     {
       "id": "influence-anarchs-24",
-      "label": "Anarchs · invloed 24",
+      "label": "Anarchs · Influence 24",
       "shortLabel": "A24",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -758,7 +758,7 @@
     },
     {
       "id": "influence-anarchs-25",
-      "label": "Anarchs · invloed 25",
+      "label": "Anarchs · Influence 25",
       "shortLabel": "A25",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -767,7 +767,7 @@
     },
     {
       "id": "influence-anarchs-26",
-      "label": "Anarchs · invloed 26",
+      "label": "Anarchs · Influence 26",
       "shortLabel": "A26",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -776,7 +776,7 @@
     },
     {
       "id": "influence-anarchs-27",
-      "label": "Anarchs · invloed 27",
+      "label": "Anarchs · Influence 27",
       "shortLabel": "A27",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -785,7 +785,7 @@
     },
     {
       "id": "influence-anarchs-28",
-      "label": "Anarchs · invloed 28",
+      "label": "Anarchs · Influence 28",
       "shortLabel": "A28",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -794,7 +794,7 @@
     },
     {
       "id": "influence-anarchs-29",
-      "label": "Anarchs · invloed 29",
+      "label": "Anarchs · Influence 29",
       "shortLabel": "A29",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -803,7 +803,7 @@
     },
     {
       "id": "influence-anarchs-30",
-      "label": "Anarchs · invloed 30",
+      "label": "Anarchs · Influence 30",
       "shortLabel": "A30",
       "kind": "cube",
       "groupId": "anarch-cubes",
@@ -812,7 +812,7 @@
     },
     {
       "id": "influence-camarilla-1",
-      "label": "Camarilla · invloed 1",
+      "label": "Camarilla · Influence 1",
       "shortLabel": "C1",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -821,7 +821,7 @@
     },
     {
       "id": "influence-camarilla-2",
-      "label": "Camarilla · invloed 2",
+      "label": "Camarilla · Influence 2",
       "shortLabel": "C2",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -830,7 +830,7 @@
     },
     {
       "id": "influence-camarilla-3",
-      "label": "Camarilla · invloed 3",
+      "label": "Camarilla · Influence 3",
       "shortLabel": "C3",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -839,7 +839,7 @@
     },
     {
       "id": "influence-camarilla-4",
-      "label": "Camarilla · invloed 4",
+      "label": "Camarilla · Influence 4",
       "shortLabel": "C4",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -848,7 +848,7 @@
     },
     {
       "id": "influence-camarilla-5",
-      "label": "Camarilla · invloed 5",
+      "label": "Camarilla · Influence 5",
       "shortLabel": "C5",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -857,7 +857,7 @@
     },
     {
       "id": "influence-camarilla-6",
-      "label": "Camarilla · invloed 6",
+      "label": "Camarilla · Influence 6",
       "shortLabel": "C6",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -866,7 +866,7 @@
     },
     {
       "id": "influence-camarilla-7",
-      "label": "Camarilla · invloed 7",
+      "label": "Camarilla · Influence 7",
       "shortLabel": "C7",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -875,7 +875,7 @@
     },
     {
       "id": "influence-camarilla-8",
-      "label": "Camarilla · invloed 8",
+      "label": "Camarilla · Influence 8",
       "shortLabel": "C8",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -884,7 +884,7 @@
     },
     {
       "id": "influence-camarilla-9",
-      "label": "Camarilla · invloed 9",
+      "label": "Camarilla · Influence 9",
       "shortLabel": "C9",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -893,7 +893,7 @@
     },
     {
       "id": "influence-camarilla-10",
-      "label": "Camarilla · invloed 10",
+      "label": "Camarilla · Influence 10",
       "shortLabel": "C10",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -902,7 +902,7 @@
     },
     {
       "id": "influence-camarilla-11",
-      "label": "Camarilla · invloed 11",
+      "label": "Camarilla · Influence 11",
       "shortLabel": "C11",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -911,7 +911,7 @@
     },
     {
       "id": "influence-camarilla-12",
-      "label": "Camarilla · invloed 12",
+      "label": "Camarilla · Influence 12",
       "shortLabel": "C12",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -920,7 +920,7 @@
     },
     {
       "id": "influence-camarilla-13",
-      "label": "Camarilla · invloed 13",
+      "label": "Camarilla · Influence 13",
       "shortLabel": "C13",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -929,7 +929,7 @@
     },
     {
       "id": "influence-camarilla-14",
-      "label": "Camarilla · invloed 14",
+      "label": "Camarilla · Influence 14",
       "shortLabel": "C14",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -938,7 +938,7 @@
     },
     {
       "id": "influence-camarilla-15",
-      "label": "Camarilla · invloed 15",
+      "label": "Camarilla · Influence 15",
       "shortLabel": "C15",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -947,7 +947,7 @@
     },
     {
       "id": "influence-camarilla-16",
-      "label": "Camarilla · invloed 16",
+      "label": "Camarilla · Influence 16",
       "shortLabel": "C16",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -956,7 +956,7 @@
     },
     {
       "id": "influence-camarilla-17",
-      "label": "Camarilla · invloed 17",
+      "label": "Camarilla · Influence 17",
       "shortLabel": "C17",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -965,7 +965,7 @@
     },
     {
       "id": "influence-camarilla-18",
-      "label": "Camarilla · invloed 18",
+      "label": "Camarilla · Influence 18",
       "shortLabel": "C18",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -974,7 +974,7 @@
     },
     {
       "id": "influence-camarilla-19",
-      "label": "Camarilla · invloed 19",
+      "label": "Camarilla · Influence 19",
       "shortLabel": "C19",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -983,7 +983,7 @@
     },
     {
       "id": "influence-camarilla-20",
-      "label": "Camarilla · invloed 20",
+      "label": "Camarilla · Influence 20",
       "shortLabel": "C20",
       "kind": "cube",
       "groupId": "camarilla-cubes",
@@ -992,7 +992,7 @@
     },
     {
       "id": "influence-ambrose-1",
-      "label": "Hand of St. Ambrose · invloed 1",
+      "label": "Hand of St. Ambrose · Influence 1",
       "shortLabel": "H1",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1001,7 +1001,7 @@
     },
     {
       "id": "influence-ambrose-2",
-      "label": "Hand of St. Ambrose · invloed 2",
+      "label": "Hand of St. Ambrose · Influence 2",
       "shortLabel": "H2",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1010,7 +1010,7 @@
     },
     {
       "id": "influence-ambrose-3",
-      "label": "Hand of St. Ambrose · invloed 3",
+      "label": "Hand of St. Ambrose · Influence 3",
       "shortLabel": "H3",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1019,7 +1019,7 @@
     },
     {
       "id": "influence-ambrose-4",
-      "label": "Hand of St. Ambrose · invloed 4",
+      "label": "Hand of St. Ambrose · Influence 4",
       "shortLabel": "H4",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1028,7 +1028,7 @@
     },
     {
       "id": "influence-ambrose-5",
-      "label": "Hand of St. Ambrose · invloed 5",
+      "label": "Hand of St. Ambrose · Influence 5",
       "shortLabel": "H5",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1037,7 +1037,7 @@
     },
     {
       "id": "influence-ambrose-6",
-      "label": "Hand of St. Ambrose · invloed 6",
+      "label": "Hand of St. Ambrose · Influence 6",
       "shortLabel": "H6",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1046,7 +1046,7 @@
     },
     {
       "id": "influence-ambrose-7",
-      "label": "Hand of St. Ambrose · invloed 7",
+      "label": "Hand of St. Ambrose · Influence 7",
       "shortLabel": "H7",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1055,7 +1055,7 @@
     },
     {
       "id": "influence-ambrose-8",
-      "label": "Hand of St. Ambrose · invloed 8",
+      "label": "Hand of St. Ambrose · Influence 8",
       "shortLabel": "H8",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1064,7 +1064,7 @@
     },
     {
       "id": "influence-ambrose-9",
-      "label": "Hand of St. Ambrose · invloed 9",
+      "label": "Hand of St. Ambrose · Influence 9",
       "shortLabel": "H9",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1073,7 +1073,7 @@
     },
     {
       "id": "influence-ambrose-10",
-      "label": "Hand of St. Ambrose · invloed 10",
+      "label": "Hand of St. Ambrose · Influence 10",
       "shortLabel": "H10",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1082,7 +1082,7 @@
     },
     {
       "id": "influence-ambrose-11",
-      "label": "Hand of St. Ambrose · invloed 11",
+      "label": "Hand of St. Ambrose · Influence 11",
       "shortLabel": "H11",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1091,7 +1091,7 @@
     },
     {
       "id": "influence-ambrose-12",
-      "label": "Hand of St. Ambrose · invloed 12",
+      "label": "Hand of St. Ambrose · Influence 12",
       "shortLabel": "H12",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1100,7 +1100,7 @@
     },
     {
       "id": "influence-ambrose-13",
-      "label": "Hand of St. Ambrose · invloed 13",
+      "label": "Hand of St. Ambrose · Influence 13",
       "shortLabel": "H13",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1109,7 +1109,7 @@
     },
     {
       "id": "influence-ambrose-14",
-      "label": "Hand of St. Ambrose · invloed 14",
+      "label": "Hand of St. Ambrose · Influence 14",
       "shortLabel": "H14",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1118,7 +1118,7 @@
     },
     {
       "id": "influence-ambrose-15",
-      "label": "Hand of St. Ambrose · invloed 15",
+      "label": "Hand of St. Ambrose · Influence 15",
       "shortLabel": "H15",
       "kind": "cube",
       "groupId": "ambrose-cubes",
@@ -1127,7 +1127,7 @@
     },
     {
       "id": "control-anarchs-camarilla-1",
-      "label": "Controle Anarchs / Camarilla 1",
+      "label": "Control Anarchs / Camarilla 1",
       "shortLabel": "AC1",
       "kind": "token",
       "groupId": "control",
@@ -1147,7 +1147,7 @@
     },
     {
       "id": "control-anarchs-camarilla-2",
-      "label": "Controle Anarchs / Camarilla 2",
+      "label": "Control Anarchs / Camarilla 2",
       "shortLabel": "AC2",
       "kind": "token",
       "groupId": "control",
@@ -1167,7 +1167,7 @@
     },
     {
       "id": "control-anarchs-camarilla-3",
-      "label": "Controle Anarchs / Camarilla 3",
+      "label": "Control Anarchs / Camarilla 3",
       "shortLabel": "AC3",
       "kind": "token",
       "groupId": "control",
@@ -1187,7 +1187,7 @@
     },
     {
       "id": "control-anarchs-camarilla-4",
-      "label": "Controle Anarchs / Camarilla 4",
+      "label": "Control Anarchs / Camarilla 4",
       "shortLabel": "AC4",
       "kind": "token",
       "groupId": "control",
@@ -1207,7 +1207,7 @@
     },
     {
       "id": "control-anarchs-camarilla-5",
-      "label": "Controle Anarchs / Camarilla 5",
+      "label": "Control Anarchs / Camarilla 5",
       "shortLabel": "AC5",
       "kind": "token",
       "groupId": "control",
@@ -1227,7 +1227,7 @@
     },
     {
       "id": "control-anarchs-camarilla-6",
-      "label": "Controle Anarchs / Camarilla 6",
+      "label": "Control Anarchs / Camarilla 6",
       "shortLabel": "AC6",
       "kind": "token",
       "groupId": "control",
@@ -1247,7 +1247,7 @@
     },
     {
       "id": "control-anarchs-camarilla-7",
-      "label": "Controle Anarchs / Camarilla 7",
+      "label": "Control Anarchs / Camarilla 7",
       "shortLabel": "AC7",
       "kind": "token",
       "groupId": "control",
@@ -1267,7 +1267,7 @@
     },
     {
       "id": "control-anarchs-camarilla-8",
-      "label": "Controle Anarchs / Camarilla 8",
+      "label": "Control Anarchs / Camarilla 8",
       "shortLabel": "AC8",
       "kind": "token",
       "groupId": "control",
@@ -1287,7 +1287,7 @@
     },
     {
       "id": "control-anarchs-camarilla-9",
-      "label": "Controle Anarchs / Camarilla 9",
+      "label": "Control Anarchs / Camarilla 9",
       "shortLabel": "AC9",
       "kind": "token",
       "groupId": "control",
@@ -1307,7 +1307,7 @@
     },
     {
       "id": "control-anarchs-camarilla-10",
-      "label": "Controle Anarchs / Camarilla 10",
+      "label": "Control Anarchs / Camarilla 10",
       "shortLabel": "AC10",
       "kind": "token",
       "groupId": "control",
@@ -1327,7 +1327,7 @@
     },
     {
       "id": "control-anarchs-camarilla-11",
-      "label": "Controle Anarchs / Camarilla 11",
+      "label": "Control Anarchs / Camarilla 11",
       "shortLabel": "AC11",
       "kind": "token",
       "groupId": "control",
@@ -1347,7 +1347,7 @@
     },
     {
       "id": "control-anarchs-camarilla-12",
-      "label": "Controle Anarchs / Camarilla 12",
+      "label": "Control Anarchs / Camarilla 12",
       "shortLabel": "AC12",
       "kind": "token",
       "groupId": "control",
@@ -1367,7 +1367,7 @@
     },
     {
       "id": "control-anarchs-camarilla-13",
-      "label": "Controle Anarchs / Camarilla 13",
+      "label": "Control Anarchs / Camarilla 13",
       "shortLabel": "AC13",
       "kind": "token",
       "groupId": "control",
@@ -1387,7 +1387,7 @@
     },
     {
       "id": "control-anarchs-camarilla-14",
-      "label": "Controle Anarchs / Camarilla 14",
+      "label": "Control Anarchs / Camarilla 14",
       "shortLabel": "AC14",
       "kind": "token",
       "groupId": "control",
@@ -1407,7 +1407,7 @@
     },
     {
       "id": "control-anarchs-camarilla-15",
-      "label": "Controle Anarchs / Camarilla 15",
+      "label": "Control Anarchs / Camarilla 15",
       "shortLabel": "AC15",
       "kind": "token",
       "groupId": "control",
@@ -1427,7 +1427,7 @@
     },
     {
       "id": "control-anarchs-camarilla-16",
-      "label": "Controle Anarchs / Camarilla 16",
+      "label": "Control Anarchs / Camarilla 16",
       "shortLabel": "AC16",
       "kind": "token",
       "groupId": "control",
@@ -1447,7 +1447,7 @@
     },
     {
       "id": "control-anarchs-camarilla-17",
-      "label": "Controle Anarchs / Camarilla 17",
+      "label": "Control Anarchs / Camarilla 17",
       "shortLabel": "AC17",
       "kind": "token",
       "groupId": "control",
@@ -1467,7 +1467,7 @@
     },
     {
       "id": "control-anarchs-camarilla-18",
-      "label": "Controle Anarchs / Camarilla 18",
+      "label": "Control Anarchs / Camarilla 18",
       "shortLabel": "AC18",
       "kind": "token",
       "groupId": "control",
@@ -1487,7 +1487,7 @@
     },
     {
       "id": "control-anarchs-camarilla-19",
-      "label": "Controle Anarchs / Camarilla 19",
+      "label": "Control Anarchs / Camarilla 19",
       "shortLabel": "AC19",
       "kind": "token",
       "groupId": "control",
@@ -1507,7 +1507,7 @@
     },
     {
       "id": "control-anarchs-ambrose-1",
-      "label": "Controle Anarchs / Hand of St. Ambrose 1",
+      "label": "Control Anarchs / Hand of St. Ambrose 1",
       "shortLabel": "AH1",
       "kind": "token",
       "groupId": "control",
@@ -1527,7 +1527,7 @@
     },
     {
       "id": "control-anarchs-ambrose-2",
-      "label": "Controle Anarchs / Hand of St. Ambrose 2",
+      "label": "Control Anarchs / Hand of St. Ambrose 2",
       "shortLabel": "AH2",
       "kind": "token",
       "groupId": "control",
@@ -1547,7 +1547,7 @@
     },
     {
       "id": "control-anarchs-ambrose-3",
-      "label": "Controle Anarchs / Hand of St. Ambrose 3",
+      "label": "Control Anarchs / Hand of St. Ambrose 3",
       "shortLabel": "AH3",
       "kind": "token",
       "groupId": "control",
@@ -1567,7 +1567,7 @@
     },
     {
       "id": "control-anarchs-ambrose-4",
-      "label": "Controle Anarchs / Hand of St. Ambrose 4",
+      "label": "Control Anarchs / Hand of St. Ambrose 4",
       "shortLabel": "AH4",
       "kind": "token",
       "groupId": "control",
@@ -1587,7 +1587,7 @@
     },
     {
       "id": "control-anarchs-ambrose-5",
-      "label": "Controle Anarchs / Hand of St. Ambrose 5",
+      "label": "Control Anarchs / Hand of St. Ambrose 5",
       "shortLabel": "AH5",
       "kind": "token",
       "groupId": "control",
@@ -1607,7 +1607,7 @@
     },
     {
       "id": "control-anarchs-ambrose-6",
-      "label": "Controle Anarchs / Hand of St. Ambrose 6",
+      "label": "Control Anarchs / Hand of St. Ambrose 6",
       "shortLabel": "AH6",
       "kind": "token",
       "groupId": "control",
@@ -1627,7 +1627,7 @@
     },
     {
       "id": "control-anarchs-ambrose-7",
-      "label": "Controle Anarchs / Hand of St. Ambrose 7",
+      "label": "Control Anarchs / Hand of St. Ambrose 7",
       "shortLabel": "AH7",
       "kind": "token",
       "groupId": "control",
@@ -1647,7 +1647,7 @@
     },
     {
       "id": "control-anarchs-ambrose-8",
-      "label": "Controle Anarchs / Hand of St. Ambrose 8",
+      "label": "Control Anarchs / Hand of St. Ambrose 8",
       "shortLabel": "AH8",
       "kind": "token",
       "groupId": "control",
@@ -1667,7 +1667,7 @@
     },
     {
       "id": "control-anarchs-ambrose-9",
-      "label": "Controle Anarchs / Hand of St. Ambrose 9",
+      "label": "Control Anarchs / Hand of St. Ambrose 9",
       "shortLabel": "AH9",
       "kind": "token",
       "groupId": "control",
@@ -1687,7 +1687,7 @@
     },
     {
       "id": "control-camarilla-ambrose-1",
-      "label": "Controle Camarilla / Hand of St. Ambrose 1",
+      "label": "Control Camarilla / Hand of St. Ambrose 1",
       "shortLabel": "CH1",
       "kind": "token",
       "groupId": "control",
@@ -1707,7 +1707,7 @@
     },
     {
       "id": "investigation-1",
-      "label": "Onderzoek / afgesloten locatie 1",
+      "label": "Investigation / Restricted location 1",
       "shortLabel": "O1",
       "kind": "token",
       "groupId": "investigation",
@@ -1715,19 +1715,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-2",
-      "label": "Onderzoek / afgesloten locatie 2",
+      "label": "Investigation / Restricted location 2",
       "shortLabel": "O2",
       "kind": "token",
       "groupId": "investigation",
@@ -1735,19 +1735,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-3",
-      "label": "Onderzoek / afgesloten locatie 3",
+      "label": "Investigation / Restricted location 3",
       "shortLabel": "O3",
       "kind": "token",
       "groupId": "investigation",
@@ -1755,19 +1755,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-4",
-      "label": "Onderzoek / afgesloten locatie 4",
+      "label": "Investigation / Restricted location 4",
       "shortLabel": "O4",
       "kind": "token",
       "groupId": "investigation",
@@ -1775,19 +1775,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-5",
-      "label": "Onderzoek / afgesloten locatie 5",
+      "label": "Investigation / Restricted location 5",
       "shortLabel": "O5",
       "kind": "token",
       "groupId": "investigation",
@@ -1795,19 +1795,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-6",
-      "label": "Onderzoek / afgesloten locatie 6",
+      "label": "Investigation / Restricted location 6",
       "shortLabel": "O6",
       "kind": "token",
       "groupId": "investigation",
@@ -1815,19 +1815,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-7",
-      "label": "Onderzoek / afgesloten locatie 7",
+      "label": "Investigation / Restricted location 7",
       "shortLabel": "O7",
       "kind": "token",
       "groupId": "investigation",
@@ -1835,19 +1835,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-8",
-      "label": "Onderzoek / afgesloten locatie 8",
+      "label": "Investigation / Restricted location 8",
       "shortLabel": "O8",
       "kind": "token",
       "groupId": "investigation",
@@ -1855,19 +1855,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-9",
-      "label": "Onderzoek / afgesloten locatie 9",
+      "label": "Investigation / Restricted location 9",
       "shortLabel": "O9",
       "kind": "token",
       "groupId": "investigation",
@@ -1875,19 +1875,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-10",
-      "label": "Onderzoek / afgesloten locatie 10",
+      "label": "Investigation / Restricted location 10",
       "shortLabel": "O10",
       "kind": "token",
       "groupId": "investigation",
@@ -1895,19 +1895,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-11",
-      "label": "Onderzoek / afgesloten locatie 11",
+      "label": "Investigation / Restricted location 11",
       "shortLabel": "O11",
       "kind": "token",
       "groupId": "investigation",
@@ -1915,19 +1915,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-12",
-      "label": "Onderzoek / afgesloten locatie 12",
+      "label": "Investigation / Restricted location 12",
       "shortLabel": "O12",
       "kind": "token",
       "groupId": "investigation",
@@ -1935,19 +1935,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-13",
-      "label": "Onderzoek / afgesloten locatie 13",
+      "label": "Investigation / Restricted location 13",
       "shortLabel": "O13",
       "kind": "token",
       "groupId": "investigation",
@@ -1955,19 +1955,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-14",
-      "label": "Onderzoek / afgesloten locatie 14",
+      "label": "Investigation / Restricted location 14",
       "shortLabel": "O14",
       "kind": "token",
       "groupId": "investigation",
@@ -1975,19 +1975,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-15",
-      "label": "Onderzoek / afgesloten locatie 15",
+      "label": "Investigation / Restricted location 15",
       "shortLabel": "O15",
       "kind": "token",
       "groupId": "investigation",
@@ -1995,19 +1995,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-16",
-      "label": "Onderzoek / afgesloten locatie 16",
+      "label": "Investigation / Restricted location 16",
       "shortLabel": "O16",
       "kind": "token",
       "groupId": "investigation",
@@ -2015,19 +2015,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-17",
-      "label": "Onderzoek / afgesloten locatie 17",
+      "label": "Investigation / Restricted location 17",
       "shortLabel": "O17",
       "kind": "token",
       "groupId": "investigation",
@@ -2035,19 +2035,19 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
     },
     {
       "id": "investigation-18",
-      "label": "Onderzoek / afgesloten locatie 18",
+      "label": "Investigation / Restricted location 18",
       "shortLabel": "O18",
       "kind": "token",
       "groupId": "investigation",
@@ -2055,12 +2055,12 @@
       "faces": [
         {
           "id": "investigation",
-          "label": "Onderzoek",
+          "label": "Investigation",
           "color": "#486b72"
         },
         {
           "id": "restricted",
-          "label": "Afgesloten locatie",
+          "label": "Restricted location",
           "color": "#363b45"
         }
       ]
@@ -2149,92 +2149,92 @@
   ],
   "releaseId": "milan-city",
   "scenarios": [],
-  "provenance": "Gedrukte districtnamen, globaal bordverband en attribuuticonen afgelezen uit officiële Xplored-bordfoto’s (Gamefound updates 42 en 59). Eigen schematische presentatie; geen overgenomen kaartillustratie, sensorindex of campagnebeginstand.",
+  "provenance": "Thirty city districts and ten Haven rooms, schematically arranged from the board photograph. Haven 1L–5R are our own position labels. Adjacency and sensor indices are not verified. Copy setup from the official app; no starting preset is invented.",
   "gameId": "milan-uprising",
   "version": "0.6.0",
   "schemaVersion": 2,
   "dice": [
     10
   ],
-  "title": "Milan Uprising · stadskaart en campagne-opstelling",
-  "contentNote": "30 stadsdistricten en tien Havenvelden, schematisch ingedeeld zoals op de bordfoto. Havenlabels 1L–5R zijn onze eigen plaatsaanduidingen. Aangrenzendheid en echte sensorindex zijn nog niet geverifieerd. Neem de campagne-opstelling handmatig over uit de officiële app; er is geen verzonnen startpreset.",
+  "title": "Milan Uprising · city map and campaign setup",
+  "contentNote": "Thirty city districts and ten Haven rooms, schematically arranged from the board photograph. Haven 1L–5R are our own position labels. Adjacency and sensor indices are not verified. Copy setup from the official app; no starting preset is invented.",
   "sources": [
     {
       "id": "physical-inventory",
-      "title": "Xplored · fysieke componenten (retail)",
+      "title": "Xplored · physical components (retail)",
       "url": "https://teburu.zendesk.com/hc/en-us/articles/25458904976667-Physical-components-VTM"
     },
     {
       "id": "characters",
-      "title": "Xplored · personages Milan Uprising",
+      "title": "Xplored · Milan Uprising characters",
       "url": "https://teburu.com/game/Vampire%3A%20The%20Masquerade%20-%20Milan%20Uprising/"
     },
     {
       "id": "manual",
-      "title": "Officiële handleiding · onderdelen en invloed, p. 6 en 12",
+      "title": "Official manual · components and Influence, pp. 6 and 12",
       "url": "https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf"
     },
     {
       "id": "board-sample",
-      "title": "Xplored · volledige bordfoto (productie-update 42)",
+      "title": "Xplored · full board photograph (production update 42)",
       "url": "https://gamefound.com/en/projects/xplored/vampire-the-masquerade-milan-uprising/updates/42"
     },
     {
       "id": "board-play",
-      "title": "Xplored · latere bordfoto (update 59)",
+      "title": "Xplored · later board photograph (update 59)",
       "url": "https://gamefound.com/en/projects/xplored/vampire-the-masquerade-milan-uprising/updates/59"
     }
   ],
   "componentGroups": [
     {
       "id": "characters",
-      "label": "Personages",
-      "description": "Zeven clanminiaturen beschikbaar; een spel gebruikt vier personages."
+      "label": "Characters",
+      "description": "Seven clan miniatures available; a game uses four characters."
     },
     {
       "id": "allies",
-      "label": "Bondgenoten",
-      "description": "Bondgenootminiaturen voor plaatsing volgens de app."
+      "label": "Allies",
+      "description": "Ally miniatures to place as instructed by the app."
     },
     {
       "id": "ghouls",
       "label": "Ghouls",
-      "description": "Ghoulminiaturen voor plaatsing volgens de app."
+      "description": "Ghoul miniatures to place as instructed by the app."
     },
     {
       "id": "anarch-cubes",
-      "label": "Invloed · Anarchs",
-      "description": "Rode invloedskubussen van de Anarchs."
+      "label": "Influence · Anarchs",
+      "description": "Red Anarch Influence cubes."
     },
     {
       "id": "camarilla-cubes",
-      "label": "Invloed · Camarilla",
-      "description": "Paarse invloedskubussen van de Camarilla."
+      "label": "Influence · Camarilla",
+      "description": "Purple Camarilla Influence cubes."
     },
     {
       "id": "ambrose-cubes",
-      "label": "Invloed · Hand of St. Ambrose",
-      "description": "Gele invloedskubussen van de Hand of St. Ambrose."
+      "label": "Influence · Hand of St. Ambrose",
+      "description": "Yellow Hand of St. Ambrose Influence cubes."
     },
     {
       "id": "control",
-      "label": "Controlefiches",
-      "description": "Geven de controlerende factie aan. Keer het fiche om voor de andere factie."
+      "label": "Control tokens",
+      "description": "Identify the controlling faction. Flip a token to show the other faction."
     },
     {
       "id": "investigation",
-      "label": "Onderzoek / afgesloten locatie",
-      "description": "Fiches voor onderzoek of een afgesloten locatie. Nummering van fysieke onderzoeksfiches is nog niet gereproduceerd."
+      "label": "Investigation / Restricted location",
+      "description": "Tokens for Investigation or a Restricted location. Physical Investigation token numbering is not yet reproduced."
     },
     {
       "id": "masquerade",
       "label": "Masquerade",
-      "description": "Markeert de locatie van een Masquerade Encounter."
+      "description": "Marks the location of a Masquerade Encounter."
     },
     {
       "id": "npcs",
-      "label": "NPC’s",
-      "description": "Acht afzonderlijke NPC-fiches; verhaal en acties blijven in de officiële app."
+      "label": "NPCs",
+      "description": "Eight separate NPC tokens; the official app manages their stories and actions."
     }
   ],
   "campaignSetup": {

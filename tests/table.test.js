@@ -27,11 +27,11 @@ test('gemengde zonecapaciteit blijft atomair en vreemde componenttypen worden ge
   const table = setup(limited);
   table.place('p1', 'A1'); table.place('token-1', 'A1'); table.place('cube-1', 'B1');
   const before = table.snapshot();
-  assert.throws(() => table.place('cube-1', 'A1'), /bezet/);
+  assert.throws(() => table.place('cube-1', 'A1'), /occupied/);
   assert.deepEqual(table.snapshot(), before);
   table.place('p1', 'A1'); // Herplaatsen telt het onderdeel zelf niet dubbel.
   const invalid = structuredClone(profile); invalid.components[0].kind = 'script';
-  assert.throws(() => validateProfile(invalid), /componenttype/);
+  assert.throws(() => validateProfile(invalid), /component type/);
 });
 
 test('volledige werkvoorraad, d10 en export blijven headless reproduceerbaar', () => {

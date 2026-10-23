@@ -246,158 +246,159 @@
       "G5",
       "H5"
     ],
-    "columns": 8
+    "columns": 8,
+    "boardNote": "Neutral virtual tabletop. The 8 × 5 grid follows Xplored hardware. Cube/token quantities and capacity 32 are demo choices, not verified Milan inventory or rules."
   },
   "tokens": [],
   "components": [
     {
-      "label": "Pion 1",
+      "label": "Miniature 1",
       "id": "p1",
       "kind": "piece",
       "shortLabel": "P1"
     },
     {
-      "label": "Pion 2",
+      "label": "Miniature 2",
       "id": "p2",
       "kind": "piece",
       "shortLabel": "P2"
     },
     {
-      "label": "Pion 3",
+      "label": "Miniature 3",
       "id": "p3",
       "kind": "piece",
       "shortLabel": "P3"
     },
     {
-      "label": "Pion 4",
+      "label": "Miniature 4",
       "id": "p4",
       "kind": "piece",
       "shortLabel": "P4"
     },
     {
       "id": "cube-1",
-      "label": "Invloedskubus 1",
+      "label": "Influence cube 1",
       "shortLabel": "K1",
       "kind": "cube"
     },
     {
       "id": "cube-2",
-      "label": "Invloedskubus 2",
+      "label": "Influence cube 2",
       "shortLabel": "K2",
       "kind": "cube"
     },
     {
       "id": "cube-3",
-      "label": "Invloedskubus 3",
+      "label": "Influence cube 3",
       "shortLabel": "K3",
       "kind": "cube"
     },
     {
       "id": "cube-4",
-      "label": "Invloedskubus 4",
+      "label": "Influence cube 4",
       "shortLabel": "K4",
       "kind": "cube"
     },
     {
       "id": "cube-5",
-      "label": "Invloedskubus 5",
+      "label": "Influence cube 5",
       "shortLabel": "K5",
       "kind": "cube"
     },
     {
       "id": "cube-6",
-      "label": "Invloedskubus 6",
+      "label": "Influence cube 6",
       "shortLabel": "K6",
       "kind": "cube"
     },
     {
       "id": "cube-7",
-      "label": "Invloedskubus 7",
+      "label": "Influence cube 7",
       "shortLabel": "K7",
       "kind": "cube"
     },
     {
       "id": "cube-8",
-      "label": "Invloedskubus 8",
+      "label": "Influence cube 8",
       "shortLabel": "K8",
       "kind": "cube"
     },
     {
       "id": "cube-9",
-      "label": "Invloedskubus 9",
+      "label": "Influence cube 9",
       "shortLabel": "K9",
       "kind": "cube"
     },
     {
       "id": "cube-10",
-      "label": "Invloedskubus 10",
+      "label": "Influence cube 10",
       "shortLabel": "K10",
       "kind": "cube"
     },
     {
       "id": "cube-11",
-      "label": "Invloedskubus 11",
+      "label": "Influence cube 11",
       "shortLabel": "K11",
       "kind": "cube"
     },
     {
       "id": "cube-12",
-      "label": "Invloedskubus 12",
+      "label": "Influence cube 12",
       "shortLabel": "K12",
       "kind": "cube"
     },
     {
       "id": "token-1",
-      "label": "Fiche 1",
+      "label": "Token 1",
       "shortLabel": "F1",
       "kind": "token"
     },
     {
       "id": "token-2",
-      "label": "Fiche 2",
+      "label": "Token 2",
       "shortLabel": "F2",
       "kind": "token"
     },
     {
       "id": "token-3",
-      "label": "Fiche 3",
+      "label": "Token 3",
       "shortLabel": "F3",
       "kind": "token"
     },
     {
       "id": "token-4",
-      "label": "Fiche 4",
+      "label": "Token 4",
       "shortLabel": "F4",
       "kind": "token"
     },
     {
       "id": "token-5",
-      "label": "Fiche 5",
+      "label": "Token 5",
       "shortLabel": "F5",
       "kind": "token"
     },
     {
       "id": "token-6",
-      "label": "Fiche 6",
+      "label": "Token 6",
       "shortLabel": "F6",
       "kind": "token"
     },
     {
       "id": "token-7",
-      "label": "Fiche 7",
+      "label": "Token 7",
       "shortLabel": "F7",
       "kind": "token"
     },
     {
       "id": "token-8",
-      "label": "Fiche 8",
+      "label": "Token 8",
       "shortLabel": "F8",
       "kind": "token"
     }
   ],
   "releaseId": "virtual-table",
   "scenarios": [],
-  "provenance": "Eigen virtuele tafel met neutrale onderdelen. Raster 8 × 5 volgens Xplored; geen bewezen Milan-locatiemapping. Aantallen kubussen/fiches en capaciteit 32 zijn werkvoorraadkeuzes, geen fysieke Milan-inventaris of spelregels.",
+  "provenance": "Neutral virtual tabletop. The 8 × 5 grid follows Xplored hardware. Cube/token quantities and capacity 32 are demo choices, not verified Milan inventory or rules.",
   "gameId": "milan-uprising",
   "version": "0.4.0",
   "schemaVersion": 1,

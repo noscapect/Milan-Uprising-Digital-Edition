@@ -1,6 +1,6 @@
 # Locatiebonus en speciale locatietegels
 
-Kies een stadsdistrict op de kaart. Onder **Locatie → Bordtegels** toont een kaartje het symbool, de betekenis en het gebruik van de getoonde tegel. **Tegel omdraaien** wisselt tussen achterzijde en symboolzijde. Om een nog onbekende tegel uit Milan over te nemen, open je **Tegel overnemen of corrigeren**. Dezelfde uitleg werkt op de schematische kaart en via de gedeelde bordlink.
+Kies een stadsdistrict op de kaart. Onder **Location → Board tiles** toont een kaartje het symbool, de betekenis en het gebruik van de getoonde tegel. **Flip tile** wisselt tussen achterzijde en symboolzijde. Om een nog onbekende tegel uit Milan over te nemen, open je **Copy or correct a tile**. De appinterface en de speluitleg zijn Engels, passend bij het spel; deze documentatie blijft Nederlands. Dezelfde uitleg werkt op de schematische kaart en via de gedeelde bordlink.
 
 De officiële handleiding beschrijft locatiebonussen en hun typen op pagina 7: Haven, Herd, Income, Media Office, Possible Haven, Secret Bar en Underground. Bron: [Game Manual](https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf). Er is geen volledige geverifieerde toewijzing van beide fysieke zijden aan ieder district ingebouwd. Een onbekende tegel blijft daarom **Nog niet ingesteld** of **Nog niet vastgesteld**. Het kiezen van een bonus voert de bijbehorende spelactie niet uit; dat blijft aan Milan.
 

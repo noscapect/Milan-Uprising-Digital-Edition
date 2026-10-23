@@ -21,7 +21,7 @@ export function installPieceDrag({board,sources=[board],canDrag=()=>true,onStart
     board.classList.remove('dragging-piece');
     if(board.hasPointerCapture?.(current.pointerId))board.releasePointerCapture(current.pointerId);
     if(current.active){silenceClick();onEnd();}
-    if(cancelled&&current.active)onHint('Verplaatsing geannuleerd.');
+    if(cancelled&&current.active)onHint('Move cancelled.');
     return current;
   }
   function down(event){
@@ -45,7 +45,7 @@ export function installPieceDrag({board,sources=[board],canDrag=()=>true,onStart
     }
     Object.assign(ghost.style,{left:event.clientX+'px',top:event.clientY+'px'});
     const zone=zoneAt(event.clientX,event.clientY);mark(zone);
-    onHint(zone?'Laat los op '+(highlight?.title||zone)+'.':'Sleep naar een vak op het bord. Esc annuleert.');
+    onHint(zone?'Release at '+(highlight?.title||zone)+'.':'Drag to a board zone. Esc cancels.');
     const viewport=board.closest('.scroll');
     if(viewport){const r=viewport.getBoundingClientRect(),edge=30;viewport.scrollBy(event.clientX<r.left+edge?-14:event.clientX>r.right-edge?14:0,event.clientY<r.top+edge?-14:event.clientY>r.bottom-edge?14:0);}
   }
@@ -53,8 +53,8 @@ export function installPieceDrag({board,sources=[board],canDrag=()=>true,onStart
     if(!gesture||event.pointerId!==gesture.pointerId)return;
     const zone=gesture.active?zoneAt(event.clientX,event.clientY):null,current=finish();
     if(!current?.active)return;
-    if(!zone){onHint('Buiten het bord losgelaten; niets verplaatst.');return;}
-    if(zone===current.sourceZone){onHint('Terug op dezelfde locatie; niets verplaatst.');return;}
+    if(!zone){onHint('Released outside the board; nothing moved.');return;}
+    if(zone===current.sourceZone){onHint('Returned to the same location; nothing moved.');return;}
     Promise.resolve().then(()=>onDrop(current.componentId,zone)).catch(error=>onHint(error.message));
   }
   const cancel=()=>finish(true);

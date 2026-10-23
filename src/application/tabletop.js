@@ -18,7 +18,7 @@ export function createTabletop({ profile, module, random }) {
   const send = (type, payload) => commit(applyCommand(state, { type, payload, actorId: 'local', expectedRevision: state.revision }, profile, module));
   return Object.freeze({
     subscribe(listener) {
-      if (typeof listener !== 'function') throw Error('Ongeldige tafelobserver');
+      if (typeof listener !== 'function') throw Error('Invalid table observer');
       listeners.add(listener); return () => listeners.delete(listener);
     },
     place: (componentId, zoneId) => send('component.place', { componentId, zoneId }),
@@ -29,23 +29,23 @@ export function createTabletop({ profile, module, random }) {
     roll(sides) { const value = random(sides); send('dice.record', { sides, value }); return value; },
     reset() { commit(createSession(profile, module)); },
     undo() {
-      if (!past.length) throw Error('Geen handeling om ongedaan te maken');
+      if (!past.length) throw Error('No action to undo');
       future.push(state); state = past.pop(); notify();
     },
     redo() {
-      if (!future.length) throw Error('Geen handeling om opnieuw uit te voeren');
+      if (!future.length) throw Error('No action to redo');
       past.push(state); state = future.pop(); notify();
     },
     restoreSession(saved) {
-      if (saved?.format !== 'tabletop-session' || saved.schemaVersion !== 1) throw Error('Onbekend sessieformaat');
-      if (saved.inputSimulation) throw Error('Sensorstudies kunnen nog niet worden hervat; gebruik een export van de handmatige tafel');
+      if (saved?.format !== 'tabletop-session' || saved.schemaVersion !== 1) throw Error('Unknown session format');
+      if (saved.inputSimulation) throw Error('Sensor studies cannot be resumed yet; use a manual-table export');
       if (saved.module?.id !== module.id || saved.module.version !== module.version ||
-          saved.package?.gameId !== profile.gameId || saved.package.releaseId !== profile.releaseId || saved.package.version !== profile.version) throw Error('Sessie hoort bij een ander tafelprofiel of een andere versie');
+          saved.package?.gameId !== profile.gameId || saved.package.releaseId !== profile.releaseId || saved.package.version !== profile.version) throw Error('Session belongs to another table profile or version');
       const imported = saved.state;
-      if (!Array.isArray(imported?.events) || imported.events.length > 10000) throw Error('Ongeldig of te groot activiteitenlog');
+      if (!Array.isArray(imported?.events) || imported.events.length > 10000) throw Error('Invalid or oversized activity log');
       let replay = createSession(profile, module);
       for (const event of imported.events) {
-        if (event?.sequence !== replay.revision + 1 || event.schemaVersion !== 1) throw Error('Ongeldige eventvolgorde of eventversie');
+        if (event?.sequence !== replay.revision + 1 || event.schemaVersion !== 1) throw Error('Invalid event sequence or version');
         replay = applyCommand(replay, { type: event.type, actorId: event.actorId, payload: event.payload, expectedRevision: replay.revision }, profile, module);
       }
       // Compare JSON objects independent of property order; only commit after complete replay.
@@ -55,7 +55,7 @@ export function createTabletop({ profile, module, random }) {
         const keys = Object.keys(a);
         return keys.length === Object.keys(b).length && keys.every(key => Object.hasOwn(b, key) && equivalent(a[key], b[key]));
       };
-      if (!equivalent(replay, imported)) throw Error('Sessietoestand komt niet overeen met het activiteitenlog');
+      if (!equivalent(replay, imported)) throw Error('Session state does not match the activity log');
       state = replay;
       past = []; future = []; notify();
     },
