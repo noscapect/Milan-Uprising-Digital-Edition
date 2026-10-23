@@ -20,16 +20,20 @@ De private offline runner compileert dezelfde Core-bron als de adapter, zonder W
 | Personage aanbieden | Scanvoorwaarden, annuleren, zeven synthetische selecties | Vier personages geregistreerd |
 | Radio-instellingen | Bevestiging en interne toestand | Verbinding bewezen; geen bewijs van volledige hardwaredekking |
 | Lichtopdrachten | Ontvangen opdracht veilig uitleesbaar | Nog geen zichtbare reproductie |
-| Virtuele fysieke d10 | Encoder, invoergrenzen, oorspronkelijke SDK-callbacks voor alle tien waarden en virtueel Bluetooth-transport | Nog geen acceptatiebewijs |
+| Vijf virtuele fysieke d10's | Eigen vaste identiteiten, groeps- en selectieworpen, oorspronkelijke SDK-callbacks en virtueel Bluetooth-transport | Alle vijf herkend op het setupscherm; spelchecks nog toetsen |
 | Firmware bijwerken / tags schrijven | Expliciet niet ondersteund | Normale appoptie om zonder update door te gaan gebruikt |
 | Invloed en blijvende pionpositie | Afzonderlijke terugkoppeladapter | Android-kaartoverdracht nog onvolledig |
 | Campagne opslaan en laden | Verantwoordelijkheid officiële app | Nog niet bevestigd op Android |
 
-De eerste offline run slaagt voor vijftien scenario's, waaronder tien bestaande vergelijkingsbestanden. Deze vergelijkingsbestanden zijn regressiereferenties; zij vormen op zichzelf geen onafhankelijk bewijs. Het rapport vermeldt expliciet dat geen radio of officiële app is gebruikt.
+De offline run slaagt voor zestien scenario's, waaronder tien bestaande vergelijkingsbestanden. Deze vergelijkingsbestanden zijn regressiereferenties; zij vormen op zichzelf geen onafhankelijk bewijs. Het rapport vermeldt expliciet dat geen radio of officiële app is gebruikt.
 
-De oorspronkelijke SDK herkent afzonderlijk ontdekking van de synthetische d10, tien rolstarts en de tien bijbehorende eindwaarden, ook bij aanlevering in gesplitste berichten. De private adapter biedt een experimentele worp met een willekeurige fysieke waarde van één tot en met tien; de aanvrager kan geen gewenste uitkomst opgeven. Dit is invoer voor de officiële app, geen eigen berekening van spelsucces.
+De oorspronkelijke SDK herkent vijf afzonderlijke synthetische d10's en hun onafhankelijke waarden, ook bij aanlevering in gesplitste berichten. De test omvat alle tien waarden van de eerste d10 en vervolgens een groepsworp met alle vijf. De private adapter biedt een willekeurige fysieke waarde van één tot en met tien per gekozen dobbelsteen; de aanvrager kan geen gewenste uitkomst opgeven. Iedere dobbelsteen behoudt zijn eigen lokaal opgeslagen identiteit. Dit is invoer voor de officiële app, geen eigen berekening van spelsucces.
 
-De virtuele Bluetooth-test ontdekte dat langere berichten bij de standaard pakketgrootte werden afgekapt. De adapter splitst notificaties nu op basis van de beschikbare pakketgrootte. De transporttest controleert complete ontvangst, een stabiele eigen dobbelsteenidentiteit, weigering van gelijktijdige worpen en annuleren bij uitschakelen of verbreken. Dit is getest met softwarecontrollers, zonder fysieke radio. Activering en acceptatie in de echte Android-sessie blijven een vervolgstap.
+De private pc-bediening biedt vijf selectievakjes, toont de laatst verzonden waarden en kan één tot vijf geselecteerde dice gooien. Lege of dubbele selecties worden geweigerd. Niet-geselecteerde dobbelstenen krijgen geen nieuwe worp. De browsercontrole toetst een volledige worp, een selectie van twee en het blokkeren van een lege selectie.
+
+De virtuele Bluetooth-test ontdekte dat langere berichten bij de standaard pakketgrootte werden afgekapt. De adapter splitst notificaties nu op basis van de beschikbare pakketgrootte. De transporttest controleert complete ontvangst, vijf verschillende identiteiten, volledige en gedeeltelijke worpen, weigering van gelijktijdige worpen en annuleren bij uitschakelen of verbreken. Dit is getest met softwarecontrollers, zonder fysieke radio.
+
+De aansluitende fysieke proef met de ongewijzigde Android-app bevestigt herkenning van de eerste virtuele d10 op het setupscherm en een zichtbare verandering van één naar vijf bij de tweede worp. Na het laden van de uitbreiding toont hetzelfde officiële setupscherm alle vijf de dobbelstenen, met dezelfde vijf waarden als de private pc-Core. De app toont firmware- en batterijwaarschuwingen doordat de virtuele dice hiervoor nog geen bruikbare telemetrie aanbieden. Dit bewijst geen geslaagde spelcheck, groepscheck of campagneopslag.
 
 ## Gerichte acceptatie na de hardwaretests
 

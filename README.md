@@ -51,7 +51,7 @@ De 8 Ã— 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1â€
 
 ## Onderzoek naar appkoppeling
 
-De actuele ontwikkelstap is [Core-functies zelfstandig testen](docs/CORE-VALIDATIE.md), zodat hardwarewijzigingen geen nieuwe campagne-setup vereisen. Een private regressiesuite en virtuele d10 zijn toegevoegd. SDK- en softwaretransporttests zijn gescheiden van acceptatie met Milan op de echte Android-tablet; opslaan/hervatten en volledige bordterugkoppeling op Android zijn nog niet bevestigd.
+De actuele ontwikkelstap is [Core-functies zelfstandig testen](docs/CORE-VALIDATIE.md), zodat hardwarewijzigingen geen nieuwe campagne-setup vereisen. Een private regressiesuite en vijf virtuele d10's met afzonderlijke identiteiten en selecteerbare groepsworpen zijn toegevoegd. Alle vijf zijn op het echte Android-setupscherm herkend; volledige spelchecks, opslaan/hervatten en bordterugkoppeling op Android zijn nog niet bevestigd.
 
 De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert een optionele native helper voor appinvoer en afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; lokale resultaten blijven privaat. De private proef toont personageregistratie, tafelbediening, digitale worpen, invloedsoverdracht en hervatten binnen beperkte scope. Volledige cityrondes, andere schermformaten en een publieke adapter blijven open.
 
