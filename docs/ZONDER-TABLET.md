@@ -45,6 +45,8 @@ De officiële [Android-app staat op Google Play](https://play.google.com/store/a
 
 ## Eerstvolgende proef voor de gekozen tabletopstelling
 
+Vervolg op 23 oktober: vier personages zijn via de pc-Core door de officiële tablet-app geregistreerd en hun plaatsing op QT8 is bevestigd. De campagne is via de normale setup gestart. De vier bevestigde posities zijn overgenomen op het digitale bord; de browsercontrole slaagt zonder JavaScriptfouten. Dit is nog geen bewijs van een spelactie, digitale worp, hervatten of automatische kaartoverdracht op Android. De radioproef is beëindigd en Windows heeft de radio terug.
+
 1. Corrigeer de werkelijk uitgezonden pc-naam via een door de gebruiker toegestane route en controleer die opnieuw op de fysieke tablet.
 2. Bewijs een verbinding en echte spelinvoer met de ongewijzigde Milan-app op de tablet, zonder de oude Android-helper te gebruiken.
 3. Kalibreer de afzonderlijke Android-schermlezer op een echte kaart en herhaal verplaatsing, invloedwijziging en hervatten. De bestaande Windows-proef bewijst deze Android-keten niet.
