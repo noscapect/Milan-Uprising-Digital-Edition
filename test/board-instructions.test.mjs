@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createTabletop} from '../src/application/tabletop.js';
+import {milanModule} from '../src/games/milan-uprising/module.js';
+import {buildBoardInstructions} from '../src/games/milan-uprising/board-instructions.js';
+const profile=JSON.parse(readFileSync(new URL('../data/games/milan-uprising/city.json',import.meta.url)));
+test('controle verwijderen bewaart invloed, personages en fiches en is idempotent',()=>{
+  const table=createTabletop({profile,module:milanModule});
+  for(const id of ['character-brujah','influence-anarchs-1','investigation-1','control-anarchs-camarilla-1'])table.place(id,'qt8');
+  table.place('control-anarchs-camarilla-2','portello');
+  const before=table.snapshot();
+  table.arrange(buildBoardInstructions(profile,before,{removeControl:['qt8']}));
+  const after=table.snapshot();assert.equal(after.placements['control-anarchs-camarilla-1'],null);
+  for(const [id,zone]of Object.entries(before.placements))if(id!=='control-anarchs-camarilla-1')assert.equal(after.placements[id],zone);
+  assert.deepEqual(after.faces,before.faces);assert.equal(after.revision,before.revision+1);
+  assert.equal(buildBoardInstructions(profile,after,{removeControl:['qt8']}).changed,false);
+  table.undo();assert.deepEqual(table.snapshot(),before);
+});
+test('gemengde instructies worden vooraf geheel gevalideerd',()=>{
+  const table=createTabletop({profile,module:milanModule}),before=table.snapshot();
+  assert.throws(()=>buildBoardInstructions(profile,before,{influence:[{zoneId:'solari',faction:'ambrose',count:3}],removeControl:['unknown']}));
+  assert.deepEqual(table.snapshot(),before);
+  const result=buildBoardInstructions(profile,before,{influence:[{zoneId:'solari',faction:'ambrose',count:3}],removeControl:['qt8']});
+  table.arrange(result);assert.equal(table.snapshot().revision,1);
+});

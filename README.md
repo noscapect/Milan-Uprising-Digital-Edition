@@ -57,6 +57,8 @@ Voor de private gekoppelde tafel is er nu ook een [bordlink voor een tweede pc o
 
 De private terugkoppeladapter neemt nu ook drie zichtbare Engelse invloedseindstanden uit de Android-dagfase automatisch over. Dit is op de actuele tablet en via de gedeelde bordpagina gecontroleerd; volledige fasesynchronisatie blijft open. Zie [dagfase-onderzoek en automatisering](docs/DAGFASE-AUTOMATISERING.md).
 
+De ingerichte pc heeft een **Milan Speeltafel**-launcher voor zelfstandig starten. De automatische verwerking draait lokaal op de achtergrond, zonder Codex of een geopende bordbrowser. Zie [werking, vereisten en verificatie](docs/ZELFSTANDIGE-KOPPELING.md).
+
 De actuele ontwikkelstap is [Core-functies zelfstandig testen](docs/CORE-VALIDATIE.md), zodat hardwarewijzigingen geen nieuwe campagne-setup vereisen. Een private regressiesuite en vijf virtuele d10's met afzonderlijke identiteiten en selecteerbare groepsworpen zijn toegevoegd. Alle vijf zijn op het echte Android-setupscherm herkend; volledige spelchecks, opslaan/hervatten en bordterugkoppeling op Android zijn nog niet bevestigd.
 
 De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert een optionele native helper voor appinvoer en afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; lokale resultaten blijven privaat. De private proef toont personageregistratie, tafelbediening, digitale worpen, invloedsoverdracht en hervatten binnen beperkte scope. Volledige cityrondes, andere schermformaten en een publieke adapter blijven open.

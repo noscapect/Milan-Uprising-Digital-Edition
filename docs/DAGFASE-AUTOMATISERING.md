@@ -18,13 +18,21 @@ Neem de door Milan getoonde eindstanden over. Bereken geen eigen vijandelijke ac
 
 De private adapter herkent het dagfasescherm en leest de zichtbare Engelse instructies van de vorm “locatie heeft nu aantal factie-invloed”. Twee overeenkomende waarnemingen zijn vereist. Een onbekende locatie, dubbel bericht of ongeldige hoeveelheid blokkeert de overname van dat scherm. Onbekende instructies over controle worden niet omgezet in veronderstelde kubussen of controlefiches.
 
+Dit draait zelfstandig in een lokale achtergrondtaak, zonder Codex of een geopende bordbrowser. Zie [starten en zelfstandige verificatie](ZELFSTANDIGE-KOPPELING.md).
+
 De publieke, headless functie `buildInfluenceArrangement(profile, state, updates)` ontvangt uitsluitend expliciete eindstanden. Ze behoudt andere facties, personages, controlefiches en ficheszijden, controleert de beschikbare voorraad en levert één bestaande `table.arrange`-opdracht. Er wordt niets bijgeteld bij iedere uitlezing: dezelfde eindstanden opnieuw toepassen verandert niets. Voorraadafname wordt vóór toename verwerkt. Engine, sessieformaat en regelsmodus veranderen niet.
 
 In de echte Android-proef zijn drie zichtbare St. Ambrose-instructies automatisch overgenomen: Sant’Ambrogio 3, Solari 3 en Sempione 1. De browsercontrole via de LAN-bordlink bevestigt de aantallen en herhaald uitlezen zonder duplicaten. Dit gebeurde zonder sensorinvoer of op Confirm drukken. De volledige projectsuite slaagt met 42 tests.
 
 ## Grenzen en vervolg
 
-Deze doorsnede is gekalibreerd op het huidige Engelse tabletscherm. Niet-zichtbare of weg geklikte logregels worden niet achteraf gereconstrueerd. De status meldt daarom het aantal **zichtbare invloedseindstanden**, niet dat de hele dagfase is gesynchroniseerd. Andere talen, controlewissels, NPC-verplaatsingen, scrollende logboeken en algemene faseovergangen vereisen aanvullende voorbeelden en tests. Een volgende stap is een volledige kaartvergelijking vóór de fase als gereed wordt gemarkeerd. De speler blijft Confirm bedienen in de officiële app.
+Deze doorsnede is gekalibreerd op het huidige Engelse tabletscherm. Niet-zichtbare of weg geklikte logregels worden niet achteraf gereconstrueerd. De status meldt daarom het aantal **zichtbare invloedseindstanden**, niet dat de hele dagfase is gesynchroniseerd. Andere talen, controleovernames, NPC-verplaatsingen, scrollende logboeken en algemene faseovergangen vereisen aanvullende voorbeelden en tests. Een volgende stap is een volledige kaartvergelijking vóór de fase als gereed wordt gemarkeerd. De speler blijft Confirm bedienen in de officiële app.
+
+## Uitbreiding Sunset op 24 oktober 2026
+
+De vastgelegde Android-melding tijdens Sunset bevat naast invloedseindstanden ook een expliciete opdracht om controle uit QT8 te verwijderen. De parser herkent deze instructie nu. De publieke pure builder `buildBoardInstructions` combineert invloedseindstanden en expliciete controleverwijderingen in één atomaire tafelopdracht. Alleen controlefiches op het genoemde district gaan naar de voorraad; invloed, onderzoek, personages en andere locaties blijven behouden. Herhaling verandert niets.
+
+De melding over een nieuwe Fixer wordt als aankondiging herkend. Zonder plaatsingsbestemming wordt geen miniatuur verplaatst. De Sunset-parser en volledige achtergrondverwerking zijn getest met de vastgelegde OCR-waarneming in een aparte testsessie, zonder browser, HTTP-verzoeken of wijzigingen aan de echte campagne. Na de pauze stond de echte app weer in de verbindingssetup; deze Sunset-uitbreiding is daarom nog niet opnieuw op een live Sunset-scherm geaccepteerd.
 
 ## Haven-terugkoppeling
 

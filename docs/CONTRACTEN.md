@@ -84,3 +84,7 @@ Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde 
 ## Milan-module — expliciete invloedseindstanden
 
 `buildInfluenceArrangement(profile, state, updates)` accepteert unieke `{zoneId, faction, count}`-combinaties voor stadsdistricten, met gehele aantallen van nul tot drie. De pure builder controleert voorraad en geeft `{changed, placements, faces}` terug voor één bestaande `table.arrange`-opdracht. Alleen de benoemde factie-invloed verandert; andere plaatsingen en zijden blijven behouden. De aanroeper slaat de opdracht over bij `changed:false`. Dit is overname van expliciete gegevens, geen automatische Milan-regels. Zie [dagfase-onderzoek](DAGFASE-AUTOMATISERING.md).
+
+`buildBoardInstructions(profile, state, {influence, removeControl})` combineert dezelfde invloedseindstanden met expliciete controleverwijdering uit unieke stadsdistricten. Controleverwijdering verwijdert uitsluitend de betrokken controlefiches. Alle validatie gebeurt vóór de bestaande atomaire opdracht. De applicatie voert geen fase- of factiebeslissingen uit.
+
+`createPollingWorker({run, interval, onState})` biedt een zelfstandige seriële achtergrondtaak. `start()` begint zonder browserverzoek; fouten worden gemeld en de volgende cyclus wordt opnieuw gepland. `stop()` wacht op de lopende cyclus en voorkomt vervolgruns. De private appadapter gebruikt deze generieke taak buiten engine en UI.
