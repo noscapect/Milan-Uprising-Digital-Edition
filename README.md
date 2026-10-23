@@ -51,6 +51,8 @@ De 8 Ã— 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1â€
 
 ## Onderzoek naar appkoppeling
 
+Voor de private gekoppelde tafel is er nu ook een [bordlink voor een tweede pc op het lokale netwerk](docs/BORD-DELEN.md), met een korte toegangscode en dezelfde tafelsessie. De technische Core-bediening blijft lokaal.
+
 De actuele ontwikkelstap is [Core-functies zelfstandig testen](docs/CORE-VALIDATIE.md), zodat hardwarewijzigingen geen nieuwe campagne-setup vereisen. Een private regressiesuite en vijf virtuele d10's met afzonderlijke identiteiten en selecteerbare groepsworpen zijn toegevoegd. Alle vijf zijn op het echte Android-setupscherm herkend; volledige spelchecks, opslaan/hervatten en bordterugkoppeling op Android zijn nog niet bevestigd.
 
 De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert een optionele native helper voor appinvoer en afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; lokale resultaten blijven privaat. De private proef toont personageregistratie, tafelbediening, digitale worpen, invloedsoverdracht en hervatten binnen beperkte scope. Volledige cityrondes, andere schermformaten en een publieke adapter blijven open.
