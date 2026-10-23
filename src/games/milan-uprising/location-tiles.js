@@ -1,5 +1,5 @@
-export const bonusTypes={unknown:'Nog niet vastgesteld',haven:'Haven',herd:'Herd',income:'Income',media:'Media Office',possibleHaven:'Possible Haven',secretBar:'Secret Bar',underground:'Underground'};
-export const specialTypes={unknown:'Nog niet vastgesteld','haven-11':'Haven 11','haven-12':'Haven 12'};
+export const bonusTypes={unknown:'Nog niet vastgesteld',haven:'Schuilplaats (Haven)',herd:'Voedingsbron (Herd)',income:'Inkomsten (Income)',media:'Mediakantoor (Media Office)',possibleHaven:'Mogelijke schuilplaats (Possible Haven)',secretBar:'Geheime bar (Secret Bar)',underground:'Metro (Underground)'};
+export const specialTypes={unknown:'Nog niet vastgesteld',haven:'Schuilplaats (Haven)','haven-11':'Schuilplaats (Haven)','haven-12':'Schuilplaats (Haven)'};
 export const blankTile=()=>({face:'unconfirmed',value:'unknown'});
 export function emptyLocationTiles(){return {format:'milan-location-tiles',schemaVersion:1,revision:0,tiles:{}};}
 export function setLocationTile(state,zones,{zoneId,kind,face,value,expectedRevision}){

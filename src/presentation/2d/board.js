@@ -1,5 +1,7 @@
 import { artworkImage } from '../artwork.js';
 import { milanMap } from './milan-map.js';
+import {describeLocationTile} from '../../games/milan-uprising/location-tile-info.js';
+import {tileSymbol} from './tile-symbol.js';
 
 function pieceElement(component, index, options, interactive = false) {
   const piece = document.createElement(interactive ? 'button' : 'span');
@@ -53,7 +55,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
   });
   if (cells.some((cell, index) => container.children[index] !== cell)) container.replaceChildren(...cells);
 }
-const zoneDescription = zone => `${zone.label}, ${zone.occupants.map(c => `${c.label}${c.faceLabel ? ` (${c.faceLabel})` : ''}`).join(', ') || 'leeg'}`;
+const zoneDescription = zone => `${zone.label}, ${zone.occupants.map(c => `${c.label}${c.faceLabel ? ` (${c.faceLabel})` : ''}`).join(', ') || 'leeg'}${Object.entries(zone.locationTiles||{}).filter(([,tile])=>tile.face==='visible').map(([kind,tile])=>', '+describeLocationTile(kind,tile,zone.label).title).join('')}`;
 
 function renderMap(container, projection, onZone, options) {
   container.style.gridTemplateColumns = ''; container.style.aspectRatio = `${milanMap.width} / ${milanMap.height}`;
@@ -95,13 +97,12 @@ function renderMap(container, projection, onZone, options) {
     if (active) [...pieces.children].find(piece=>piece.dataset.component===active)?.focus({preventScroll:true});
   }
 }
-import {locationTileLabel} from '../../games/milan-uprising/location-tiles.js';
 function tileBadges(zone){
   const badges=document.createElement('span');badges.className='location-tile-badges';
   for(const [kind,tile]of Object.entries(zone.locationTiles||{})){
     if(tile.face!=='visible')continue;
     const badge=document.createElement('span');badge.className='location-tile-badge';badge.dataset.tileKind=kind;
-    badge.textContent=(tile.value.startsWith('haven')?'⌂ ':'')+locationTileLabel(kind,tile);badge.title=(kind==='bonus'?'Locatiebonus: ':'Speciale locatie: ')+locationTileLabel(kind,tile);badges.append(badge);
+    const info=describeLocationTile(kind,tile,zone.label);badge.append(tileSymbol(info.symbol),document.createTextNode(info.shortLabel));badge.title=info.title+' · '+info.summary;badges.append(badge);
   }
   return badges;
 }
