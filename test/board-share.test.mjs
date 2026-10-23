@@ -21,7 +21,7 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
     const joined=await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded',Origin:base},body:'pin=123456',redirect:'manual'});
     assert.equal(joined.status,303);assert.equal(joined.headers.get('location'),'/board');
     const cookie=joined.headers.get('set-cookie').split(';')[0];assert.match(joined.headers.get('set-cookie'),/HttpOnly; SameSite=Strict/);
-    for(const path of ['/board','/api/table-session','/api/board-status','/board-client.mjs','/src/style.css','/data/games/test.json','/local-artwork/test.png']){
+    for(const path of ['/board','/api/table-session','/api/board-status','/api/board-tiles','/board-client.mjs','/src/style.css','/data/games/test.json','/local-artwork/test.png']){
       assert.equal((await fetch(base+path,{headers:{Cookie:cookie}})).status,200);
     }
     const count=received.length;
@@ -37,6 +37,9 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
     assert.equal(received.length,count);
     const move=await fetch(base+'/api/board-move',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"componentId":"own-piece","zoneId":"own-zone"}'});
     assert.equal(move.status,200);assert.equal(received.at(-1).method,'POST');assert.equal(received.at(-1).host,'127.0.0.1:'+upstream.address().port);
+    assert.equal((await fetch(base+'/api/board-tiles',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{}'})).status,403);
+    const tile=await fetch(base+'/api/board-tiles',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"zoneId":"qt8","kind":"special"}'});
+    assert.equal(tile.status,200);assert.equal(received.at(-1).url,'/api/board-tiles');
     for(let i=0;i<6;i++)assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,401);
     assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,429);
   }finally{await Promise.all([new Promise(r=>share.server.close(r)),new Promise(r=>upstream.close(r))]);}

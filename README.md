@@ -29,6 +29,8 @@ De tafel gebruikt de volledige beschikbare schermbreedte. Met lokaal artwork ope
 
 **Voorraad**, **Locatie** en **Sessie** staan in een compacte zijbalk. Gebruik de zoomknoppen voor details, **Passend** voor het hele bord en **Bordfocus** voor extra ruimte. Op tablet en telefoon staat de zijbalk onder de kaart. **Campagne-opstelling** en **Tafelinstellingen** openen aparte vensters. Bewaren, openen en activiteiten staan onder Sessie; undo/redo blijven direct onder het bord bereikbaar. Zonder lokaal artwork blijven dezelfde handelingen in de schematische weergave beschikbaar.
 
+Onder **Locatie → Bordtegels** kun je op de stadstafel locatiebonussen en speciale locatietegels instellen en omkeren. Dit werkt ook op de gekoppelde tafel via de LAN-link; de stand blijft daar op de pc bewaard. Zie [bediening, opslag en grenzen](docs/LOCATIETEGELS.md).
+
 De fysieke weergave benadert de gedrukte gebieden; dit is geen geverifieerde aangrenzendheidsmapping. De officiële app blijft de regel- en campagneautoriteit bij de private koppeling. Andere invoerbronnen kunnen dezelfde sessie bijwerken; de UI reageert automatisch via `tabletop.subscribe`. Live tafelbediening en invloedsoverdracht zijn beperkt getest in de private proef, zonder publieke integratieadapter. Zie [layout en vervolgrichting](docs/TAFEL-LAYOUT.md).
 
 ## Inhoud en bestaande profielen

@@ -5,6 +5,7 @@ import { downloadSession } from './adapters/download.js';
 import { createVirtualCore } from './adapters/virtual-core.js';
 import { mountTabletop } from './ui/controller.js';
 import { mountCampaignSetup } from './ui/campaign-setup.js';
+import {withLocationTiles} from './games/milan-uprising/tile-tabletop.js';
 try {
   const names = ['city', 'campaign', 'retail', 'table', 'interaction', 'demo'];
   const profiles = await Promise.all(names.map(async name => {
@@ -20,7 +21,8 @@ try {
     dispose();
     const simulation = document.getElementById('profile').value === 'interaction';
     const profile = profiles[names.indexOf(document.getElementById('profile').value)];
-    const tabletop = createTabletop({ profile, module:milanModule, random:cryptoDie });
+    const baseTable = createTabletop({ profile, module:milanModule, random:cryptoDie });
+    const tabletop = document.getElementById('profile').value === 'city' ? withLocationTiles(baseTable,profile) : baseTable;
     const core = simulation ? createVirtualCore(tabletop, Object.fromEntries(profile.zones.map(zone => [zone.id, zone.id]))) : null;
     const refresh = mountTabletop(tabletop, downloadSession, core, artwork, document.getElementById('profile').value === 'city');
     dispose = refresh.dispose;

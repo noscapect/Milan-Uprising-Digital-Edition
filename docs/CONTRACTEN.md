@@ -88,3 +88,7 @@ Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde 
 `buildBoardInstructions(profile, state, {influence, removeControl})` combineert dezelfde invloedseindstanden met expliciete controleverwijdering uit unieke stadsdistricten. Controleverwijdering verwijdert uitsluitend de betrokken controlefiches. Alle validatie gebeurt vóór de bestaande atomaire opdracht. De applicatie voert geen fase- of factiebeslissingen uit.
 
 `createPollingWorker({run, interval, onState})` biedt een zelfstandige seriële achtergrondtaak. `start()` begint zonder browserverzoek; fouten worden gemeld en de volgende cyclus wordt opnieuw gepland. `stop()` wacht op de lopende cyclus en voorkomt vervolgruns. De private appadapter gebruikt deze generieke taak buiten engine en UI.
+
+## Milan-module — locatietegels
+
+`setLocationTile(state, zones, {zoneId, kind, face, value, expectedRevision})` retourneert nieuwe `milan-location-tiles`-toestand. `kind` is bonus of special; `face` is unconfirmed, hidden of visible. Alleen stadsdistricten en bekende waarden zijn toegestaan. Projecties kopiëren de tegeldata. De stadstafel voegt deze moduletoestand optioneel als `locationTiles` aan de bestaande sessie-envelop toe; de engine blijft ongewijzigd. Zie [locatietegels](LOCATIETEGELS.md).

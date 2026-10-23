@@ -12,6 +12,8 @@ De bordpagina, geselecteerde bordassets, actuele sessie en bordstatus worden doo
 
 Miniaturen zijn ook via deze link met ingedrukte linkermuisknop naar een ander vak te slepen. Na een update vernieuw je de pagina met Ctrl+F5. Tijdens de appbevestiging blijft de laatst bevestigde positie zichtbaar. Zie [sleepbediening](SLEPEN-EN-SENSOREN.md).
 
+Ook de [locatietegels](LOCATIETEGELS.md) zijn via deze link te kiezen en om te keren. Deze gedeelde tafelgegevens blijven op de host-pc bewaard. Twee gelijktijdige wijzigingen gebruiken een revisiecontrole, zodat een verouderde browserstand niet stilzwijgend de laatste wijziging vervangt.
+
 Core-start/stop, koppelen, technische logs, handmatige sensorinvoer en opstellingsimport zijn niet via deze bordlink beschikbaar. De technische pc-bediening op poort 5180 blijft lokaal. De bordlink gebruikt een eigen aanmelding, controleert Host en Origin, beperkt foutieve codepogingen en deelt alleen de vastgelegde bordroutes.
 
 ## Implementatie en validatie

@@ -1,12 +1,14 @@
 import { withArtwork, artworkImage } from '../presentation/artwork.js';
 import { renderBoard } from '../presentation/2d/board.js';
 import { installPieceDrag } from './piece-drag.js';
+import { mountLocationTiles } from './location-tiles.js';
 export function mountTabletop(tabletop, download, core = null, artwork = null, locationArtwork = false) {
   const $ = id => document.getElementById(id);
   const project = () => withArtwork(tabletop.project(), artwork, { locationArtwork });
   const initial = project();
   let selectedZone = null, placing = Boolean(core), zoom = 1, mapFailed = false;
   let drag=null,pendingUpdate=false,dropBusy=false;
+  const updateTiles=mountLocationTiles($('location-pieces').parentElement,tabletop,(run,message)=>act(run,message));
   const tabs = [...document.querySelectorAll('[role=tab]')];
   function showPanel(name, focus = false) {
     for (const tab of tabs) {
@@ -127,6 +129,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const selected = view.components.find(c => c.id === $('piece').value);
     $('selection-status').textContent = `${selected.label}${selected.faceLabel ? ` · ${selected.faceLabel}` : ''} · ${locationLabel(selected.id)}`;
     const zone = view.zones.find(z=>z.id === selectedZone);
+    updateTiles(zone);
     $('location-title').textContent = zone?.label || 'Kies een district';
     $('location-image').hidden = !zone?.background;
     if (zone?.background) { $('location-image').src = zone.background; $('location-image').onerror = () => { $('location-image').hidden = true; }; }
@@ -231,7 +234,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     onHint:message=>{$('status').textContent=message;},
     onDrop:async(id,zoneId)=>{dropBusy=true;selectedZone=zoneId;try{await act(()=>tabletop.place(id,zoneId),`Geplaatst op ${initial.zones.find(z=>z.id===zoneId)?.label||zoneId}.`);}finally{dropBusy=false;update();}}
   });
-  update.dispose = () => { drag.dispose();unsubscribe(); observer.disconnect(); document.removeEventListener('keydown',cancelPlacement); };
+  update.dispose = () => { updateTiles.dispose?.();drag.dispose();unsubscribe(); observer.disconnect(); document.removeEventListener('keydown',cancelPlacement); };
   update();
   return update;
 }

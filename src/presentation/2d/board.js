@@ -46,7 +46,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
     const attributes = document.createElement('span'); attributes.className = 'zone-attributes';
     const labels = { physical:'Fysiek', mental:'Mentaal', social:'Sociaal' };
     attributes.textContent = (zone.attributes || []).map(attribute => labels[attribute] || attribute).join(' · ');
-    cell.replaceChildren(title, attributes, occupants);
+    cell.replaceChildren(title, attributes, tileBadges(zone), occupants);
     cell.setAttribute('aria-label', zoneDescription(zone));
     cell.onclick = () => onZone(zone.id);
     return cell;
@@ -83,6 +83,7 @@ function renderMap(container, projection, onZone, options) {
     const hit = wrapper.querySelector('.cell'); hit.setAttribute('aria-label', zoneDescription(zone)); hit.title = zone.label;
     hit.onclick = () => onZone(zone.id);
     const pieces = wrapper.querySelector('.zone-pieces');
+    wrapper.querySelector('.location-tile-badges')?.remove();wrapper.querySelector('.map-zone-content').append(tileBadges(zone));
     const active = document.activeElement?.closest('.board-piece')?.dataset.component;
     const miniatures=zone.occupants.filter(c=>c.kind==='piece');
     const visible=[...miniatures,...zone.occupants.filter(c=>c.kind!=='piece').slice(0,Math.max(0,4-miniatures.length))];
@@ -93,4 +94,14 @@ function renderMap(container, projection, onZone, options) {
     }
     if (active) [...pieces.children].find(piece=>piece.dataset.component===active)?.focus({preventScroll:true});
   }
+}
+import {locationTileLabel} from '../../games/milan-uprising/location-tiles.js';
+function tileBadges(zone){
+  const badges=document.createElement('span');badges.className='location-tile-badges';
+  for(const [kind,tile]of Object.entries(zone.locationTiles||{})){
+    if(tile.face!=='visible')continue;
+    const badge=document.createElement('span');badge.className='location-tile-badge';badge.dataset.tileKind=kind;
+    badge.textContent=(tile.value.startsWith('haven')?'⌂ ':'')+locationTileLabel(kind,tile);badge.title=(kind==='bonus'?'Locatiebonus: ':'Speciale locatie: ')+locationTileLabel(kind,tile);badges.append(badge);
+  }
+  return badges;
 }
