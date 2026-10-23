@@ -14,3 +14,8 @@ dialog{background:var(--panel);color:var(--text);border:1px solid #626057;border
 
 #board.placing .cell,#board.placing .board-piece{cursor:crosshair}.map-zone-content .board-piece.piece:has(.miniature-icon){height:clamp(16px,4.5cqw,64px);width:clamp(10px,2.6cqw,40px);border:0;border-bottom:3px solid #bab4a5;border-radius:0 0 40% 40%;background:radial-gradient(ellipse at bottom,#77776b80,transparent 55%);filter:drop-shadow(1px 2px 1px #000)}
 @media(max-width:360px){.app-header{flex-wrap:wrap}.header-actions{width:100%;max-width:none;justify-content:space-between}.connection{width:auto;font-size:8px}.brand{width:100%}}
+#board .board-piece[data-movable=true],#inventory [data-movable=true],#location-pieces [data-movable=true]{cursor:grab;touch-action:none;user-select:none}
+#board.dragging-piece,#board.dragging-piece *{cursor:grabbing!important}
+#board .cell.drop-target{background:#efd18b55!important;outline:3px solid #ffe3a1;outline-offset:-3px}
+.drag-ghost{position:fixed!important;z-index:10000!important;pointer-events:none!important;transform:translate(-50%,-50%);opacity:.88;filter:drop-shadow(0 5px 5px #0009);margin:0!important;max-width:220px;overflow:hidden}
+.drag-ghost img{max-width:100%;max-height:100%;object-fit:contain}.drag-ghost .inventory-text{display:none}

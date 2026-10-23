@@ -10,6 +10,8 @@ Beide apparaten moeten elkaar op het lokale netwerk kunnen bereiken. Een gastnet
 
 De bordpagina, geselecteerde bordassets, actuele sessie en bordstatus worden doorgegeven vanuit de lokale adapter. Verplaatsingsverzoeken gaan naar dezelfde bestaande adapter, inclusief de controle op actieve speler en appbevestiging. De deelserver voegt geen spelregels of hardwareprotocol toe.
 
+Miniaturen zijn ook via deze link met ingedrukte linkermuisknop naar een ander vak te slepen. Na een update vernieuw je de pagina met Ctrl+F5. Tijdens de appbevestiging blijft de laatst bevestigde positie zichtbaar. Zie [sleepbediening](SLEPEN-EN-SENSOREN.md).
+
 Core-start/stop, koppelen, technische logs, handmatige sensorinvoer en opstellingsimport zijn niet via deze bordlink beschikbaar. De technische pc-bediening op poort 5180 blijft lokaal. De bordlink gebruikt een eigen aanmelding, controleert Host en Origin, beperkt foutieve codepogingen en deelt alleen de vastgelegde bordroutes.
 
 ## Implementatie en validatie

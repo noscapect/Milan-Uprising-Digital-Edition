@@ -45,7 +45,7 @@ export function createBoardShare({address,port=5182,upstream='http://127.0.0.1:5
         if(!req.headers['content-type']?.startsWith('application/json')){res.writeHead(415).end();return;}
         body=await read(req,4096);
       }
-      const response=await fetch(new URL(path+url.search,target),{method:req.method,headers:body?{'Content-Type':'application/json'}:{},body,redirect:'error',signal:AbortSignal.timeout(20000)});
+      const response=await fetch(new URL(path+url.search,target),{method:req.method,headers:body?{'Content-Type':'application/json'}:{},body,redirect:'error',signal:AbortSignal.timeout(35000)});
       res.writeHead(response.status,{'Content-Type':response.headers.get('content-type')||'application/octet-stream'});
       res.end(Buffer.from(await response.arrayBuffer()));
     }catch{if(!res.headersSent)res.writeHead(502,{'Content-Type':'text/plain; charset=utf-8'});res.end('Bord niet bereikbaar. Controleer de lokale bordadapter.');}

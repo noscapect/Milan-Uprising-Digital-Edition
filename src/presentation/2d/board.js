@@ -6,6 +6,7 @@ function pieceElement(component, index, options, interactive = false) {
   if (interactive) piece.type = 'button';
   piece.className = `board-piece ${component.kind} p${index % 4 + 1}`;
   piece.dataset.component = component.id;
+  piece.dataset.movable = String(component.kind === 'piece');
   if (component.color) piece.style.setProperty('--piece-color', component.color);
   const label = document.createElement('span'); label.className = 'piece-abbreviation'; label.textContent = component.shortLabel || `${index + 1}`;
   piece.append(label);
@@ -14,7 +15,7 @@ function pieceElement(component, index, options, interactive = false) {
   piece.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
   piece.setAttribute('aria-label', piece.title);
   piece.classList.toggle('selected-piece', component.id === options.selectedComponent);
-  if (interactive) piece.onclick = event => { event.stopPropagation(); options.onComponent?.(component.id,options.zoneId); };
+  if (interactive || options.onComponent) piece.onclick = event => { event.stopPropagation(); options.onComponent?.(component.id,options.zoneId); };
   return piece;
 }
 
@@ -83,9 +84,11 @@ function renderMap(container, projection, onZone, options) {
     hit.onclick = () => onZone(zone.id);
     const pieces = wrapper.querySelector('.zone-pieces');
     const active = document.activeElement?.closest('.board-piece')?.dataset.component;
-    pieces.replaceChildren(...zone.occupants.slice(0,4).map(component => pieceElement(component,projection.components.findIndex(c=>c.id===component.id),{...options,zoneId:zone.id},true)));
-    if (zone.occupants.length > 4) {
-      const more=document.createElement('button'); more.type='button'; more.className='piece-overflow'; more.textContent=`+${zone.occupants.length-4}`;
+    const miniatures=zone.occupants.filter(c=>c.kind==='piece');
+    const visible=[...miniatures,...zone.occupants.filter(c=>c.kind!=='piece').slice(0,Math.max(0,4-miniatures.length))];
+    pieces.replaceChildren(...visible.map(component => pieceElement(component,projection.components.findIndex(c=>c.id===component.id),{...options,zoneId:zone.id},true)));
+    if (zone.occupants.length > visible.length) {
+      const more=document.createElement('button'); more.type='button'; more.className='piece-overflow'; more.textContent=`+${zone.occupants.length-visible.length}`;
       more.setAttribute('aria-label',`${zone.label}: toon alle ${zone.occupants.length} onderdelen`); more.onclick=()=>options.onInspect?.(zone.id); pieces.append(more);
     }
     if (active) [...pieces.children].find(piece=>piece.dataset.component===active)?.focus({preventScroll:true});

@@ -23,7 +23,9 @@ Op deze computer zijn 79 originele afbeeldingen uit de geïnstalleerde app toege
 
 ## Speeltafel gebruiken
 
-De tafel gebruikt de volledige beschikbare schermbreedte. Met lokaal artwork opent de originele fysieke kaart met veertig klikbare locatiegebieden. **Bekijken** toont de inhoud van een district; selecteer een onderdeel in de voorraad om het daarna op een bestemming te **plaatsen**. Met Escape ga je terug naar bekijken. In deze stand kun je een onderdeel op de kaart selecteren en via de zijbalk verplaatsen, omkeren of terugleggen. Bij meer dan vier onderdelen opent `+n` de volledige locatielijst.
+De tafel gebruikt de volledige beschikbare schermbreedte. Met lokaal artwork opent de originele fysieke kaart met veertig klikbare locatiegebieden. **Sleep een miniatuur met de linkermuisknop ingedrukt naar een ander vak en laat los.** Dit werkt ook vanuit de voorraad en locatielijst, op de fysieke kaart en het raster. Het doelvak licht op; Escape of buiten het bord loslaten annuleert. Alle miniaturen blijven zichtbaar, ook in drukke vakken. `+n` opent de volledige lijst met overige onderdelen.
+
+**Bekijken** toont de inhoud van een district. Selecteren en daarna op een bestemming klikken blijft beschikbaar voor alle onderdelen. Via de zijbalk kun je onderdelen ook omkeren of terugleggen. Op de private gekoppelde tafel laat de adapter alleen het door Milan gevraagde personage bewegen; de bordpositie verandert pas na bevestiging uit de app. Zie [bediening en verificatie](docs/SLEPEN-EN-SENSOREN.md).
 
 **Voorraad**, **Locatie** en **Sessie** staan in een compacte zijbalk. Gebruik de zoomknoppen voor details, **Passend** voor het hele bord en **Bordfocus** voor extra ruimte. Op tablet en telefoon staat de zijbalk onder de kaart. **Campagne-opstelling** en **Tafelinstellingen** openen aparte vensters. Bewaren, openen en activiteiten staan onder Sessie; undo/redo blijven direct onder het bord bereikbaar. Zonder lokaal artwork blijven dezelfde handelingen in de schematische weergave beschikbaar.
 

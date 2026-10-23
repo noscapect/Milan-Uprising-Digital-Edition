@@ -1,10 +1,12 @@
 import { withArtwork, artworkImage } from '../presentation/artwork.js';
 import { renderBoard } from '../presentation/2d/board.js';
+import { installPieceDrag } from './piece-drag.js';
 export function mountTabletop(tabletop, download, core = null, artwork = null, locationArtwork = false) {
   const $ = id => document.getElementById(id);
   const project = () => withArtwork(tabletop.project(), artwork, { locationArtwork });
   const initial = project();
   let selectedZone = null, placing = Boolean(core), zoom = 1, mapFailed = false;
+  let drag=null,pendingUpdate=false,dropBusy=false;
   const tabs = [...document.querySelectorAll('[role=tab]')];
   function showPanel(name, focus = false) {
     for (const tab of tabs) {
@@ -106,6 +108,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const option = document.createElement('option'); option.value = component.id; option.textContent = component.label; return option;
   }));
   function update() {
+    if(drag?.active){pendingUpdate=true;return;}
     const view = project();
     const physical = $('board-view').value === 'map' && physicalAvailable();
     renderBoard($('board'), view, handleZone, {
@@ -117,7 +120,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     $('mode-inspect').setAttribute('aria-pressed',String(!placing));
     $('mode-place').setAttribute('aria-pressed',String(placing));
     $('board').classList.toggle('placing',placing);
-    $('tool-hint').textContent = placing ? 'Klik de bestemming op het bord. Esc om te stoppen.' : 'Klik een district om de inhoud te bekijken.';
+    $('tool-hint').textContent = placing ? 'Klik de bestemming op het bord. Esc om te stoppen.' : 'Sleep een pion naar een locatie, of klik een district om het te bekijken.';
     resizeBoard();
     const positions = new Map(view.zones.flatMap(zone => zone.occupants.map(c => [c.id, zone.id])));
     const locationLabel = componentId => view.zones.find(zone => zone.id === positions.get(componentId))?.label || 'in voorraad';
@@ -132,6 +135,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     $('place-in-location').textContent = `Plaats ${selected.shortLabel || selected.label} hier`;
     $('location-pieces').replaceChildren(...(zone?.occupants || []).map(component => {
       const button = document.createElement('button'); button.type = 'button';
+      button.dataset.component=component.id;button.dataset.movable=String(component.kind==='piece');
       if (component.icon) button.append(artworkImage(component.icon,'inventory-icon'));
       const label = document.createElement('span'); label.textContent = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
       button.append(label); button.onclick = () => selectComponent(component.id,false); return button;
@@ -147,6 +151,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     $('inventory-count').textContent = filtered.length ? `${filtered.length} onderdelen getoond` : 'Geen onderdelen gevonden. Pas de categorie of zoekterm aan.';
     $('inventory').replaceChildren(...filtered.map(component => {
       const button = document.createElement('button'); button.type = 'button'; button.dataset.component = component.id;
+      button.dataset.movable=String(component.kind==='piece');
       button.className = `inventory-piece ${component.kind}`;
       const text = document.createElement('span'); text.className = 'inventory-text';
       const name = document.createElement('span'); name.textContent = `${initial.title ? component.label : component.shortLabel || component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
@@ -219,7 +224,14 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     finally { if (input.onchange === readHandler) input.value = ''; }
   };
   const unsubscribe = tabletop.subscribe(update);
-  update.dispose = () => { unsubscribe(); observer.disconnect(); document.removeEventListener('keydown',cancelPlacement); };
+  drag=installPieceDrag({board:$('board'),sources:[$('board'),$('inventory'),$('location-pieces')],
+    canDrag:id=>core?'Gebruik de sensorbediening in deze studie.':dropBusy?'Wacht tot de vorige verplaatsing is verwerkt.':tabletop.canMove?.(id)??true,
+    onStart:id=>{$('piece').value=id;placing=false;$('status').textContent='Sleep naar de bestemming; laat daar de linkermuisknop los.';},
+    onEnd:()=>{if(pendingUpdate){pendingUpdate=false;update();}},
+    onHint:message=>{$('status').textContent=message;},
+    onDrop:async(id,zoneId)=>{dropBusy=true;selectedZone=zoneId;try{await act(()=>tabletop.place(id,zoneId),`Geplaatst op ${initial.zones.find(z=>z.id===zoneId)?.label||zoneId}.`);}finally{dropBusy=false;update();}}
+  });
+  update.dispose = () => { drag.dispose();unsubscribe(); observer.disconnect(); document.removeEventListener('keydown',cancelPlacement); };
   update();
   return update;
 }

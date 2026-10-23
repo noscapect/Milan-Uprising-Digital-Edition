@@ -76,3 +76,7 @@ Export: format tabletop-session, schemaVersion 1, module-identiteit, pakket-iden
 ## Presentatie-uitbreiding — fysieke tafelweergave
 
 Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde kaart 0.7 krijgt een optionele fysieke renderer met alleen presentatiegeometrie. De schematische renderer en oudere profielen blijven beschikbaar. `tabletop.subscribe(listener)` geeft een unsubscribe-functie en meldt geslaagde statewijzigingen, inclusief import en herstel; geen melding bij een geweigerde opdracht. De callback krijgt geen mutable domeintoestand. Dit is een eigen applicatiecontract voor andere invoerbronnen, geen app- of Teburu-protocol.
+
+## Presentatie-uitbreiding — slepen
+
+`installPieceDrag` vertaalt pointerinvoer naar één bestaande plaatsingsopdracht na loslaten op een ander bordvak. De preview verandert geen domeintoestand. Een optionele `tabletop.canMove(componentId)` kan invoer vooraf beperken; de adapter blijft verantwoordelijk voor opdrachtvalidatie en bevestiging. Tijdens slepen stelt de controller externe hertekeningen uit. Miniaturen blijven op de fysieke kaart zichtbaar ongeacht het aantal overige onderdelen. Engine, profielen en sessieformaat veranderen niet.
