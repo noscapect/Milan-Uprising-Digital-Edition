@@ -12,6 +12,9 @@ async function refresh(){
     $('core-detail').textContent=core.connected?'Milan is connected. You can open the tabletop.':core.running?'Open Milan on the tablet and connect using Single Device.':'Start Core prepares the local service and Bluetooth connection.';
     $('start-core').disabled=busy||latest.starting||core.running;
     $('stop-core').disabled=busy||latest.starting||!core.running;
+    const firmware=core.firmware;
+    $('firmware-status').textContent=!firmware?'Start the updated PC Core service to read its simulated versions.':`Core ${firmware.core.reportedVersion} → ${firmware.core.targetVersion} · Dice ${firmware.dice.map(d=>d.reportedVersion).join(', ')} → ${firmware.dice[0]?.targetVersion} · ${firmware.phase==='completed'?'Simulation completed':firmware.phase==='interrupted'?'Previous simulation interrupted; retry available':firmware.phase==='updating'?'Updating simulation…':'Not updated'}`;
+    $('simulate-firmware').disabled=busy||!firmware||firmware.phase==='updating'||!firmware.updateRequired;
     const share=latest.share;
     $('remote-details').hidden=!share?.available;$('remote-unavailable').hidden=!!share?.available;
     if(share?.available){$('remote-address').textContent=share.url;$('remote-address').href=share.url;$('remote-code').textContent=share.pin;}
@@ -27,6 +30,12 @@ async function act(path,label){
 }
 $('start-core').onclick=()=>act('/api/windows-core/start','Preparing Bluetooth and starting Core…');
 $('stop-core').onclick=()=>act('/api/windows-core/stop','Stopping Core…');
+$('simulate-firmware').onclick=async()=>{
+  if(busy)return;busy=true;$('simulate-firmware').disabled=true;$('message').textContent='Simulating the Core and five dice update…';
+  try{await api('/api/windows-core/firmware-simulate',{confirmSimulation:true});$('message').textContent='Simulated update saved. Reconnect Milan to read the new Core and dice versions. No official firmware was installed.';}
+  catch(error){$('message').textContent=error.message;}
+  finally{busy=false;await refresh();}
+};
 $('recover-board').onclick=async()=>{
   const button=$('recover-board');button.disabled=true;
   try{await api('/api/board-recover',{});$('message').textContent='Temporary input and registrations reset. Follow Milan; confirmed board positions and campaign saves are kept.';}

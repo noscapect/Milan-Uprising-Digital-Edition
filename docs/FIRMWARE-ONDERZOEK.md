@@ -6,7 +6,7 @@ Onderzocht op 24 oktober 2026, nadat de gebruiker de officiële Teburu-app op de
 
 Onderscheppen is voor deze eerste stap niet nodig. De geïnstalleerde officiële Teburu Android-app **1.2.0** bevat al afzonderlijke firmware-updatearchieven voor Core, dice en LED-ring. Via de bestaande geautoriseerde USB-verbinding is uitsluitend het gebundelde Core-archief naar de genegeerde onderzoeksmap gekopieerd. De officiële app en firmware zijn niet gewijzigd; er is niet op Update gedrukt en geen firmware verstuurd of geïnstalleerd.
 
-De bestandsnaam van het bordpakket verwijst naar **2.31**. Dat bewijst niet dat dit de nieuwste online versie is, of dat de virtuele Core deze firmware uitvoert. De virtuele Core blijft terecht versie 0.0.0 melden.
+De bestandsnaam van het bordpakket verwijst naar **2.31**. Dat bewijst niet dat dit de nieuwste online versie is, of dat de virtuele Core deze firmware uitvoert. Ten tijde van dit onderzoek meldde de virtuele Core versie 0.0.0. Inmiddels bestaat op gebruikersverzoek een [afzonderlijke gesimuleerde update met blijvende compatibiliteitsversies](FIRMWARE-SIMULATIE.md); ook die voert geen officiële firmware uit.
 
 ## Gecontroleerde eigenschappen
 
