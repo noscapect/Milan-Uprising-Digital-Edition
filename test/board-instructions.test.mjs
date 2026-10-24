@@ -24,3 +24,27 @@ test('gemengde instructies worden vooraf geheel gevalideerd',()=>{
   const result=buildBoardInstructions(profile,before,{influence:[{zoneId:'solari',faction:'ambrose',count:3}],removeControl:['qt8']});
   table.arrange(result);assert.equal(table.snapshot().revision,1);
 });
+
+test('expliciete personageverplaatsingen en controleverwijdering vormen één idempotente bordupdate',()=>{
+  const table=createTabletop({profile,module:milanModule});
+  const ids=['character-brujah','character-nosferatu','character-toreador','character-tremere'];
+  for(const id of ids)table.place(id,'haven-1l');
+  for(const id of ['control-anarchs-camarilla-1','influence-anarchs-1','investigation-1','ghoul-fixer'])table.place(id,'qt8');
+  const before=table.snapshot(),input={characterMoves:ids.map(componentId=>({componentId,zoneId:'qt8'})),removeControl:['qt8']};
+  table.arrange(buildBoardInstructions(profile,before,input));
+  const after=table.snapshot();
+  for(const id of ids)assert.equal(after.placements[id],'qt8');
+  assert.equal(after.placements['control-anarchs-camarilla-1'],null);
+  for(const [id,zone]of Object.entries(before.placements))if(!ids.includes(id)&&id!=='control-anarchs-camarilla-1')assert.equal(after.placements[id],zone);
+  assert.deepEqual(after.faces,before.faces);assert.equal(after.revision,before.revision+1);
+  assert.equal(buildBoardInstructions(profile,after,input).changed,false);
+  table.undo();assert.deepEqual(table.snapshot(),before);
+});
+
+test('ongeldige of dubbele personagebestemmingen laten ook overige instructies onaangeroerd',()=>{
+  const table=createTabletop({profile,module:milanModule}),before=table.snapshot();
+  for(const characterMoves of [[null],[{componentId:'unknown',zoneId:'qt8'}],[{componentId:'ghoul-fixer',zoneId:'qt8'}],[{componentId:'character-brujah',zoneId:'unknown'}],[{componentId:'character-brujah',zoneId:'qt8'},{componentId:'character-brujah',zoneId:'portello'}]]){
+    assert.throws(()=>buildBoardInstructions(profile,before,{characterMoves,removeControl:['qt8'],influence:[{zoneId:'solari',faction:'ambrose',count:3}]}));
+    assert.deepEqual(table.snapshot(),before);
+  }
+});

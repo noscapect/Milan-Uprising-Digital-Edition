@@ -105,3 +105,6 @@ Een gekoppelde tafel kan `scan(componentId)`, `canScan(componentId)` en `scanSta
 
 
 De optionele scanpresentatie groepeert een miniaturenstrook en de Core in één perifere UI-container. `fit({width, height})` reserveert die ruimte voordat de kaart wordt geschaald. De strook ontvangt uitsluitend de door de adapter aangeleverde onderdeel-ID’s; extra slots zijn niet hard gecodeerd. Zoeken en scrollen wijzigen geen domein- of registratiegegevens. De scanplek blijft hetzelfde tijdelijke lezerdoel zonder zone-ID.
+
+
+`buildBoardInstructions` accepteert daarnaast `characterMoves: [{componentId, zoneId}]` met unieke bekende spelerspersonages en bekende bestemmingen. Deze expliciete appuitkomsten worden vooraf gevalideerd en samen met invloed/controle in één bestaande atomaire tafelopdracht verwerkt. Andere onderdelen en fichezijden blijven behouden. De builder bepaalt geen nachtfaseregels of standaardbestemming.
