@@ -4,6 +4,14 @@ Bijgesteld op 23 oktober 2026: de eerstvolgende stap is het gedrag van de fysiek
 
 ## Testlagen
 
+### Gesimuleerde batterij en aanwezigheid
+
+De private Core geeft iedere virtuele dobbelsteen een eigen stabiel gesimuleerd batterijniveau, ruim boven een lage-ladingwaarschuwing. Het niveau blijft bij wakker maken, rollen en opnieuw verbinden hetzelfde; het is geen meting van een fysieke batterij. De status vermeldt expliciet dat de lading gesimuleerd is.
+
+Tijdens een actieve spelverbinding worden aangemelde dobbelstenen periodiek als aanwezig gemeld, ook wanneer de speler er maar één gebruikt. Deze meldingen pauzeren tijdens een worp, verzinnen geen uitslag en veranderen de gekozen dobbelsteenselectie niet. Alleen opnieuw aanmelden was onvoldoende om eerder bekende dobbelsteenstatussen te verversen.
+
+De private regressiesuite heeft negentien geslaagde scenario’s, inclusief stabiele lading, wakker maken zonder worp en statusmeldingen zonder verandering van bewaarde waarden. De onafhankelijke decoderproef bevestigt gezonde batterijniveaus en controleert dat extra statusmeldingen geen nieuwe start- of resultaatcallbacks veroorzaken. Ruwe waarnemingen, decoderinhoud en virtuele identiteiten blijven onder private/.
+
 1. **Offline Core-tests:** sessiestatus, alle veertig contacten, gelijktijdige contacten, vrijgave, scanvoorwaarden, eigen synthetische identiteiten en herstel na verbreken. Geen radio, tablet of campagne nodig.
 2. **Onafhankelijke SDK-controle:** de oorspronkelijke SDK leest de gegenereerde invoer en levert de verwachte callbacks. Dit controleert de interpretatie buiten onze eigen encoder.
 3. **Virtuele Bluetooth-test:** ontdekking, verbinding, abonnementen, opdrachten, notificaties en verbreken tussen afzonderlijke softwarecontrollers.
