@@ -89,6 +89,8 @@ De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adv
 - `tests/`: oorspronkelijke regressies plus engine-, module- en replaycontroles.
 - `AGENTS.md`: instructies voor verder werken in Codex.
 
+Op de private gekoppelde tafel toont **Saved roster** de personages uit het officiële saveprofiel en hun registratievoortgang. Alleen resterende personages uit die groep krijgen actieve scanknoppen wanneer Milan om een scan vraagt. Zie [savegame-personages en verificatie](docs/SAVEGAME-PERSONAGES.md).
+
 ## Grenzen en rechten
 
 Dit project is niet verbonden aan Xplored, Teburu of de rechthebbenden van Vampire: The Masquerade. Namen dienen ter identificatie. De tafel heeft eigen schematische vormgeving met optioneel lokaal app-artwork; de retailvoorraad bevat bronverwezen feitelijke namen en aantallen. Geen kaartscans, appbestanden, audio, verhaallijnen of andere beschermde assets overnemen zonder toestemming. Privégebruik vormt geen automatische toestemming voor hergebruik of verspreiding. Geen beveiliging, authenticatie of licentiecontrole omzeilen. Een publieke softwarelicentie is nog niet gekozen.
