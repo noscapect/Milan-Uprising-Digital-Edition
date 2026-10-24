@@ -261,7 +261,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     onEnd:()=>{if(pendingUpdate){pendingUpdate=false;update();}},
     onHint:message=>{$('status').textContent=message;},
     onDrop:async(id,zoneId)=>{dropBusy=true;selectedZone=zoneId;try{await act(()=>tabletop.place(id,zoneId),`Placed at ${initial.zones.find(z=>z.id===zoneId)?.label||zoneId}.`);}finally{dropBusy=false;update();}},
-    onTargetDrop:async(id)=>{dropBusy=true;try{await act(()=>tabletop.scan(id),'Character presented to the Core reader. Follow Milan for placement.');}finally{dropBusy=false;update();}}
+    onTargetDrop:async(id)=>{dropBusy=true;try{await act(()=>tabletop.scan(id),'Miniature presented to the Core reader. Follow Milan for placement.');}finally{dropBusy=false;update();}}
   });
   update.dispose = () => { updateTiles.dispose?.();drag.dispose();scanDock?.dispose();unsubscribe(); observer.disconnect(); if(resizeFrame!==null)cancelAnimationFrame(resizeFrame);window.removeEventListener('resize',scheduleResize);window.visualViewport?.removeEventListener('resize',scheduleResize);document.removeEventListener('keydown',cancelPlacement); };
   update();

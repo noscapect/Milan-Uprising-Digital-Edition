@@ -21,3 +21,12 @@ Als Android niet via USB bereikbaar is, kan de adapter een procesherstart niet w
 De geïsoleerde herstelproef controleert een gewijzigde procesinstantie, afgebroken wachtende beweging, behouden sessie, herhaald scannen en uitsluitend vrijgeven van actieve contacten. Browserproeven controleren slepen naar de lezer, tijdelijke presentatie, plaatsingsbevestiging, foutafhandeling en schermformaten. Dit zijn simulatieproeven; ze vervangen geen echte acceptatie door Milan. Eerder werden onder meer plaatsingen in Haven 2L en QT8 door de echte app bevestigd. Een volledige campagne-import blijft buiten deze beperkte uitlezing.
 
 De publieke demo blijft zonder externe dependencies werken; protocolgegevens en ruwe apparaatwaarnemingen blijven onder private/.
+
+
+## Bondgenoten en ghouls scannen
+
+De gekoppelde PC-Core ondersteunt naast de zeven personages ook de vier miniaturen uit onze retailvoorraad: **Carabinieri Officer**, **Reporter**, **Con Artist** en **Fixer**. Ze hebben afzonderlijke scanknoppen met het label Ally of Ghoul. Wanneer Milan om een Ally/Ghoul vraagt, staan deze vier miniaturen naast het bord klaar om naar de Core-lezer te slepen. Scannen verandert hun blijvende bordpositie niet. De officiële app bepaalt welke miniatuur in de huidige situatie geldig is; selecteer zelf het juiste onderdeel.
+
+De private adapter herkent het zichtbare verzoek om een Ally/Ghoul te scannen en kent een daaropvolgende plaatsingsinvoer toe aan de aangeboden miniatuur, niet aan de spelersnaam onderaan dat scherm. Alle veertig sensorbestemmingen gebruiken de bestaande plaatsingsroute met appbevestiging. Een niet herkende bevestiging blijft onbevestigd; de adapter verzint geen plaatsing.
+
+De elf scanselecties zijn afzonderlijk getest op hun semantische gegevens uit lokale appmetadata. Hiervoor worden uitsluitend eigen gegenereerde virtuele identiteiten gebruikt. De browserproef controleert de vier knoppen, de wachtrij, slepen naar de lezer en het behoud van bordposities. De bijgewerkte Core is opnieuw met de tablet verbonden en de lezer is actief. Acceptatie van een concrete bondgenoot/ghoul en de daaropvolgende plaatsing moet tijdens het echte spelen nog worden bevestigd; de tests kiezen geen onderdeel namens de speler.
