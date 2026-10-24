@@ -26,6 +26,8 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
       assert.equal((await fetch(base+path,{headers:{Cookie:cookie}})).status,200);
     }
     const count=received.length;
+    assert.equal((await fetch(base+'/api/board-clear',{method:'POST',headers:{'Content-Type':'application/json'},body:'{"confirm":true}'})).status,401);
+    assert.equal((await fetch(base+'/api/board-clear',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{"confirm":true}'})).status,403);
     for(const path of ['/api/status','/api/windows-core/start','/api/control-center','/control-center.js','/diagnostics','/api/confirmed-app-setup','/private/secret.json','/api/pair']){
       assert.equal((await fetch(base+path,{headers:{Cookie:cookie}})).status,404);
     }
@@ -38,6 +40,8 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
     assert.equal(received.length,count);
     const move=await fetch(base+'/api/board-move',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"componentId":"own-piece","zoneId":"own-zone"}'});
     assert.equal(move.status,200);assert.equal(received.at(-1).method,'POST');assert.equal(received.at(-1).host,'127.0.0.1:'+upstream.address().port);
+    const clear=await fetch(base+'/api/board-clear',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"confirm":true}'});
+    assert.equal(clear.status,200);assert.equal(received.at(-1).url,'/api/board-clear');assert.equal(received.at(-1).body,'{"confirm":true}');
     assert.equal((await fetch(base+'/api/board-tiles',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{}'})).status,403);
     const tile=await fetch(base+'/api/board-tiles',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"zoneId":"qt8","kind":"special"}'});
     assert.equal(tile.status,200);assert.equal(received.at(-1).url,'/api/board-tiles');

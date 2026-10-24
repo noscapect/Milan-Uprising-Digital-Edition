@@ -23,6 +23,8 @@ Op deze computer zijn 79 originele afbeeldingen uit de geïnstalleerde app toege
 
 ## Speeltafel gebruiken
 
+De gekoppelde tafel kan volledig worden geleegd via **Table menu → Clear board & resync**. Toon daarna de opstelling in Milan om zichtbare gegevens opnieuw in te lezen. Een herkende componentenopstelling ruimt ook automatisch de vorige tafel op. De Android-save blijft behouden; niet zichtbare onderdelen kunnen niet automatisch uit dat scherm worden hersteld. Zie [tafel legen en grenzen van opnieuw inlezen](docs/TAFEL-LEGEN.md).
+
 De appinterface is Engels, passend bij het spel: **Stock**, **Location**, **Session** en **Board tiles**. Ook speltermen, tegeluitleg, meldingen en de login voor het gedeelde bord zijn Engels. Deze projectdocumentatie blijft Nederlands. Een vertaling wijzigt geen onderdeel-ID’s, spelstand of opslagversies.
 
 De tafel gebruikt de volledige beschikbare schermbreedte. Met lokaal artwork opent de originele fysieke kaart met veertig klikbare locatiegebieden. **Sleep een miniatuur met de linkermuisknop ingedrukt naar een ander vak en laat los.** Dit werkt ook vanuit de voorraad en locatielijst, op de fysieke kaart en het raster. Het doelvak licht op; Escape of buiten het bord loslaten annuleert. Alle miniaturen blijven zichtbaar, ook in drukke vakken. `+n` opent de volledige lijst met overige onderdelen.

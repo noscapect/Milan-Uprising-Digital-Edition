@@ -1,11 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {emptyLocationTiles,setLocationTile,validateLocationTiles} from '../src/games/milan-uprising/location-tiles.js';
+import {emptyLocationTiles,clearLocationTiles,setLocationTile,validateLocationTiles} from '../src/games/milan-uprising/location-tiles.js';
 import {withLocationTiles} from '../src/games/milan-uprising/tile-tabletop.js';
 import {createTabletop} from '../src/application/tabletop.js';
 import {milanModule} from '../src/games/milan-uprising/module.js';
 const profile=JSON.parse(readFileSync(new URL('../data/games/milan-uprising/city.json',import.meta.url)));
+test('tafel legen wist alle tegelinstellingen en verhoogt de revisie voor andere schermen',()=>{
+  const original=setLocationTile(emptyLocationTiles(),profile.zones,{zoneId:'qt8',kind:'special',face:'visible',value:'haven-11',expectedRevision:0});
+  const cleared=clearLocationTiles(original);
+  assert.deepEqual(cleared.tiles,{});assert.equal(cleared.revision,2);assert.ok(original.tiles.qt8);
+  assert.throws(()=>setLocationTile(cleared,profile.zones,{zoneId:'qt8',kind:'special',face:'visible',value:'haven-11',expectedRevision:1}),/another screen/);
+});
 test('bonustegel en speciale tegel zijn afzonderlijk en onbekende zijden worden niet verzonnen',()=>{
   const start=emptyLocationTiles();assert.deepEqual(start.tiles,{});
   const action={zoneId:'qt8',kind:'special',face:'visible',value:'haven-11',expectedRevision:0};

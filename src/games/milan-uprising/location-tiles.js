@@ -2,6 +2,7 @@ export const bonusTypes={unknown:'Not identified yet',haven:'Haven',herd:'Herd',
 export const specialTypes={unknown:'Not identified yet',haven:'Haven','haven-11':'Haven','haven-12':'Haven'};
 export const blankTile=()=>({face:'unconfirmed',value:'unknown'});
 export function emptyLocationTiles(){return {format:'milan-location-tiles',schemaVersion:1,revision:0,tiles:{}};}
+export function clearLocationTiles(state){return {...emptyLocationTiles(),revision:state.revision+1};}
 export function setLocationTile(state,zones,{zoneId,kind,face,value,expectedRevision}){
   if(expectedRevision!==state.revision)throw Error('The tiles changed on another screen. Please try again.');
   if(!zones.some(z=>z.id===zoneId&&z.area==='city')||!['bonus','special'].includes(kind)||!['hidden','visible','unconfirmed'].includes(face)||!Object.hasOwn(kind==='bonus'?bonusTypes:specialTypes,value))throw Error('Invalid location tile.');
