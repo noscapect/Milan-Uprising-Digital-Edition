@@ -26,7 +26,7 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
       assert.equal((await fetch(base+path,{headers:{Cookie:cookie}})).status,200);
     }
     const count=received.length;
-    for(const path of ['/api/status','/api/windows-core/start','/api/confirmed-app-setup','/private/secret.json','/api/pair']){
+    for(const path of ['/api/status','/api/windows-core/start','/api/control-center','/control-center.js','/diagnostics','/api/confirmed-app-setup','/private/secret.json','/api/pair']){
       assert.equal((await fetch(base+path,{headers:{Cookie:cookie}})).status,404);
     }
     assert.equal(received.length,count);

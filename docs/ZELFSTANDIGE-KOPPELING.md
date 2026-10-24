@@ -6,9 +6,13 @@ De private pc-adapter draait een eigen achtergrondtaak. Die leest het geautorise
 
 ## Starten op de ingerichte pc
 
-Dubbelklik op **Milan Speeltafel** op het bureaublad. De lokale launcher start ontbrekende bordservices als zelfstandige Windows-achtergrondprocessen en opent het bord. Al draaiende services worden hergebruikt. Op deze ingerichte computer staat de launcher ook onder `private/integration/Start-Speeltafel.cmd`.
+Dubbelklik op **Milan Control Center** op het bureaublad. De launcher start ontbrekende bordservices en opent een lokaal startvenster op `http://127.0.0.1:5180/`. Daar vind je **Start Core**, **Stop Core**, **Open tabletop** en het actuele remote bordadres met toegangscode en kopieerknoppen. De verbindingsstatus wordt automatisch bijgewerkt. De code wordt uit de draaiende bordserver gelezen en is niet vast ingebouwd.
 
-Laat Milan op de tablet open en houd de geautoriseerde USB-verbinding aangesloten. Voor bewegingen vanuit het bord moet de bestaande virtuele Bluetooth-Core verbonden zijn. De launcher installeert of wijzigt de officiële app niet en start de Bluetooth-radio-overdracht na een pc-herstart nog niet automatisch. Hij vervangt dus niet de volledige eerste hardware-setup.
+**Milan Speeltafel** blijft het bord rechtstreeks openen. De lokale launchers staan ook onder `private/integration/Start-Milan-Control.cmd` en `private/integration/Start-Speeltafel.cmd`. Al draaiende services worden hergebruikt.
+
+**Start Core** start zo nodig de lokale Core-service, start de ingerichte WSL-omgeving en draagt de reeds gedeelde, specifiek gecontroleerde Bluetooth-radio over. Daarna begint de Core uit te zenden. Meerdere startverzoeken delen dezelfde lopende voorbereiding. Een actieve Core wordt hergebruikt. De eerste installatie en het eenmalig delen van een nog niet voorbereide radio vereisen aparte inrichting; de knop voert geen installatie, computernaamwijziging of automatische administratorverhoging uit.
+
+Laat Milan op de tablet open en houd de geautoriseerde USB-verbinding aangesloten. Voor bewegingen vanuit het bord moet de virtuele Bluetooth-Core verbonden zijn. **Stop Core** stopt de verbinding en uitzending, maar sluit het bord niet en geeft de radio niet automatisch terug aan Windows. Technische bediening blijft beschikbaar via **Technical diagnostics**. Het startvenster en de toegangscode zijn uitsluitend op de host-pc beschikbaar; ze worden niet via de remote bordrelay gedeeld.
 
 De koppeling blijft draaien nadat de launcher en Codex worden gesloten. De pc moet aan blijven. Na een pc-herstart start je de launcher opnieuw; dit is geen automatisch gestarte Windows-service. Technische status en logs blijven lokaal onder genegeerd `private/`.
 
@@ -19,3 +23,7 @@ De koppeling blijft draaien nadat de launcher en Codex worden gesloten. De pc mo
 - Tests controleren dat cycli niet overlappen, dat de taak na een fout doorgaat en dat stoppen op een lopende cyclus wacht. Met de Sunset-uitbreiding op 24 oktober slaagt de volledige projectsuite met 46 tests. Een aanvullende zelfstandige replayproef controleert QT8-controleverwijdering zonder browser of wijzigingen aan de echte campagne.
 
 De zelfstandige uitvoering vergroot niet automatisch de herkenningsdekking. Voor de huidige grenzen, waaronder verborgen instructies en controleovernames, zie [dagfase-automatisering](DAGFASE-AUTOMATISERING.md).
+
+## Controle van het Control Center op 24 oktober 2026
+
+De echte lokale pagina toont de actieve Core en de actuele gegevens van de remote bordserver. De browsercontrole omvat desktop, telefoonbreedte, kopieeracties, verbindingsstatus en gesimuleerde start-/stopbediening. Een werkelijk herhaald startverzoek hergebruikte de verbonden Core zonder de verbinding te onderbreken. Voorbereiding na een ontbrekende service, gelijktijdige verzoeken en opnieuw proberen na een fout zijn daarnaast met afzonderlijke tests van de startfunctie gecontroleerd. De koude radio-overdracht is bij deze GUI-proef niet opnieuw uitgevoerd terwijl Milan verbonden was. De publieke suite slaagt met 49 tests; daarin wordt ook gecontroleerd dat de remote relay geen toegang geeft tot het startvenster of de bijbehorende API.

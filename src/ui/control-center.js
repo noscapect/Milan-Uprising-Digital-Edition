@@ -1,0 +1,35 @@
+const $=id=>document.getElementById(id);
+let busy=false,disposed=false,reading=false,latest=null;
+async function api(path,body){
+  const response=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});
+  const value=await response.json();if(!response.ok)throw Error(value.error||'The local control service did not respond.');return value;
+}
+async function refresh(){
+  if(disposed||reading)return;reading=true;
+  try{
+    latest=await api('/api/control-center');const core=latest.core;
+    $('core-status').textContent=busy||latest.starting?'Starting Core…':core.connected?'Connected to Milan':core.running?'Waiting for Milan':core.available?'Core stopped':'Core service stopped';
+    $('core-detail').textContent=core.connected?'Milan is connected. You can open the tabletop.':core.running?'Open Milan on the tablet and connect using Single Device.':'Start Core prepares the local service and Bluetooth connection.';
+    $('start-core').disabled=busy||latest.starting||core.running;
+    $('stop-core').disabled=busy||latest.starting||!core.running;
+    const share=latest.share;
+    $('remote-details').hidden=!share?.available;$('remote-unavailable').hidden=!!share?.available;
+    if(share?.available){$('remote-address').textContent=share.url;$('remote-address').href=share.url;$('remote-code').textContent=share.pin;}
+    else $('remote-unavailable').textContent='Remote tabletop is not running. Reopen the Control Center using the desktop shortcut to start it.';
+  }catch(error){$('core-status').textContent='Control service unavailable';$('message').textContent=error.message;$('start-core').disabled=$('stop-core').disabled=true;}
+  finally{reading=false;}
+}
+async function act(path,label){
+  if(busy)return;busy=true;$('start-core').disabled=$('stop-core').disabled=true;$('message').textContent=label;
+  try{await api(path,{});$('message').textContent=path.endsWith('/start')?'Core started. Connect Milan on the tablet.':'Core stopped.';}
+  catch(error){$('message').textContent=error.message;}
+  finally{busy=false;await refresh();}
+}
+$('start-core').onclick=()=>act('/api/windows-core/start','Preparing Bluetooth and starting Core…');
+$('stop-core').onclick=()=>act('/api/windows-core/stop','Stopping Core…');
+for(const [id,key]of [['copy-address','url'],['copy-code','pin']])$(id).onclick=async()=>{
+  try{if(!latest?.share?.available)return;await navigator.clipboard.writeText(latest.share[key]);$('message').textContent=key==='pin'?'Access code copied.':'Tabletop address copied.';}
+  catch{$('message').textContent='Select and copy the displayed '+(key==='pin'?'access code.':'address.');}
+};
+const timer=setInterval(refresh,2000);window.addEventListener('pagehide',()=>{disposed=true;clearInterval(timer);},{once:true});
+await refresh();
