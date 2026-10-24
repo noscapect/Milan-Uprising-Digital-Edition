@@ -32,3 +32,14 @@ De echte lokale pagina toont de actieve Core en de actuele gegevens van de remot
 
 
 Na een appcrash kan de gebruiker op het bord **App restarted? Recover input** kiezen, of in het Control Center **Reset registrations / recover input**. De Android-adapter herkent bovendien een gewijzigde app-procesinstantie. Registratievoortgang is adviserend; de Core-lezerstatus bepaalt of een scan kan worden aangeboden. Zie [scanherstel](SAVEGAME-PERSONAGES.md).
+
+
+## Snellere terugkoppeling bij scannen en plaatsen
+
+De achtergrondadapter neemt beelden zelfstandig achter elkaar op. Een bordstatusverzoek leest de laatst verwerkte momentopname en wacht niet op een nieuwe screenshot, OCR of saveprofieluitlezing. De browser controleert de status iedere 250 ms; gelijktijdige verzoeken delen één lopende uitlezing. Ongewijzigde momentopnamen vervangen de sleepbare DOM-elementen niet. Bevestigde bordposities worden weergegeven vóór de afzonderlijke tegeluitlezing is voltooid.
+
+Op de huidige tablet kostte de oorspronkelijke PNG-opname circa 2,9–3,1 seconden, plus circa 0,7 seconde herkenning per beeld. De private adapter kan nu verliesvrij gecomprimeerde ruwe pixels ophalen en rechtstreeks herkennen, met PNG als terugval voor niet ondersteunde apparaten. Warme proefmetingen kwamen uit op circa 1,3 seconde voor de opname en 0,5 seconde voor herkenning; een koude eerste herkenning kan langer duren. Het actuele statusendpoint antwoordde lokaal in 4–30 ms. Dat laatste meet alleen het ophalen van de verwerkte toestand, niet de tijd vanaf een spelactie in Milan.
+
+Twee overeenkomende waarnemingen blijven vereist waar ze eerder als bevestiging nodig waren. Een snelle tijdelijke scanpresentatie is geen bevestigde plaatsing. Na een scan wordt een eerder begonnen beeldverwerking verworpen, zodat een oud beeld niet aan het nieuw gescande personage wordt toegewezen. Het geheel blijft afhankelijk van USB, appanimaties en herkenbaarheid; directe volledige synchronisatie wordt hiermee niet geclaimd.
+
+Verificatie omvat gelijke OCR-uitvoer voor dezelfde pixels via de oude PNG-route en de nieuwe route, geserialiseerde langzame browserverzoeken, behoud van ongewijzigde sleepbare elementen en weergave van bevestigde plaatsingen zonder te wachten op trage tegeldata. De browserproef gebruikt gesimuleerde appantwoorden; de snelheidsmetingen gebruiken de aangesloten tablet zonder spelacties te versturen.

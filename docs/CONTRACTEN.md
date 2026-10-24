@@ -99,3 +99,6 @@ Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde 
 ## Optionele lezerbediening in de UI
 
 Een gekoppelde tafel kan `scan(componentId)`, `canScan(componentId)` en `scanStatus()` aanbieden. De UI presenteert dan een Core-lezer naast de kaart. Het lezerdoel heeft geen zone-ID en maakt geen engineplaatsing. Tijdelijke scanpresentatie en registratievoortgang zijn adaptertoestand; blijvende bordposities blijven domeintoestand. De gewone sandbox biedt deze optionele apparaatbediening niet aan.
+
+
+`createSingleFlight(read)` laat gelijktijdige aanroepen dezelfde lopende Promise delen. Na succes of fout voert de volgende aanroep opnieuw een uitlezing uit. De browseradapter gebruikt dit voor statusverzoeken; het verandert geen engine- of speltoestand.
