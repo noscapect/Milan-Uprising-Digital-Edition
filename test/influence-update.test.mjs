@@ -8,6 +8,20 @@ const profile = JSON.parse(readFileSync(new URL('../data/games/milan-uprising/ci
 const make = () => createTabletop({ profile, module: milanModule });
 const count = (state, zone, faction) => profile.components.filter(c => c.groupId === `${faction}-cubes` && state.placements[c.id] === zone).length;
 
+test('een volledige invloedkaart corrigeert ook afnames en lege locaties zonder andere stukken te wijzigen',()=>{
+  const table=make();
+  for(const id of ['influence-ambrose-1','influence-ambrose-2','influence-ambrose-3','character-brujah','control-anarchs-camarilla-1','investigation-1'])table.place(id,'sant-ambrogio');
+  table.place('influence-anarchs-1','bocconi');
+  const before=table.snapshot();
+  const updates=profile.zones.filter(z=>z.area==='city').flatMap(z=>['anarchs','camarilla','ambrose'].map(faction=>({zoneId:z.id,faction,count:z.id==='sant-ambrogio'&&faction==='ambrose'?2:0})));
+  table.arrange(buildInfluenceArrangement(profile,before,updates));
+  const after=table.snapshot();
+  assert.equal(count(after,'sant-ambrogio','ambrose'),2);assert.equal(count(after,'bocconi','anarch'),0);
+  for(const c of profile.components.filter(c=>!['anarch-cubes','camarilla-cubes','ambrose-cubes'].includes(c.groupId)))assert.equal(after.placements[c.id],before.placements[c.id]);
+  assert.deepEqual(after.faces,before.faces);assert.equal(after.revision,before.revision+1);
+  assert.equal(buildInfluenceArrangement(profile,after,updates).changed,false);
+});
+
 test('absolute appinvloed wordt atomair overgenomen en behoudt andere onderdelen en fichezijden', () => {
   const table = make();
   table.place('character-toreador', 'haven-3l');
