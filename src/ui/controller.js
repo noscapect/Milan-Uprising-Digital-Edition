@@ -50,8 +50,9 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const footer = document.querySelector('.table-status');
     const bottomPadding = parseFloat(getComputedStyle(main).paddingBottom) || 0;
     const screenHeight = window.visualViewport?.height ?? window.innerHeight;
-    const available = Math.max(80, screenHeight - (viewport.getBoundingClientRect().top + window.scrollY) - footer.getBoundingClientRect().height - bottomPadding - 2);
-    const stacked = window.matchMedia('(max-width: 900px)').matches;
+    const playLayout=document.body.classList.contains('table-play');
+    const available = Math.max(80, screenHeight - (viewport.getBoundingClientRect().top + window.scrollY) - (playLayout?0:footer.getBoundingClientRect().height) - bottomPadding - 2);
+    const stacked = !playLayout && window.matchMedia('(max-width: 900px)').matches;
     const boardWidth=Math.max(1,viewport.clientWidth-(scanDock?scanDock.element.getBoundingClientRect().width+12:0));
     viewport.style.minHeight = '0';
     viewport.style.height = `${Math.floor(stacked ? Math.min(available,boardWidth * 1295/2048) : available)}px`;
@@ -87,7 +88,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
   function selectComponent(id, arm = true) {
     $('piece').value = id; placing = core ? true : arm; showPanel('stock'); update();
   }
-  function inspectZone(id) { selectedZone = id; showPanel('location'); update(); }
+  function inspectZone(id) { selectedZone = id; showPanel('location'); update(); document.dispatchEvent(new CustomEvent('tabletop:location-inspected')); }
   function handleZone(id) {
     selectedZone = id;
     if (!placing && !core) { inspectZone(id); return; }

@@ -1,5 +1,16 @@
 # De virtuele fysieke tafel
 
+## Gekoppelde speeltafel: bord centraal
+
+De gekoppelde `/board`-pagina opent nu in een compacte speelweergave. Alleen een kop van 44–48 pixels, de actuele spelhandeling, **Pieces**, **Table menu**, de kaart en de Core-lezer blijven permanent zichtbaar. De zijbalk, scanlijsten, instructieblokken en technische synchronisatiemeldingen nemen standaard geen bordruimte meer in. De onderstaande beschrijving van de vaste werkbalk en zijbalk geldt nog voor de zelfstandige sandbox.
+
+**Pieces** opent een zwevend onderdelenpaneel dat met Close of Escape weer sluit. Klikken op een district opent hetzelfde paneel direct op de locatie-inhoud, inclusief de bestaande tegelbediening. Scanknoppen staan onder **Pieces → Scan a miniature**; miniaturen kunnen ook rechtstreeks vanaf de Core-wachtrij worden gesleept. **Table menu** bevat zoom, Auto fit en tabelinformatie. Technische status, dobbelsteenbediening en **Recover input** staan onder **Connection & recovery**. Tijdens de dobbelsteenopstelling verschijnt bovendien een directe **Wake dice**-knop in de kop.
+
+De volledige resterende breedte en hoogte zijn voor de tafel beschikbaar. Het bord behoudt zijn fysieke verhouding; op smalle staande schermen betekent dat vrije ruimte boven en onder de kaart. Meldingen na een handeling verschijnen kort als overlay en verschuiven de kaart niet. Open panelen zweven boven de tafel; ze verkleinen de kaart niet. Engine, sensormapping, scan-/plaatsingsopdrachten en saves blijven hetzelfde.
+
+Browsercontrole op zes schermformaten bevestigt dat de bordruimte vanaf de compacte kop tot onderaan het venster loopt, zonder horizontale pagina-overloop. De proeven controleren ook slepen naar de lezer en naar een district, wachten op appbevestiging, locatie-inspectie, menu, herstelbediening en Escape. Screenshots en appfixtures blijven lokaal onder private/.
+
+
 De gebruikerservaring vertrekt vanuit het bord op tafel. Op een breed scherm krijgt het bord alle ruimte naast een compacte zijbalk. Op tablet en telefoon schuift de zijbalk eronder. De hoofdweergave gebruikt de originele kaart uit het lokale artworkpakket. Figuren gebruiken de volledige personageafbeelding, kubussen en fiches hun eigen icoon. Geen externe grafische bibliotheek of netwerkdienst nodig.
 
 ## Bediening
@@ -32,4 +43,4 @@ Nog te implementeren voor echte automatisering: een reproduceerbaar werkende com
 `node --test` bevat regressies plus controle op veertig complete klikgebieden, ankers binnen het juiste gebied, geen geometrie in exports en observatie van externe opdrachten, undo/redo en import. Browsercontrole omvat daadwerkelijke klikken op alle veertig kaartankers, selectie, verplaatsing, een vol district, fichezijde, campagne-opstelling, JSON-herstel, toetsenbord, zoom/bordfocus en fallback zonder artwork. Schermen gecontroleerd op 2560×1440, 1600×1000, 1366×768, 768×1024 en 390×844. Screenshots en tijdelijke browsertools staan uitsluitend onder genegeerd `work/`.
 
 
-De gekoppelde tafel heeft naast de kaart een Core-lezer en wachtrij voor miniaturen. Sleep een miniatuur naar de lezer en daarna naar de door Milan gevraagde locatie. Het eerste contact verandert geen blijvende bordpositie. Een zichtbare herstelknop maakt tijdelijke invoer na een crash opnieuw beschikbaar zonder de bevestigde tafelopstelling te wissen.
+De gekoppelde tafel heeft naast de kaart een Core-lezer en wachtrij voor miniaturen. Sleep een miniatuur naar de lezer en daarna naar de door Milan gevraagde locatie. Het eerste contact verandert geen blijvende bordpositie. De herstelknop onder Table menu → Connection & recovery maakt tijdelijke invoer na een crash opnieuw beschikbaar zonder de bevestigde tafelopstelling te wissen.
