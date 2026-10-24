@@ -17,6 +17,7 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
   try{
     const login=await fetch(base+'/board');assert.match(await login.text(),/Access code/);assert.equal(received.length,0);
     assert.equal((await fetch(base+'/api/table-session')).status,401);
+    assert.equal((await fetch(base+'/api/board-scan',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'})).status,401);
     assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,401);
     const joined=await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded',Origin:base},body:'pin=123456',redirect:'manual'});
     assert.equal(joined.status,303);assert.equal(joined.headers.get('location'),'/board');
@@ -40,6 +41,9 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
     assert.equal((await fetch(base+'/api/board-tiles',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{}'})).status,403);
     const tile=await fetch(base+'/api/board-tiles',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"zoneId":"qt8","kind":"special"}'});
     assert.equal(tile.status,200);assert.equal(received.at(-1).url,'/api/board-tiles');
+    assert.equal((await fetch(base+'/api/board-scan',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{}'})).status,403);
+    const scan=await fetch(base+'/api/board-scan',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"componentId":"own-character"}'});
+    assert.equal(scan.status,200);assert.equal(received.at(-1).url,'/api/board-scan');assert.equal(received.at(-1).body,'{"componentId":"own-character"}');
     for(let i=0;i<6;i++)assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,401);
     assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,429);
   }finally{await Promise.all([new Promise(r=>share.server.close(r)),new Promise(r=>upstream.close(r))]);}
