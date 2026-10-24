@@ -58,6 +58,10 @@ De gekoppelde tafel heeft naast de kaart een Core-lezer en wachtrij voor miniatu
 
 ## Dobbelbak als overlay
 
+De Milan-weergave gebruikt vier symbooltypen op tien fysieke vlakken: schedel (1), leeg (2–5), ankh (6–9) en ankh met tanden (10). De Core blijft waarden 1–10 versturen; de UI maakt hiervan geen vier even waarschijnlijke uitkomsten en berekent geen spelresultaten. Zie de [officiële handleiding, p. 10–11](https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf) en de [uitleg van de uitgever over de gedeelde Vampire-dobbelstenen](https://gamefound.com/en/projects/xplored/vampire-the-masquerade---palermo-conspiracies/updates/13).
+
+De bak start zonder selectie. **Dice to roll** kiest expliciet 1–5 dobbelstenen; afzonderlijk aanklikken blijft beschikbaar. **Wake 5 dice** meldt alle vijf aan zonder een worp te versturen of de selectie te wijzigen. De browserproef controleert ieder aantal van één tot vijf afzonderlijk. De vier originele zwarte vlaksymbolen komen uit het lokale artworkpakket; zonder dat pakket blijft een eigen symboolfallback beschikbaar. De app bepaalt de digitale Hunger-kleur en beoordeelt de worp.
+
 **Dice** opent een dobbelbak boven de tafel. Klik op de vijf d10’s om ze te selecteren; **Roll … dice** verstuurt alleen die selectie naar de bestaande private Core-worproute. **Wake 5 dice** meldt de dobbelstenen aan zonder uitslagen of een worp te versturen. Het bord verkleint niet en blijft onder de overlay behouden. Sluiten met Close of Escape annuleert geen al verstuurde worp en speelt die bij opnieuw openen niet opnieuw af.
 
 De d10’s animeren tijdens een lopende worp en eindigen op de waarden uit de Core-status. De weergave genereert geen willekeurige uitslagen en verandert geen bord- of campagneregels. De speler kiest het door Milan gevraagde aantal dobbelstenen en het moment van rollen, zoals bij een fysieke dobbelbak. Bij een ontbrekende verbinding of gesloten dobbelsteenkanaal zijn de bijbehorende acties uitgeschakeld. Een kanaal dat alleen ontdekken toestaat kan wel wakker maken, maar geen worp versturen. Verminderde beweging in de browser schakelt de draaianimatie uit.

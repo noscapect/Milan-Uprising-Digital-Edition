@@ -148,3 +148,13 @@ dialog{background:var(--panel);color:var(--text);border:1px solid #626057;border
   .scan-station .scan-miniature .board-piece,.table-play .scan-station .scan-miniature .board-piece{width:38px;height:65px}
   .core-brand>strong{font-size:6px}.core-brand .scan-dock-label{font-size:7px}
 }
+
+/* Milan uses symbolic faces; the raw 1–10 value remains inside the adapter. */
+.tray-die .die-artwork{width:100px;height:100px;object-fit:contain;clip-path:polygon(50% 0,100% 80%,50% 100%,0 80%);filter:drop-shadow(3px 7px 4px #0009)}
+.tray-die.has-die-artwork svg{display:none}
+.tray-die.sleeping .die-artwork{opacity:.55}
+.die-fangs{display:none;fill:#ffd18b;stroke:#202426;stroke-width:1}
+.tray-die[data-face-kind=double-success] .die-fangs{display:block}
+.dice-amount-label{display:flex;align-items:center;gap:8px;margin-right:auto;color:#ded4c3}
+.dice-amount-label select{width:90px}
+@media(max-width:650px){.tray-die .die-artwork{width:70px;height:70px}.dice-amount-label{flex-basis:100%;justify-content:center;margin:0 0 4px}}

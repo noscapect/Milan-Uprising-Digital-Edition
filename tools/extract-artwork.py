@@ -96,6 +96,10 @@ def extract(app_data):
         result = export(asset_id, name, width, height)
         if result:
             pack["branding"][kind] = result
+    for kind, name in [("blank", "diceblack_empty"), ("skull", "diceblack_skull"), ("success", "diceblack_ankh"), ("double-success", "diceblack_double_ankh")]:
+        asset_id = export(f"dice-{kind}", name)
+        if asset_id:
+            pack["faces"][f"dice-{kind}"] = asset_id
     (output / "manifest.json").write_text(json.dumps(pack, indent=2, ensure_ascii=False) + "\n", encoding="utf8")
     print(json.dumps({"exportedImages": len(pack["assets"]), "people": len(people), "districtBackgrounds": len(pack["zones"]),
                       "map": bool(pack["branding"].get("map")), "logo": bool(pack["branding"].get("logo")),

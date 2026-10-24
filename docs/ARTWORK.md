@@ -30,3 +30,5 @@ De scherpe appkaart corrigeert eerdere foto-interpretaties: bovenaan staat Porte
 - Openbare SDK-/repozoekresultaten leverden geen geverifieerd herbruikbaar Milan-artpakket op. Een officiële perskit werd gevonden, maar zonder vastgestelde herdistributielicentie.
 
 Geen herdistributielicentie voor het artwork vastgesteld. De afbeeldingen, het lokale manifest en screenshots worden niet naar GitHub gestuurd. De repository bevat alleen loader, presentatie, extractietool en documentatie. Dit is geen bewijs van appcompatibiliteit of werkende Teburu-emulatie.
+
+De dobbelbak gebruikt aanvullend vier originele vlaksymbolen uit de lokaal geïnstalleerde app: leeg, schedel, ankh en ankh met tanden. De extractietool neemt ze optioneel mee in de lokale catalogus. De publieke UI bevat alleen de koppeling en een eigen symboolfallback; de afbeeldingen blijven onder private/artwork/.
