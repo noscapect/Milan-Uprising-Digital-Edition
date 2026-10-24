@@ -24,6 +24,16 @@ De gebruikerservaring vertrekt vanuit het bord op tafel. Op een breed scherm kri
 
 De klikgebieden zijn eigen benaderingen van de zichtbare gedrukte districten en Havenvelden. Het zijn geen spelregelgrenzen, bewezen aangrenzendheid of sensorcoördinaten. Logische plaatsing blijft een zone-ID. Bij afwezig artwork of een mislukte kaartdownload valt de weergave terug op het schema. Oude sessies gebruiken hun oorspronkelijke profiel en versies.
 
+## Miniaturen naast de Core
+
+Scanklare miniaturen staan in een aparte strook **links van de Core**, met een grotere afbeelding, volledige naam en clan of onderdeelgroep. De Core zelf bevat alleen de scanplek en de momenteel aangeboden miniatuur. De strook gebruikt de beschikbare ruimte naast de kaart; de kaart blijft leidend voor het passend maken.
+
+De kaarten behouden hun leesbare formaat als er meer miniaturen beschikbaar zijn. De strook scrolt verticaal en toont vanaf negen beschikbare miniaturen een zoekveld voor naam of clan/groep. Er is geen vast aantal slots in deze UI. Op grotere schermen passen meerdere kolommen. Scrollpositie, zoekinvoer en bestaande miniatuurknoppen blijven bij ongewijzigde updates behouden. Een lege strook blijft als onzichtbare ruimte gereserveerd, zodat het bord bij de laatste scan niet opzij springt.
+
+De Core is een eigen CSS-weergave met een compacte hoekige behuizing, een verzonken scanvak en ingetogen opdruk, gebaseerd op de [hardwareafbeelding van Teburu/Xplored](https://gamefound.com/en/projects/xplored/teburu-presents-the-bad-karmas/updates/10). Er is geen beschermde productfoto als asset opgenomen. Het kleine lichtje geeft onze scanbeschikbaarheid weer; dit is geen uitlezing van de fysieke Core-led.
+
+De UI is getest met veertig synthetische extra miniaturen, inclusief zoeken, scrollen, behoud van DOM/scrollpositie en opruimen van de weergave. Dat bewijst ruimte voor toekomstige uitbreidingen, geen reeds geïmplementeerde speldata of app-/protocolondersteuning voor die uitbreidingen. De bestaande scan- en plaatsingsroute is afzonderlijk in de browser gecontroleerd.
+
 ## Automatisch passend maken
 
 De fysieke kaart start met **Auto fit**. De weergave meet de daadwerkelijke resterende vensterhoogte na de kop, werkbalk, appmeldingen, scanbediening en statusregel. De kaart behoudt haar verhouding en past binnen zowel breedte als hoogte. Op desktop sluit de hoogte van de zijbalk aan; op kleinere schermen blijft de zijbalk onder het bord staan.

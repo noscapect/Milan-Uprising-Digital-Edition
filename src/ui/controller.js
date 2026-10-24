@@ -53,6 +53,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const playLayout=document.body.classList.contains('table-play');
     const available = Math.max(80, screenHeight - (viewport.getBoundingClientRect().top + window.scrollY) - (playLayout?0:footer.getBoundingClientRect().height) - bottomPadding - 2);
     const stacked = !playLayout && window.matchMedia('(max-width: 900px)').matches;
+    scanDock?.fit({width:viewport.clientWidth,height:available});
     const boardWidth=Math.max(1,viewport.clientWidth-(scanDock?scanDock.element.getBoundingClientRect().width+12:0));
     viewport.style.minHeight = '0';
     viewport.style.height = `${Math.floor(stacked ? Math.min(available,boardWidth * 1295/2048) : available)}px`;
@@ -60,7 +61,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     sidebar.style.height = stacked ? '' : `${document.querySelector('.surface').getBoundingClientRect().height}px`;
     const fit = Math.floor(Math.min(boardWidth, viewport.clientHeight * 2048/1295));
     $('board').style.width = `${Math.max(1,fit * zoom)}px`;
-    if(scanDock)scanDock.element.style.height=`${$('board').getBoundingClientRect().height}px`;
+    if(scanDock)scanDock.element.style.height=`${window.matchMedia('(max-width: 650px)').matches?viewport.clientHeight:$('board').getBoundingClientRect().height}px`;
     $('zoom-out').disabled = zoom <= 1; $('zoom-in').disabled = zoom >= 3;
   }
   let resizeFrame=null;

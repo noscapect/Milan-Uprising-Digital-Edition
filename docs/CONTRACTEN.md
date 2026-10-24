@@ -102,3 +102,6 @@ Een gekoppelde tafel kan `scan(componentId)`, `canScan(componentId)` en `scanSta
 
 
 `createSingleFlight(read)` laat gelijktijdige aanroepen dezelfde lopende Promise delen. Na succes of fout voert de volgende aanroep opnieuw een uitlezing uit. De browseradapter gebruikt dit voor statusverzoeken; het verandert geen engine- of speltoestand.
+
+
+De optionele scanpresentatie groepeert een miniaturenstrook en de Core in één perifere UI-container. `fit({width, height})` reserveert die ruimte voordat de kaart wordt geschaald. De strook ontvangt uitsluitend de door de adapter aangeleverde onderdeel-ID’s; extra slots zijn niet hard gecodeerd. Zoeken en scrollen wijzigen geen domein- of registratiegegevens. De scanplek blijft hetzelfde tijdelijke lezerdoel zonder zone-ID.
