@@ -13,6 +13,12 @@ De gebruikerservaring vertrekt vanuit het bord op tafel. Op een breed scherm kri
 
 De klikgebieden zijn eigen benaderingen van de zichtbare gedrukte districten en Havenvelden. Het zijn geen spelregelgrenzen, bewezen aangrenzendheid of sensorcoördinaten. Logische plaatsing blijft een zone-ID. Bij afwezig artwork of een mislukte kaartdownload valt de weergave terug op het schema. Oude sessies gebruiken hun oorspronkelijke profiel en versies.
 
+## Automatisch passend maken
+
+De fysieke kaart start met **Auto fit**. De weergave meet de daadwerkelijke resterende vensterhoogte na de kop, werkbalk, appmeldingen, scanbediening en statusregel. De kaart behoudt haar verhouding en past binnen zowel breedte als hoogte. Op desktop sluit de hoogte van de zijbalk aan; op kleinere schermen blijft de zijbalk onder het bord staan.
+
+Vensterwijzigingen, schermwisseling en gewijzigde meldinghoogten leiden automatisch tot een nieuwe berekening. Handmatig zoomen blijft beschikbaar; **Auto fit** herstelt de volledige kaart. Deze berekening verandert uitsluitend presentatie en laat bordposities, sensorinvoer en saves ongemoeid. De gekoppelde bordpagina is gecontroleerd op 2560×1440, 1920×1080, 1366×768, 1280×720, 768×1024 en 390×844, inclusief extra instructies boven het bord, zoomen en bordfocus.
+
 ## Ruimte voor digitale voordelen
 
 De officiële app moet uiteindelijk regels en campagne blijven beheren, terwijl de virtuele tafel de fysieke onderdelen weergeeft. Een toekomstige instructie zoals “plaats invloed tijdens de cityronde” hoeft dan niet meer door een speler te worden overgenomen.

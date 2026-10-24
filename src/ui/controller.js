@@ -35,14 +35,34 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
   function resizeBoard() {
     const physical = $('board').dataset.layout === 'physical-map';
     for (const id of ['zoom-out','zoom-in','fit-board']) $(id).disabled = !physical;
+    $('fit-board').setAttribute('aria-pressed',String(physical && zoom === 1));
     $('zoom-label').textContent = physical ? `${Math.round(zoom * 100)}%` : '—';
-    if (!physical) return;
     const viewport = $('board-viewport');
-    const fit = Math.min(viewport.clientWidth, viewport.clientHeight * 2048/1295);
+    const sidebar = document.querySelector('.sidebar');
+    if (!physical) {
+      viewport.style.height = ''; viewport.style.minHeight = '';
+      sidebar.style.height = ''; sidebar.style.minHeight = ''; return;
+    }
+    const main = document.querySelector('main');
+    const footer = document.querySelector('.table-status');
+    const bottomPadding = parseFloat(getComputedStyle(main).paddingBottom) || 0;
+    const screenHeight = window.visualViewport?.height ?? window.innerHeight;
+    const available = Math.max(80, screenHeight - (viewport.getBoundingClientRect().top + window.scrollY) - footer.getBoundingClientRect().height - bottomPadding - 2);
+    const stacked = window.matchMedia('(max-width: 900px)').matches;
+    viewport.style.minHeight = '0';
+    viewport.style.height = `${Math.floor(stacked ? Math.min(available,viewport.clientWidth * 1295/2048) : available)}px`;
+    sidebar.style.minHeight = '0';
+    sidebar.style.height = stacked ? '' : `${document.querySelector('.surface').getBoundingClientRect().height}px`;
+    const fit = Math.floor(Math.min(viewport.clientWidth, viewport.clientHeight * 2048/1295));
     $('board').style.width = `${Math.max(1,fit * zoom)}px`;
     $('zoom-out').disabled = zoom <= 1; $('zoom-in').disabled = zoom >= 3;
   }
-  const observer = new ResizeObserver(resizeBoard); observer.observe($('board-viewport'));
+  let resizeFrame=null;
+  function scheduleResize(){if(resizeFrame===null)resizeFrame=requestAnimationFrame(()=>{resizeFrame=null;resizeBoard();});}
+  const observer = new ResizeObserver(scheduleResize);
+  for(const element of [document.querySelector('main'),$('board-viewport'),document.querySelector('.table-status')])observer.observe(element);
+  window.addEventListener('resize',scheduleResize);
+  window.visualViewport?.addEventListener('resize',scheduleResize);
   function changeZoom(value) {
     const viewport = $('board-viewport');
     const centerX = (viewport.scrollLeft + viewport.clientWidth/2) / Math.max(1,viewport.scrollWidth);
@@ -234,7 +254,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     onHint:message=>{$('status').textContent=message;},
     onDrop:async(id,zoneId)=>{dropBusy=true;selectedZone=zoneId;try{await act(()=>tabletop.place(id,zoneId),`Placed at ${initial.zones.find(z=>z.id===zoneId)?.label||zoneId}.`);}finally{dropBusy=false;update();}}
   });
-  update.dispose = () => { updateTiles.dispose?.();drag.dispose();unsubscribe(); observer.disconnect(); document.removeEventListener('keydown',cancelPlacement); };
+  update.dispose = () => { updateTiles.dispose?.();drag.dispose();unsubscribe(); observer.disconnect(); if(resizeFrame!==null)cancelAnimationFrame(resizeFrame);window.removeEventListener('resize',scheduleResize);window.visualViewport?.removeEventListener('resize',scheduleResize);document.removeEventListener('keydown',cancelPlacement); };
   update();
   return update;
 }
