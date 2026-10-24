@@ -2,6 +2,8 @@
 
 ## Hoofddoel en eerstvolgende integratiemijlpalen
 
+Aanvullend onderzoek op 24 oktober: het ongewijzigde Core-firmwarepakket is al in de geïnstalleerde Teburu-app gevonden en lokaal gecontroleerd. Netwerkonderschepping of het starten van een update was niet nodig. Gebruik dit als onafhankelijke statische referentie voor concrete emulatorverschillen; volledige firmware-uitvoering blijft een apart, onbewezen spoor. Zie [firmware-onderzoek](FIRMWARE-ONDERZOEK.md).
+
 Actuele prioriteit op 23 oktober 2026: bouw en test het Core-gedrag onafhankelijk van de Milan-campagne. De private offline regressiesuite is toegevoegd; onafhankelijke decodercontrole, virtuele Bluetooth-tests en fysieke Android-acceptatie blijven afzonderlijke bewijsniveaus. Zie [hardwaredekking en acceptatie](CORE-VALIDATIE.md). Volledige dobbelsteeninvoer, Android-kaartterugkoppeling en werkelijk opslaan/hervatten op Android blijven open.
 
 - [x] Neem een gecontroleerde volledige momentopname van de huidige Android-kaart over: dertig districten en 39 onderdelen. Dit is de huidige spelstand, geen algemene campagnebeginstand.
