@@ -5,6 +5,11 @@ import {waitingMiniatures} from '../src/games/milan-uprising/scan-options.js';
 const {components}=JSON.parse(readFileSync(new URL('../data/games/milan-uprising/city.json',import.meta.url)));
 const ids=components.filter(c=>c.groupId==='characters').map(c=>c.id);
 const oldGroup=ids.slice(0,4).map(componentId=>({componentId,stage:'registered'}));
+test('bevestigd geplaatste miniaturen keren niet terug in de wachtrij zonder bevestigde savegroep',()=>{
+  const roster={ready:false,characters:oldGroup,placedIds:[ids[0],ids[4]]};
+  assert.deepEqual(waitingMiniatures(components,{screen:'character-scan',roster}),ids.filter(id=>!roster.placedIds.includes(id)));
+  assert.deepEqual(waitingMiniatures(components,{screen:'character-scan',roster:{...roster,placedIds:[]}}),ids);
+});
 test('een nieuw spel krijgt alle zeven basispersonages ondanks een oude opgeslagen groep',()=>{
   assert.deepEqual(waitingMiniatures(components,{screen:'character-scan',roster:{ready:false,characters:oldGroup}}),ids);
   assert.deepEqual(waitingMiniatures(components,{screen:'character-scan'}),ids);

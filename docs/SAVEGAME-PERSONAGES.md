@@ -4,6 +4,8 @@ De gekoppelde tafel toont de laatst gelezen opgeslagen groep als hulpmiddel. Reg
 
 Bij een nieuw spel of een niet bevestigde savegroep staan alle zeven basispersonages in de miniaturenstrook. Een achtergebleven groep van vier uit een vorige sessie beperkt die keuze niet. Bij een bevestigde geladen save toont de strook de nog te scannen leden van die groep. De keuze komt uit de componentgegevens en heeft geen vaste limiet van vier.
 
+Een door Milan bevestigde plaatsing haalt de miniatuur uit de beschikbare strook, ook zonder bevestigde savegroep. Deze registratie blijft bewaard na verversen en serverherstart. Een nieuwe setup of invoerherstel maakt de miniaturen opnieuw beschikbaar; opnieuw scannen kan bovendien via **Pieces → Scan a miniature**. Alleen scannen is nog geen bevestigde plaatsing.
+
 ## Fysieke handeling op het virtuele bord
 
 Sleep een miniatuur uit de wachtrij naast het bord naar de Core-lezer. Dit is een tijdelijk lezercontact, geen blijvende spelpositie. Daarna sleep je het gelezen personage naar de locatie die Milan aanwijst. De adapter bewaart die positie pas na een herkende appbevestiging. Een personage mag opnieuw dezelfde bestemming krijgen: een oude bordpositie vervangt geen nieuw sensorcontact. Klikken op een scanknop blijft een toegankelijk alternatief.
