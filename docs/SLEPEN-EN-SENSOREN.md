@@ -16,6 +16,8 @@ De overgang van het laatste Haven-personage naar de dagfase is eveneens toegevoe
 
 ## Verificatie op 23 oktober 2026
 
+Correctie op 24 oktober: een oude, onvolledige scanregistratie mag tijdens de dagfase geen geplaatste miniatuur op de kaart verbergen. Alleen de personagescan en de bijbehorende opstellingsstappen gebruiken die tijdelijke presentatie. Tijdens **Place your miniature in a Haven room** blijft de pion op zijn bevestigde stadspositie zichtbaar en kan hij rechtstreeks naar een Haven-vak worden gesleept. Hij staat dan niet tegelijk in de miniaturenstrook. De browserregressie controleert dit met verouderde scanmetadata, één sleepverzoek van QT8 naar Haven 1L en een nagebootste appbevestiging; er is geen echte spelactie uitgevoerd.
+
 | Controle | Resultaat en grens |
 | --- | --- |
 | Veertig sensorbestemmingen | Volledige, unieke mapping gecontroleerd; geen ontbrekende of dubbele contacten |

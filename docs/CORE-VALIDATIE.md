@@ -4,6 +4,12 @@ Bijgesteld op 23 oktober 2026: de eerstvolgende stap is het gedrag van de fysiek
 
 ## Testlagen
 
+### Eerste worp na ontdekking
+
+De private Bluetooth-adapter verstuurt de ontdekking van een nog onbekende dobbelsteen vóór zijn eerste rolstart, met een korte registratietijd ertussen. Voor reeds bekende dice verandert deze volgorde niets. Er wordt geen tweede worp, extra resultaat of door de UI gekozen uitkomst toegevoegd. Verbreken of uitschakelen tijdens de registratie annuleert de lopende invoer.
+
+Een onafhankelijke decoderproef reproduceert waarom de oude directe combinatie kwetsbaar was: een listener die bij ontdekking wordt aangemeld mist dan de eerste rolstart. Met gescheiden melding en rolstart ontvangt hij die wel. De virtuele Bluetooth-proef controleert ook de werkelijke tijd tussen ontdekking, beweging en resultaat. Dit onderbouwt de correctie; acceptatie van één klik op een echte Milan-worp blijft afzonderlijk live te controleren. De publieke suite heeft 63 geslaagde tests.
+
 ### Gesimuleerde batterij en aanwezigheid
 
 De private Core geeft iedere virtuele dobbelsteen een eigen stabiel gesimuleerd batterijniveau, ruim boven een lage-ladingwaarschuwing. Het niveau blijft bij wakker maken, rollen en opnieuw verbinden hetzelfde; het is geen meting van een fysieke batterij. De status vermeldt expliciet dat de lading gesimuleerd is.
