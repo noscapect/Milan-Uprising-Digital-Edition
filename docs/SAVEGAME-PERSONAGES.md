@@ -1,26 +1,23 @@
-# Personages bij het hervatten van een savegame
+# Personages scannen en herstellen
 
-De gekoppelde tafel toont boven de kaart **Saved roster · Slot …** met de personages uit het officiële saveprofiel. De speler ziet per personage of een scan nog nodig is, is verstuurd, door Milan als plaatsingsopdracht is beantwoord of na plaatsing is bevestigd. Alleen resterende personages uit die groep kunnen worden gescand wanneer Milan daarom vraagt. Een vrije keuze uit de hele retailvoorraad is bij hervatten onjuist.
+De gekoppelde tafel toont de laatst gelezen opgeslagen groep als hulpmiddel. Registratievinkjes, bordposities en OCR-herkenning mogen een nieuwe RFID-scan niet blokkeren. De Core moet verbonden zijn en de officiële app moet de RFID-lezer hebben ingeschakeld. Alle bekende speelbare miniaturen kunnen dan opnieuw worden aangeboden; de officiële app beoordeelt de scan.
 
-## Bron en werking
+## Fysieke handeling op het virtuele bord
 
-De private Android-adapter leest via de al geautoriseerde USB-verbinding uitsluitend de saveversie en profielmetadata uit de externe opslag van Milan. De app, campagne en savebestanden worden niet aangepast. De laatste saveverwijzing in het profiel bepaalt de slotindex; de bijbehorende header bevat de vier personagedefinities. Deze worden via lokaal gecontroleerde namen naar onze onderdeel-ID's vertaald. Accountgegevens en hardware-identiteiten worden niet aan de bordpagina doorgegeven. Ruwe bestanden en formaatonderzoek blijven onder `private/`.
+Sleep een miniatuur uit de wachtrij naast het bord naar de Core-lezer. Dit is een tijdelijk lezercontact, geen blijvende spelpositie. Daarna sleep je het gelezen personage naar de locatie die Milan aanwijst. De adapter bewaart die positie pas na een herkende appbevestiging. Een personage mag opnieuw dezelfde bestemming krijgen: een oude bordpositie vervangt geen nieuw sensorcontact. Klikken op een scanknop blijft een toegankelijk alternatief.
 
-De geverifieerde Android 1.0.9-save wees slot 5 aan met **Simona Ferrari, Orlando Bianchi, Latebra Uberto Ascheri en Dante Brunieri**. Dezelfde groep werd afzonderlijk in de bijbehorende campagnegegevens aangetroffen. Dit resultaat is uit de save gelezen, niet afgeleid van de oude virtuele bordposities of een vaste voorkeursgroep.
+De opgeslagen groep komt uit profielmetadata die de private Android-adapter via de geautoriseerde USB-verbinding leest. De officiële app en savebestanden worden niet gewijzigd. Bij onleesbare metadata blijft de laatst bekende groep adviserend zichtbaar; een ingeschakelde Core-lezer blijft bruikbaar. Onbekende bestandsformaten worden niet op basis van vermoedens geïnterpreteerd.
 
-De achtergrondtaak leest de profielmetadata periodiek opnieuw, zonder Codex of een open bordbrowser. Bij onbekend formaat, onvolledige gegevens, een niet ondersteund personage of ontbrekende USB-verbinding blijven de scanknoppen uitgeschakeld. De laatst gelezen groep kan zichtbaar blijven met een expliciete melding dat die niet bevestigd is. De momenteel ondersteunde bron is het lokale standaardprofiel van de gecontroleerde appversie; andere profielstructuren worden niet op basis van vermoedens geïnterpreteerd.
+## Na een crash of herstart
 
-## Registratie en herladen
+De achtergrondadapter vergelijkt de Android-app-procesinstantie met de vorige waarneming. Bij een andere instantie worden tijdelijke registratievoortgang, scancontext en een nog onbevestigde beweging vergeten. De beweging wordt voor onderzoek als afgebroken bewaard en nooit automatisch opnieuw verstuurd. Een herstart van alleen onze server behoudt de bekende appinstantie.
 
-Een geslaagde verzendactie is nog geen bevestigde registratie. Pas een herkende plaatsingsopdracht maakt de scan bevestigd; de daaropvolgende appbevestiging maakt het personage geregistreerd. Ook een reeds bestaande virtuele positie kan daarom opnieuw een sensorcontact nodig hebben. Een stabiele overgang naar het volgende scanscherm bevestigde de echte plaatsing van Simona in Haven 2L.
+Op het bord staat **App restarted? Recover input**. Het Control Center biedt **Reset registrations / recover input**. Deze bediening is ook beschikbaar als schermherkenning of saveprofieluitlezing niet lukt. Ze wist tijdelijke voortgang en geeft actieve sensorcontacten vrij, zonder bewegingen te bevestigen of nieuwe spelacties te kiezen. Bevestigde bordposities, fiches en officiële campagnebestanden blijven behouden. Dit is dus geen opdracht om de hele campagne te wissen. Volg na herstel het actuele scherm in Milan en scan opnieuw wanneer de lezer actief is.
 
-De voortgang wordt lokaal bewaard, gekoppeld aan slot, campagne, scenario en groep. Een nieuwe hardware- of componentenopstelling maakt de registratievoortgang opnieuw leeg. Een ander slot erft geen oude registraties. De namenlijst blijft zichtbaar tijdens setup; de scanknoppen worden pas actief wanneer Milan daadwerkelijk **Scan your Character** toont.
+Als Android niet via USB bereikbaar is, kan de adapter een procesherstart niet waarnemen. Gebruik dan de herstelknop zodra de Coreverbinding weer beschikbaar is. Korte gelijktijdige sensoracties blijven geserialiseerd om overlappende contacten te voorkomen.
 
 ## Verificatie en grenzen
 
-- De echte profieluitlezing en namenlijst zijn gecontroleerd op de gedeelde bordpagina, zonder nieuwe spelinvoer te versturen.
-- Afzonderlijke tests controleren een andere slotverwijzing, gewijzigde groepssamenstelling, dubbele of onbekende personages, onvolledige bestanden, herstart, een nieuwe setup en ontbrekende verbinding.
-- De browserproef simuleert daarnaast een scanverzoek en registratievoortgang, zonder daarmee nieuwe scanacceptatie door Milan te claimen. De eerder bevestigde Simona-plaatsing is een afzonderlijke echte waarneming.
-- De achtergrondtaak bepaalt hiermee de opgeslagen groep en registratievoortgang. Dit is geen volledige save-import van bordposities, tegels, verhaalmarkers of actuele spelregels.
+De geïsoleerde herstelproef controleert een gewijzigde procesinstantie, afgebroken wachtende beweging, behouden sessie, herhaald scannen en uitsluitend vrijgeven van actieve contacten. Browserproeven controleren slepen naar de lezer, tijdelijke presentatie, plaatsingsbevestiging, foutafhandeling en schermformaten. Dit zijn simulatieproeven; ze vervangen geen echte acceptatie door Milan. Eerder werden onder meer plaatsingen in Haven 2L en QT8 door de echte app bevestigd. Een volledige campagne-import blijft buiten deze beperkte uitlezing.
 
-De publieke demo blijft zonder externe dependencies werken. De private reader gebruikt tijdens het spelen alleen Node en de bestaande geautoriseerde ADB-verbinding; onderzoekshulpmiddelen zijn geen runtimevereiste.
+De publieke demo blijft zonder externe dependencies werken; protocolgegevens en ruwe apparaatwaarnemingen blijven onder private/.

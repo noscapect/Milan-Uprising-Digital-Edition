@@ -2,12 +2,14 @@ import { withArtwork, artworkImage } from '../presentation/artwork.js';
 import { renderBoard } from '../presentation/2d/board.js';
 import { installPieceDrag } from './piece-drag.js';
 import { mountLocationTiles } from './location-tiles.js';
+import { mountScanDock } from './scan-dock.js';
 export function mountTabletop(tabletop, download, core = null, artwork = null, locationArtwork = false) {
   const $ = id => document.getElementById(id);
   const project = () => withArtwork(tabletop.project(), artwork, { locationArtwork });
   const initial = project();
   let selectedZone = null, placing = Boolean(core), zoom = 1, mapFailed = false;
   let drag=null,pendingUpdate=false,dropBusy=false;
+  let scanDock=null;
   const updateTiles=mountLocationTiles($('location-pieces').parentElement,tabletop,(run,message)=>act(run,message));
   const tabs = [...document.querySelectorAll('[role=tab]')];
   function showPanel(name, focus = false) {
@@ -41,6 +43,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const sidebar = document.querySelector('.sidebar');
     if (!physical) {
       viewport.style.height = ''; viewport.style.minHeight = '';
+      if(scanDock)scanDock.element.style.height='';
       sidebar.style.height = ''; sidebar.style.minHeight = ''; return;
     }
     const main = document.querySelector('main');
@@ -49,12 +52,14 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const screenHeight = window.visualViewport?.height ?? window.innerHeight;
     const available = Math.max(80, screenHeight - (viewport.getBoundingClientRect().top + window.scrollY) - footer.getBoundingClientRect().height - bottomPadding - 2);
     const stacked = window.matchMedia('(max-width: 900px)').matches;
+    const boardWidth=Math.max(1,viewport.clientWidth-(scanDock?scanDock.element.getBoundingClientRect().width+12:0));
     viewport.style.minHeight = '0';
-    viewport.style.height = `${Math.floor(stacked ? Math.min(available,viewport.clientWidth * 1295/2048) : available)}px`;
+    viewport.style.height = `${Math.floor(stacked ? Math.min(available,boardWidth * 1295/2048) : available)}px`;
     sidebar.style.minHeight = '0';
     sidebar.style.height = stacked ? '' : `${document.querySelector('.surface').getBoundingClientRect().height}px`;
-    const fit = Math.floor(Math.min(viewport.clientWidth, viewport.clientHeight * 2048/1295));
+    const fit = Math.floor(Math.min(boardWidth, viewport.clientHeight * 2048/1295));
     $('board').style.width = `${Math.max(1,fit * zoom)}px`;
+    if(scanDock)scanDock.element.style.height=`${$('board').getBoundingClientRect().height}px`;
     $('zoom-out').disabled = zoom <= 1; $('zoom-in').disabled = zoom >= 3;
   }
   let resizeFrame=null;
@@ -142,10 +147,12 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     $('mode-inspect').setAttribute('aria-pressed',String(!placing));
     $('mode-place').setAttribute('aria-pressed',String(placing));
     $('board').classList.toggle('placing',placing);
+    const scanContact=tabletop.scanStatus?.();
+    scanDock?.update(view,scanContact);
     $('tool-hint').textContent = placing ? 'Click the destination on the board. Esc to cancel.' : 'Drag a miniature to a location, or click a district to inspect it.';
     resizeBoard();
     const positions = new Map(view.zones.flatMap(zone => zone.occupants.map(c => [c.id, zone.id])));
-    const locationLabel = componentId => view.zones.find(zone => zone.id === positions.get(componentId))?.label || 'in stock';
+    const locationLabel = componentId => scanContact?.componentId===componentId?'On Core reader (temporary)':scanContact?.unplacedIds?.includes(componentId)?'Beside board · waiting for scan':view.zones.find(zone => zone.id === positions.get(componentId))?.label || 'in stock';
     const selected = view.components.find(c => c.id === $('piece').value);
     $('selection-status').textContent = `${selected.label}${selected.faceLabel ? ` · ${selected.faceLabel}` : ''} · ${locationLabel(selected.id)}`;
     const zone = view.zones.find(z=>z.id === selectedZone);
@@ -247,14 +254,16 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     finally { if (input.onchange === readHandler) input.value = ''; }
   };
   const unsubscribe = tabletop.subscribe(update);
-  drag=installPieceDrag({board:$('board'),sources:[$('board'),$('inventory'),$('location-pieces')],
-    canDrag:id=>core?'Use the sensor controls in this study.':dropBusy?'Wait for the previous move to finish.':tabletop.canMove?.(id)??true,
+  if(typeof tabletop.scan==='function')scanDock=mountScanDock($('board'),{scan:id=>tabletop.scan(id),canScan:id=>tabletop.canScan?.(id)??false,selected:()=>$('piece').value,onSelect:id=>selectComponent(id,false),onHint:message=>{$('status').textContent=message;}});
+  drag=installPieceDrag({board:$('board'),sources:[$('board'),$('inventory'),$('location-pieces'),...(scanDock?[scanDock.element]:[])],dropTargets:scanDock?[scanDock.target]:[],
+    canDrag:id=>core?'Use the sensor controls in this study.':dropBusy?'Wait for the previous move to finish.':tabletop.canScan?.(id)===true?true:tabletop.canMove?.(id)??true,
     onStart:id=>{$('piece').value=id;placing=false;$('status').textContent='Drag to the destination and release the left mouse button.';},
     onEnd:()=>{if(pendingUpdate){pendingUpdate=false;update();}},
     onHint:message=>{$('status').textContent=message;},
-    onDrop:async(id,zoneId)=>{dropBusy=true;selectedZone=zoneId;try{await act(()=>tabletop.place(id,zoneId),`Placed at ${initial.zones.find(z=>z.id===zoneId)?.label||zoneId}.`);}finally{dropBusy=false;update();}}
+    onDrop:async(id,zoneId)=>{dropBusy=true;selectedZone=zoneId;try{await act(()=>tabletop.place(id,zoneId),`Placed at ${initial.zones.find(z=>z.id===zoneId)?.label||zoneId}.`);}finally{dropBusy=false;update();}},
+    onTargetDrop:async(id)=>{dropBusy=true;try{await act(()=>tabletop.scan(id),'Character presented to the Core reader. Follow Milan for placement.');}finally{dropBusy=false;update();}}
   });
-  update.dispose = () => { updateTiles.dispose?.();drag.dispose();unsubscribe(); observer.disconnect(); if(resizeFrame!==null)cancelAnimationFrame(resizeFrame);window.removeEventListener('resize',scheduleResize);window.visualViewport?.removeEventListener('resize',scheduleResize);document.removeEventListener('keydown',cancelPlacement); };
+  update.dispose = () => { updateTiles.dispose?.();drag.dispose();scanDock?.dispose();unsubscribe(); observer.disconnect(); if(resizeFrame!==null)cancelAnimationFrame(resizeFrame);window.removeEventListener('resize',scheduleResize);window.visualViewport?.removeEventListener('resize',scheduleResize);document.removeEventListener('keydown',cancelPlacement); };
   update();
   return update;
 }

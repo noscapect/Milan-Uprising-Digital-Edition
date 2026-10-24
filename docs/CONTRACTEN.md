@@ -94,3 +94,8 @@ Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde 
 ## Milan-module — locatietegels
 
 `setLocationTile(state, zones, {zoneId, kind, face, value, expectedRevision})` retourneert nieuwe `milan-location-tiles`-toestand. `kind` is bonus of special; `face` is unconfirmed, hidden of visible. Alleen stadsdistricten en bekende waarden zijn toegestaan. Projecties kopiëren de tegeldata. De stadstafel voegt deze moduletoestand optioneel als `locationTiles` aan de bestaande sessie-envelop toe; de engine blijft ongewijzigd. Zie [locatietegels](LOCATIETEGELS.md).
+
+
+## Optionele lezerbediening in de UI
+
+Een gekoppelde tafel kan `scan(componentId)`, `canScan(componentId)` en `scanStatus()` aanbieden. De UI presenteert dan een Core-lezer naast de kaart. Het lezerdoel heeft geen zone-ID en maakt geen engineplaatsing. Tijdelijke scanpresentatie en registratievoortgang zijn adaptertoestand; blijvende bordposities blijven domeintoestand. De gewone sandbox biedt deze optionele apparaatbediening niet aan.

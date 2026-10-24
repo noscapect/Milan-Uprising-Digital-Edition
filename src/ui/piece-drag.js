@@ -1,5 +1,5 @@
 // Pointer interaction only. The supplied drop command owns validation and state.
-export function installPieceDrag({board,sources=[board],canDrag=()=>true,onStart=()=>{},onEnd=()=>{},onDrop,onHint=()=>{}}){
+export function installPieceDrag({board,sources=[board],dropTargets=[],canDrag=()=>true,onStart=()=>{},onEnd=()=>{},onDrop,onTargetDrop=()=>{},onHint=()=>{}}){
   let gesture=null,ghost=null,highlight=null,suppressClick=false,clickTimer;
   const doc=board.ownerDocument,win=doc.defaultView;
   const zoneAt=(x,y)=>{
@@ -9,9 +9,17 @@ export function installPieceDrag({board,sources=[board],canDrag=()=>true,onStart
     }
     return null;
   };
-  function mark(zoneId){
+  const targetAt=(x,y)=>{
+    for(const element of doc.elementsFromPoint(x,y)){
+      const target=dropTargets.find(target=>target.element.contains(element));
+      if(target)return target;
+    }
+    return null;
+  };
+  function mark(zoneId,target=null){
     highlight?.classList.remove('drop-target');highlight=null;
-    if(zoneId)highlight=[...board.querySelectorAll('.cell[data-zone]')].find(el=>el.dataset.zone===zoneId);
+    if(target)highlight=target.element;
+    else if(zoneId)highlight=[...board.querySelectorAll('.cell[data-zone]')].find(el=>el.dataset.zone===zoneId);
     highlight?.classList.add('drop-target');
   }
   function silenceClick(){suppressClick=true;win.clearTimeout(clickTimer);clickTimer=win.setTimeout(()=>{suppressClick=false;},500);}
@@ -44,15 +52,23 @@ export function installPieceDrag({board,sources=[board],canDrag=()=>true,onStart
       board.classList.add('dragging-piece');board.setPointerCapture?.(event.pointerId);onStart(gesture.componentId);
     }
     Object.assign(ghost.style,{left:event.clientX+'px',top:event.clientY+'px'});
-    const zone=zoneAt(event.clientX,event.clientY);mark(zone);
-    onHint(zone?'Release at '+(highlight?.title||zone)+'.':'Drag to a board zone. Esc cancels.');
+    const target=targetAt(event.clientX,event.clientY),zone=target?null:zoneAt(event.clientX,event.clientY);
+    const permitted=target?.canDrop?.(gesture.componentId)??true;
+    mark(zone,target&&permitted===true?target:null);
+    onHint(target?(permitted===true?'Release at '+target.label+'.':typeof permitted==='string'?permitted:'This reader is not available.'):zone?'Release at '+(highlight?.title||zone)+'.':'Drag to a board zone or reader. Esc cancels.');
     const viewport=board.closest('.scroll');
     if(viewport){const r=viewport.getBoundingClientRect(),edge=30;viewport.scrollBy(event.clientX<r.left+edge?-14:event.clientX>r.right-edge?14:0,event.clientY<r.top+edge?-14:event.clientY>r.bottom-edge?14:0);}
   }
   function up(event){
     if(!gesture||event.pointerId!==gesture.pointerId)return;
-    const zone=gesture.active?zoneAt(event.clientX,event.clientY):null,current=finish();
+    const target=gesture.active?targetAt(event.clientX,event.clientY):null;
+    const zone=gesture.active&&!target?zoneAt(event.clientX,event.clientY):null,current=finish();
     if(!current?.active)return;
+    if(target){
+      const permitted=target.canDrop?.(current.componentId)??true;
+      if(permitted!==true){onHint(typeof permitted==='string'?permitted:'This reader is not available.');return;}
+      Promise.resolve().then(()=>onTargetDrop(current.componentId,target.id)).catch(error=>onHint(error.message));return;
+    }
     if(!zone){onHint('Released outside the board; nothing moved.');return;}
     if(zone===current.sourceZone){onHint('Returned to the same location; nothing moved.');return;}
     Promise.resolve().then(()=>onDrop(current.componentId,zone)).catch(error=>onHint(error.message));

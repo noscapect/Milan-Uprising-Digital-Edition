@@ -27,6 +27,12 @@ async function act(path,label){
 }
 $('start-core').onclick=()=>act('/api/windows-core/start','Preparing Bluetooth and starting Core…');
 $('stop-core').onclick=()=>act('/api/windows-core/stop','Stopping Core…');
+$('recover-board').onclick=async()=>{
+  const button=$('recover-board');button.disabled=true;
+  try{await api('/api/board-recover',{});$('message').textContent='Temporary input and registrations reset. Follow Milan; confirmed board positions and campaign saves are kept.';}
+  catch(error){$('message').textContent=error.message;}
+  finally{button.disabled=false;await refresh();}
+};
 for(const [id,key]of [['copy-address','url'],['copy-code','pin']])$(id).onclick=async()=>{
   try{if(!latest?.share?.available)return;await navigator.clipboard.writeText(latest.share[key]);$('message').textContent=key==='pin'?'Access code copied.':'Tabletop address copied.';}
   catch{$('message').textContent='Select and copy the displayed '+(key==='pin'?'access code.':'address.');}

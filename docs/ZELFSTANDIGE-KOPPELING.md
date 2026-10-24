@@ -29,3 +29,6 @@ De zelfstandige uitvoering vergroot niet automatisch de herkenningsdekking. Voor
 ## Controle van het Control Center op 24 oktober 2026
 
 De echte lokale pagina toont de actieve Core en de actuele gegevens van de remote bordserver. De browsercontrole omvat desktop, telefoonbreedte, kopieeracties, verbindingsstatus en gesimuleerde start-/stopbediening. Een werkelijk herhaald startverzoek hergebruikte de verbonden Core zonder de verbinding te onderbreken. Voorbereiding na een ontbrekende service, gelijktijdige verzoeken en opnieuw proberen na een fout zijn daarnaast met afzonderlijke tests van de startfunctie gecontroleerd. De koude radio-overdracht is bij deze GUI-proef niet opnieuw uitgevoerd terwijl Milan verbonden was. De publieke suite slaagt met 49 tests; daarin wordt ook gecontroleerd dat de remote relay geen toegang geeft tot het startvenster of de bijbehorende API.
+
+
+Na een appcrash kan de gebruiker op het bord **App restarted? Recover input** kiezen, of in het Control Center **Reset registrations / recover input**. De Android-adapter herkent bovendien een gewijzigde app-procesinstantie. Registratievoortgang is adviserend; de Core-lezerstatus bepaalt of een scan kan worden aangeboden. Zie [scanherstel](SAVEGAME-PERSONAGES.md).
