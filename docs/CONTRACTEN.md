@@ -108,3 +108,6 @@ De optionele scanpresentatie groepeert een miniaturenstrook en de Core in één 
 
 
 `buildBoardInstructions` accepteert daarnaast `characterMoves: [{componentId, zoneId}]` met unieke bekende spelerspersonages en bekende bestemmingen. Deze expliciete appuitkomsten worden vooraf gevalideerd en samen met invloed/controle in één bestaande atomaire tafelopdracht verwerkt. Andere onderdelen en fichezijden blijven behouden. De builder bepaalt geen nachtfaseregels of standaardbestemming.
+
+
+`mountDiceTray({onRoll, onWake, container})` presenteert vijf d10’s in een dialoog. `update({connected, ready, canRoll, rolling, dice})` neemt de hardwaretoestand over; `dice` bevat alleen index, aanmeldstatus, rolstatus en de laatst bekende waarde. `onRoll(indices)` en `onWake()` leveren zo nodig de nieuwe hardwaretoestand terug. De component heeft geen RNG en maakt geen domeinopdrachten. Openen/sluiten verstuurt geen invoer; selectie blijft lokale UI-toestand. `dispose()` verwijdert de dialoog en openingsknop.

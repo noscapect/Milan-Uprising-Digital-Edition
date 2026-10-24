@@ -1,5 +1,5 @@
 // Optional presentation for an app-led table. Existing controls keep their handlers.
-export function mountPlayLayout({scanPanel, secondaryNodes=[], wakeButton}={}) {
+export function mountPlayLayout({scanPanel, secondaryNodes=[], wakeButton,showQuickDice=true}={}) {
   const doc=document, body=doc.body, sidebar=doc.querySelector('.sidebar');
   const actions=doc.querySelector('.header-actions'), moved=[];
   const move=(element,parent)=>{if(!element)return;const marker=doc.createComment('play-layout');element.before(marker);moved.push([element,marker]);parent.append(element);};
@@ -39,7 +39,7 @@ export function mountPlayLayout({scanPanel, secondaryNodes=[], wakeButton}={}) {
   statusObserver.observe(doc.getElementById('status'),{childList:true,characterData:true,subtree:true});
   window.dispatchEvent(new Event('resize'));
   return {
-    setContext({label,connected,diceAvailable=false}){context.textContent=label;context.dataset.connected=String(connected);quickDice.hidden=!diceAvailable;},
+    setContext({label,connected,diceAvailable=false}){context.textContent=label;context.dataset.connected=String(connected);quickDice.hidden=!diceAvailable||!showQuickDice;},
     dispose(){clearTimeout(toastTimer);statusObserver.disconnect();doc.removeEventListener('keydown',escape);doc.removeEventListener('tabletop:location-inspected',reveal);showPieces(false);sidebar.inert=false;for(const [element,marker]of moved.reverse()){marker.replaceWith(element);}drawerHeader.remove();menu.remove();context.remove();pieces.remove();quickDice.remove();openMenu.remove();body.classList.remove('table-play');footer.classList.remove('play-notice');}
   };
 }

@@ -4,7 +4,7 @@
 
 De gekoppelde `/board`-pagina opent nu in een compacte speelweergave. Alleen een kop van 44–48 pixels, de actuele spelhandeling, **Pieces**, **Table menu**, de kaart en de Core-lezer blijven permanent zichtbaar. De zijbalk, scanlijsten, instructieblokken en technische synchronisatiemeldingen nemen standaard geen bordruimte meer in. De onderstaande beschrijving van de vaste werkbalk en zijbalk geldt nog voor de zelfstandige sandbox.
 
-**Pieces** opent een zwevend onderdelenpaneel dat met Close of Escape weer sluit. Klikken op een district opent hetzelfde paneel direct op de locatie-inhoud, inclusief de bestaande tegelbediening. Scanknoppen staan onder **Pieces → Scan a miniature**; miniaturen kunnen ook rechtstreeks vanaf de Core-wachtrij worden gesleept. **Table menu** bevat zoom, Auto fit en tabelinformatie. Technische status, dobbelsteenbediening en **Recover input** staan onder **Connection & recovery**. Tijdens de dobbelsteenopstelling verschijnt bovendien een directe **Wake dice**-knop in de kop.
+**Pieces** opent een zwevend onderdelenpaneel dat met Close of Escape weer sluit. Klikken op een district opent hetzelfde paneel direct op de locatie-inhoud, inclusief de bestaande tegelbediening. Scanknoppen staan onder **Pieces → Scan a miniature**; miniaturen kunnen ook rechtstreeks vanaf de Core-wachtrij worden gesleept. **Table menu** bevat zoom, Auto fit en tabelinformatie. Technische status, dobbelsteenbediening en **Recover input** staan onder **Connection & recovery**. De knop **Dice** opent een aparte dobbelbak-overlay met vijf d10’s, ook tijdens de dobbelsteenopstelling.
 
 De volledige resterende breedte en hoogte zijn voor de tafel beschikbaar. Het bord behoudt zijn fysieke verhouding; op smalle staande schermen betekent dat vrije ruimte boven en onder de kaart. Meldingen na een handeling verschijnen kort als overlay en verschuiven de kaart niet. Open panelen zweven boven de tafel; ze verkleinen de kaart niet. Engine, sensormapping, scan-/plaatsingsopdrachten en saves blijven hetzelfde.
 
@@ -54,3 +54,12 @@ Nog te implementeren voor echte automatisering: een reproduceerbaar werkende com
 
 
 De gekoppelde tafel heeft naast de kaart een Core-lezer en wachtrij voor miniaturen. Sleep een miniatuur naar de lezer en daarna naar de door Milan gevraagde locatie. Het eerste contact verandert geen blijvende bordpositie. De herstelknop onder Table menu → Connection & recovery maakt tijdelijke invoer na een crash opnieuw beschikbaar zonder de bevestigde tafelopstelling te wissen.
+
+
+## Dobbelbak als overlay
+
+**Dice** opent een dobbelbak boven de tafel. Klik op de vijf d10’s om ze te selecteren; **Roll … dice** verstuurt alleen die selectie naar de bestaande private Core-worproute. **Wake 5 dice** meldt de dobbelstenen aan zonder uitslagen of een worp te versturen. Het bord verkleint niet en blijft onder de overlay behouden. Sluiten met Close of Escape annuleert geen al verstuurde worp en speelt die bij opnieuw openen niet opnieuw af.
+
+De d10’s animeren tijdens een lopende worp en eindigen op de waarden uit de Core-status. De weergave genereert geen willekeurige uitslagen en verandert geen bord- of campagneregels. De speler kiest het door Milan gevraagde aantal dobbelstenen en het moment van rollen, zoals bij een fysieke dobbelbak. Bij een ontbrekende verbinding of gesloten dobbelsteenkanaal zijn de bijbehorende acties uitgeschakeld. Een kanaal dat alleen ontdekken toestaat kan wel wakker maken, maar geen worp versturen. Verminderde beweging in de browser schakelt de draaianimatie uit.
+
+Browserproeven met gesimuleerde Core-antwoorden controleren selectie, wakker maken zonder worp, precies één worpverzoek, tijdelijke animatie, ongewijzigde Core-resultaten, sluiten/heropenen, verbindingverlies en weergave op desktop/telefoon. De echte pagina wordt uitsluitend geopend en uitgelezen bij de live controle; er wordt geen spelworp namens de speler verstuurd. De LAN-bordroute gebruikt dezelfde toegangscode en oorsprongcontrole als andere bordacties.

@@ -52,6 +52,10 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
     assert.equal((await fetch(base+'/api/board-recover',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{}'})).status,403);
     const recovery=await fetch(base+'/api/board-recover',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{}'});
     assert.equal(recovery.status,200);assert.equal(received.at(-1).url,'/api/board-recover');
+    assert.equal((await fetch(base+'/api/board-dice-roll',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'})).status,401);
+    assert.equal((await fetch(base+'/api/board-dice-roll',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{}'})).status,403);
+    const roll=await fetch(base+'/api/board-dice-roll',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:'{"dice":[1,3,5]}'});
+    assert.equal(roll.status,200);assert.equal(received.at(-1).url,'/api/board-dice-roll');assert.equal(received.at(-1).body,'{"dice":[1,3,5]}');
     for(let i=0;i<6;i++)assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,401);
     assert.equal((await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'pin=000000'})).status,429);
   }finally{await Promise.all([new Promise(r=>share.server.close(r)),new Promise(r=>upstream.close(r))]);}
