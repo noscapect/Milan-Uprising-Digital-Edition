@@ -12,6 +12,10 @@ De bestaande expliciete fase-instructies blijven zelfstandig werken wanneer de v
 
 ## Controle
 
+Een afzonderlijk probleem bij het laden van een componentenopstelling was een achtergebleven onderzoekfiche in Sempione. Invloed en controle klopten al, waardoor de oude mapvergelijking geen wijziging zag. De setup-initialisatie ruimt nu ook oude onderzoeksfiches op, onafhankelijk van verschillen in invloed of controle. Dit is een eenmalige voorbereiding van een opnieuw aangeboden opstelling, geen afleiding dat iedere lege plek tijdens het spel geen onderzoek mag bevatten. Restricted-fiches, personages en andere categorieën worden hierdoor niet gewist. Een nieuwe appinstructie kan daarna weer een onderzoekfiche plaatsen.
+
+De huidige opruiming is live gecontroleerd: het oude fiche is verdwenen en alle dertig invloed-/controlelocaties blijven overeenkomen. Een afzonderlijke levenscyclusproef controleert dat een vers bevestigd fiche tijdens dezelfde setup behouden blijft en dat een volgende setup oude onderzoeksfiches opnieuw opruimt.
+
 De proef met het vastgelegde echte Android-scherm herkent alle dertig districten, de afname van drie naar twee in Sant’Ambrogio en de drie zichtbare dagfase-instructies. Een geïsoleerde sessie controleert correctie van oude invloed op een lege locatie, behoud van alle overige onderdelen, twee overeenkomende beelden en idempotentie. Onbekende aantallen, verkeerde indeling, ontbrekende of dubbele districten en een tegenspraak met fase-instructies worden geweigerd. De regressie voor het laden van een scenario en de nachtfasetest blijven afzonderlijk slagen. Beeldmateriaal, kalibratie en ruwe waarnemingen blijven onder private/.
 
 

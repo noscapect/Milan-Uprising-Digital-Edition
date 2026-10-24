@@ -17,6 +17,15 @@ export function reconcileDistrictMap(profile, state, locations) {
   return {changed, placements, faces};
 }
 
+// Starting a component setup must not inherit research from an older table.
+// This is setup initialization, separate from ordinary map reconciliation.
+export function prepareComponentSetup(profile,state,locations) {
+  const arrangement=reconcileDistrictMap(profile,state,locations);
+  const clearedResearch=profile.components.filter(c=>c.groupId==='investigation'&&state.placements[c.id]&&(state.faces[c.id]||c.faces?.[0]?.id)==='investigation').map(c=>({componentId:c.id,zoneId:state.placements[c.id]}));
+  const removed=new Set(clearedResearch.map(c=>c.componentId));
+  return {...arrangement,changed:arrangement.changed||removed.size>0,placements:arrangement.placements.filter(p=>!removed.has(p.componentId)),clearedResearch};
+}
+
 function buildArrangement(profile, input, requireCharacters) {
   if (profile.gameId !== 'milan-uprising' || profile.campaignSetup?.version !== 1) throw Error('This profile does not support campaign setup');
   const placements = [], faces = [], used = new Set();
