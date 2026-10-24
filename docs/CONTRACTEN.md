@@ -89,6 +89,8 @@ Geen wijziging aan engine-, profiel- of saveversies. De bestaande gecorrigeerde 
 
 `createPollingWorker({run, interval, onState})` biedt een zelfstandige seriële achtergrondtaak. `start()` begint zonder browserverzoek; fouten worden gemeld en de volgende cyclus wordt opnieuw gepland. `stop()` wacht op de lopende cyclus en voorkomt vervolgruns. De private appadapter gebruikt deze generieke taak buiten engine en UI.
 
+`reconcileDistrictMap(profile, state, locations)` vereist alle stadsdistricten, uniek en met geldige factieaantallen. De pure builder vervangt uitsluitend invloed en controle, inclusief het verwijderen van overtollige oude onderdelen. Personages, onderzoek, locatietegels en andere categorieën worden hierdoor niet bevestigd of gewijzigd. Vier geplaatste personages zijn voor deze beperkte kaartovername niet vereist. Het resultaat gebruikt dezelfde atomaire opdracht en verandert niets bij herhaling; sessieformaat en engine blijven gelijk.
+
 ## Milan-module — locatietegels
 
 `setLocationTile(state, zones, {zoneId, kind, face, value, expectedRevision})` retourneert nieuwe `milan-location-tiles`-toestand. `kind` is bonus of special; `face` is unconfirmed, hidden of visible. Alleen stadsdistricten en bekende waarden zijn toegestaan. Projecties kopiëren de tegeldata. De stadstafel voegt deze moduletoestand optioneel als `locationTiles` aan de bestaande sessie-envelop toe; de engine blijft ongewijzigd. Zie [locatietegels](LOCATIETEGELS.md).

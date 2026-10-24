@@ -37,3 +37,11 @@ De melding over een nieuwe Fixer wordt als aankondiging herkend. Zonder plaatsin
 ## Haven-terugkoppeling
 
 De eerste Haven-implementatie herkende een volgend personage, maar niet de overgang van het laatste personage naar de dagfase. Die ontbrekende bevestigingsroute is toegevoegd en afzonderlijk getest. Een verstuurde Haven-bestemming blijft bewaard tot herkenbare bevestiging; ook een stabiel herkend dagfasescherm kan die bevestiging leveren. Latebra's eerder ontbrekende positie is op gebruikersaanwijzing naar Haven 3L hersteld; haar oorspronkelijke sensorbestemming was niet gelogd en is hiermee niet onafhankelijk bewezen.
+
+## Herstellen na het laden van een campagne
+
+Op 24 oktober 2026 bleek de opgeslagen digitale tafel nog de latere dagfasestand te bevatten terwijl Milan een oudere campagne laadde. De private adapter herkent nu het Engelse scherm **Scenario setup → Components setup** op de geverifieerde tabletresolutie. Hij leest alle dertig districten en controleert de invloed- en controletotalen afzonderlijk tegen de drie factielegenda's. Alleen twee overeenkomende volledige lezingen mogen de tafel vervangen. Ontbrekende aantallen, dubbele locaties of afwijkende totalen blokkeren de overname.
+
+Dit is live uitgevoerd: 22 controlefiches en 11 invloedstenen zijn uit het geladen opstellingsscherm overgenomen, inclusief het verwijderen van verouderde invloed. De zelfstandige achtergrondtaak deed dit zonder een bordbrowser. Een afzonderlijke proef met het vastgelegde tabletscherm controleert OCR, twee lezingen, herhaling, ongeldige waarnemingen en behoud van overige onderdelen. De echte bordpagina is in de browser gecontroleerd.
+
+Dit bewijst uitsluitend synchronisatie van **invloed en controle** in dit setupscherm. Personages, locatietegels en verhaalmarkers hebben afzonderlijke waarnemingen nodig. De bordpagina toont deze grens expliciet; oude posities in die categorieën mogen niet als geverifieerde geladen spelstand worden beschouwd. Er is nog geen volledige campagne-export vanuit de officiële app. Gameplaykaarten op Android krijgen niet automatisch dezelfde setupkalibratie: hun geometrie en ontbrekende legenda vereisen aparte verificatie. Herkende dag-, Sunset- en verplaatsingsinstructies blijven zelfstandig verwerkt worden.

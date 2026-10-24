@@ -1,5 +1,23 @@
 // Manual transcription of an app-directed arrangement, not an official start preset.
 export function buildCampaignArrangement(profile, input) {
+  return buildArrangement(profile, input, true);
+}
+
+// Reconcile only the categories explicitly visible on a complete district map.
+// Character, tile and story-marker positions require their own app evidence.
+export function reconcileDistrictMap(profile, state, locations) {
+  if (!Array.isArray(locations) || locations.length !== profile.zones.filter(z => z.area === 'city').length) throw Error('A complete district map is required');
+  const generated = buildArrangement(profile, {characters: [], locations: locations.map(l => ({...l, restricted: false})), otherPieces: []}, false);
+  const replaced = new Set(profile.components.filter(c => ['control', 'anarch-cubes', 'camarilla-cubes', 'ambrose-cubes'].includes(c.groupId)).map(c => c.id));
+  const placements = [...Object.entries(state.placements).filter(([id, zone]) => zone && !replaced.has(id)).map(([componentId, zoneId]) => ({componentId, zoneId})), ...generated.placements];
+  const faces = [...Object.entries(state.faces).filter(([id]) => !replaced.has(id)).map(([componentId, faceId]) => ({componentId, faceId})), ...generated.faces];
+  const next = Object.fromEntries(placements.map(p => [p.componentId, p.zoneId]));
+  const nextFaces = Object.fromEntries(faces.map(f => [f.componentId, f.faceId]));
+  const changed = profile.components.some(c => (state.placements[c.id] || null) !== (next[c.id] || null) || (state.faces[c.id] || c.faces?.[0]?.id || null) !== (nextFaces[c.id] || c.faces?.[0]?.id || null));
+  return {changed, placements, faces};
+}
+
+function buildArrangement(profile, input, requireCharacters) {
   if (profile.gameId !== 'milan-uprising' || profile.campaignSetup?.version !== 1) throw Error('This profile does not support campaign setup');
   const placements = [], faces = [], used = new Set();
   const components = new Map(profile.components.map(c => [c.id, c]));
@@ -11,7 +29,7 @@ export function buildCampaignArrangement(profile, input) {
     if (used.has(componentId)) throw Error('A component can only appear once in the setup');
     used.add(componentId); placements.push({ componentId, zoneId });
   };
-  if (!Array.isArray(input?.characters) || input.characters.length !== 4) throw Error('Choose exactly four different characters and their starting locations');
+  if (!Array.isArray(input?.characters) || (requireCharacters && input.characters.length !== 4)) throw Error('Choose exactly four different characters and their starting locations');
   for (const item of input.characters) place(item?.componentId, item?.zoneId, ['characters']);
   if (!Array.isArray(input.locations) || !Array.isArray(input.otherPieces)) throw Error('Missing location data');
   const cubeGroups = { anarchs: 'anarch-cubes', camarilla: 'camarilla-cubes', ambrose: 'ambrose-cubes' };

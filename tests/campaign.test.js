@@ -4,13 +4,38 @@ import { readFile } from 'node:fs/promises';
 import { createTabletop } from '../src/application/tabletop.js';
 import { validateProfile } from '../src/engine/profile.js';
 import { milanModule } from '../src/games/milan-uprising/module.js';
-import { buildCampaignArrangement } from '../src/games/milan-uprising/campaign-setup.js';
+import { buildCampaignArrangement, reconcileDistrictMap } from '../src/games/milan-uprising/campaign-setup.js';
 const profile = JSON.parse(await readFile(new URL('../data/games/milan-uprising/campaign.json', import.meta.url), 'utf8'));
 const setup = () => createTabletop({ profile, module: milanModule, random: () => 4 });
 const input = () => ({
   characters: ['brujah', 'gangrel', 'malkavian', 'nosferatu'].map((clan, i) => ({ componentId: `character-${clan}`, zoneId: ['haven-1l', 'haven-1r', 'haven-2l', 'haven-2r'][i] })),
   locations: profile.zones.filter(z => z.area === 'city').map(z => ({ zoneId: z.id, influence: { anarchs: 0, camarilla: 0, ambrose: 0 }, control: 'none', restricted: false })),
   otherPieces: [], masqueradeZoneId: ''
+});
+
+test('volledige districtsynchronisatie verwijdert oude invloed en controle, behoudt andere categorieën en werkt zonder vier spelers', () => {
+  const table = setup(), locations = input().locations;
+  table.place('character-brujah', 'haven-3l');
+  table.place('investigation-1', 'sempione');
+  table.place('influence-ambrose-1', 'sempione');
+  table.place('influence-ambrose-2', 'solari');
+  table.place(profile.components.find(c => c.groupId === 'control').id, 'duomo');
+  const before = table.snapshot();
+  locations.find(l => l.zoneId === 'solari').influence.ambrose = 1;
+  locations.find(l => l.zoneId === 'qt8').control = 'anarchs';
+  const arrangement = reconcileDistrictMap(profile, before, locations);
+  assert.equal(arrangement.changed, true); table.arrange(arrangement);
+  const after = table.snapshot();
+  assert.equal(after.placements['character-brujah'], 'haven-3l');
+  assert.equal(after.placements['investigation-1'], 'sempione');
+  assert.equal(profile.components.filter(c => c.groupId === 'ambrose-cubes' && after.placements[c.id]).length, 1);
+  assert.equal(profile.components.filter(c => c.groupId === 'control' && after.placements[c.id] === 'qt8').length, 1);
+  assert.equal(profile.components.filter(c => c.groupId === 'control' && after.placements[c.id] === 'duomo').length, 0);
+  assert.equal(reconcileDistrictMap(profile, after, locations).changed, false);
+  for (const invalid of [locations.slice(1), [...locations.slice(1), locations[1]], locations.map((l,i) => i ? l : {...l,influence:{anarchs:-1,camarilla:0,ambrose:0}})]) {
+    assert.throws(() => reconcileDistrictMap(profile, after, invalid));
+    assert.deepEqual(table.snapshot(), after);
+  }
 });
 
 test('stadskaart bevat alle dertig districtnamen en tien expliciet benoemde Havenvelden', () => {
