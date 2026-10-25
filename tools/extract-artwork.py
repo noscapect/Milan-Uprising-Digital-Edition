@@ -19,7 +19,7 @@ def normalized(value):
     return "".join(c for c in unicodedata.normalize("NFD", value).lower() if c.isascii() and c.isalnum())
 
 
-def extract(app_data):
+def extract(app_data, merge=False):
     profile = json.loads((ROOT / "data/games/milan-uprising/city.json").read_text(encoding="utf8"))
     output = ROOT / "private/artwork"
     images = output / "images"
@@ -40,6 +40,11 @@ def extract(app_data):
                    "rights": "No redistribution license verified. Local artwork is excluded from Git."},
         "assets": {}, "components": {}, "zones": {}, "groups": {}, "faces": {}, "branding": {},
     }
+    if merge and (output / 'manifest.json').exists():
+        existing = json.loads((output / 'manifest.json').read_text(encoding='utf8'))
+        if existing.get('format') != pack['format'] or existing.get('gameId') != pack['gameId'] or existing.get('schemaVersion') != 1:
+            raise ValueError('Incompatible local artwork manifest')
+        pack = existing
 
     def export(asset_id, name, width=None, height=None):
         candidates = [r for r in textures if normalized(r[2].m_Name) == normalized(name)
@@ -49,6 +54,10 @@ def extract(app_data):
             return None  # Never guess between different pictures or locations.
         filename, path_id, texture = candidates[0]
         destination = images / f"{asset_id}.png"
+        previous = pack['assets'].get(asset_id)
+        if merge and previous and destination.is_file() and previous.get('file') == destination.name:
+            if (previous.get('sourceFile'), previous.get('pathId'), previous.get('textureName')) == (filename, path_id, texture.m_Name) and hashlib.sha256(destination.read_bytes()).hexdigest() == previous.get('sha256'):
+                return asset_id
         texture.image.save(destination)  # Decode original pixels; no generated/repainted artwork.
         pack["assets"][asset_id] = {
             "file": destination.name, "label": name, "width": texture.m_Width, "height": texture.m_Height,
@@ -61,8 +70,18 @@ def extract(app_data):
         "character-brujah": "simona_ferrari", "character-gangrel": "rosa_de_lorenzo",
         "character-malkavian": "arianna_zanni", "character-nosferatu": "orlando_bianchi",
         "character-toreador": "latebra_uberto_ascheri", "character-tremere": "dante_brunieri",
-        "character-ventrue": "chao_yang_marco_hu", "ally-carabinieri-officer": "police_officer",
+        "character-ventrue": "chao_yang_marco_hu",
+        "character-hecata": "jamilah_ianni", "character-lasombra": "domenica_amato",
+        "character-ministry": "aristide_demiana", "character-tzimisce": "romeo_de_carlo",
+        "ally-carabinieri-officer": "police_officer",
         "ally-reporter": "reporter", "ghoul-con-artist": "con_artist", "ghoul-fixer": "fixer",
+        "ally-food-delivery-driver": "food_delivery_driver", "ally-paramedic": "paramedic",
+        "ally-taxi-driver": "taxi_driver", "ally-investigator": "investigator",
+        "ally-hacker": "hacker", "ally-real-estate-agent": "real_estate_agent",
+        "ghoul-blood-addict": "blood_addict", "ghoul-enforcer": "enforcer",
+        "ghoul-punk": "punk", "ghoul-burglar": "burglar", "ghoul-vagrant": "vagrant",
+        "npc-professor-jacopo-spano": "spano", "npc-rahim": "rahim",
+        "npc-andreu-la-torre": "latorre",
         "npc-agnese-della-luna": "agnese", "npc-hasanah": "hasanah", "npc-helena-varga": "helena",
         "npc-il-dottore": "dottore", "npc-lafcadio": "lafcadio", "npc-leandro-costa": "leandro",
         "npc-ruslana": "ruslana", "npc-salvador-espartelo": "salvador",
@@ -71,8 +90,33 @@ def extract(app_data):
         icon_width = 256 if component_id.startswith("character-") else 240
         icon_height = 255 if component_id.startswith("character-") else 240
         icon = export(f"{component_id}-icon", name, icon_width, icon_height)
-        detail = export(f"{component_id}-portrait", name, 614, 1024)
-        pack["components"][component_id] = {key: value for key, value in {"icon": icon, "detail": detail}.items() if value}
+        detail = export(f"{component_id}-portrait", name, 611 if name == 'latorre' else 614, 1024)
+        pack["components"].setdefault(component_id, {}).update({key: value for key, value in {"icon": icon, "detail": detail}.items() if value})
+    # These numbered IDs are our inventory slots, not an official numbering scheme.
+    extras = json.loads((ROOT / 'data/games/milan-uprising/expansions.json').read_text(encoding='utf8'))
+    shared = {
+        'faction-anarchs-': ('prop_anarchs', 128, 128),
+        'faction-camarilla-': ('prop_camarilla', 128, 128),
+        'faction-ambrose-': ('prop_inquisition', 128, 128),
+        'faction-sabbat-': ('prop_sabbat', 128, 128),
+        'influence-sabbat-': ('sabbat_cube', 72, 73),
+        'influence-nephilim-': ('nephilim_cube', 72, 73),
+    }
+    numbered = {'amulet-location': [('talismaninvestigation'+str(i),128,128) for i in range(1,5)],
+                'special-location': [('DuomoSpecialMM',128,128),('RipamontiSpecialMM',128,128)],
+                'npc-cult-fanatic': [('cultleader_'+kind,240,240) for kind in ['physical','social','mental','mixed']]}
+    for key, variants in numbered.items():
+        for i, (name,w,h) in enumerate(variants,1):
+            asset = export(f'{key}-{i}-icon', name, w, h)
+            if asset: pack['components'].setdefault(f'{key}-{i}', {})['icon'] = asset
+    for prefix,(name,w,h) in shared.items():
+        asset = export('expansion-'+name.replace('_','-'), name, w, h)
+        if asset:
+            for expansion in extras['packs']:
+                for component in expansion['components']:
+                    if component['id'].startswith(prefix):pack['components'].setdefault(component['id'], {})['icon'] = asset
+    helicopter = export('npc-military-helicopter-icon','helicopter',256,256)
+    if helicopter:pack['components'].setdefault('npc-military-helicopter', {})['icon'] = helicopter
     for zone in profile["zones"]:
         if zone.get("area") == "city":
             background = export(f"location-{zone['id']}", zone["label"], 1024, 576)
@@ -110,10 +154,11 @@ if __name__ == "__main__":
     default = Path(os.environ.get("LOCALAPPDATA", "")) / "Programs/Teburu/Milan Uprising/1.0.9/VTMTEBURU_v1.0.9/VTMTEBURU_Data"
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--app-data", type=Path, default=default)
+    parser.add_argument("--merge", action="store_true", help="Preserve previously exported local assets, including optional accessories")
     args = parser.parse_args()
     source = args.app_data.resolve()
     if not (source / "resources.assets").is_file() or not (source / "sharedassets0.assets").is_file():
         parser.error("Officiële appdata niet gevonden; geef --app-data op.")
     if source == (ROOT / "private/artwork").resolve():
         parser.error("Bron en uitvoer mogen niet hetzelfde zijn.")
-    extract(source)
+    extract(source, merge=args.merge)

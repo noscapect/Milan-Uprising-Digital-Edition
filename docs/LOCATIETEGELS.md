@@ -1,5 +1,13 @@
 # Locatiebonus en speciale locatietegels
 
+## Havenkamers links op het bord
+
+Sinds 25 oktober kunnen de tien Havenkamers ook een afzonderlijk kamertype, niveau (onbevestigd, standaard of upgraded) en actuele bonus bewaren. Voorheen waren deze kamers uitsluitend pixels in de vaste kaartafbeelding; daarmee konden upgrades of veranderde bonussen niet worden weergegeven. Dit staat los van het Haven-huissymbool op een stadsdistrict.
+
+Klik een Havenkamer aan en kopieer onder **Location → Haven room** het kamertype, niveau en de actuele bonus uit Milan. **Save current Haven bonus** bewaart de gegevens en toont de bonus direct op de kaart. De gekoppelde tafel deelt deze stand met de andere browsers via de bestaande tegelroute. Het wijzigen van de tekst gebruikt de kamer niet, koopt geen upgrade en wijzigt de officiële campagne niet. Zonder bevestigde gegevens staat op het bord **Bonus not copied from Milan**; er wordt geen bonus uit het achtergrondbeeld afgeleid.
+
+Automatische uitlezing van de tien actuele kamerstanden uit de officiële app is nog niet geïmplementeerd. Deze wijziging voegt expliciete kopieerbediening, weergave en opslag toe. De Havengegevens zitten optioneel in de bestaande `locationTiles`-opslag; oude exports blijven leesbaar. Testen controleren revisieconflicten, ongeldige kamer-ID’s, upgrade-/bonuswijzigingen, replay van de overige tafel, onveranderlijke projecties en expliciet onbekende bonussen. Alle 77 publieke tests en de desktop-/mobiele browserproef slagen.
+
 Kies een stadsdistrict op de kaart. Onder **Location → Board tiles** toont een kaartje het symbool, de betekenis en het gebruik van de getoonde tegel. **Flip tile** wisselt tussen achterzijde en symboolzijde. Om een nog onbekende tegel uit Milan over te nemen, open je **Copy or correct a tile**. De appinterface en de speluitleg zijn Engels, passend bij het spel; deze documentatie blijft Nederlands. Dezelfde uitleg werkt op de schematische kaart en via de gedeelde bordlink.
 
 De officiële handleiding beschrijft locatiebonussen en hun typen op pagina 7: Haven, Herd, Income, Media Office, Possible Haven, Secret Bar en Underground. Bron: [Game Manual](https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf). Er is geen volledige geverifieerde toewijzing van beide fysieke zijden aan ieder district ingebouwd. Een onbekende tegel blijft daarom **Nog niet ingesteld** of **Nog niet vastgesteld**. Het kiezen van een bonus voert de bijbehorende spelactie niet uit; dat blijft aan Milan.

@@ -26,7 +26,8 @@
         <div id="core-controls"><button id="register">Register demo miniature</button><button id="release">Release sensor</button><p id="core-status" role="status"></p></div>
         <div class="stock-heading"><h2>Components</h2><span id="stock-count"></span></div>
         <label for="inventory-group" class="sr-only">Category</label><select id="inventory-group"></select>
-        <label for="inventory-search" class="sr-only">Find component</label><input id="inventory-search" type="search" placeholder="Search name, clan or faction…">
+          <label for="inventory-expansion" class="sr-only">Expansion pack</label><select id="inventory-expansion" aria-label="Expansion pack" hidden></select>
+          <label for="inventory-search" class="sr-only">Find component</label><input id="inventory-search" type="search" placeholder="Search name, clan or faction…">
         <p id="inventory-count" class="muted"></p><div id="inventory" aria-label="Choose components"></div>
         <details class="small-details"><summary>About the components</summary><p id="inventory-note"></p></details>
       </section>
@@ -46,7 +47,7 @@
   </div>
   <dialog id="setup-dialog"><div class="dialog-header"><h2>Prepare campaign</h2><button data-close-dialog aria-label="Close campaign setup">Close</button></div><section id="campaign-setup" hidden></section></dialog>
   <dialog id="settings-dialog"><div class="dialog-header"><h2>Table settings</h2><button data-close-dialog aria-label="Close table settings">Close</button></div><div class="dialog-body">
-    <label for="profile">Table profile</label><select id="profile"><option value="city">Milan · verified city map 0.7</option><option value="campaign">Previous city map 0.6 · existing sessions</option><option value="retail">Retail base game · sensor grid</option><option value="table">Neutral tabletop</option><option value="interaction">Sensor interaction study</option><option value="demo">Original reference profile</option></select><button id="start-profile">Start an empty table with this profile</button><p>Starting a profile replaces the current session. Save anything you want to keep first.</p>
+    <label for="profile">Table profile</label><select id="profile"><option value="city">Milan · verified city map 0.7</option><option value="city-expansions">Milan · base game + 6 expansion packs</option><option value="campaign">Previous city map 0.6 · existing sessions</option><option value="retail">Retail base game · sensor grid</option><option value="table">Neutral tabletop</option><option value="interaction">Sensor interaction study</option><option value="demo">Original reference profile</option></select><button id="start-profile">Start an empty table with this profile</button><p>Starting a profile replaces the current session. Save anything you want to keep first.</p>
     <p id="artwork-status"></p><p id="board-note"></p><div id="content-info"><h3 id="content-title"></h3><p id="content-note"></p><nav id="content-sources" aria-label="Game content sources"></nav></div>
     <details id="map-reference" hidden><summary>Original map reference</summary><img id="original-map" alt="Original Milan map with city districts and Haven"></details>
     <p class="muted">Independent prototype. Full Teburu emulation is not proven. Click areas approximate the printed board; they do not define rules or sensor positions.</p>

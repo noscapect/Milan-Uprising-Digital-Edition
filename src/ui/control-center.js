@@ -13,7 +13,7 @@ async function refresh(){
     $('start-core').disabled=busy||latest.starting||core.running;
     $('stop-core').disabled=busy||latest.starting||!core.running;
     const firmware=core.firmware;
-    $('firmware-status').textContent=!firmware?'Start the updated PC Core service to read its simulated versions.':`Core ${firmware.core.reportedVersion} → ${firmware.core.targetVersion} · Dice ${firmware.dice.map(d=>d.reportedVersion).join(', ')} → ${firmware.dice[0]?.targetVersion} · ${firmware.phase==='completed'?'Simulation completed':firmware.phase==='interrupted'?'Previous simulation interrupted; retry available':firmware.phase==='updating'?'Updating simulation…':'Not updated'}`;
+    $('firmware-status').textContent=!firmware?'Start the updated PC Core service to read its simulated versions.':`Core ${firmware.core.reportedVersion} → ${firmware.core.targetVersion} · Dice ${firmware.dice.map(d=>d.reportedVersion).join(', ')} → ${firmware.dice[0]?.targetVersion} · ${firmware.phase==='completed'?(firmware.updateRequired?'New simulation available':'Simulation completed'):firmware.phase==='interrupted'?'Previous simulation interrupted; retry available':firmware.phase==='updating'?'Updating simulation…':'Not updated'}`;
     $('simulate-firmware').disabled=busy||!firmware||firmware.phase==='updating'||!firmware.updateRequired;
     const share=latest.share;
     $('remote-details').hidden=!share?.available;$('remote-unavailable').hidden=!!share?.available;

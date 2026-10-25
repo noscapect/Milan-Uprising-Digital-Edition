@@ -127,6 +127,10 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
   $('inventory-note').textContent = initial.title ? 'Names and quantities are checked against retail sources. Local artwork is optional; symbols are used without it. Follow the official app for setup.' : 'Neutral demo stock. Quantities and zone capacity do not represent verified Milan inventory or rules.';
   $('inventory-search').value = '';
   $('inventory').dataset.catalog = String(Boolean(initial.title));
+  const packs=[...new Map(initial.components.filter(c=>c.expansionId).map(c=>[c.expansionId,c.expansionLabel])).entries()];
+  $('inventory-expansion').hidden=!packs.length;
+  $('inventory-expansion').replaceChildren(...[['all','Base game + all expansions'],['base','Base game'],...packs].map(([id,label])=>{const option=document.createElement('option');option.value=id;option.textContent=label;return option;}));
+  $('inventory-expansion').value='all';
   const groups = [{ id: 'all', label: 'All components' }, ...initial.componentGroups];
   $('inventory-group').replaceChildren(...groups.map(group => {
     const option = document.createElement('option'); option.value = group.id;
@@ -182,7 +186,8 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     const activeInventory = document.activeElement?.dataset.component;
     const normalized = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('en');
     const query = normalized($('inventory-search').value.trim());
-    const filtered = view.components.filter(component => ($('inventory-group').value === 'all' || component.groupId === $('inventory-group').value) && normalized(`${component.label} ${component.faceLabel || ''}`).includes(query));
+    const pack=$('inventory-expansion').value;
+    const filtered = view.components.filter(component => (pack==='all'||(pack==='base'?!component.expansionId:component.expansionId===pack)) && ($('inventory-group').value === 'all' || component.groupId === $('inventory-group').value) && normalized(`${component.label} ${component.faceLabel || ''}`).includes(query));
     $('inventory-count').textContent = filtered.length ? `${filtered.length} components shown` : 'No components found. Change the category or search term.';
     $('inventory').replaceChildren(...filtered.map(component => {
       const button = document.createElement('button'); button.type = 'button'; button.dataset.component = component.id;
@@ -230,6 +235,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     $('inventory-search').value = ''; placing = true; update();
   };
   $('inventory-group').onchange = update;
+  $('inventory-expansion').onchange = ()=>{$('inventory-group').value='all';update();};
   $('inventory-search').oninput = update;
   $('flip').onclick = () => act(() => { if (core) throw Error('Token flipping is only available on the manual table'); tabletop.flip($('piece').value); }, 'Token flipped.');
   $('remove').onclick = () => act(() => { if (core?.snapshot().contact) throw Error('Release the sensor contact first'); tabletop.remove($('piece').value); }, 'Selected component returned to stock.');

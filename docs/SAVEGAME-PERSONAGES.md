@@ -8,6 +8,8 @@ Een door Milan bevestigde plaatsing haalt de miniatuur uit de beschikbare strook
 
 ## Fysieke handeling op het virtuele bord
 
+De miniaturenstrook links is sinds 25 oktober alleen zichtbaar bij een actueel scanverzoek: personages bij personagekeuze, bondgenoten/ghouls bij een bijbehorend verzoek. Zodra de keuze voltooid is of het spel begint, verdwijnt de ongebruikte voorraad uit deze strook, ook als de savegroep nog niet leesbaar is. Tijdens plaatsing blijft alleen de zojuist gelezen miniatuur op de Core zichtbaar. Een lege strook neemt geen ruimte naast het bord in. De volledige voorraad blijft bereikbaar via Pieces/Stock. Deze weergavekeuze verandert geen registratie of bordpositie.
+
 Sleep een miniatuur uit de wachtrij naast het bord naar de Core-lezer. Dit is een tijdelijk lezercontact, geen blijvende spelpositie. Daarna sleep je het gelezen personage naar de locatie die Milan aanwijst. De adapter bewaart die positie pas na een herkende appbevestiging. Een personage mag opnieuw dezelfde bestemming krijgen: een oude bordpositie vervangt geen nieuw sensorcontact. Klikken op een scanknop blijft een toegankelijk alternatief.
 
 De opgeslagen groep komt uit profielmetadata die de private Android-adapter via de geautoriseerde USB-verbinding leest. De officiële app en savebestanden worden niet gewijzigd. Bij onleesbare metadata blijft de laatst bekende groep adviserend zichtbaar; een ingeschakelde Core-lezer blijft bruikbaar. Onbekende bestandsformaten worden niet op basis van vermoedens geïnterpreteerd.

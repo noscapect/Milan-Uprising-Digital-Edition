@@ -1,5 +1,9 @@
 # Contracten v1 — eerste doorsnede
 
+## Uitbreidingsvoorraad 0.8
+
+`withExpansions(base, catalog, selected)` voegt uitsluitend de gekozen Milan-voorraden toe op een kopie van het basisprofiel. Componenten krijgen een `expansionId` en presentatielabel; generieke zone-/componentopdrachten blijven gelijk. Het uitgebreide profiel heeft een eigen release-ID en pakketversie. `extendTableSession` is een expliciete additieve conversie van onze eigen basisbordexports, met validatie en replay vóór en na conversie. De gewone import blijft profielgebonden. Zie [pakketten, bediening en private adaptergrenzen](UITBREIDINGEN.md).
+
 ## Uitbreiding 0.6 — benoemde kaart en atomaire opstelling
 
 Afzonderlijk pakket `milan-city` versie `0.6.0`, profielschema 2. De retail- en demopakketten blijven behouden. Zones hebben optioneel `area` (ID), `attributes` (unieke IDs) en `sourceId` (bestaande bron). De presentatie kiest een eigen schematische indeling; deze velden maken geen sensorprotocol of aangrenzendheidsgraaf. `boardEvidence` en `campaignSetup` zijn versie-1-Milan-metadata; officiële beginstand en sensormapping zijn daarin expliciet onbewezen. Zie KAART-EN-OPSTELLING.md.

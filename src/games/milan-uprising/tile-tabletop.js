@@ -5,6 +5,7 @@ export function withLocationTiles(tabletop,profile){
     project:()=>decorateLocationTiles(tabletop.project(),tiles),
     subscribe:listener=>{listeners.add(listener);const off=tabletop.subscribe(listener);return()=>{listeners.delete(listener);off();};},
     setLocationTile:async(zoneId,kind,tile)=>{tiles=setLocationTile(tiles,profile.zones,{zoneId,kind,...tile,expectedRevision:tiles.revision});for(const listener of listeners)listener();},
+    setHavenRoom:async(zoneId,room)=>{tiles=setLocationTile(tiles,profile.zones,{zoneId,kind:'haven-room',room,expectedRevision:tiles.revision});for(const listener of listeners)listener();},
     exportSession:()=>({...tabletop.exportSession(),locationTiles:structuredClone(tiles)}),
     restoreSession:saved=>{const next=saved.locationTiles?validateLocationTiles(saved.locationTiles,profile.zones):emptyLocationTiles();tabletop.restoreSession(saved);tiles=next;for(const listener of listeners)listener();}
   };

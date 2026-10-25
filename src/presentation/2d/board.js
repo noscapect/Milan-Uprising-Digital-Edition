@@ -2,6 +2,7 @@ import { artworkImage } from '../artwork.js';
 import { milanMap } from './milan-map.js';
 import {describeLocationTile} from '../../games/milan-uprising/location-tile-info.js';
 import {tileSymbol} from './tile-symbol.js';
+import {havenRoomLabel} from '../../games/milan-uprising/haven-rooms.js';
 
 function pieceElement(component, index, options, interactive = false) {
   const piece = document.createElement(interactive ? 'button' : 'span');
@@ -99,6 +100,10 @@ function renderMap(container, projection, onZone, options) {
 }
 function tileBadges(zone){
   const badges=document.createElement('span');badges.className='location-tile-badges';
+  if(zone.area==='haven'){
+    const info=havenRoomLabel(zone.havenRoom),badge=document.createElement('span');badge.className='haven-room-badge';badge.dataset.confirmed=String(!!zone.havenRoom?.bonus);
+    badge.textContent=info.bonus;badge.title=info.title+' · '+info.bonus;badges.append(badge);
+  }
   for(const [kind,tile]of Object.entries(zone.locationTiles||{})){
     if(tile.face!=='visible')continue;
     const badge=document.createElement('span');badge.className='location-tile-badge';badge.dataset.tileKind=kind;

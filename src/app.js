@@ -7,7 +7,7 @@ import { mountTabletop } from './ui/controller.js';
 import { mountCampaignSetup } from './ui/campaign-setup.js';
 import {withLocationTiles} from './games/milan-uprising/tile-tabletop.js';
 try {
-  const names = ['city', 'campaign', 'retail', 'table', 'interaction', 'demo'];
+  const names = ['city', 'city-expansions', 'campaign', 'retail', 'table', 'interaction', 'demo'];
   const profiles = await Promise.all(names.map(async name => {
     const response = await fetch(`./data/games/milan-uprising/${name}.json`);
     if (!response.ok) throw Error('Failed to load game data');
@@ -22,9 +22,10 @@ try {
     const simulation = document.getElementById('profile').value === 'interaction';
     const profile = profiles[names.indexOf(document.getElementById('profile').value)];
     const baseTable = createTabletop({ profile, module:milanModule, random:cryptoDie });
-    const tabletop = document.getElementById('profile').value === 'city' ? withLocationTiles(baseTable,profile) : baseTable;
+    const city = ['city','city-expansions'].includes(document.getElementById('profile').value);
+    const tabletop = city ? withLocationTiles(baseTable,profile) : baseTable;
     const core = simulation ? createVirtualCore(tabletop, Object.fromEntries(profile.zones.map(zone => [zone.id, zone.id]))) : null;
-    const refresh = mountTabletop(tabletop, downloadSession, core, artwork, document.getElementById('profile').value === 'city');
+    const refresh = mountTabletop(tabletop, downloadSession, core, artwork, city);
     dispose = refresh.dispose;
     mountCampaignSetup(profile, tabletop, refresh);
     document.getElementById('open-setup').disabled = !profile.campaignSetup;

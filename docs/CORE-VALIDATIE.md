@@ -37,7 +37,7 @@ De private offline runner compileert dezelfde Core-bron als de adapter, zonder W
 | Veertig tijdelijke contacten | Alle afzonderlijk, samen en onafhankelijk vrijgeven | Enkele bestemmingen bevestigd |
 | Personage aanbieden | Scanvoorwaarden, annuleren, zeven synthetische selecties | Vier personages geregistreerd |
 | Radio-instellingen | Bevestiging en interne toestand | Verbinding bewezen; geen bewijs van volledige hardwaredekking |
-| Lichtopdrachten | Ontvangen opdracht veilig uitleesbaar | Nog geen zichtbare reproductie |
+| LED-ring / lichtopdrachten | Ringmelding met eigen identiteit, oorspronkelijke SDK-decoder, virtueel Bluetooth-transport en beperkte kleurprojectie | Gebruiker bevestigt op 25 oktober **Connected** bij Prospero; volledige animaties blijven open. Zie [Prospero](PROSPERO.md). |
 | Vijf virtuele fysieke d10's | Eigen vaste identiteiten, groeps- en selectieworpen, oorspronkelijke SDK-callbacks en virtueel Bluetooth-transport | Alle vijf herkend op het setupscherm; spelchecks nog toetsen |
 | Firmware bijwerken / tags schrijven | Expliciet niet ondersteund | Normale appoptie om zonder update door te gaan gebruikt |
 | Invloed en blijvende pionpositie | Afzonderlijke terugkoppeladapter | Android-kaartoverdracht nog onvolledig |
@@ -56,6 +56,12 @@ De virtuele Bluetooth-test ontdekte dat langere berichten bij de standaard pakke
 De aansluitende fysieke proef met de ongewijzigde Android-app bevestigt herkenning van de eerste virtuele d10 op het setupscherm en een zichtbare verandering van één naar vijf bij de tweede worp. Na het laden van de uitbreiding toont hetzelfde officiële setupscherm alle vijf de dobbelstenen, met dezelfde vijf waarden als de private pc-Core. De app toont firmware- en batterijwaarschuwingen doordat de virtuele dice hiervoor nog geen bruikbare telemetrie aanbieden. Dit bewijst geen geslaagde spelcheck, groepscheck of campagneopslag.
 
 ## Gerichte acceptatie na de hardwaretests
+
+### Onderzoeksfiche op de Android-kaart — 25 oktober
+
+Een werkelijk zichtbaar onderzoeksfiche voor Cinque Giornate werd ten onrechte aan Buenos Aires gekoppeld: de app plaatst het fiche boven de gewone locatiepositie, waardoor de fysieke kaartpolygonen geen betrouwbare toewijzing geven. De private herkenner gebruikt hiervoor nu afzonderlijke, begrensde markerankers binnen de al gecontroleerde Android-kaartgeometrie. De actuele Cinque Giornate-opname en de eerdere Washington-opnamen, inclusief de opstellingsvariant, slagen als regressieproef.
+
+Stabiliteit van onderzoeksfiches wordt afzonderlijk van portretherkenning gecontroleerd, zodat een bewegend of afgedekt portret hun overname niet blokkeert. Alleen herhaald positief waargenomen fiches worden toegevoegd; een onleesbare of ontbrekende afbeelding verwijdert geen bestaande fiches. De foutieve lokale plaatsing is met een vooraf bewaarde tafelkopie gecorrigeerd, zonder andere posities of de officiële campagne te wijzigen. De levende pc-tafel en browser tonen nu één onderzoeksfiche op Cinque Giornate. Herhalen voegt geen duplicaat toe; alle 75 publieke tests slagen. Dit blijft beperkt tot de gecontroleerde Android-kaartweergave.
 
 ### Opstelling bij een nieuwe campagne
 

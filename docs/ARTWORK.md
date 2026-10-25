@@ -4,6 +4,12 @@ De geïnstalleerde officiële Windows-app 1.0.9 bevat leesbare Unity-textures. D
 
 ## Bestanden en starten
 
+Op 25 oktober zijn voor de vier personages uit Playable Characters ook de originele iconen en volledige portretten toegevoegd: Jamilah Ianni, Domenica Amato, Aristide Demiana en Romeo De Carlo. De acht beelden blijven onder `private/artwork/`; de bestaande kaart-, basispersonage-, dice- en Prospero-beelden zijn behouden. De voorbereidingstool neemt deze vier personages voortaan eveneens mee. Herlaad de bordpagina na het bijwerken en herstarten van de lokale artworkserver.
+
+Daarna zijn ook alle overige uitbreidingsonderdelen gekoppeld: de elf nieuwe bondgenoten/ghouls hebben een icoon én volledig portret, en de NPC’s, factiecontroleminiaturen, Sabbat-/Nephilim-kubussen, vier amuletmarkers en twee speciale locatiefiches hebben hun beschikbare originele iconen. Alle 101 uitbreidingsonderdelen hebben nu een beeldkoppeling. De lokale catalogus bevat in totaal 136 afbeeldingen, inclusief de eerder toegevoegde dice- en Prospero-accessoires. Niet iedere NPC heeft een afzonderlijk groot portret in deze selectie; waar dat ontbreekt gebruikt de detailweergave het icoon.
+
+De nummering van amuletmarkers, speciale locatiefiches en de vier Cult Fanatic-varianten is onze voorraadnummering, geen geverifieerde officiële fysieke nummering of automatische locatietoewijzing. De beelden bepalen geen regels of plaatsing. Voor bijwerken met behoud van eerder toegevoegde accessoires ondersteunt de voorbereidingstool `--merge`.
+
 De beelden en het bronmanifest staan uitsluitend in `private/artwork/`, dat door Git wordt genegeerd. Op deze computer zijn ze al aanwezig. Start `node server.mjs` en open http://127.0.0.1:5178. Herstart de server na een nieuwe export. Zonder dit pakket werkt de demo met de bestaande symbolen, zonder Python of andere externe runtime-dependencies.
 
 Voor een eigen lokale installatie is er de optionele voorbereidingstool:

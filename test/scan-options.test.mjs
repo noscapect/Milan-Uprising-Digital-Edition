@@ -30,3 +30,15 @@ test('een bevestigde savegroep en een bondgenootverzoek behouden hun eigen scana
   assert.deepEqual(waitingMiniatures(components,{screen:'character-scan',roster}),[oldGroup[1].componentId]);
   assert.deepEqual(waitingMiniatures(components,{screen:'companion-scan',roster}),components.filter(c=>['allies','ghouls'].includes(c.groupId)).map(c=>c.id));
 });
+
+test('ongebruikte personages blijven weg zodra de app niet meer om een scan vraagt',()=>{
+  for(const screen of ['location','city-map','day-summary','night-summary','sunset-summary','haven-placement','setup-characters-complete','components-setup','board-tiles-setup','hardware-setup','other','error','unavailable',undefined]){
+    for(const roster of [undefined,{ready:false,characters:[]},{ready:true,characters:oldGroup}])assert.deepEqual(waitingMiniatures(components,{screen,roster}),[],String(screen));
+  }
+});
+
+test('plaatsing toont geen extra keuzeminiaturen; een volgend scanverzoek opent de relevante voorraad',()=>{
+  for(const screen of ['setup-placement','setup-placement-reading','component-placement'])assert.deepEqual(waitingMiniatures(components,{screen,currentId:ids[0]}),[]);
+  assert.deepEqual(waitingMiniatures(components,{screen:'character-scan'}),ids);
+  assert.ok(waitingMiniatures(components,{screen:'companion-scan'}).every(id=>!ids.includes(id)));
+});

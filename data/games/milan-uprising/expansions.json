@@ -1,0 +1,1096 @@
+{
+  "schemaVersion": 1,
+  "version": "0.8.0",
+  "sources": [
+    {
+      "id": "expansion-inventory",
+      "title": "Xplored · expansion components",
+      "url": "https://teburu.zendesk.com/hc/en-us/articles/25458904976667-Physical-components-VTM"
+    },
+    {
+      "id": "expansion-characters",
+      "title": "Xplored · Milan Uprising characters",
+      "url": "https://games.teburu.com/vtm-milan-uprising"
+    }
+  ],
+  "componentGroups": [
+    {
+      "id": "faction-miniatures",
+      "label": "Faction Control miniatures",
+      "description": "Place as instructed by the official app."
+    },
+    {
+      "id": "amulet-locations",
+      "label": "Amulet locations",
+      "description": "Place as instructed by the official app."
+    },
+    {
+      "id": "special-locations",
+      "label": "Special locations",
+      "description": "Place as instructed by the official app."
+    },
+    {
+      "id": "sabbat-control",
+      "label": "Sabbat Control miniatures",
+      "description": "Place as instructed by the official app."
+    },
+    {
+      "id": "sabbat-cubes",
+      "label": "Influence · Sabbat",
+      "description": "Place as instructed by the official app."
+    },
+    {
+      "id": "nephilim-cubes",
+      "label": "Influence · Cult of Nephilim",
+      "description": "Place as instructed by the official app."
+    }
+  ],
+  "packs": [
+    {
+      "id": "faction-miniatures",
+      "label": "Faction Miniatures",
+      "components": [
+        {
+          "id": "faction-anarchs-1",
+          "label": "Anarchs · Control miniature 1",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·1",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-2",
+          "label": "Anarchs · Control miniature 2",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·2",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-3",
+          "label": "Anarchs · Control miniature 3",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·3",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-4",
+          "label": "Anarchs · Control miniature 4",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·4",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-5",
+          "label": "Anarchs · Control miniature 5",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·5",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-6",
+          "label": "Anarchs · Control miniature 6",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·6",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-7",
+          "label": "Anarchs · Control miniature 7",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·7",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-8",
+          "label": "Anarchs · Control miniature 8",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·8",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-9",
+          "label": "Anarchs · Control miniature 9",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·9",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-10",
+          "label": "Anarchs · Control miniature 10",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·10",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-11",
+          "label": "Anarchs · Control miniature 11",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·11",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-12",
+          "label": "Anarchs · Control miniature 12",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·12",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-13",
+          "label": "Anarchs · Control miniature 13",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·13",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-14",
+          "label": "Anarchs · Control miniature 14",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·14",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-15",
+          "label": "Anarchs · Control miniature 15",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·15",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-16",
+          "label": "Anarchs · Control miniature 16",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·16",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-17",
+          "label": "Anarchs · Control miniature 17",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·17",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-18",
+          "label": "Anarchs · Control miniature 18",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·18",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-19",
+          "label": "Anarchs · Control miniature 19",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·19",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-anarchs-20",
+          "label": "Anarchs · Control miniature 20",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#ad433d",
+          "shortLabel": "A·20",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-1",
+          "label": "Camarilla · Control miniature 1",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·1",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-2",
+          "label": "Camarilla · Control miniature 2",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·2",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-3",
+          "label": "Camarilla · Control miniature 3",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·3",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-4",
+          "label": "Camarilla · Control miniature 4",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·4",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-5",
+          "label": "Camarilla · Control miniature 5",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·5",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-6",
+          "label": "Camarilla · Control miniature 6",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·6",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-7",
+          "label": "Camarilla · Control miniature 7",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·7",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-8",
+          "label": "Camarilla · Control miniature 8",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·8",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-9",
+          "label": "Camarilla · Control miniature 9",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·9",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-10",
+          "label": "Camarilla · Control miniature 10",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·10",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-11",
+          "label": "Camarilla · Control miniature 11",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·11",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-12",
+          "label": "Camarilla · Control miniature 12",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·12",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-13",
+          "label": "Camarilla · Control miniature 13",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·13",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-14",
+          "label": "Camarilla · Control miniature 14",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·14",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-15",
+          "label": "Camarilla · Control miniature 15",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·15",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-16",
+          "label": "Camarilla · Control miniature 16",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·16",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-17",
+          "label": "Camarilla · Control miniature 17",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·17",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-18",
+          "label": "Camarilla · Control miniature 18",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·18",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-19",
+          "label": "Camarilla · Control miniature 19",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·19",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-camarilla-20",
+          "label": "Camarilla · Control miniature 20",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#79579c",
+          "shortLabel": "C·20",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-1",
+          "label": "Hand of St. Ambrose · Control miniature 1",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho1",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-2",
+          "label": "Hand of St. Ambrose · Control miniature 2",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho2",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-3",
+          "label": "Hand of St. Ambrose · Control miniature 3",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho3",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-4",
+          "label": "Hand of St. Ambrose · Control miniature 4",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho4",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-5",
+          "label": "Hand of St. Ambrose · Control miniature 5",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho5",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-6",
+          "label": "Hand of St. Ambrose · Control miniature 6",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho6",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-7",
+          "label": "Hand of St. Ambrose · Control miniature 7",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho7",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-8",
+          "label": "Hand of St. Ambrose · Control miniature 8",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho8",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-9",
+          "label": "Hand of St. Ambrose · Control miniature 9",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho9",
+          "expansionId": "faction-miniatures"
+        },
+        {
+          "id": "faction-ambrose-10",
+          "label": "Hand of St. Ambrose · Control miniature 10",
+          "kind": "piece",
+          "groupId": "faction-miniatures",
+          "sourceId": "expansion-inventory",
+          "color": "#c6a346",
+          "shortLabel": "Ho10",
+          "expansionId": "faction-miniatures"
+        }
+      ]
+    },
+    {
+      "id": "allies-ghouls",
+      "label": "Allies & Ghouls",
+      "components": [
+        {
+          "id": "ally-food-delivery-driver",
+          "label": "Food Delivery Driver",
+          "kind": "piece",
+          "groupId": "allies",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "FD",
+          "expansionId": "allies-ghouls"
+        },
+        {
+          "id": "ally-paramedic",
+          "label": "Paramedic",
+          "kind": "piece",
+          "groupId": "allies",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "P",
+          "expansionId": "allies-ghouls"
+        },
+        {
+          "id": "ally-taxi-driver",
+          "label": "Taxi Driver",
+          "kind": "piece",
+          "groupId": "allies",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "TD",
+          "expansionId": "allies-ghouls"
+        },
+        {
+          "id": "ghoul-blood-addict",
+          "label": "Blood Addict",
+          "kind": "piece",
+          "groupId": "ghouls",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "BA",
+          "expansionId": "allies-ghouls"
+        },
+        {
+          "id": "ghoul-enforcer",
+          "label": "Enforcer",
+          "kind": "piece",
+          "groupId": "ghouls",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "E",
+          "expansionId": "allies-ghouls"
+        },
+        {
+          "id": "ghoul-punk",
+          "label": "Punk",
+          "kind": "piece",
+          "groupId": "ghouls",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "P",
+          "expansionId": "allies-ghouls"
+        }
+      ]
+    },
+    {
+      "id": "playable-characters",
+      "label": "Playable Characters",
+      "components": [
+        {
+          "id": "character-hecata",
+          "label": "Jamilah Ianni · Hecata",
+          "kind": "piece",
+          "groupId": "characters",
+          "sourceId": "expansion-characters",
+          "color": "#657e85",
+          "shortLabel": "JI",
+          "expansionId": "playable-characters"
+        },
+        {
+          "id": "character-lasombra",
+          "label": "Domenica Amato · Lasombra",
+          "kind": "piece",
+          "groupId": "characters",
+          "sourceId": "expansion-characters",
+          "color": "#657e85",
+          "shortLabel": "DA",
+          "expansionId": "playable-characters"
+        },
+        {
+          "id": "character-ministry",
+          "label": "Aristide Demiana · Ministry",
+          "kind": "piece",
+          "groupId": "characters",
+          "sourceId": "expansion-characters",
+          "color": "#657e85",
+          "shortLabel": "AD",
+          "expansionId": "playable-characters"
+        },
+        {
+          "id": "character-tzimisce",
+          "label": "Romeo De Carlo · Tzimisce",
+          "kind": "piece",
+          "groupId": "characters",
+          "sourceId": "expansion-characters",
+          "color": "#657e85",
+          "shortLabel": "RC",
+          "expansionId": "playable-characters"
+        }
+      ]
+    },
+    {
+      "id": "mystical-milan",
+      "label": "Mystical Milan",
+      "components": [
+        {
+          "id": "ally-investigator",
+          "label": "Investigator",
+          "kind": "piece",
+          "groupId": "allies",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "I",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "ghoul-burglar",
+          "label": "Burglar",
+          "kind": "piece",
+          "groupId": "ghouls",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "B",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "npc-professor-jacopo-spano",
+          "label": "Professor Jacopo Spanò",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "PJ",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "npc-military-helicopter",
+          "label": "Military Helicopter",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "MH",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "amulet-location-1",
+          "label": "Amulet location 1",
+          "kind": "token",
+          "groupId": "amulet-locations",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "Al1",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "amulet-location-2",
+          "label": "Amulet location 2",
+          "kind": "token",
+          "groupId": "amulet-locations",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "Al2",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "amulet-location-3",
+          "label": "Amulet location 3",
+          "kind": "token",
+          "groupId": "amulet-locations",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "Al3",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "amulet-location-4",
+          "label": "Amulet location 4",
+          "kind": "token",
+          "groupId": "amulet-locations",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "Al4",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "special-location-1",
+          "label": "Special location 1",
+          "kind": "token",
+          "groupId": "special-locations",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "Sl1",
+          "expansionId": "mystical-milan"
+        },
+        {
+          "id": "special-location-2",
+          "label": "Special location 2",
+          "kind": "token",
+          "groupId": "special-locations",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "Sl2",
+          "expansionId": "mystical-milan"
+        }
+      ]
+    },
+    {
+      "id": "prosperos-legacy",
+      "label": "Prospero's Legacy",
+      "components": [
+        {
+          "id": "ally-hacker",
+          "label": "Hacker",
+          "kind": "piece",
+          "groupId": "allies",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "H",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "faction-sabbat-1",
+          "label": "Sabbat · Control miniature 1",
+          "kind": "piece",
+          "groupId": "sabbat-control",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·1",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "faction-sabbat-2",
+          "label": "Sabbat · Control miniature 2",
+          "kind": "piece",
+          "groupId": "sabbat-control",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·2",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "faction-sabbat-3",
+          "label": "Sabbat · Control miniature 3",
+          "kind": "piece",
+          "groupId": "sabbat-control",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·3",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "faction-sabbat-4",
+          "label": "Sabbat · Control miniature 4",
+          "kind": "piece",
+          "groupId": "sabbat-control",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·4",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "faction-sabbat-5",
+          "label": "Sabbat · Control miniature 5",
+          "kind": "piece",
+          "groupId": "sabbat-control",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·5",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "faction-sabbat-6",
+          "label": "Sabbat · Control miniature 6",
+          "kind": "piece",
+          "groupId": "sabbat-control",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·6",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "influence-sabbat-1",
+          "label": "Sabbat · Influence 1",
+          "kind": "cube",
+          "groupId": "sabbat-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·1",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "influence-sabbat-2",
+          "label": "Sabbat · Influence 2",
+          "kind": "cube",
+          "groupId": "sabbat-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·2",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "influence-sabbat-3",
+          "label": "Sabbat · Influence 3",
+          "kind": "cube",
+          "groupId": "sabbat-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·3",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "influence-sabbat-4",
+          "label": "Sabbat · Influence 4",
+          "kind": "cube",
+          "groupId": "sabbat-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·4",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "influence-sabbat-5",
+          "label": "Sabbat · Influence 5",
+          "kind": "cube",
+          "groupId": "sabbat-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·5",
+          "expansionId": "prosperos-legacy"
+        },
+        {
+          "id": "influence-sabbat-6",
+          "label": "Sabbat · Influence 6",
+          "kind": "cube",
+          "groupId": "sabbat-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#49746d",
+          "shortLabel": "S·6",
+          "expansionId": "prosperos-legacy"
+        }
+      ]
+    },
+    {
+      "id": "unending-dream",
+      "label": "The Unending Dream",
+      "components": [
+        {
+          "id": "ally-real-estate-agent",
+          "label": "Real Estate Agent",
+          "kind": "piece",
+          "groupId": "allies",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "RE",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "ghoul-vagrant",
+          "label": "Vagrant",
+          "kind": "piece",
+          "groupId": "ghouls",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "V",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-1",
+          "label": "Cult of Nephilim · Influence 1",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co1",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-2",
+          "label": "Cult of Nephilim · Influence 2",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co2",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-3",
+          "label": "Cult of Nephilim · Influence 3",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co3",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-4",
+          "label": "Cult of Nephilim · Influence 4",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co4",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-5",
+          "label": "Cult of Nephilim · Influence 5",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co5",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-6",
+          "label": "Cult of Nephilim · Influence 6",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co6",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-7",
+          "label": "Cult of Nephilim · Influence 7",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co7",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-8",
+          "label": "Cult of Nephilim · Influence 8",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co8",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-9",
+          "label": "Cult of Nephilim · Influence 9",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co9",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "influence-nephilim-10",
+          "label": "Cult of Nephilim · Influence 10",
+          "kind": "cube",
+          "groupId": "nephilim-cubes",
+          "sourceId": "expansion-inventory",
+          "color": "#7594a3",
+          "shortLabel": "Co10",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "npc-andreu-la-torre",
+          "label": "Andreu La Torre",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "AL",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "npc-rahim",
+          "label": "Rahim",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "R",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "npc-cult-fanatic-1",
+          "label": "Cult Fanatic 1",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "CF1",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "npc-cult-fanatic-2",
+          "label": "Cult Fanatic 2",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "CF2",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "npc-cult-fanatic-3",
+          "label": "Cult Fanatic 3",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "CF3",
+          "expansionId": "unending-dream"
+        },
+        {
+          "id": "npc-cult-fanatic-4",
+          "label": "Cult Fanatic 4",
+          "kind": "token",
+          "groupId": "npcs",
+          "sourceId": "expansion-inventory",
+          "color": "#657e85",
+          "shortLabel": "CF4",
+          "expansionId": "unending-dream"
+        }
+      ]
+    }
+  ]
+}
