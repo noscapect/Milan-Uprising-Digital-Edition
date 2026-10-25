@@ -10,4 +10,6 @@ Dit is geen volledige save-import. De officiële app levert via deze koppeling g
 
 Een zichtbare **Next Encounter in …**-melding kan nu ook het bijbehorende [onderzoeksfiche herstellen](ONDERZOEKFICHES-SYNC.md). Zonder zo'n ondersteunde instructie worden onderzoeksposities niet uit oude campagnes teruggehaald.
 
+Aanvulling op 25 oktober: de [gewone stadskaart kan nu ook positief herkende controlefiches en zichtbare onderzoeksiconen herstellen](KAARTHERSTEL.md). Volledig leesbare personageportretten kunnen ontbrekende posities aanvullen; gestapelde of verborgen onderdelen blijven onvolledig. Toon de stadskaart na een reset en laat hem even openstaan voor de aanvullende beeldlezing.
+
 Verificatie: de headless tests controleren tegelreset en afwijzing van oude revisies. De LAN-test controleert authenticatie, oorsprong en doorsturen van de reset. Een geïsoleerde private adapterproef controleert een lege opgeslagen tafel, herstelkopie, alleen sensorvrijgave, opnieuw inlezen van een opgenomen Android-opstelling en het behoud van nieuwe markers binnen dezelfde stap. Een browserproef controleert annuleren en bevestigen via het tafelmenu zonder echte spelinvoer. Dit vervangt geen live acceptatietest in een volledige campagne.
