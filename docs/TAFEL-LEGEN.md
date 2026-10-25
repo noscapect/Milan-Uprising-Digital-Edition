@@ -8,4 +8,6 @@ De achtergrondadapter begint vervolgens opnieuw met twee overeenkomende waarnemi
 
 Dit is geen volledige save-import. De officiële app levert via deze koppeling geen compleet bordmomentopnamebericht. Alleen zichtbare en ondersteunde kaartgegevens of instructies worden automatisch overgenomen. Personages moeten zo nodig opnieuw worden gescand en geplaatst; locatiebonussen, verborgen gegevens en verhaalmarkers vragen hun eigen opstellingsstappen. Leegmaken op een willekeurig spelscherm kan dus niet alle onderdelen onmiddellijk reconstrueren. De interface vermeldt die beperking vóór het legen.
 
+Een zichtbare **Next Encounter in …**-melding kan nu ook het bijbehorende [onderzoeksfiche herstellen](ONDERZOEKFICHES-SYNC.md). Zonder zo'n ondersteunde instructie worden onderzoeksposities niet uit oude campagnes teruggehaald.
+
 Verificatie: de headless tests controleren tegelreset en afwijzing van oude revisies. De LAN-test controleert authenticatie, oorsprong en doorsturen van de reset. Een geïsoleerde private adapterproef controleert een lege opgeslagen tafel, herstelkopie, alleen sensorvrijgave, opnieuw inlezen van een opgenomen Android-opstelling en het behoud van nieuwe markers binnen dezelfde stap. Een browserproef controleert annuleren en bevestigen via het tafelmenu zonder echte spelinvoer. Dit vervangt geen live acceptatietest in een volledige campagne.

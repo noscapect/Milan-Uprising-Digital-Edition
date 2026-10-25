@@ -5,6 +5,20 @@ import {createTabletop} from '../src/application/tabletop.js';
 import {milanModule} from '../src/games/milan-uprising/module.js';
 import {buildBoardInstructions} from '../src/games/milan-uprising/board-instructions.js';
 const profile=JSON.parse(readFileSync(new URL('../data/games/milan-uprising/city.json',import.meta.url)));
+test('expliciete encounterbestemming plaatst één onderzoeksfiche en herhalen verdubbelt niet',()=>{
+ const table=createTabletop({profile,module:milanModule});table.place('investigation-1','portello');table.flip('investigation-1');table.place('character-brujah','qt8');
+ const before=table.snapshot();table.arrange(buildBoardInstructions(profile,before,{investigationLocations:['washington']}));
+ const after=table.snapshot();assert.equal(after.placements['investigation-1'],'portello');assert.equal(after.faces['investigation-1'],'restricted');
+ const marker=profile.components.find(c=>c.groupId==='investigation'&&after.placements[c.id]==='washington');assert.ok(marker);assert.equal(after.faces[marker.id],'investigation');assert.equal(after.placements['character-brujah'],'qt8');
+ assert.equal(buildBoardInstructions(profile,after,{investigationLocations:['washington']}).changed,false);
+ table.reset();table.arrange(buildBoardInstructions(profile,table.snapshot(),{investigationLocations:['washington']}));assert.equal(Object.values(table.snapshot().placements).filter(z=>z==='washington').length,1);
+});
+test('ongeldige onderzoeksbestemmingen en een lege voorraad wijzigen geen andere instructies',()=>{
+ const table=createTabletop({profile,module:milanModule});
+ for(const investigationLocations of [['missing'],['haven-1l'],['washington','washington']])assert.throws(()=>buildBoardInstructions(profile,table.snapshot(),{investigationLocations,characterMoves:[{componentId:'character-brujah',zoneId:'qt8'}]}));
+ for(const c of profile.components.filter(c=>c.groupId==='investigation'))table.place(c.id,'portello');const before=table.snapshot();
+ assert.throws(()=>buildBoardInstructions(profile,before,{investigationLocations:['washington'],characterMoves:[{componentId:'character-brujah',zoneId:'qt8'}]}),/No Investigation/);assert.deepEqual(table.snapshot(),before);
+});
 test('controle verwijderen bewaart invloed, personages en fiches en is idempotent',()=>{
   const table=createTabletop({profile,module:milanModule});
   for(const id of ['character-brujah','influence-anarchs-1','investigation-1','control-anarchs-camarilla-1'])table.place(id,'qt8');
