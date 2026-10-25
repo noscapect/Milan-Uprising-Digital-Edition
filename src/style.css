@@ -158,3 +158,17 @@ dialog{background:var(--panel);color:var(--text);border:1px solid #626057;border
 .dice-amount-label{display:flex;align-items:center;gap:8px;margin-right:auto;color:#ded4c3}
 .dice-amount-label select{width:90px}
 @media(max-width:650px){.tray-die .die-artwork{width:70px;height:70px}.dice-amount-label{flex-basis:100%;justify-content:center;margin:0 0 4px}}
+
+/* Optional throne beside the physical board; no board zone or scan identity. */
+.miniature-stand{flex:0 0 clamp(92px,9vw,152px);width:clamp(92px,9vw,152px);align-self:flex-end;text-align:center;padding:12px 4px 18px;color:#d7ccbc;box-sizing:border-box}
+.miniature-stand h2{font:19px Georgia;margin:0 0 5px;color:#dfbf85}
+.miniature-stand-subtitle{font-size:11px;margin:0 0 12px;color:#b8afa0}
+.miniature-stand-sculpture{position:relative;overflow:hidden;width:100%;aspect-ratio:249/440;isolation:isolate}
+.miniature-stand-sculpture>img{position:absolute;right:0;bottom:0;height:auto;max-width:none;filter:grayscale(1);user-select:none;pointer-events:none}
+.miniature-stand-fallback{display:none}.miniature-stand-sculpture.without-artwork .miniature-stand-fallback{display:grid;place-items:center;height:80%;font:20px Georgia;color:#cdbd9c;border-radius:55% 55% 10% 10%;background:linear-gradient(100deg,#171c1c,#4b4944,#171c1c);border:1px solid #665c49}
+.miniature-led-ring{position:absolute;bottom:0;left:0;width:100%;height:31%;overflow:visible;filter:drop-shadow(0 3px 3px #000)}
+.miniature-led-ring path{fill:none;stroke:var(--led-color,#343b3c);stroke-width:12;stroke-linecap:round;paint-order:stroke;transition:stroke .18s ease}
+.miniature-led-ring path[data-lit=true]{filter:drop-shadow(0 0 4px var(--led-color))}
+.miniature-stand-status{font-size:10px;line-height:1.4;min-height:28px;margin:10px 0 0;color:#aaa99e}
+@media(max-width:650px){.miniature-stand{flex-basis:78px;width:78px;padding:5px 2px}.miniature-stand h2{font-size:14px}.miniature-stand-subtitle,.miniature-stand-status{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.miniature-led-ring path{transition:none}}

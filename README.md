@@ -23,6 +23,8 @@ Op deze computer zijn 79 originele afbeeldingen uit de geïnstalleerde app toege
 
 ## Speeltafel gebruiken
 
+Op de gekoppelde tafel staat [Prospero met zijn LED-voet](docs/PROSPERO.md) rechts naast de kaart. Lokaal beschikbaar officieel artwork wordt gebruikt; de vier lichtsegmenten tonen alleen ondersteunde ontvangen lichtstanden. Dit miniatuuraccessoire staat los van de verhaalcampagne Prospero's Legacy.
+
 Het lokale Control Center heeft ook een [gesimuleerde firmware-update](docs/FIRMWARE-SIMULATIE.md) voor Core en vijf dice. De compatibiliteitsversies blijven na herstart bewaard en worden aan de app teruggerapporteerd. Dit installeert geen officiële firmware en ondersteunt niet de bootloaderupdateknop van de officiële app.
 
 De gekoppelde tafel kan volledig worden geleegd via **Table menu → Clear board & resync**. Toon daarna de opstelling in Milan om zichtbare gegevens opnieuw in te lezen. Een herkende componentenopstelling ruimt ook automatisch de vorige tafel op. De Android-save blijft behouden; niet zichtbare onderdelen kunnen niet automatisch uit dat scherm worden hersteld. Zie [tafel legen en grenzen van opnieuw inlezen](docs/TAFEL-LEGEN.md).
