@@ -5,6 +5,14 @@ import {createTabletop} from '../src/application/tabletop.js';
 import {milanModule} from '../src/games/milan-uprising/module.js';
 import {buildBoardInstructions} from '../src/games/milan-uprising/board-instructions.js';
 const profile=JSON.parse(readFileSync(new URL('../data/games/milan-uprising/city.json',import.meta.url)));
+
+test('expliciete encounteropvolging hergebruikt het fiche en bewaart andere fiches en personages',()=>{
+ const t=createTabletop({profile,module:milanModule});t.place('investigation-5','sempione');t.place('investigation-1','washington');t.place('investigation-2','sempione');t.flip('investigation-2');t.place('character-brujah','qt8');
+ const instruction={removeInvestigation:['sempione'],investigationLocations:['portello']},before=t.snapshot();t.arrange(buildBoardInstructions(profile,before,instruction));const after=t.snapshot();
+ assert.equal(after.placements['investigation-5'],'portello');assert.equal(after.placements['investigation-1'],'washington');assert.equal(after.placements['investigation-2'],'sempione');assert.equal(after.faces['investigation-2'],'restricted');assert.equal(after.placements['character-brujah'],'qt8');
+ assert.equal(buildBoardInstructions(profile,after,instruction).changed,false);assert.equal(before.placements['investigation-5'],'sempione');
+ for(const removeInvestigation of [['missing'],['haven-1l'],['sempione','sempione']])assert.throws(()=>buildBoardInstructions(profile,after,{removeInvestigation,investigationLocations:['portello']}));
+});
 test('expliciete encounterbestemming plaatst één onderzoeksfiche en herhalen verdubbelt niet',()=>{
  const table=createTabletop({profile,module:milanModule});table.place('investigation-1','portello');table.flip('investigation-1');table.place('character-brujah','qt8');
  const before=table.snapshot();table.arrange(buildBoardInstructions(profile,before,{investigationLocations:['washington']}));

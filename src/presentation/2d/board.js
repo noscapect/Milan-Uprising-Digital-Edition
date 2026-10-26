@@ -3,22 +3,30 @@ import { milanMap } from './milan-map.js';
 import {describeLocationTile} from '../../games/milan-uprising/location-tile-info.js';
 import {tileSymbol} from './tile-symbol.js';
 import {havenRoomLabel} from '../../games/milan-uprising/haven-rooms.js';
+import {layoutPieces,pieceBounds} from './piece-layout.js';
+import {groupInfluenceCubes} from './influence-stacks.js';
 
 function pieceElement(component, index, options, interactive = false) {
   const piece = document.createElement(interactive ? 'button' : 'span');
   if (interactive) piece.type = 'button';
   piece.className = `board-piece ${component.kind} p${index % 4 + 1}`;
-  piece.dataset.component = component.id;
+  const componentId=component.stackMembers?.find(id=>id===options.selectedComponent)||component.id;
+  piece.dataset.component = componentId;
   piece.dataset.movable = String(component.kind === 'piece');
   if (component.color) piece.style.setProperty('--piece-color', component.color);
   const label = document.createElement('span'); label.className = 'piece-abbreviation'; label.textContent = component.shortLabel || `${index + 1}`;
   piece.append(label);
+  if(component.influenceCount){
+    piece.classList.add('influence-stack');piece.dataset.influenceCount=String(component.influenceCount);
+    if(component.influenceCount>1){const count=document.createElement('span');count.className='influence-count';count.textContent=String(component.influenceCount);piece.append(count);}
+  }
   const miniature = interactive && component.kind === 'piece' && component.portrait;
   if (miniature || component.icon) piece.prepend(artworkImage(miniature || component.icon, miniature ? 'piece-icon miniature-icon' : 'piece-icon'));
   piece.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
+  if(component.influenceCount)piece.title=component.label.split('·')[0].trim()+' · Influence × '+component.influenceCount;
   piece.setAttribute('aria-label', piece.title);
-  piece.classList.toggle('selected-piece', component.id === options.selectedComponent);
-  if (interactive || options.onComponent) piece.onclick = event => { event.stopPropagation(); options.onComponent?.(component.id,options.zoneId); };
+  piece.classList.toggle('selected-piece', componentId === options.selectedComponent);
+  if (interactive || options.onComponent) piece.onclick = event => { event.stopPropagation(); options.onComponent?.(componentId,options.zoneId); };
   return piece;
 }
 
@@ -45,7 +53,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
     if (zone.area === 'haven') cell.classList.add('haven-zone');
     const title = document.createElement('span'); title.className = 'zone-label'; title.textContent = zone.label;
     const occupants = document.createElement('span'); occupants.className = 'zone-pieces';
-    occupants.replaceChildren(...zone.occupants.map(component => pieceElement(component, projection.components.findIndex(c => c.id === component.id), options)));
+    occupants.replaceChildren(...groupInfluenceCubes(zone.occupants).map(component => pieceElement(component, projection.components.findIndex(c => c.id === component.id), options)));
     const attributes = document.createElement('span'); attributes.className = 'zone-attributes';
     const labels = { physical:'Physical', mental:'Mental', social:'Social' };
     attributes.textContent = (zone.attributes || []).map(attribute => labels[attribute] || attribute).join(' · ');
@@ -80,21 +88,30 @@ function renderMap(container, projection, onZone, options) {
       const xs=geometry.polygon.map(p=>p[0]), ys=geometry.polygon.map(p=>p[1]);
       const x=Math.min(...xs), y=Math.min(...ys), w=Math.max(...xs)-x, h=Math.max(...ys)-y;
       Object.assign(hit.style,{left:`${x / milanMap.width * 100}%`,top:`${y / milanMap.height * 100}%`,width:`${w / milanMap.width * 100}%`,height:`${h / milanMap.height * 100}%`,clipPath:`polygon(${geometry.polygon.map(p=>`${(p[0]-x)/w*100}% ${(p[1]-y)/h*100}%`).join(',')})`});
-      Object.assign(content.style,{left:`${geometry.anchor[0] / milanMap.width * 100}%`,top:`${geometry.anchor[1] / milanMap.height * 100}%`});
+      const bounds=pieceBounds(geometry.polygon);content.classList.add('packed-zone');
+      Object.assign(content.style,{left:`${bounds.x / milanMap.width * 100}%`,top:`${bounds.y / milanMap.height * 100}%`,width:`${bounds.width / milanMap.width * 100}%`,height:`${bounds.height / milanMap.height * 100}%`});
     }
     wrapper.classList.toggle('selected-zone', zone.id === options.selectedZone);
     const hit = wrapper.querySelector('.cell'); hit.setAttribute('aria-label', zoneDescription(zone)); hit.title = zone.label;
+    let roomArt=wrapper.querySelector('.haven-room-art');
+    if(zone.area==='haven'&&zone.havenRoom?.level==='upgraded'&&zone.roomArtwork){
+      if(!roomArt){roomArt=artworkImage(zone.roomArtwork,'haven-room-art');roomArt.draggable=false;wrapper.insertBefore(roomArt,hit);}
+      if(roomArt.getAttribute('src')!==zone.roomArtwork)roomArt.src=zone.roomArtwork;
+      for(const key of ['left','top','width','height','clipPath'])roomArt.style[key]=hit.style[key];
+    }else roomArt?.remove();
     hit.onclick = () => onZone(zone.id);
     const pieces = wrapper.querySelector('.zone-pieces');
     wrapper.querySelector('.location-tile-badges')?.remove();wrapper.querySelector('.map-zone-content').append(tileBadges(zone));
     const active = document.activeElement?.closest('.board-piece')?.dataset.component;
-    const miniatures=zone.occupants.filter(c=>c.kind==='piece');
-    const visible=[...miniatures,...zone.occupants.filter(c=>c.kind!=='piece').slice(0,Math.max(0,4-miniatures.length))];
-    pieces.replaceChildren(...visible.map(component => pieceElement(component,projection.components.findIndex(c=>c.id===component.id),{...options,zoneId:zone.id},true)));
-    if (zone.occupants.length > visible.length) {
-      const more=document.createElement('button'); more.type='button'; more.className='piece-overflow'; more.textContent=`+${zone.occupants.length-visible.length}`;
-      more.setAttribute('aria-label',`${zone.label}: show all ${zone.occupants.length} components`); more.onclick=()=>options.onInspect?.(zone.id); pieces.append(more);
-    }
+    const displayed=groupInfluenceCubes(zone.occupants);
+    const layoutKey=JSON.stringify(displayed.map(c=>[c.id,c.kind,!!c.portrait]));
+    if(wrapper.pieceLayoutKey!==layoutKey){wrapper.pieceLayoutKey=layoutKey;wrapper.pieceLayout=layoutPieces(geometry,displayed);}
+    const bounds=pieceBounds(geometry.polygon),positions=new Map(wrapper.pieceLayout.map(p=>[p.id,p]));
+    pieces.replaceChildren(...displayed.map(component=>{
+      const piece=pieceElement(component,projection.components.findIndex(c=>c.id===component.id),{...options,zoneId:zone.id},true),position=positions.get(component.id);
+      Object.assign(piece.style,{left:`${(position.x-bounds.x)/bounds.width*100}%`,top:`${(position.y-bounds.y)/bounds.height*100}%`,width:`${position.width/bounds.width*100}%`,height:`${position.height/bounds.height*100}%`,fontSize:`${position.width*.075}cqw`});
+      return piece;
+    }));
     if (active) [...pieces.children].find(piece=>piece.dataset.component===active)?.focus({preventScroll:true});
   }
 }

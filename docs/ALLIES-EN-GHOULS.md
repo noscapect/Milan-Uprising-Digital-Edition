@@ -14,6 +14,22 @@ During Sunset, you may deploy available allies and ghouls to city districts, wit
 
 To skip deployment, use **Done** in Milan and respond to its confirmation prompt. The board does not advance the phase or choose a miniature or destination for you.
 
+## Automatic return at the end of nightly deployment
+
+Deployment and removal are separate synchronization events. The original integration recorded deployment but did not synchronize the end of that deployment, leaving Fixer in City Life after Milan had reached Day and no longer showed him on the map.
+
+The adapter now automatically returns deployed allies and ghouls to stock after two matching, calibrated observations of Milan's **NIGHT … DAY** phase heading. It covers all 15 companion types in the base and expansion inventory. No user removal action is required. Phase confirmation is independent of changing feed cards, so scrolling or animating influence outcomes do not keep companions on the board. Observations must belong to the same night and input generation; one frame, other phases, errors, and uncalibrated screens do not trigger this cleanup.
+
+Only ally and ghoul positions are cleared. Characters, influence, control, Investigation/Restricted tokens, and their faces are preserved. Recruitment, Hunger, availability, and cooldown remain in Milan. Stale pending companion deployment requests are abandoned without replaying sensor input. Repeated Day observations do not produce repeated changes.
+
+This policy handles the end-of-night return observed in the reported Day case. It is not evidence of automatic detection of every possible mid-night story-driven companion removal. A missing portrait on a partial map alone is not a removal signal.
+
+### Optional correction outside the recognized Day flow
+
+After verifying a removal in Milan, open **Pieces → Stock → Copy an ally / ghoul removal**, choose the miniature, and press **Copy removal from Milan**. Only currently placed companions appear in this selector. The action returns that miniature to our stock; it does not change Milan, recruitment, Hunger, or cooldown. The adapter checks the component category, expected location, current revision, and any pending placement for that miniature before accepting the change. Stale requests are rejected. Other pieces and faces remain unchanged, and the explicit removal is recorded privately for diagnosis.
+
+The earlier manual Fixer correction used the user's confirmation. It has now been superseded for normal end-of-night cleanup by the automatic Day-phase route. The correction control remains optional for situations outside that recognized flow.
+
 ## State and responsibilities
 
 The occupancy check uses the known board state. Miniatures that have not been observed or recorded may be missing, so this is not a complete campaign check. Milan remains responsible for recruitment, availability, Hunger, cooldowns, and bonuses; the local placement constraint does not execute these rules.
@@ -28,4 +44,8 @@ The recorded Android screen after Jurgen's scan showed **Allies**, **Ghouls**, *
 
 The public suite passes all 79 tests, including companion occupancy, shared districts with player characters, and rejection of Haven destinations. Private tests cover sensor release, withholding unconfirmed positions, and rejecting stale or duplicate confirmations. Browser checks cover the district selector, active miniature, blocked destinations, explicit confirmation, and mobile layout. Adapter and browser acceptance checks use simulated responses and isolated state.
 
-No live deployment was performed and no Hunger was spent, as requested by the user. Acceptance of an actual ally or ghoul placement in Milan remains to be checked during play. The linked board also loaded without browser errors after the local adapter was restarted.
+No live deployment was performed by the agent during the initial implementation checks and no Hunger was spent. During subsequent user play, Fixer was recorded in City Life and later reported absent in Milan's Day phase. The linked board loaded without browser errors after the local adapter restarts.
+
+The removal tests use isolated state and mocked browser responses. They verify removal of the selected companion, preservation of other components and faces, stale-request rejection, idempotency for an already absent miniature, and the explicit UI action. Fixer's return from City Life to stock was then applied to the live linked table following the user's report; no sensor or official-app command was sent.
+
+Automatic cleanup has separate tests: a recorded calibrated Day screen removes a deployed Fixer and an expansion ally without any user removal request, including while feed text is changing. A pending companion placement is cleared, other components are preserved, and repeated observations are idempotent. Public tests cover all 15 companion types and the refusal to clean up on unconfirmed or non-Day contexts. The full public suite now passes 88 tests. The live adapter exposes its confirmed phase and applied cleanup in board status; the current Fixer was already off board before automatic cleanup was activated.
