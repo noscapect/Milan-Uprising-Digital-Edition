@@ -4,7 +4,7 @@ export function validateHavenRoom(room){
   return {type:room.type,level:room.level,bonus:room.bonus.trim()};
 }
 export function havenRoomLabel(room){
-  if(!room)return {title:'Haven room',bonus:'Bonus not copied from Milan'};
+  if(!room)return {title:'Haven room',bonus:'Room not yet observed in Milan'};
   const value=validateHavenRoom(room);
-  return {title:havenRoomTypes[value.type]+(value.level==='upgraded'?' · upgraded':value.level==='unknown'?' · level unconfirmed':''),bonus:value.bonus||'Bonus not copied from Milan'};
+  return {title:havenRoomTypes[value.type]+(value.level==='upgraded'?' · upgraded':value.level==='unknown'?' · level unconfirmed':''),bonus:value.bonus||'Room not yet observed in Milan'};
 }

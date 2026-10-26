@@ -1,5 +1,5 @@
 // Saved groups guide a resumed setup; an unread/old profile must not limit a new game.
-export const isScanScene=screen=>['character-scan','setup-placement','setup-placement-reading','companion-scan','component-placement'].includes(screen);
+export const isScanScene=screen=>['character-scan','setup-placement','setup-placement-reading','companion-scan','component-placement','companion-placement'].includes(screen);
 export function unplacedMiniatures(roster,screen){
   return ['character-scan','setup-placement','setup-placement-reading'].includes(screen)?(roster?.characters||[]).filter(c=>c.stage!=='registered'&&!roster?.placedIds?.includes(c.componentId)).map(c=>c.componentId):[];
 }

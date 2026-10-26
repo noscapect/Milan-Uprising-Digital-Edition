@@ -38,7 +38,7 @@ test('ongebruikte personages blijven weg zodra de app niet meer om een scan vraa
 });
 
 test('plaatsing toont geen extra keuzeminiaturen; een volgend scanverzoek opent de relevante voorraad',()=>{
-  for(const screen of ['setup-placement','setup-placement-reading','component-placement'])assert.deepEqual(waitingMiniatures(components,{screen,currentId:ids[0]}),[]);
+  for(const screen of ['setup-placement','setup-placement-reading','component-placement','companion-placement'])assert.deepEqual(waitingMiniatures(components,{screen,currentId:ids[0]}),[]);
   assert.deepEqual(waitingMiniatures(components,{screen:'character-scan'}),ids);
   assert.ok(waitingMiniatures(components,{screen:'companion-scan'}).every(id=>!ids.includes(id)));
 });

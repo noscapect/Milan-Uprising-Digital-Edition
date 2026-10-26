@@ -100,7 +100,7 @@ function renderMap(container, projection, onZone, options) {
 }
 function tileBadges(zone){
   const badges=document.createElement('span');badges.className='location-tile-badges';
-  if(zone.area==='haven'){
+  if(zone.area==='haven'&&zone.havenRoom?.bonus){
     const info=havenRoomLabel(zone.havenRoom),badge=document.createElement('span');badge.className='haven-room-badge';badge.dataset.confirmed=String(!!zone.havenRoom?.bonus);
     badge.textContent=info.bonus;badge.title=info.title+' · '+info.bonus;badges.append(badge);
   }

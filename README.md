@@ -1,106 +1,125 @@
 # Milan Uprising: Digital Edition
 
-Onafhankelijk project voor een modulair digitaal tabletop-platform met Vampire: The Masquerade – Milan Uprising als eerste module. **Het einddoel is de officiële game-app downloaden en gebruiken met onze virtuele tafel, zonder fysieke spelonderdelen.** Later moeten andere officiële releases kunnen aansluiten. De officiële app blijft eigenaar van regels, verhaal en campagne. Een losse sandbox is een tussenstap, geen vervulling van dit einddoel.
+An independent, modular digital tabletop project, with **Vampire: The Masquerade – Milan Uprising** as its first game module. The goal is to use the unmodified official game app with a virtual table, without physical game components. The official app remains responsible for rules, story, and campaign progress.
 
-De architectuur scheidt generieke engine, spelregels, spelgegevens, gebruikersinterface en grafische presentatie. De volgorde is **2D-reproductie → automatisering → optionele 3D-uitbreiding**. De eerste doorsnede is geïmplementeerd: een configureerbare engine met afzonderlijke Milan-sandboxmodule en JSON-profiel. Andere spellen en uitgeversreleases kunnen later via eigen modules en gegevenspakketten worden toegevoegd. Volledige regels, kaarten en scenario's zijn nog niet geïmplementeerd.
+The public application is a standalone sandbox. A separate private adapter has demonstrated limited interaction with the official app, including character registration, movement, dice interaction, resuming a campaign, and copying observed board changes. This is not evidence that every phase, expansion, or hardware behavior works.
 
-**Status: lokaal bordprototype met een beperkte live koppeling naar de ongewijzigde officiële app aangetoond.** De private proef omvat personageregistratie, campagne, spelactie, digitale worp en hervatten. Een klik op onze tafel verplaatste de actieve pion in Milan; pas na appbevestiging wijzigde de bordpositie. Een echte invloedactie werd automatisch overgenomen. Eén beurtwissel gaf een foutmelding; de oorzaak is nog onbekend. De publieke demo blijft een zelfstandige sandbox. Zie [actuele appvalidatie](docs/APP-VALIDATIE.md#live-tafelbediening-en-invloed).
+## Quick start
 
-## Starten
-
-Benodigd: Node.js 22 of nieuwer. Geen installatie van pakketten nodig.
+Requires Node.js 22 or later. The public demo has no external runtime dependencies and needs no package installation.
 
 ```powershell
-cd 'C:\CODE\Milan Uprising'
+cd 'C:\CODE\Milan-Uprising-Digital-Edition'
 node server.mjs
 ```
 
-Open http://127.0.0.1:5178. Stop met Ctrl+C. Testen: `node --test`. Als npm beschikbaar is, werken ook `npm start` en `npm test`. Open de pagina via de lokale server: rechtstreeks openen als bestand kan JavaScript-modules blokkeren.
+Open http://127.0.0.1:5178. Stop the server with Ctrl+C. Open the page through the server rather than directly from the filesystem.
 
-## Lokaal artwork
+Run the public test suite with:
 
-Op deze computer zijn 79 originele afbeeldingen uit de geïnstalleerde app toegevoegd: alle dertig locatiebeelden, portretten, fiches, logo en originele kaart. Ze staan alleen onder genegeerd `private/artwork/`. De publieke code werkt ook zonder deze beelden. Zie [voorbereiding, bron en gebruik](docs/ARTWORK.md). Het vorige kaartprofiel 0.6 blijft beschikbaar voor oude sessies.
+```powershell
+node --test
+```
 
-## Speeltafel gebruiken
+If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest implementation check on 26 October 2026 passed all 79 public tests. This documentation-only update does not change application behavior.
 
-Op de gekoppelde tafel staat [Prospero met zijn LED-voet](docs/PROSPERO.md) rechts naast de kaart. Lokaal beschikbaar officieel artwork wordt gebruikt; de vier lichtsegmenten tonen alleen ondersteunde ontvangen lichtstanden. Dit miniatuuraccessoire staat los van de verhaalcampagne Prospero's Legacy.
+## Current features and limits
 
-Het lokale Control Center heeft ook een [gesimuleerde firmware-update](docs/FIRMWARE-SIMULATIE.md) voor Core en vijf dice. De compatibiliteitsversies blijven na herstart bewaard en worden aan de app teruggerapporteerd. Dit installeert geen officiële firmware en ondersteunt niet de bootloaderupdateknop van de officiële app.
+| Feature | Current behavior | Validation limit |
+| --- | --- | --- |
+| Sandbox table | Place, move, remove, and flip components; export and restore sessions; undo/redo | Does not implement Milan's campaign rules |
+| Base game and six expansions | Separate inventories, 233 total components, expansion filters | Full expansion campaigns have not been validated |
+| Linked table | App-led input, observed board updates, shared LAN board | Private local integration; only recognized scenes and observations are supported |
+| Allies and ghouls | Optional Sunset deployment, city destination selection, pending confirmation | Actual deployment in Milan has not yet been tested |
+| Haven bonuses | Stored room type, level, and bonus; unknown map labels hidden | Automatic observation is experimental and has not been verified on the real Haven overview |
+| Local artwork | Optional images loaded from ignored local storage | Protected artwork is not distributed with the repository |
 
-De gekoppelde tafel kan volledig worden geleegd via **Table menu → Clear board & resync**. Toon daarna de opstelling in Milan om zichtbare gegevens opnieuw in te lezen. Een herkende componentenopstelling ruimt ook automatisch de vorige tafel op. De Android-save blijft behouden; niet zichtbare onderdelen kunnen niet automatisch uit dat scherm worden hersteld. Zie [tafel legen en grenzen van opnieuw inlezen](docs/TAFEL-LEGEN.md).
+See [ally and ghoul deployment](docs/ALLIES-EN-GHOULS.md) and [location tiles and Haven bonuses](docs/LOCATIETEGELS.md) for current instructions and evidence.
 
-De appinterface is Engels, passend bij het spel: **Stock**, **Location**, **Session** en **Board tiles**. Ook speltermen, tegeluitleg, meldingen en de login voor het gedeelde bord zijn Engels. Deze projectdocumentatie blijft Nederlands. Een vertaling wijzigt geen onderdeel-ID’s, spelstand of opslagversies.
+## Using the table
 
-De tafel gebruikt de volledige beschikbare schermbreedte. Met lokaal artwork opent de originele fysieke kaart met veertig klikbare locatiegebieden. **Sleep een miniatuur met de linkermuisknop ingedrukt naar een ander vak en laat los.** Dit werkt ook vanuit de voorraad en locatielijst, op de fysieke kaart en het raster. Het doelvak licht op; Escape of buiten het bord loslaten annuleert. Alle miniaturen blijven zichtbaar, ook in drukke vakken. `+n` opent de volledige lijst met overige onderdelen.
+The board uses the available screen width, with **Stock**, **Location**, and **Session** controls. With local artwork available, it opens the physical map presentation; without it, the schematic board remains usable.
 
-**Bekijken** toont de inhoud van een district. Selecteren en daarna op een bestemming klikken blijft beschikbaar voor alle onderdelen. Via de zijbalk kun je onderdelen ook omkeren of terugleggen. Op de private gekoppelde tafel laat de adapter alleen het door Milan gevraagde personage bewegen; de bordpositie verandert pas na bevestiging uit de app. Zie [bediening en verificatie](docs/SLEPEN-EN-SENSOREN.md).
+Hold the left mouse button and drag a miniature to a destination, then release. Escape or dropping outside the board cancels the move. Selecting a component and clicking a destination is also supported. Miniatures remain visible in crowded locations; a `+n` button opens the remaining contents.
 
-**Voorraad**, **Locatie** en **Sessie** staan in een compacte zijbalk. Gebruik de zoomknoppen voor details, **Passend** voor het hele bord en **Bordfocus** voor extra ruimte. Op tablet en telefoon staat de zijbalk onder de kaart. **Campagne-opstelling** en **Tafelinstellingen** openen aparte vensters. Bewaren, openen en activiteiten staan onder Sessie; undo/redo blijven direct onder het bord bereikbaar. Zonder lokaal artwork blijven dezelfde handelingen in de schematische weergave beschikbaar.
+In the sandbox, component positions are manual. Save a JSON export before closing or reloading the page. Import validates the profile, events, and state before replacing the session. Undo/redo keeps up to 100 local operations in the current tab; redo preserves recorded dice results. These controls do not change the official app.
 
-Onder **Location → Board tiles** kun je op de stadstafel locatiebonussen en speciale locatietegels instellen en omkeren. Dit werkt ook op de gekoppelde tafel via de LAN-link; de stand blijft daar op de pc bewaard. Zie [bediening, opslag en grenzen](docs/LOCATIETEGELS.md).
+On the private linked table, Milan determines which miniature may move. The board does not treat sending a sensor contact as proof of a persistent position. Use the linked board for supported app-led input, and follow Milan for phase changes and campaign decisions.
 
-De fysieke weergave benadert de gedrukte gebieden; dit is geen geverifieerde aangrenzendheidsmapping. De officiële app blijft de regel- en campagneautoriteit bij de private koppeling. Andere invoerbronnen kunnen dezelfde sessie bijwerken; de UI reageert automatisch via `tabletop.subscribe`. Live tafelbediening en invloedsoverdracht zijn beperkt getest in de private proef, zonder publieke integratieadapter. Zie [layout en vervolgrichting](docs/TAFEL-LAYOUT.md).
+### Optional allies and ghouls
 
-## Inhoud en bestaande profielen
+During Sunset, scan the desired ally or ghoul when Milan requests it. After the selected deployment screen is recognized, choose a city district above our board and press **Place in Milan**, or drag the scanned miniature there.
 
-Alle [zes uitbreidingspakketten](docs/UITBREIDINGEN.md) zijn nu als afzonderlijke voorraden toegevoegd: samen 101 extra onderdelen. Kies in de demo **Milan · base game + 6 expansion packs** voor de volledige voorraad van 233 onderdelen en filter in Stock op pakket. De private gekoppelde tafel heeft dezelfde voorraad, 26 scanbare miniaturen en handmatige bediening voor uitbreidingsmarkers. Officiële uitbreidingskeuze en verhalen blijven in Milan; volledige uitbreidingscampagnes zijn nog niet live geverifieerd.
+At most one recorded ally or ghoul may occupy a district. Player characters may share that district. Haven rooms are not valid destinations. Milan checks availability, Hunger costs, cooldowns, and effects.
 
-Standaard opent nu **locatiekaart 0.7**: dertig benoemde stadsdistricten en tien Havenvelden, met de retailonderdelen uit 0.5. De kaart is een eigen schema met op de appkaart gecontroleerde districtnamen; exacte grenzen, aangrenzendheid en sensorindex zijn nog niet geverifieerd. Via **Campagne-opstelling** open je **Campagne-opstelling overnemen** voor vier personages, invloed, controle, afgesloten locaties, NPC’s, bondgenoten, ghouls en Masquerade. Toepassen is één handeling, inclusief undo/redo en JSON-herstel. Er is **nog geen geverifieerde officiële campagnebeginstand** ingevuld. Zie [kaart, bronnen en opstellingsstatus](docs/KAART-EN-OPSTELLING.md).
+If the app response cannot be recognized automatically, verify the result in Milan before using **Milan accepted this placement** or **Milan did not place it**. These buttons resolve the pending request without resending the sensor contact. Scanning alone does not place a miniature. To skip deployment, use **Done** in Milan.
 
-**Milan-content 0.5: retail-basisspel** blijft als apart profiel beschikbaar met de echte namen en aantallen: zeven personages, twee bondgenoten, twee ghouls, 65 factiekubussen en 56 fiches, samen 132 losse onderdelen. Categorieën en zoeken maken de voorraad doorzoekbaar. Controle- en onderzoek/afgesloten-locatiefiches kun je omkeren; zijde en positie worden samen bewaard en hersteld. De eigen symbolen vervangen geen officiële illustraties. Zie [inhoud en bronnen](docs/MILAN-CONTENT.md). Dit oudere profiel behoudt het voorlopige sensorraster voor bestaande sessies.
+The UI and adapter behavior passed isolated tests and browser checks. No live companion deployment was performed and no Hunger was spent. See the [deployment guide](docs/ALLIES-EN-GHOULS.md).
 
-De **neutrale werktafel 0.4** blijft als apart profiel beschikbaar. In beide handmatige profielen: kies een onderdeel uit de voorraad of keuzelijst en klik op een zone. Pionnen, invloedskubussen en fiches zijn afzonderlijk te plaatsen en te verplaatsen, ook samen in één zone. **Terug naar voorraad** verwijdert alleen het geselecteerde onderdeel. De voorraad toont waar ieder onderdeel staat. Gebruik **Bewaar JSON** en later **Open JSON** om dezelfde tafel met dezelfde vastgelegde worpen te hervatten. Laden controleert profiel/versie, events en eindtoestand vóór vervanging; fouten laten de bestaande sessie intact. Geen automatische opslag of migraties. Sensorstudies blijven alleen export ondersteunen.
+### Haven rooms and location tiles
 
-De vier pionnen, twaalf kubussen, acht fiches en capaciteit 32 in de neutrale werktafel zijn een demovoorraad, geen geverifieerde Milan-inventaris of locatiecapaciteit. Die 8 × 5 indeling volgt de sensorlaag. De ontwikkeling van de fysieke tafel blijft onafhankelijk van fabrikantcontact; de verbinding met onze tafel moet nog worden geïmplementeerd.
+Select a Haven room and use **Location → Haven room** to record or correct its type, level, and current bonus. Only rooms with stored bonus text display a bonus label on the map.
 
-**Ongedaan maken** en **Opnieuw uitvoeren** herstellen maximaal honderd lokale handelingen, inclusief bord leegmaken. Opnieuw uitvoeren behoudt de oorspronkelijke worp. Een nieuwe handeling na teruggaan vervangt de redo-reeks. De herstelgeschiedenis blijft alleen in het tabblad; een JSON-export bewaart de actieve tafel en het openen van JSON begint een nieuwe herstelgeschiedenis. Deze knoppen zijn niet beschikbaar in de sensorstudie.
+An experimental private reader can submit a complete ten-room observation after two matching reads. It has passed a composed fixture, but recognition and room assignment on the real Haven overview remain unverified. Off-screen room changes are not continuously tracked.
 
-Kies voor de **interactiestudie** het bijbehorende tafelprofiel: kies een demopion, druk op **Registreer demopion**, klik een sensor en druk op **Maak sensor vrij**. De pion blijft logisch in de zone. Registreer daarna een andere pion en gebruik dezelfde sensor: beide mogen de demozone delen. Opnieuw dezelfde zone aanraken registreert alleen een generieke interactie. Dit is expliciete lokale selectie, geen RFID-scan of echte Core-emulatie. Het d10-profiel volgt de Milan-inventaris; capaciteit vier is alleen een demokeuze. Digitale worpen van de officiële Windows-app zijn inmiddels afzonderlijk gevalideerd in de private spelproef; deze sandbox stuurt ze niet aan.
+For city districts, **Location → Board tiles** explains the tile symbol and lets you flip or correct its recorded side. Tile edits do not execute the corresponding game action in Milan. See [location tiles and Haven bonuses](docs/LOCATIETEGELS.md).
 
-Het tafelprofielmenu kan terug naar het oorspronkelijke referentieprofiel hieronder. Kies het profiel en klik **Start lege tafel met dit profiel**; exporteer eerst wat je wilt bewaren. De JSON-export van de interactiestudie bevat ook een afzonderlijk lokaal inputlog, zonder echte hardware-identifiers.
+### Other linked-table controls
 
-In het referentieprofiel: kies een van vier neutrale pionnen en klik op een cel om die te plaatsen of verplaatsen. Iedere cel ondersteunt één pion in dit profiel; de engine ondersteunt ook andere zones en capaciteiten. Verwijder de geselecteerde pion, draai een demo-d6/d10, of herstel de beginsituatie. Bewaar de sessie en het eigen eventlog als JSON (tabletop-session v1). Met Tab en Enter zijn de bordcellen bedienbaar. Zonder een bewaard JSON-bestand wist herladen de stand. De oorspronkelijke demo en haar oude exportformaat blijven beschikbaar op http://127.0.0.1:5178/legacy/index.html; dat oude formaat wordt niet geïmporteerd.
+- **Table menu → Clear board & resync** clears the virtual table and tile settings. Show the relevant setup or map screen in Milan to reread supported visible information. Hidden or unobserved components cannot be restored automatically. The Android campaign save is kept.
+- The **Saved roster** guides character registration during recognized setup requests. Unused playable characters are hidden once their selection step is over; the miniature shelf follows the current scan request.
+- Prospero's LED-base accessory appears beside the map and displays supported received light states. It is separate from the Prospero's Legacy campaign.
+- The local Control Center can simulate Core and dice firmware version updates. It does not install official firmware or implement the official app's bootloader updater.
+- A shared LAN board uses the same PC session and an access code. Technical Core controls remain local.
 
-De 8 × 5 indeling is bevestigd voor de **Teburu-sensorlaag** door Xplored. A1–H5 is onze eigen coördinatienotatie; officiële sensorvolgorde, oriëntatie en Milan-locatiemapping zijn onbekend. Het prototype implementeert geen spelregels, verhaal of campagne en is nog geen speelbare digitale editie.
+Detailed historical guides: [clearing and resyncing](docs/TAFEL-LEGEN.md), [saved characters](docs/SAVEGAME-PERSONAGES.md), [Prospero](docs/PROSPERO.md), [firmware simulation](docs/FIRMWARE-SIMULATIE.md), and [LAN sharing](docs/BORD-DELEN.md).
 
-## Onderzoek naar appkoppeling
+## Profiles and artwork
 
-Voor de private gekoppelde tafel is er nu ook een [bordlink voor een tweede pc op het lokale netwerk](docs/BORD-DELEN.md), met een korte toegangscode en dezelfde tafelsessie. De technische Core-bediening blijft lokaal.
+The city map contains 30 named city districts and ten Haven rooms. Its presentation is an approximation of the printed layout, not a verified adjacency map or a complete official campaign starting state.
 
-De private terugkoppeladapter neemt nu ook drie zichtbare Engelse invloedseindstanden uit de Android-dagfase automatisch over. Dit is op de actuele tablet en via de gedeelde bordpagina gecontroleerd; volledige fasesynchronisatie blijft open. Zie [dagfase-onderzoek en automatisering](docs/DAGFASE-AUTOMATISERING.md).
+Choose **Milan · base game + 6 expansion packs** for all 233 components, including 101 expansion components. The private linked table has 26 scannable miniatures and separate manual expansion-marker controls. Expansion selection, stories, and rules remain in Milan. See [expansion inventory](docs/UITBREIDINGEN.md).
 
-De ingerichte pc heeft een **Milan Speeltafel**-launcher voor zelfstandig starten. De automatische verwerking draait lokaal op de achtergrond, zonder Codex of een geopende bordbrowser. Zie [werking, vereisten en verificatie](docs/ZELFSTANDIGE-KOPPELING.md).
+Older city, retail, neutral-table, and sensor-study profiles remain available for their existing sessions. The retail base inventory contains 132 components. The neutral and reference profiles are demonstrations, not official Milan setups. Session compatibility is validated on import rather than silently migrated.
 
-De actuele ontwikkelstap is [Core-functies zelfstandig testen](docs/CORE-VALIDATIE.md), zodat hardwarewijzigingen geen nieuwe campagne-setup vereisen. Een private regressiesuite en vijf virtuele d10's met afzonderlijke identiteiten en selecteerbare groepsworpen zijn toegevoegd. Alle vijf zijn op het echte Android-setupscherm herkend; volledige spelchecks, opslaan/hervatten en bordterugkoppeling op Android zijn nog niet bevestigd.
+The sensor study explicitly separates temporary contact from persistent position. It is a local behavior simulation, not an RFID/BLE emulator. The original demo remains at http://127.0.0.1:5178/legacy/index.html; its old export format is not imported into the current engine.
 
-De [vergelijking van verbindingsroutes](docs/APP-KOPPELING-VOORONDERZOEK.md) adviseert een optionele native helper voor appinvoer en afzonderlijke toestandsterugkoppeling. Een read-only probe staat in `tools/check-bridge-prerequisites.ps1`; lokale resultaten blijven privaat. De private proef toont personageregistratie, tafelbediening, digitale worpen, invloedsoverdracht en hervatten binnen beperkte scope. Volledige cityrondes, andere schermformaten en een publieke adapter blijven open.
+Optional original images from the locally installed app remain under ignored `private/artwork/`. The server serves only an allowlisted local catalog. The public demo also works without those files. Image counts vary with the local extraction; no protected artwork is included in Git. See [artwork handling](docs/ARTWORK.md).
 
-## Projectstructuur
+## Architecture and repository
 
-- `src/engine/`: headless zone-/componentmodel, profielvalidatie en atomische opdrachten.
-- `src/application/`: sessiebediening, projecties en exportcontract.
-- `src/games/milan-uprising/`: afzonderlijke module, uitsluitend sandbox.
-- `data/games/milan-uprising/demo.json`: neutrale componenten en sensorprofiel.
-- `data/games/milan-uprising/retail.json`: geverifieerde basisspelvoorraad, personage-/NPC-namen, facties, ficheszijden en bronverwijzingen.
-- `data/games/milan-uprising/campaign.json`: benoemde districts-/Havenvelden, bronstatus en handmatige campagne-opstelling; geen officiële startpreset.
-- `src/ui/`, `src/presentation/2d/`: bediening en aparte bordrenderer.
-- `src/adapters/`: cryptografische demo-worpen en JSON-download.
-- `src/adapters/virtual-core.js`: lokale simulatie met gescheiden identiteit, sensorcontact en spelpositie; geen netwerktransport.
-- `src/app.js`: samenstellen van module, gegevens en adapters.
-- `legacy/`, `src/model.js`: behouden oorspronkelijke demo/referentiemodel.
-- `docs/PLAN.md`: fasen en acceptatiecriteria.
-- `docs/ONDERZOEK.md`: bronnen, feiten, onzekerheden en onderzoeksvragen.
-- `docs/ARCHITECTUUR.md`: laaggrenzen, contracten en presentatie-onafhankelijke engine.
-- `docs/BESLUITEN.md`: gewijzigde architectuurbeslissingen en behoud van bestaande werkzaamheden.
-- `docs/CONTRACTEN.md`: v1-contracten, componentinventaris en referentiesessie.
-- `docs/TEBURU-DEEPSEARCH.md`: technische verdieping, actuele SDK-/downloadroute, bronbewijs en haalbaarheidsgrenzen.
-- `tests/`: oorspronkelijke regressies plus engine-, module- en replaycontroles.
-- `AGENTS.md`: instructies voor verder werken in Codex.
+The engine, game rules, game data, UI, and presentation are separate. Milan is a game module rather than an engine dependency. Engine and rule interfaces are headless; graphical objects do not belong in domain state. Future 3D presentation should use the same commands and state as 2D.
 
-Op de private gekoppelde tafel toont **Saved roster** de personages uit het officiële saveprofiel en hun registratievoortgang. Alleen resterende personages uit die groep krijgen actieve scanknoppen wanneer Milan om een scan vraagt. Zie [savegame-personages en verificatie](docs/SAVEGAME-PERSONAGES.md).
+| Path | Purpose |
+| --- | --- |
+| `src/engine/` | Generic state, commands, events, validation, and replay |
+| `src/games/milan-uprising/` | Milan module, setup builders, tile state, and companion placement validation |
+| `src/application/` | Tabletop orchestration and session handling |
+| `src/ui/`, `src/presentation/` | Controls, artwork decoration, and board rendering |
+| `src/adapters/` | Public adapters, including local sensor behavior simulation |
+| `data/games/` | Versioned board and component profiles |
+| `server/`, `server.mjs` | Local serving and restricted board sharing |
+| `test/` | Current public engine, module, adapter, and replay tests |
+| `tests/` | Original regression tests |
+| `legacy/`, `src/model.js` | Preserved original reference implementation |
+| `private/` | Ignored local integration, observations, identifiers, and assets |
 
-## Grenzen en rechten
+The recent usage guides and this README are in English. Earlier architecture and research records retain their existing filenames and may still be in Dutch:
 
-Dit project is niet verbonden aan Xplored, Teburu of de rechthebbenden van Vampire: The Masquerade. Namen dienen ter identificatie. De tafel heeft eigen schematische vormgeving met optioneel lokaal app-artwork; de retailvoorraad bevat bronverwezen feitelijke namen en aantallen. Geen kaartscans, appbestanden, audio, verhaallijnen of andere beschermde assets overnemen zonder toestemming. Privégebruik vormt geen automatische toestemming voor hergebruik of verspreiding. Geen beveiliging, authenticatie of licentiecontrole omzeilen. Een publieke softwarelicentie is nog niet gekozen.
+- [Development plan](docs/PLAN.md)
+- [Architecture](docs/ARCHITECTUUR.md)
+- [Decisions](docs/BESLUITEN.md)
+- [Implemented contracts](docs/CONTRACTEN.md)
+- [Research register](docs/ONDERZOEK.md)
+- [Teburu source research](docs/TEBURU-DEEPSEARCH.md)
+- [Official-app validation history](docs/APP-VALIDATIE.md)
+- [Core validation](docs/CORE-VALIDATIE.md)
+- [Contributor instructions](AGENTS.md)
 
-Begin een volgende Codex-sessie met: “Lees AGENTS.md en werk de eerstvolgende open stap in docs/PLAN.md uit.”
+## Boundaries and rights
+
+This project is not affiliated with Xplored, Teburu, or the owners of Vampire: The Masquerade. Names identify the relevant products and components. No public software license has been selected.
+
+Do not distribute protected artwork, app binaries, audio, story content, confidential SDK material, or private hardware identifiers. Private use does not automatically grant redistribution rights. Do not bypass security, authentication, or licensing, clone RFID identities, or patch firmware. Do not present compatibility as proven without a reproducible test in the official app.
+
+The public sandbox and optional private integration are separate deliverables. The objective remains use of the unmodified official app; the sandbox is an intermediate tool.

@@ -1,33 +1,47 @@
-# Locatiebonus en speciale locatietegels
+# Location tiles and Haven room bonuses
 
-## Havenkamers links op het bord
+Updated 26 October 2026.
 
-Sinds 25 oktober kunnen de tien Havenkamers ook een afzonderlijk kamertype, niveau (onbevestigd, standaard of upgraded) en actuele bonus bewaren. Voorheen waren deze kamers uitsluitend pixels in de vaste kaartafbeelding; daarmee konden upgrades of veranderde bonussen niet worden weergegeven. Dit staat los van het Haven-huissymbool op een stadsdistrict.
+## Haven rooms
 
-Klik een Havenkamer aan en kopieer onder **Location → Haven room** het kamertype, niveau en de actuele bonus uit Milan. **Save current Haven bonus** bewaart de gegevens en toont de bonus direct op de kaart. De gekoppelde tafel deelt deze stand met de andere browsers via de bestaande tegelroute. Het wijzigen van de tekst gebruikt de kamer niet, koopt geen upgrade en wijzigt de officiële campagne niet. Zonder bevestigde gegevens staat op het bord **Bonus not copied from Milan**; er wordt geen bonus uit het achtergrondbeeld afgeleid.
+The ten Haven rooms on the left of the board can store their own room type, level (unconfirmed, standard, or upgraded), and current bonus. Previously, these rooms were only part of the static background image, so the board could not display changed bonuses. Haven rooms are separate from the house-shaped Haven location tile in a city district.
 
-Automatische uitlezing van de tien actuele kamerstanden uit de officiële app is nog niet geïmplementeerd. Deze wijziging voegt expliciete kopieerbediening, weergave en opslag toe. De Havengegevens zitten optioneel in de bestaande `locationTiles`-opslag; oude exports blijven leesbaar. Testen controleren revisieconflicten, ongeldige kamer-ID’s, upgrade-/bonuswijzigingen, replay van de overige tafel, onveranderlijke projecties en expliciet onbekende bonussen. Alle 77 publieke tests en de desktop-/mobiele browserproef slagen.
+The map displays a bonus label only when that room has stored bonus text. Unknown rooms no longer display **Bonus not copied from Milan** over the map. Select a room and use **Location → Haven room** to correct its type, level, and bonus manually. **Save current Haven bonus** saves these values; it does not use the room, purchase an upgrade, or change Milan's campaign.
 
-Kies een stadsdistrict op de kaart. Onder **Location → Board tiles** toont een kaartje het symbool, de betekenis en het gebruik van de getoonde tegel. **Flip tile** wisselt tussen achterzijde en symboolzijde. Om een nog onbekende tegel uit Milan over te nemen, open je **Copy or correct a tile**. De appinterface en de speluitleg zijn Engels, passend bij het spel; deze documentatie blijft Nederlands. Dezelfde uitleg werkt op de schematische kaart en via de gedeelde bordlink.
+### Experimental automatic observation
 
-De officiële handleiding beschrijft locatiebonussen en hun typen op pagina 7: Haven, Herd, Income, Media Office, Possible Haven, Secret Bar en Underground. Bron: [Game Manual](https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf). Er is geen volledige geverifieerde toewijzing van beide fysieke zijden aan ieder district ingebouwd. Een onbekende tegel blijft daarom **Nog niet ingesteld** of **Nog niet vastgesteld**. Het kiezen van een bonus voert de bijbehorende spelactie niet uit; dat blijft aan Milan.
+The private screen reader requires two consecutive matching observations of all ten distinct rooms in a validated grid before replacing the stored room state. The public Milan module validates and applies the complete observation atomically. Missing, duplicate, or invalid rooms leave the previous state intact. Repeating the same observation does not change the revision.
 
-Op het gecontroleerde Android-scherm voor **Scenario setup → Board tiles** staat het huisjessymbool in QT8. Het bord toont nu **Schuilplaats** en legt de Haven-functie uit. Het eerdere label “Haven 11” was onvoldoende onderbouwd als spelterm. De handleiding beschrijft Haven als locatiebonus, zonder afzonderlijke spelregels voor “Haven 11” en “Haven 12”. De oude opslagwaarden blijven leesbaar, maar worden niet meer als verschillende Haven-typen of kamernummers aangeboden. De volledige fysieke toewijzing van alle tegelzijden blijft open.
+Browsers on the linked table share the stored values through the existing tile route. When the Haven overview is not visible, the board retains the last observed values; it does not continuously track changes to rooms that are off screen.
 
-## Werking op het fysieke bord
+The reader has passed a composed browser fixture containing standard and upgraded rooms. An actual Android screen outside the Haven overview was correctly rejected. Recognition and grid-to-room assignment on the real Haven overview have **not** been validated. Automatic synchronization during a real play session therefore remains unproven. The Haven changes passed public tests and desktop/mobile browser checks; the latest full public suite contains 79 passing tests, including the later companion placement changes.
 
-Een locatiebonus is een klein omkeerbaar inzetstuk. Het symbool herinnert aan de vrijgespeelde bonus; de officiële app biedt de bijbehorende actie. De attribuuticonen in het midden van een district geven verwachte encounter-attributen aan en zijn een andere informatielaag. Controlefiches geven weer wie het district beheerst. Bronnen: handleiding pagina 7, 8 en 13.
+## City location tiles
 
-De digitale oplossing toont daarom het spelsymbool met uitleg, benoemt de twee zijden en houdt het kiezen/corrigeren van een tegel apart van normaal spelen. Bij het herkende opstellingsscherm staat er concreet dat je de getoonde zijde vergelijkt en daarna Continue in Milan gebruikt. Het tonen van uitleg voert geen spelactie uit. Een verbindingsfout in Milan wordt als fout herkend, niet als gereed opstellingsscherm.
+Select a city district and open **Location → Board tiles** to see the tile symbol, meaning, and usage. **Flip tile** switches between its back and symbol sides. Use **Copy or correct a tile** to record a tile shown in Milan. This works on the schematic map and the shared linked board.
 
-## Opslag en architectuur
+The [official game manual, page 7](https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf#page=7) describes Haven, Herd, Income, Media Office, Possible Haven, Secret Bar, and Underground bonuses. A complete verified mapping of both physical tile sides to every district is not built in. Unknown tiles remain unconfigured or unidentified. Selecting a bonus does not perform its associated game action; Milan handles that action.
 
-De tegelstand is afzonderlijke headless Milan-moduledata: `milan-location-tiles`, schema 1, met een revisie en per district een bonus- en speciale tegel. Elke tegel heeft een waarde en een zichtbaarheid: onbekend, verborgen of zichtbaar. Opdrachten valideren district, tegeltype, waarde en verwachte revisie. Dezelfde stand kan door 2D en een latere 3D-presentatie worden gebruikt; er staan geen grafische objecten in de toestand.
+The observed Android **Scenario setup → Board tiles** screen showed a house symbol in QT8. The board labels this **Haven** and explains its purpose. The former labels “Haven 11” and “Haven 12” were not supported as distinct rule terms. Their legacy storage values remain readable, but the UI no longer presents them as different Haven types or room numbers. Mapping every physical tile side remains open.
 
-De bestaande engine, bordprofielen en pion-/fiche-events veranderen niet. Op de zelfstandige stadstafel bevat **Bewaar JSON** de optionele toevoeging `locationTiles`. Openen valideert die vóór vervanging van de tafel; oudere exports zonder deze toevoeging blijven bruikbaar. De tegelstand heeft nog geen eigen undo/redo-geschiedenis; gebruik omkeren om de vorige zichtbaarheid terug te zetten.
+## Physical meaning and UI behavior
 
-De private gekoppelde tafel bewaart deze gegevens apart op de pc. Alle browsers lezen en wijzigen dezelfde stand; een verouderde revisie wordt geweigerd en opnieuw ingelezen. Omkeren van zo'n losse fysieke tegel vereist geen sensorcontact en stuurt dus ook geen fictieve bevestiging naar Milan. De gebruiker bedient **Continue** in de officiële app. Automatische herkenning van alle afgebeelde opstellingstegels en automatisch wissen bij een nieuwe campagne zijn nog niet geïmplementeerd.
+A location bonus is a small reversible insert. Its symbol is a reminder of the unlocked bonus; the official app offers the associated action. Attribute icons in the center of a district indicate expected encounter attributes and are a separate information layer. Control tokens indicate which faction controls the district. See the manual, pages 7, 8, and 13.
 
-## Controle op 24 oktober 2026
+The board explains symbols and tile sides and keeps tile correction separate from playing the associated action. During a recognized setup step, compare the displayed side and then use **Continue** in Milan. Displaying the explanation does not execute a game action. A connection error in Milan is recognized as an error rather than successful setup.
 
-Headless tests controleren validatie, beide tegelsoorten, revisieconflicten, behoud van pionnen, export/herstel en onveranderlijke projecties. Browsertests controleren omkeren, JSON-export, de gedeelde tegelstand en behoud na herladen. De aanvullende betekenistest controleert huisjessymbool, uitleg over nacht/zonsopkomst, achterzijde/symboolzijde en de beschikbaarheidsuitleg voor een gewone bonus. Deze test gebruikt de echte opgeslagen tegelstand met een nagebootste opstellingsfase; tijdens de proef toonde de echte app een netwerkfout. De nieuwe route gebruikt dezelfde login- en oorsprongcontroles als bordbewegingen. De volledige suite slaagt met 48 tests; de bestaande sleepbediening is opnieuw in de browser gecontroleerd.
+## Storage and architecture
+
+Tile state is separate, headless Milan module data: `milan-location-tiles`, schema version 1, with a revision and per-district bonus and special tiles. Each tile has a value and a visibility state: unconfirmed, hidden, or visible. Commands validate the district, tile kind, value, and expected revision. No graphical objects are stored in this state, so it can be consumed by 2D and future 3D presentations.
+
+Haven room data is an optional `havenRooms` map in the same state. Existing exports without that field remain readable. Changes do not alter the engine, board profiles, or component events.
+
+Standalone session JSON exports include the optional `locationTiles` state. Import validates it before replacing the table; older exports without it remain usable. Tile state does not have its own undo/redo history; flip a tile again to restore its previous visibility.
+
+The private linked table stores tile data separately on the PC. All connected browsers read and modify the same state. A stale revision is rejected and refreshed. Flipping a loose physical tile does not require sensor contact and sends no simulated confirmation to Milan. The player uses **Continue** in the official app. Automatic recognition of every setup tile and automatic tile reset for a new campaign remain unimplemented.
+
+## Validation history
+
+The 24 October checks covered both tile kinds, validation, revision conflicts, preservation of component positions, export/restore, immutable projections, shared state, flipping, and persistence after reload. The meaning check used actual stored tile state with a simulated setup phase; Milan displayed a network error during that test. The routes retain the same login and origin checks as board movement. All 48 tests available at that time passed, and existing drag controls were checked in the browser.
+
+The later Haven checks cover complete atomic observations, idempotency, room identifiers, bonus and upgrade changes, immutable state, and hiding unknown map labels. Local reference images and recognition data remain under ignored `private/` storage.

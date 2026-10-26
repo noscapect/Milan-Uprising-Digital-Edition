@@ -4,6 +4,13 @@ export const specialTypes={unknown:'Not identified yet',haven:'Haven','haven-11'
 export const blankTile=()=>({face:'unconfirmed',value:'unknown'});
 export function emptyLocationTiles(){return {format:'milan-location-tiles',schemaVersion:1,revision:0,tiles:{}};}
 export function clearLocationTiles(state){return {...emptyLocationTiles(),revision:state.revision+1};}
+export function applyObservedHavenRooms(state,zones,rooms){
+  const havens=zones.filter(z=>z.area==='haven');
+  if(!Array.isArray(rooms)||rooms.length!==havens.length||!havens.length||new Set(rooms.map(r=>r?.zoneId)).size!==rooms.length||rooms.some(r=>!havens.some(z=>z.id===r?.zoneId)||!['standard','upgraded'].includes(r?.level)||r?.type==='unknown'||!r?.bonus?.trim()))throw Error('Incomplete Haven observation.');
+  let next=structuredClone(state);
+  for(const {zoneId,...room} of rooms)next=setLocationTile(next,zones,{zoneId,kind:'haven-room',room,expectedRevision:next.revision});
+  return next;
+}
 export function setLocationTile(state,zones,{zoneId,kind,face,value,room,expectedRevision}){
   if(expectedRevision!==state.revision)throw Error('The tiles changed on another screen. Please try again.');
   if(kind==='haven-room'){
