@@ -1,5 +1,16 @@
 # Validatie — 21 oktober 2026
 
+## Actuele controle — 28 oktober 2026
+
+- Publiek: `node --test` geslaagd, 94 tests, nul fouten; uitgevoerd vóór commit `fe0a5fa`. Private adaptercode, identifiers en artwork zijn niet opgenomen in Git.
+- Geladen spel: het echte Milan-scherm toonde Agnese in Washington. Na twee gelijke waarnemingen corrigeerde onze tafel de oude positie Cadorna naar Washington. Live browsercontrole zonder paginafouten; geïsoleerde NPC- en companionproeven bevestigen behoud van andere onderdelen en idempotentie. Geen volledige save-import getest.
+- Haven-labels: tien actuele geregistreerde bonussen zichtbaar in de browser, inclusief de opgeslagen +2 Willpower voor Haven 1L; geen bonuslabels in stadsdistricten en geen duplicaten na verversen.
+- Virtuele Core: 26 private regressiescenario’s geslaagd, inclusief migratie van oude firmwarestatus, mislukte commit, afbreken, herstart en stabiele ringbatterij. Virtuele Bluetooth- en Control Center-browserproeven geslaagd.
+- Echte Android-tablet, ongewijzigde Teburu-app 1.2.0: LED-ring 1.15.0, Firmware up to date, 46%, 3852 mV. Dit zijn gesimuleerde versies en batterijgegevens; geen officiële firmware geïnstalleerd.
+- LED-oriëntatie: geïsoleerde browserproef met vier verschillende kleuren bevestigt licht 3 linksboven, 4 rechtsboven, 1 rechtsonder en 2 linksonder. De uitgebreidere bestaande Prospero-browserproef liep vast bij het zichtbaar worden van het accessoire en is voor deze wijziging niet als geslaagd aangemerkt. Volledige hardwareanimaties blijven buiten deze controle.
+
+Oudere, gedateerde controles hieronder blijven als historisch bewijs behouden.
+
 ## Locatiekaart en opstellingshulp 0.6 — 22 oktober 2026
 
 - `node --test`: 32 tests geslaagd. Toegevoegd: dertig district-ID’s plus tien Havenvelden, atomaire toepassing/undo/redo/replay, onbewezen-bronstatus, vier verschillende personages, eindige voorraden en componentzijden. Een lastige controleverdeling van 21 Anarchs en acht Camarilla wordt correct gematcht; onmogelijke verdelingen worden geweigerd. Zonecapaciteit en beschadigde opstellingen muteren niets.

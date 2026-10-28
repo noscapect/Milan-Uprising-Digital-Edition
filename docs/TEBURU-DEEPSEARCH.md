@@ -1,5 +1,11 @@
 # Teburu en Milan Uprising — technisch onderzoek
 
+## Actuele lokale bewijsstatus — 28 oktober 2026
+
+De onderstaande openbare bronstudie en gedateerde runtimeverslagen zijn historisch. Inmiddels is een beperkte private koppeling met de ongewijzigde officiële app aangetoond; dit maakt de openbare sandbox geen volledige emulator. Het hervatte NPC-setupscherm is live gecontroleerd met Agnese in Washington. In de ongewijzigde Teburu-app 1.2.0 zijn daarnaast LED-ringversie 1.15.0 en de gesimuleerde batterijweergave 46% / 3852 mV bevestigd. De ringoriëntatie op het bord is gecorrigeerd met een afzonderlijke browserproef. Zie [plaatsingssynchronisatie](PLAATSINGSSYNC.md), [firmware-simulatie](FIRMWARE-SIMULATIE.md) en [validatie](VALIDATIE.md).
+
+Dit zijn lokale waarnemingen, geen nieuwe openbare bronclaims, volledige campagnevalidatie of bewijs van fabrikantondersteuning. Private broncode, identifiers en ruwe waarnemingen blijven onder genegeerd private/.
+
 Actuele runtime-uitkomst op 22 oktober 2026: de ongewijzigde Windows-app is normaal gestart en de aangeboden setupkeuzes zijn bekeken. Single/Main wachten op een Core; Controller vraagt koppeling met een bestaande Main. De afzonderlijke private SDK-builds en lokale runtimeproef zijn geslaagd; de normale Milan-Main-setup leverde geen verbinding met deze proef op. Geen campagne of virtuele invoerverbinding met Milan bewezen. Zie [APP-VALIDATIE.md](APP-VALIDATIE.md). De onderstaande historische onderzoeksfasen zijn geen actuele verklaring dat de app nog nooit is gestart.
 
 Onderzocht op 21 oktober 2026. Alleen openbare bronnen; geen app uitgepakt, hardware uitgelezen, SDK aangevraagd of overeenkomst geaccepteerd. Dit verslag vervangt eerdere aannames waar hieronder expliciet aangegeven.

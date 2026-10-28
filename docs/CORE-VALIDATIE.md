@@ -1,5 +1,11 @@
 # Virtuele hardware afzonderlijk valideren
 
+## Actuele aanvulling — 28 oktober 2026
+
+Alle 26 private Core-regressiescenario’s slagen, inclusief de nieuwe LED-ringproef voor firmwaremigratie, atomaire opslag, foutafhandeling, herstart en stabiele gesimuleerde batterij. De virtuele Bluetooth-proef slaagt eveneens. Na activering toont de ongewijzigde Teburu-app 1.2.0 op de echte tablet ringversie 1.15.0, Firmware up to date en 46% / 3852 mV. Dit bewijst de versie- en batterijweergave, geen uitvoering van officiële firmware of volledige hardwarecompatibiliteit. Zie [firmware-simulatie](FIRMWARE-SIMULATIE.md) en [Prospero](PROSPERO.md).
+
+De oudere aantallen en testuitkomsten hieronder horen bij de aangegeven onderzoeksfasen.
+
 Bijgesteld op 23 oktober 2026: de eerstvolgende stap is het gedrag van de fysieke Core afzonderlijk implementeren en testen. Een nieuwe Milan-campagne doorlopen is geen geschikte regressietest voor iedere hardwarewijziging. De officiële app blijft eigenaar van regels, worpen die zij zelf uitvoert, verhaal en campagneopslag.
 
 ## Testlagen

@@ -21,7 +21,7 @@ Run the public test suite with:
 node --test
 ```
 
-If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest implementation check on 27 October 2026 passed all 94 public tests, including automatic Day-phase companion cleanup, the fixed Haven layout and side persistence, Investigation marker transitions, influence stack counts, and placement of visible components within map regions.
+If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest implementation check on 28 October 2026 passed all 94 public tests, including automatic Day-phase companion cleanup, the fixed Haven layout and side persistence, Investigation marker transitions, influence stack counts, and placement of visible components within map regions.
 
 ## Current features and limits
 
@@ -32,6 +32,7 @@ If npm is available, `npm start` and `npm test` are equivalent shortcuts. The la
 | Linked table | App-led input, observed board updates, shared LAN board | Private local integration; only recognized scenes and observations are supported |
 | Allies and ghouls | Optional Sunset deployment, pending confirmation, and automatic return to stock on confirmed Day | Cleanup tested with recorded Day observations; arbitrary story-driven removals are not fully covered |
 | Haven rooms | All ten fixed room types, standard/upgraded effects, recorded side controls, and optional upgraded artwork | Standard starting sides are used unless an upgrade is recorded; purchases and room actions remain in Milan |
+| LED ring | App-led colors with segment orientation matching Teburu; simulated firmware and battery status | Static colors only; full hardware animations remain unvalidated |
 | Local artwork | Optional images loaded from ignored local storage | Protected artwork is not distributed with the repository |
 
 See [ally and ghoul deployment](docs/ALLIES-EN-GHOULS.md) and [location tiles and Haven bonuses](docs/LOCATIETEGELS.md) for current instructions and evidence.
@@ -70,7 +71,7 @@ The UI and adapter behavior passed isolated tests and browser checks. No live co
 
 ### Haven rooms and location tiles
 
-All ten Haven room types and their standard/upgraded effects are fixed and appear immediately. The standard starting side is shown unless an upgrade was previously recorded. Select a room to see both side descriptions and use **Record upgraded side**, **Record standard side**, or **Save room side** to record the campaign's current side. Room types and effects do not require screen recognition or manual bonus entry. Optional local upgraded artwork changes with the recorded side. These controls do not buy or use a room or apply player statistics in Milan.
+All ten Haven room types and their standard/upgraded effects are fixed and appear immediately. Each room shows its current recorded bonus directly on the board; district bonus labels remain in the Location panel. The standard starting side is shown unless an upgrade was previously recorded. Select a room to see both side descriptions and use **Record upgraded side**, **Record standard side**, or **Save room side** to record the campaign's current side. Room types and effects do not require screen recognition or manual bonus entry. Optional local upgraded artwork changes with the recorded side. These controls do not buy or use a room or apply player statistics in Milan.
 
 The experimental Haven screenshot reader has been removed from the active adapter flow. Fixed layout and effect data no longer depend on an app overview. Only the campaign's purchased/upgraded side needs to be recorded.
 
@@ -78,14 +79,16 @@ For city districts, **Location → Board tiles** explains the tile symbol and le
 
 See [faster movement feedback](docs/SNELLERE-TERUGKOPPELING.md) for the pending destination display, targeted confirmation and measured timing limits.
 
+When resuming a loaded game, the private adapter also reads visible NPC portraits on the **Scenario setup → NPC placement** map after two matching observations. Agnese was verified at Washington; this does not restore hidden pieces or establish a complete save import.
+
 See [placement synchronization and corrections](docs/PLAATSINGSSYNC.md) for named NPC outcomes, all-component copy controls, and automatic recognition limits.
 
 ### Other linked-table controls
 
 - **Table menu → Clear board & resync** clears the virtual table and tile settings. Show the relevant setup or map screen in Milan to reread supported visible information. Hidden or unobserved components cannot be restored automatically. The Android campaign save is kept.
 - The **Saved roster** guides character registration during recognized setup requests. Unused playable characters are hidden once their selection step is over; the miniature shelf follows the current scan request.
-- Prospero's LED-base accessory appears beside the map and displays supported received light states. It is separate from the Prospero's Legacy campaign.
-- The local Control Center can simulate Core and dice firmware version updates. It does not install official firmware or implement the official app's bootloader updater.
+- Prospero's LED-base accessory appears beside the map and displays supported received light states. Its orientation matches Teburu: lights 3/4 above and 2/1 below. See [LED ring behavior](docs/PROSPERO.md). It is separate from the Prospero's Legacy campaign.
+- The local Control Center can simulate Core, dice and LED-ring firmware version updates. The ring reports compatibility version 1.15.0 and a stable simulated battery value; Teburu 1.2.0 displayed Firmware up to date and 46% in the live check. See [firmware simulation](docs/FIRMWARE-SIMULATIE.md). It does not install official firmware or implement the official app's bootloader updater.
 - A shared LAN board uses the same PC session and an access code. Technical Core controls remain local.
 
 Detailed historical guides: [clearing and resyncing](docs/TAFEL-LEGEN.md), [saved characters](docs/SAVEGAME-PERSONAGES.md), [Prospero](docs/PROSPERO.md), [firmware simulation](docs/FIRMWARE-SIMULATIE.md), and [LAN sharing](docs/BORD-DELEN.md).

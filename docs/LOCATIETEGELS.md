@@ -91,9 +91,9 @@ Isolated replay verifies two observations, all known bonus labels, invalid types
 
 Activation verified after the user's restart: a new worker reported QT8's two-read Possible Haven reveal as applied, with no synchronization issues. The live browser still showed the correct tile and explanation without page errors. All 94 public tests passed.
 
-## Board text placement — 27 October 2026
+## Historical board text placement — 27 October 2026
 
-Following the user's layout preference, location-bonus labels and Haven-room bonus text are no longer drawn over the board in either map or grid presentation. Click a district or Haven room to read the information and controls under Table pieces → Location. Tile state, automatic recognition and session persistence are unchanged. A live browser check verified no floating bonus labels, QT8's Possible Haven explanation in the location panel, and Haven-room details on selection, without game input or page errors.
+This historical change was narrowed on 28 October: Haven labels are visible again, as described below. At this stage, location-bonus labels and Haven-room bonus text are no longer drawn over the board in either map or grid presentation. Click a district or Haven room to read the information and controls under Table pieces → Location. Tile state, automatic recognition and session persistence are unchanged. A live browser check verified no floating bonus labels, QT8's Possible Haven explanation in the location panel, and Haven-room details on selection, without game input or page errors.
 
 ### Haven-labels hersteld — 28 oktober 2026
 

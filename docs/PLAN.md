@@ -1,5 +1,15 @@
 # Gefaseerd ontwikkelplan
 
+## Actuele voortgang — 28 oktober 2026
+
+- [x] Herken zichtbare NPC-portretten bij de hervatstap NPC placement; Agnese in Washington live bevestigd. Geen volledige save-import: verborgen onderdelen en overige NPC-portretten blijven afzonderlijk te toetsen. Zie [plaatsingssynchronisatie](PLAATSINGSSYNC.md).
+- [x] Herstel alleen de tien Haven-bonuslabels; districtslabels blijven in het locatiepaneel. Zie [locatietegels](LOCATIETEGELS.md).
+- [x] Voeg de LED-ring toe aan de blijvende firmware-simulatie en dezelfde batterijaanpak als dice. Teburu 1.2.0 toont live 1.15.0, Firmware up to date en 46%. Zie [firmware-simulatie](FIRMWARE-SIMULATIE.md).
+- [x] Corrigeer de LED-segmentoriëntatie in de presentatie; vier verschillende kleuren gecontroleerd in een geïsoleerde browserproef. Zie [Prospero](PROSPERO.md).
+- [ ] Valideer een volledige geladen campagneopstelling en volledige ringanimaties; de beperkte proeven hierboven bewijzen dit niet.
+
+De gedateerde prioriteiten hieronder beschrijven eerdere onderzoeksfasen. Actuele verificatie: 94 publieke tests en 26 private Core-scenario’s geslaagd; details in [VALIDATIE.md](VALIDATIE.md).
+
 ## Hoofddoel en eerstvolgende integratiemijlpalen
 
 - [x] Voeg de fysieke voorraden van alle zes uitbreidingen toe, met apart profiel, opslag/replay, extra miniaturenscans en handmatige markerbediening op de gekoppelde tafel; zie [uitbreidingen en verificatiegrenzen](UITBREIDINGEN.md).
