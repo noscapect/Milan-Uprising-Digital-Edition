@@ -1,10 +1,9 @@
 import { artworkImage } from '../artwork.js';
 import { milanMap } from './milan-map.js';
 import {describeLocationTile} from '../../games/milan-uprising/location-tile-info.js';
-import {tileSymbol} from './tile-symbol.js';
-import {havenRoomLabel} from '../../games/milan-uprising/haven-rooms.js';
 import {layoutPieces,pieceBounds} from './piece-layout.js';
 import {groupInfluenceCubes} from './influence-stacks.js';
+import {havenRoomLabel} from '../../games/milan-uprising/haven-rooms.js';
 
 function pieceElement(component, index, options, interactive = false) {
   const piece = document.createElement(interactive ? 'button' : 'span');
@@ -13,6 +12,7 @@ function pieceElement(component, index, options, interactive = false) {
   const componentId=component.stackMembers?.find(id=>id===options.selectedComponent)||component.id;
   piece.dataset.component = componentId;
   piece.dataset.movable = String(component.kind === 'piece');
+  if(component.pendingPlacement){piece.classList.add('pending-placement');piece.dataset.pending='true';}
   if (component.color) piece.style.setProperty('--piece-color', component.color);
   const label = document.createElement('span'); label.className = 'piece-abbreviation'; label.textContent = component.shortLabel || `${index + 1}`;
   piece.append(label);
@@ -24,6 +24,7 @@ function pieceElement(component, index, options, interactive = false) {
   if (miniature || component.icon) piece.prepend(artworkImage(miniature || component.icon, miniature ? 'piece-icon miniature-icon' : 'piece-icon'));
   piece.title = `${component.label}${component.faceLabel ? ` · ${component.faceLabel}` : ''}`;
   if(component.influenceCount)piece.title=component.label.split('·')[0].trim()+' · Influence × '+component.influenceCount;
+  if(component.pendingPlacement)piece.title+=' · Awaiting Milan confirmation';
   piece.setAttribute('aria-label', piece.title);
   piece.classList.toggle('selected-piece', componentId === options.selectedComponent);
   if (interactive || options.onComponent) piece.onclick = event => { event.stopPropagation(); options.onComponent?.(componentId,options.zoneId); };
@@ -57,7 +58,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
     const attributes = document.createElement('span'); attributes.className = 'zone-attributes';
     const labels = { physical:'Physical', mental:'Mental', social:'Social' };
     attributes.textContent = (zone.attributes || []).map(attribute => labels[attribute] || attribute).join(' · ');
-    cell.replaceChildren(title, attributes, tileBadges(zone), occupants);
+    cell.replaceChildren(title, attributes, ...havenBadges(zone), occupants);
     cell.setAttribute('aria-label', zoneDescription(zone));
     cell.onclick = () => onZone(zone.id);
     return cell;
@@ -101,7 +102,8 @@ function renderMap(container, projection, onZone, options) {
     }else roomArt?.remove();
     hit.onclick = () => onZone(zone.id);
     const pieces = wrapper.querySelector('.zone-pieces');
-    wrapper.querySelector('.location-tile-badges')?.remove();wrapper.querySelector('.map-zone-content').append(tileBadges(zone));
+    wrapper.querySelector('.location-tile-badges')?.remove();
+    wrapper.querySelector('.map-zone-content').append(...havenBadges(zone));
     const active = document.activeElement?.closest('.board-piece')?.dataset.component;
     const displayed=groupInfluenceCubes(zone.occupants);
     const layoutKey=JSON.stringify(displayed.map(c=>[c.id,c.kind,!!c.portrait]));
@@ -115,16 +117,12 @@ function renderMap(container, projection, onZone, options) {
     if (active) [...pieces.children].find(piece=>piece.dataset.component===active)?.focus({preventScroll:true});
   }
 }
-function tileBadges(zone){
-  const badges=document.createElement('span');badges.className='location-tile-badges';
-  if(zone.area==='haven'&&zone.havenRoom?.bonus){
-    const info=havenRoomLabel(zone.havenRoom),badge=document.createElement('span');badge.className='haven-room-badge';badge.dataset.confirmed=String(!!zone.havenRoom?.bonus);
-    badge.textContent=info.bonus;badge.title=info.title+' · '+info.bonus;badges.append(badge);
-  }
-  for(const [kind,tile]of Object.entries(zone.locationTiles||{})){
-    if(tile.face!=='visible')continue;
-    const badge=document.createElement('span');badge.className='location-tile-badge';badge.dataset.tileKind=kind;
-    const info=describeLocationTile(kind,tile,zone.label);badge.append(tileSymbol(info.symbol),document.createTextNode(info.shortLabel));badge.title=info.title+' · '+info.summary;badges.append(badge);
-  }
-  return badges;
+function havenBadges(zone) {
+  if (zone.area !== 'haven' || !zone.havenRoom?.bonus) return [];
+  const info = havenRoomLabel(zone.havenRoom);
+  const badges = document.createElement('span'); badges.className = 'location-tile-badges';
+  const badge = document.createElement('span'); badge.className = 'haven-room-badge';
+  badge.textContent = info.bonus; badge.title = `${info.title} · ${info.bonus}`;
+  badges.append(badge);
+  return [badges];
 }

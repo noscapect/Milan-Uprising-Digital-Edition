@@ -13,7 +13,7 @@ async function refresh(){
     $('start-core').disabled=busy||latest.starting||core.running;
     $('stop-core').disabled=busy||latest.starting||!core.running;
     const firmware=core.firmware;
-    $('firmware-status').textContent=!firmware?'Start the updated PC Core service to read its simulated versions.':`Core ${firmware.core.reportedVersion} → ${firmware.core.targetVersion} · Dice ${firmware.dice.map(d=>d.reportedVersion).join(', ')} → ${firmware.dice[0]?.targetVersion} · ${firmware.phase==='completed'?(firmware.updateRequired?'New simulation available':'Simulation completed'):firmware.phase==='interrupted'?'Previous simulation interrupted; retry available':firmware.phase==='updating'?'Updating simulation…':'Not updated'}`;
+    $('firmware-status').textContent=!firmware?'Start the updated PC Core service to read its simulated versions.':`Core ${firmware.core.reportedVersion} → ${firmware.core.targetVersion} · Dice ${firmware.dice.map(d=>d.reportedVersion).join(', ')} → ${firmware.dice[0]?.targetVersion} · LED ring ${firmware.ring?.reportedVersion||'unavailable'} → ${firmware.ring?.targetVersion||'unavailable'} · ${firmware.phase==='completed'?(firmware.updateRequired?'New simulation available':'Simulation completed'):firmware.phase==='interrupted'?'Previous simulation interrupted; retry available':firmware.phase==='updating'?'Updating simulation…':'Not updated'}`;
     $('simulate-firmware').disabled=busy||!firmware||firmware.phase==='updating'||!firmware.updateRequired;
     const share=latest.share;
     $('remote-details').hidden=!share?.available;$('remote-unavailable').hidden=!!share?.available;
@@ -31,8 +31,8 @@ async function act(path,label){
 $('start-core').onclick=()=>act('/api/windows-core/start','Preparing Bluetooth and starting Core…');
 $('stop-core').onclick=()=>act('/api/windows-core/stop','Stopping Core…');
 $('simulate-firmware').onclick=async()=>{
-  if(busy)return;busy=true;$('simulate-firmware').disabled=true;$('message').textContent='Simulating the Core and five dice update…';
-  try{await api('/api/windows-core/firmware-simulate',{confirmSimulation:true});$('message').textContent='Simulated update saved. Reconnect Milan to read the new Core and dice versions. No official firmware was installed.';}
+  if(busy)return;busy=true;$('simulate-firmware').disabled=true;$('message').textContent='Simulating the Core, five dice and LED ring update…';
+  try{await api('/api/windows-core/firmware-simulate',{confirmSimulation:true});$('message').textContent='Simulated update saved. Reconnect Milan to read the new Core, dice and LED ring versions. No official firmware was installed.';}
   catch(error){$('message').textContent=error.message;}
   finally{busy=false;await refresh();}
 };

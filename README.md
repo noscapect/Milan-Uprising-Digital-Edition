@@ -21,7 +21,7 @@ Run the public test suite with:
 node --test
 ```
 
-If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest implementation check on 26 October 2026 passed all 88 public tests, including automatic Day-phase companion cleanup, the fixed Haven layout and side persistence, Investigation marker transitions, influence stack counts, and placement of visible components within map regions.
+If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest implementation check on 27 October 2026 passed all 94 public tests, including automatic Day-phase companion cleanup, the fixed Haven layout and side persistence, Investigation marker transitions, influence stack counts, and placement of visible components within map regions.
 
 ## Current features and limits
 
@@ -75,6 +75,10 @@ All ten Haven room types and their standard/upgraded effects are fixed and appea
 The experimental Haven screenshot reader has been removed from the active adapter flow. Fixed layout and effect data no longer depend on an app overview. Only the campaign's purchased/upgraded side needs to be recorded.
 
 For city districts, **Location → Board tiles** explains the tile symbol and lets you flip or correct its recorded side. Tile edits do not execute the corresponding game action in Milan. See [location tiles and Haven bonuses](docs/LOCATIETEGELS.md).
+
+See [faster movement feedback](docs/SNELLERE-TERUGKOPPELING.md) for the pending destination display, targeted confirmation and measured timing limits.
+
+See [placement synchronization and corrections](docs/PLAATSINGSSYNC.md) for named NPC outcomes, all-component copy controls, and automatic recognition limits.
 
 ### Other linked-table controls
 

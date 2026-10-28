@@ -20,3 +20,12 @@ export function artworkImage(url, className = '') {
   const image = document.createElement('img'); image.src = url; image.alt = ''; image.className = className;
   image.loading = 'lazy'; image.onerror = () => image.remove(); return image;
 }
+
+// Presentation only: confirmed session state and exports are never changed here.
+export function withPendingPlacement(view,action){
+  if(!action||!view.zones.some(z=>z.id===action.zoneId))return view;
+  const component=view.components.find(c=>c.id===action.componentId);
+  if(!component)return view;
+  const pending={...component,pendingPlacement:true};
+  return {...view,components:view.components.map(c=>c.id===pending.id?pending:c),zones:view.zones.map(z=>({...z,occupants:[...z.occupants.filter(c=>c.id!==pending.id),...(z.id===action.zoneId?[pending]:[])]}))};
+}

@@ -23,3 +23,12 @@ Na het laden van de nieuwe pc-Core heeft de gebruiker op 25 oktober op de echte 
 De publieke tests controleren het accessoire zonder speelbare identiteit en accepteren uitsluitend vier volledige waargenomen RGB-waarden. De bestaande browserproef controleert origineel artwork, de vier segmenten, kleurupdates, neutrale status, behoud van het grootste schermdeel voor de kaart, drie kleinere schermformaten en de terugval zonder artwork.
 
 De private Core-regressiesuite heeft nu 25 geslaagde scenario’s. De nieuwe ringproef controleert sessie-/radiovoorwaarden, sluiten/reset en behoud van de overige hardwaretoestand. Een afzonderlijke proef met de oorspronkelijke SDK-decoder herkent één ring en twee statusmeldingen zonder dubbele ontdekking. De virtuele Bluetooth-proef controleert daadwerkelijke aflevering van de ringmelding via dezelfde karakteristiek als de dobbelstenen. De parserproef controleert ook uitvoer gericht aan de eigen identiteit en het negeren van vreemde adressen. Deze softwareproeven blijven onderscheiden van de afzonderlijke gebruikersbevestiging op Android. Technische berichten, decoderbron en synthetische identiteiten blijven uitsluitend onder genegeerd `private/`.
+
+
+## Firmware en batterij — 28 oktober 2026
+
+De virtuele ring meldt nu de blijvend opgeslagen compatibiliteitsversie 1.15.0 en een stabiele gesimuleerde batterijwaarde op dezelfde manier als de dobbelstenen. Live gecontroleerd in de ongewijzigde Teburu-app 1.2.0: Firmware up to date, 46%, 3852 mV. De eerdere nulwaarden en beide waarschuwingen zijn hiermee verholpen. Dit vervangt de eerdere onbekende batterijtelemetrie voor onze simulatie; het is geen meting aan fysieke hardware. Zie [firmware-simulatie](FIRMWARE-SIMULATIE.md).
+
+## Oriëntatie LED-segmenten — 28 oktober 2026
+
+De bordweergave volgt nu dezelfde oriëntatie als de bovenaanzichtweergave in Teburu: linksboven licht 3, rechtsboven licht 4, rechtsonder licht 1 en linksonder licht 2. De eerdere weergave stond 180 graden gedraaid. Alleen de presentatie is aangepast; ontvangen kleuren en lichtidentiteiten blijven behouden. Een geïsoleerde browsercontrole met vier verschillende kleuren bevestigt deze plaatsing. De uitgebreidere bestaande Prospero-browserproef is niet afgerond; die bleef wachten. De correctie vereist verversen van de bordpagina.

@@ -13,12 +13,14 @@ export function mountMiniatureStand(host,config){
   const ring=doc.createElementNS(ns,'svg');ring.setAttribute('viewBox','0 0 160 86');ring.classList.add('miniature-led-ring');ring.setAttribute('role','img');
   const base=doc.createElementNS(ns,'ellipse');base.setAttribute('cx','80');base.setAttribute('cy','44');base.setAttribute('rx','73');base.setAttribute('ry','35');base.setAttribute('fill','#111616');base.setAttribute('stroke','#252c2d');base.setAttribute('stroke-width','8');ring.append(base);
   const paths=['M 14 43 A 66 29 0 0 1 75 14','M 85 14 A 66 29 0 0 1 146 43','M 146 48 A 66 29 0 0 1 85 77','M 75 77 A 66 29 0 0 1 14 48'];
-  for(const d of paths){const led=doc.createElementNS(ns,'path');led.setAttribute('d',d);ring.append(led);}sculpture.append(ring);
+  // Match Teburu's top view: upper left 3, upper right 4, lower right 1, lower left 2.
+  const lightIndices=[2,3,0,1];
+  paths.forEach((d,i)=>{const led=doc.createElementNS(ns,'path');led.setAttribute('d',d);led.dataset.light=String(lightIndices[i]+1);ring.append(led);});sculpture.append(ring);
   const status=doc.createElement('p');status.className='miniature-stand-status';status.setAttribute('role','status');
   stand.append(title,subtitle,sculpture,status);host.append(stand);
   function update(state){
     const observed=state?.observed===true&&state.colors?.length===4;
-    [...ring.querySelectorAll('path')].forEach((led,i)=>{const color=observed?state.colors[i]:'#343b3c';led.style.setProperty('--led-color',color);led.dataset.lit=String(observed&&color!=='#000000');});
+    [...ring.querySelectorAll('path')].forEach((led,i)=>{const color=observed?state.colors[lightIndices[i]]:'#343b3c';led.style.setProperty('--led-color',color);led.dataset.lit=String(observed&&color!=='#000000');});
     ring.setAttribute('aria-label',observed?'LED ring · '+state.colors.map((c,i)=>`light ${i+1}: ${c}`).join(', '):'LED ring · four lights · no signal received');
     status.textContent=observed?'LED ring · Milan':'LED ring · awaiting Milan';stand.dataset.observed=String(observed);
   }

@@ -186,3 +186,5 @@ dialog{background:var(--panel);color:var(--text);border:1px solid #626057;border
 .influence-count{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;line-height:1;color:#fff;text-shadow:0 1px 2px #000,1px 0 1px #000;pointer-events:none}
 .haven-room-art{position:absolute;pointer-events:none;object-fit:fill;user-select:none}
 .haven-side-reference{font-size:12px;color:var(--muted)}
+
+.board-piece.pending-placement{outline:2px dashed #ffd06b;outline-offset:3px;opacity:.65}.board-piece.pending-placement::after{content:"…";position:absolute;right:-6px;top:-8px;min-width:16px;padding:0 2px;border-radius:4px;background:#211c12;color:#ffd06b;font:700 14px/16px system-ui;text-align:center}

@@ -30,13 +30,15 @@ export function layoutPieces(geometry,components){
   const bounds=pieceBounds(geometry.polygon),points=[geometry.anchor];
   for(let y=bounds.y+2;y<bounds.y+bounds.height;y+=4)for(let x=bounds.x+2;x<bounds.x+bounds.width;x+=4)if(insidePolygon([x,y],geometry.polygon))points.push([x,y]);
   points.sort((a,b)=>(a[0]-geometry.anchor[0])**2+(a[1]-geometry.anchor[1])**2-(b[0]-geometry.anchor[0])**2-(b[1]-geometry.anchor[1])**2||a[1]-b[1]||a[0]-b[0]);
-  const shapes=components.map(c=>({id:c.id,width:c.kind==='cube'?13:c.kind==='piece'&&c.portrait?25:25,height:c.kind==='cube'?13:c.kind==='piece'&&c.portrait?42:25}));
+  const shapes=components.map(c=>({id:c.id,cube:c.kind==='cube',width:c.kind==='cube'?13:c.kind==='piece'&&c.portrait?25:25,height:c.kind==='cube'?13:c.kind==='piece'&&c.portrait?42:25}));
   // Place large miniatures first, then fit every token and cube around them.
   shapes.sort((a,b)=>b.width*b.height-a.width*a.height);
   for(let scale=1;scale>.015;scale*=.88){
     const placed=[];
     for(const shape of shapes){
-      const width=shape.width*scale,height=shape.height*scale,gap=1.5*scale;
+      // Keep small influence cubes readable while larger pieces shrink to fit.
+      const pieceScale=shape.cube?Math.min(1,scale*2):scale;
+      const width=shape.width*pieceScale,height=shape.height*pieceScale,gap=1.5*scale;
       const point=points.find(([x,y])=>fitsPiece({x,y,width:width+gap,height:height+gap},geometry.polygon)&&placed.every(p=>Math.abs(x-p.x)>=(width+p.width)/2+gap||Math.abs(y-p.y)>=(height+p.height)/2+gap));
       if(!point)break;
       placed.push({id:shape.id,x:point[0],y:point[1],width,height});

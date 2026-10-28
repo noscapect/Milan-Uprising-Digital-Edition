@@ -117,3 +117,13 @@ De optionele scanpresentatie groepeert een miniaturenstrook en de Core in één 
 
 
 `mountDiceTray({onRoll, onWake, container})` presenteert vijf d10’s in een dialoog. `update({connected, ready, canRoll, rolling, dice})` neemt de hardwaretoestand over; `dice` bevat alleen index, aanmeldstatus, rolstatus en de laatst bekende waarde. `onRoll(indices)` en `onWake()` leveren zo nodig de nieuwe hardwaretoestand terug. De component heeft geen RNG en maakt geen domeinopdrachten. Openen/sluiten verstuurt geen invoer; selectie blijft lokale UI-toestand. `dispose()` verwijdert de dialoog en openingsknop.
+
+## Milan-module — explicit component instructions
+
+`buildComponentInstructions(profile, state, instructions)` validates a nonempty batch of unique known component IDs with `operation: place | remove | face`, an existing `zoneId` for placements, and an optional valid `faceId`. Face-only instructions require a side. It validates final ally/ghoul district occupancy before returning an idempotent `{changed, placements, faces}` arrangement for the existing atomic table command. No engine or session format changes are introduced. The private adapter uses this contract for supported explicit named app outcomes and user-verified table-only corrections. See [placement synchronization](PLAATSINGSSYNC.md) for observed coverage and limitations.
+
+## Presentation and observation timing — 27 October 2026
+
+`withPendingPlacement(view, action)` in the presentation decorators returns a projected pending destination and `pendingPlacement` presentation flag without changing confirmed session state, events, revision or exports. The renderer marks it as awaiting confirmation. No graphical object is introduced into domain state.
+
+`createPositiveObservations({key,maxGap})` tracks independent positive observations by input generation. It returns only items seen in two distinct successive captures within the allowed gap, including the previous capture time for post-request freshness checks. Missing items reset their candidate; absence is not a removal instruction. See [faster feedback](SNELLERE-TERUGKOPPELING.md) for measured limits and private-reader activation.

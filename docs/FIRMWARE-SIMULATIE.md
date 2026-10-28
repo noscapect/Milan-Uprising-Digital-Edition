@@ -1,6 +1,6 @@
 # Gesimuleerde firmware-update
 
-De private PC-Core heeft een afzonderlijke, blijvende compatibiliteitsstatus voor de virtuele Core en vijf virtuele dobbelstenen. In het lokale Control Center staat **Simulated firmware → Simulate update · Core + 5 dice**. Dit is een update van onze simulatie; er wordt geen officiële firmware geïnstalleerd, uitgevoerd of gewijzigd. De updateknop van de officiële app en de bijbehorende bootloaderoverdracht blijven afzonderlijk en worden niet ondersteund door deze patch.
+De private PC-Core heeft een afzonderlijke, blijvende compatibiliteitsstatus voor de virtuele Core, vijf virtuele dobbelstenen en één virtuele LED-ring. In het lokale Control Center staat **Simulated firmware → Simulate update · Core + 5 dice + LED ring**. Dit is een update van onze simulatie; er wordt geen officiële firmware geïnstalleerd, uitgevoerd of gewijzigd. De updateknop van de officiële app en de bijbehorende bootloaderoverdracht blijven afzonderlijk en worden niet ondersteund door deze patch.
 
 De doelversies zijn sinds 25 oktober 2026 Core **2.32.0** en dice **3.39.0**. Deze volgen de daadwerkelijk door de ongewijzigde Android-Milan-app verwachte versies, zichtbaar in zijn eigen versievergelijkingslog. De eerdere doelen 2.31.0 en 3.36.0 volgden de bestandsnamen van meegeleverde firmwarepakketten. Die bleken achter te lopen op de versiecontrole van de app en lieten beide waarschuwingen staan. Dit zijn compatibiliteitsversies van onze gedragssimulatie; er wordt geen officiële firmware uitgevoerd en de versienummers bewijzen geen volledige hardwarecompatibiliteit.
 
@@ -17,3 +17,14 @@ De browserproef controleert fouten, opnieuw proberen, de melding bij verouderde 
 De lokale simulatie is uitgevoerd en de helper is opnieuw geladen. Daarna is met de ongewijzigde Android-Milan-app 1.0.9 via de echte BLE-route bevestigd: Core 2.32.0 komt overeen met de verwachte 2.32.0 en alle vijf dice melden 3.39.0. Beide setupschermen tonen **Continue**, zonder firmware-updatewaarschuwing of FW-pijlen bij de dice. Alleen wakker maken is gebruikt; geen worp verstuurd en geen campagne geopend. Deze acceptatie bewijst het verdwijnen van de versie­waarschuwingen, geen volledige spelcompatibiliteit of uitvoering van officiële firmware.
 
 Implementatie, ruwe apparaatwaarnemingen, identiteiten en decoderinhoud blijven onder genegeerd `private/`. De publieke demo krijgt geen SDK- of Bluetoothafhankelijkheid.
+
+
+## LED-ring — 28 oktober 2026
+
+De LED-ring maakt nu deel uit van dezelfde blijvende firmware-simulatie, met doelversie **1.15.0**. Deze versie is gecontroleerd tegen de versiecontrole van de ongewijzigde Teburu-app 1.2.0. Oudere lokale statusbestanden zonder ringversie blijven leesbaar en vragen een nieuwe simulatie; de eerder ingestelde Core- en diceversies blijven behouden. Alleen succesvol voltooien slaat de nieuwe ringversie op. Afbreken of een schrijffout meldt geen geslaagde update.
+
+De ring meldt nu ook een stabiele gesimuleerde batterijwaarde via dezelfde berekening als de dobbelstenen. Dit is geen fysieke batterijmeting. De hardwareversie blijft onbekend; er wordt geen officiële ringfirmware geïnstalleerd of uitgevoerd.
+
+De wijziging is actief. Na opnieuw verbinden met de echte Android-tablet toonde de ongewijzigde Teburu-app **1.15.0**, **Firmware up to date**, **46%** en **3852 mV**, zonder de eerdere waarschuwing voor beschikbare firmware of een lege batterij. De officiële updateknop is niet gebruikt. De campagne en bordposities zijn niet gewijzigd.
+
+Verificatie: alle 26 private Core-regressiescenario’s slagen, inclusief migratie van een oud statusbestand, afbreken, schrijffout, herstart en stabiele ringtelemetrie. De virtuele Bluetooth-proef en de Control Center-browserproef slagen eveneens. Deze acceptatie bevestigt versie- en batterijweergave; volledige ringanimaties blijven afzonderlijk te toetsen. Ruwe waarnemingen en implementatie blijven privaat.

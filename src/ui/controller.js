@@ -225,7 +225,7 @@ export function mountTabletop(tabletop, download, core = null, artwork = null, l
     $('roll').textContent = roll ? `d${roll.sides} → ${roll.value}` : '—';
   }
   async function act(action, message) {
-    try { await action(); update(); $('status').textContent = message; }
+    try { const result = await action(); update(); $('status').textContent = result?.message || message; }
     catch (error) { $('status').textContent = error.message; }
   }
   $('register').onclick = () => act(() => core?.register($('piece').value), 'Demo miniature selected for sensor input. This is not an RFID scan.');

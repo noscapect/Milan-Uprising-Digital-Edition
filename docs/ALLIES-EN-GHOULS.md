@@ -16,6 +16,10 @@ To skip deployment, use **Done** in Milan and respond to its confirmation prompt
 
 ## Automatic return at the end of nightly deployment
 
+### Restoring placements after Load game
+
+The private adapter also reads **Scenario setup → Ghouls placement / Allies placement**. These screens show existing campaign positions rather than a new Sunset deployment. Two matching, positively recognized map portraits restore the visible companions to the linked table without sending a scan or sensor input. Missing portraits do not remove other pieces. The recorded Fixer screen identifies City Life; other layouts and obscured portraits remain unverified. Continue through the setup in Milan after checking the board.
+
 Deployment and removal are separate synchronization events. The original integration recorded deployment but did not synchronize the end of that deployment, leaving Fixer in City Life after Milan had reached Day and no longer showed him on the map.
 
 The adapter now automatically returns deployed allies and ghouls to stock after two matching, calibrated observations of Milan's **NIGHT … DAY** phase heading. It covers all 15 companion types in the base and expansion inventory. No user removal action is required. Phase confirmation is independent of changing feed cards, so scrolling or animating influence outcomes do not keep companions on the board. Observations must belong to the same night and input generation; one frame, other phases, errors, and uncalibrated screens do not trigger this cleanup.
@@ -49,3 +53,9 @@ No live deployment was performed by the agent during the initial implementation 
 The removal tests use isolated state and mocked browser responses. They verify removal of the selected companion, preservation of other components and faces, stale-request rejection, idempotency for an already absent miniature, and the explicit UI action. Fixer's return from City Life to stock was then applied to the live linked table following the user's report; no sensor or official-app command was sent.
 
 Automatic cleanup has separate tests: a recorded calibrated Day screen removes a deployed Fixer and an expansion ally without any user removal request, including while feed text is changing. A pending companion placement is cleared, other components are preserved, and repeated observations are idempotent. Public tests cover all 15 companion types and the refusal to clean up on unconfirmed or non-Day contexts. The full public suite now passes 88 tests. The live adapter exposes its confirmed phase and applied cleanup in board status; the current Fixer was already off board before automatic cleanup was activated.
+
+## Recovering Jürgen on the active city map
+
+The private map reader also restores Fixer (Jürgen) from a positively recognized, unobscured portrait on the calibrated active city map. Two matching portrait observations and a stable influence-map reading are required. This copies his existing app position to the linked table; it does not deploy him, send a scan/contact, or spend Hunger. Missing portraits keep the last position, occupied companion districts and Haven destinations are rejected, and Day-phase cleanup retains priority. Recognition of other companion portraits on this active-map path remains unverified.
+
+Validation on 26 October 2026: a recorded Night 2 / Hour 1 image identified Jürgen in Washington; a separate image without him produced no Fixer placement. Isolated replay checked relocation, repeated observations, idempotency, missing portraits, unconfirmed observations, and invalid Haven destinations. The live adapter then restored Jürgen in Washington automatically, and a browser check confirmed his miniature was visible without page errors or gameplay requests. All 88 public tests, existing map recovery, and automatic Day cleanup passed.
