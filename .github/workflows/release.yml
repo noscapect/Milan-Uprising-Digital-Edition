@@ -1,4 +1,4 @@
-name: Build reviewed Windows release
+name: Build reviewed TCE Windows release
 on:
   workflow_dispatch:
     inputs:
@@ -30,7 +30,7 @@ jobs:
         run: node tools/smoke-release.mjs
       - uses: actions/upload-artifact@v4
         with:
-          name: milan-windows-x64
+          name: tce-windows-x64
           path: |
             work/release-*/*.zip
             work/release-*/*.sha256
@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: milan-windows-x64
+          name: tce-windows-x64
           path: release-files
       - name: Create draft only
         env:
@@ -55,4 +55,4 @@ jobs:
           shopt -s globstar nullglob
           assets=(release-files/**/*.zip release-files/**/*.sha256)
           test "${#assets[@]}" -gt 0
-          gh release create "review-${GITHUB_SHA:0:12}" "${assets[@]}" --draft --target "$GITHUB_SHA" --title "Windows release candidate" --notes "Review candidate; see docs/RELEASE-REVIEW.md for unvalidated hardware checks."
+          gh release create "review-${GITHUB_SHA:0:12}" "${assets[@]}" --draft --target "$GITHUB_SHA" --title "TCE Windows release candidate" --notes "Review candidate; see docs/RELEASE-REVIEW.md for unvalidated hardware checks."

@@ -17,7 +17,7 @@ if($rows[0] -match '\bNot shared\s*$'){throw 'Share this adapter explicitly with
 if($rows[0] -notmatch '\bAttached\s*$'){
   if($rows[0] -notmatch '\bShared\s*$'){throw 'Unexpected USB sharing state.'}
   $record=@{sessionId=$env:MILAN_SESSION_ID;busId=$busId;vidPid=$settings.usbAdapter;attemptedByUs=$true;attachedByUs=$false;released=$false}
-  if(-not $record.sessionId){throw 'Start the app using Start-Milan before transferring Bluetooth.'}
+  if(-not $record.sessionId){throw 'Start the app using Start-TCE before transferring Bluetooth.'}
   $record|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $PSScriptRoot 'radio-ownership.json') -Encoding UTF8
   & $usbip attach --wsl $settings.wslDistribution --busid $busId
   if($LASTEXITCODE){throw 'Could not attach the selected adapter to WSL.'}

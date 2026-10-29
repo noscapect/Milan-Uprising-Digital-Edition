@@ -1,6 +1,8 @@
-# Milan Uprising: Digital Edition
+# Teburu Core Emulator (TCE)
 
-An independent, modular digital tabletop project, with **Vampire: The Masquerade – Milan Uprising** as its first game module. The goal is to use the unmodified official game app with a virtual table, without physical game components. The official app remains responsible for rules, story, and campaign progress.
+Teburu Core Emulator (TCE) is an independent, modular digital tabletop project, with **Vampire: The Masquerade – Milan Uprising** as its first game module. The goal is to use the unmodified official game app with a virtual table, without physical game components. The official app remains responsible for rules, story, and campaign progress.
+
+Renamed from Milan Uprising: Digital Edition on 29 October 2026. This change updates the project identity only; the next module refactoring is separate work. The current compatibility and validation limits still apply.
 
 The default application is a standalone sandbox with the included artwork. The optional linked-table runtime is also included as source, with a setup procedure for a Windows PC and the official app on an Android tablet. It has demonstrated limited interaction with the official app, including character registration, movement, dice interaction, resuming a campaign, and copying observed board changes. This is not evidence that every phase, expansion, or hardware behavior works. See [installation on another computer](docs/INSTALLATION.md).
 
@@ -9,13 +11,15 @@ The default application is a standalone sandbox with the included artwork. The o
 Requires Node.js 22 or later. The standalone table has no external runtime dependencies and needs no package installation. Its 156 artwork images are bundled in one archive and unpacked automatically on first start.
 
 ```powershell
-cd Milan-Uprising-Digital-Edition
+cd Teburu-Core-Emulator
 node server.mjs
 ```
 
 Open http://127.0.0.1:5178. Stop the server with Ctrl+C. Open the page through the server rather than directly from the filesystem.
 
-On Windows, `Start-Milan.cmd` opens the linked-table Control Center with guided WSL2/usbipd installation and Bluetooth-adapter preparation. Installation starts only after an explicit confirmation. A source checkout still needs Node.js and the app-helper prerequisites; see [first-time setup](docs/INSTALLATION.md).
+On Windows, `Start-TCE.cmd` opens the linked-table Control Center with guided WSL2/usbipd installation and Bluetooth-adapter preparation. Installation starts only after an explicit confirmation. A source checkout still needs Node.js and the app-helper prerequisites; see [first-time setup](docs/INSTALLATION.md).
+
+`Start-Milan.cmd` remains a compatibility shortcut to `Start-TCE.cmd`. Existing session formats, game IDs and the installation's storage directory are preserved.
 
 A Windows release-candidate builder now packages the runtimes and prebuilt helpers, adds per-user installation, Linux-helper preparation, a tablet wizard and Bluetooth cleanup/recovery. This work is awaiting review; the release workflow has not been executed. See [release review](docs/RELEASE-REVIEW.md).
 

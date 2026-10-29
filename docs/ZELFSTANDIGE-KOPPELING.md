@@ -2,7 +2,7 @@
 
 ## Actuele start- en stoproute — 29 oktober 2026
 
-Voor de gepubliceerde runtime gebruik je `Start-Milan.cmd`; de geïnstalleerde kandidaat maakt een snelkoppeling **Milan Uprising**. Volg de Windows-/helpervoorbereiding en tabletcontrole in [INSTALLATION.md](INSTALLATION.md). De nieuwe **Stop Core** sluit de eigen helper en geeft de door onze sessie geregistreerde radio-overdracht terug aan Windows. **Quit app and return Bluetooth to Windows** sluit ook beide webservices. Na een crash is herstel expliciet; alleen de browser sluiten stopt de services niet. LAN-deling wordt niet automatisch gestart door de nieuwe launcher; zie [bord delen](BORD-DELEN.md).
+Voor de gepubliceerde runtime gebruik je `Start-TCE.cmd`; de geïnstalleerde kandidaat maakt een snelkoppeling **Teburu Core Emulator (TCE)**. Volg de Windows-/helpervoorbereiding en tabletcontrole in [INSTALLATION.md](INSTALLATION.md). De nieuwe **Stop Core** sluit de eigen helper en geeft de door onze sessie geregistreerde radio-overdracht terug aan Windows. **Quit app and return Bluetooth to Windows** sluit ook beide webservices. Na een crash is herstel expliciet; alleen de browser sluiten stopt de services niet. LAN-deling wordt niet automatisch gestart door de nieuwe launcher; zie [bord delen](BORD-DELEN.md).
 
 De beschrijving hieronder documenteert de oudere, afzonderlijk ingerichte private pc-launchers en hun proeven van 23–28 oktober. Hun snelkoppelingen en het oude stopgedrag zijn geen instructies voor een verse clone of de nieuwe kandidaat. De benodigde runtimecode staat nu in `integration/runtime/`, terwijl machinegegevens en waarnemingen lokaal blijven.
 

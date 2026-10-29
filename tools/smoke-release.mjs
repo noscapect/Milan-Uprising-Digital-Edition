@@ -6,7 +6,7 @@ import {promisify} from 'node:util';
 import assert from 'node:assert/strict';
 const run=promisify(execFile),root=fileURLToPath(new URL('../',import.meta.url));
 const builds=(await readdir(join(root,'work'))).filter(name=>/^release-\d+$/.test(name)).sort();
-const app=process.argv[2]||join(root,'work',builds.at(-1)||'missing','Milan-Uprising');
+const app=process.argv[2]||join(root,'work',builds.at(-1)||'missing','TCE');
 const env={...process.env,DOTNET_ROOT:join(app,'does-not-exist'),MILAN_CORE_STATE_DIRECTORY:join(root,'private','release-smoke'),PYTHONDONTWRITEBYTECODE:'1',PYTHONHOME:'',PYTHONPATH:'',PATH:process.env.SystemRoot+'\\System32;'+process.env.SystemRoot};
 await run(join(app,'runtime','node.exe'),['--version'],{env,windowsHide:true});
 await run(join(app,'runtime','python','python.exe'),['-c','import cv2,numpy'],{env,windowsHide:true});

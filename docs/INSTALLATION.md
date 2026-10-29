@@ -2,7 +2,7 @@
 
 ## Windows release candidate
 
-The local release-candidate build includes Node, Python/NumPy/OpenCV and self-contained .NET helpers. Extract its ZIP and run **Install-Milan.cmd**, then use the desktop shortcut. This installs for your Windows account and preserves private settings on upgrade. **Start-Milan.cmd** also runs directly from the extracted folder. No system Node, Python, .NET SDK or build commands are needed for this packaged edition.
+The local release-candidate build includes Node, Python/NumPy/OpenCV and self-contained .NET helpers. Extract its ZIP and run **Install-TCE.cmd**, then use the desktop shortcut. This installs for your Windows account and preserves private settings on upgrade. **Start-TCE.cmd** also runs directly from the extracted folder. No system Node, Python, .NET SDK or build commands are needed for this packaged edition.
 
 In Control Center, complete **Prepare this PC**, select the radio, then **Prepare app helpers**. The latter asks for approval of Linux package installation and Google's Android tools terms. It downloads the Android USB tools directly from Google, prepares the Linux environment, and reports progress/errors. Connect one tablet, approve USB debugging, choose **Check tablet**, confirm English/landscape and start Core. The automatic display reader currently supports 2560 × 1600. Stop Core returns this app's radio transfer to Windows; use **Quit app and return Bluetooth to Windows** to also close the services. After a crash, use the explicit previous-session recovery button. Closing the browser alone does not quit the app.
 
@@ -13,8 +13,8 @@ These release changes are awaiting owner review. The GitHub release workflow has
 Install Node.js 22 or later, then clone or download this repository:
 
 ```powershell
-git clone https://github.com/noscapect/Milan-Uprising-Digital-Edition.git
-cd Milan-Uprising-Digital-Edition
+git clone https://github.com/noscapect/Teburu-Core-Emulator.git
+cd Teburu-Core-Emulator
 npm start
 ```
 
@@ -26,7 +26,7 @@ The table starts with its own empty sandbox session. Export/import your tabletop
 
 ### Guided Windows preparation
 
-On Windows, double-click `Start-Milan.cmd` to open the Control Center. A source checkout still requires Node.js 22 or later; the packaged candidate uses its included `runtime/node.exe`.
+On Windows, double-click `Start-TCE.cmd` to open the Control Center. A source checkout still requires Node.js 22 or later; the packaged candidate uses its included `runtime/node.exe`.
 
 The **Prepare this PC** panel checks WSL, Debian's WSL version, usbipd and available USB Bluetooth adapters. Checking does not install software, share a USB device or start Core. You can then choose:
 

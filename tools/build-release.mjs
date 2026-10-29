@@ -6,7 +6,7 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 const run=promisify(execFile);
 export const releaseRoots=['src','server','data','legacy','integration/runtime','resources','docs'];
-export const releaseFiles=['index.html','control-center.html','server.mjs','package.json','Start-Milan.cmd','README.md','tools/start-linked.mjs','tools/linked-runtime.mjs','tools/windows-prerequisites.ps1','tools/prepare-release-helpers.mjs','tools/linux-helper-setup.ps1','tools/install-release.ps1','tools/launch-release.ps1'];
+export const releaseFiles=['index.html','control-center.html','server.mjs','package.json','Start-TCE.cmd','Start-Milan.cmd','README.md','tools/start-linked.mjs','tools/linked-runtime.mjs','tools/windows-prerequisites.ps1','tools/prepare-release-helpers.mjs','tools/linux-helper-setup.ps1','tools/install-release.ps1','tools/launch-release.ps1'];
 export async function copyReleaseSources(source,destination){
  async function copy(path){
   await mkdir(join(destination,path),{recursive:true});
@@ -28,7 +28,7 @@ const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 export async function buildRelease({source=fileURLToPath(new URL('../',import.meta.url)),output}={}){
  if(process.platform!=='win32'||process.arch!=='x64')throw Error('Build the Windows x64 release on Windows x64.');
  const version=JSON.parse(await readFile(join(source,'package.json'),'utf8')).version;
- const directory=output||join(source,'work',`release-${Date.now()}`),app=join(directory,'Milan-Uprising');
+ const directory=output||join(source,'work',`release-${Date.now()}`),app=join(directory,'TCE');
  await mkdir(app,{recursive:true});await copyReleaseSources(source,app);
  const downloads=join(directory,'downloads');await mkdir(downloads,{recursive:true});
  async function download(url,name,expected){
@@ -60,7 +60,7 @@ export async function buildRelease({source=fileURLToPath(new URL('../',import.me
   console.log('Publishing',project);await run('dotnet',['publish',join(source,'integration/runtime',project),'-c','Release','-r','win-x64','--self-contained','true','-p:PublishSingleFile=true','-p:IncludeNativeLibrariesForSelfExtract=true','-p:DebugType=None','-o',join(app,'integration/runtime',destination)],{windowsHide:true,timeout:300000,maxBuffer:4*1024*1024});
  }
  await writeFile(join(app,'release.json'),JSON.stringify({format:'milan-windows-release',schemaVersion:1,version,architecture:'x64',node:nodeEntry[1],python:pythonVersion,dependencies:materials},null,2));
- await writeFile(join(app,'Install-Milan.cmd'),'@echo off\r\npowershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\\install-release.ps1"\r\nif errorlevel 1 pause\r\n');
+ await writeFile(join(app,'Install-TCE.cmd'),'@echo off\r\npowershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\\install-release.ps1"\r\nif errorlevel 1 pause\r\n');
  await writeFile(join(app,'THIRD-PARTY.txt'),'Node license: runtime/LICENSE\nPython license: runtime/python/LICENSE.txt\nNumPy/OpenCV licenses: runtime/python/Lib/site-packages/*.dist-info/\n.NET notices: https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT\nAndroid Platform Tools is downloaded separately after consent to Google terms.\nTeburu SDK is not included.\n');
  await mkdir(join(app,'notices'),{recursive:true});
  for(const [name,url] of [['dotnet-license.txt','https://raw.githubusercontent.com/dotnet/runtime/release/8.0/LICENSE.TXT'],['dotnet-third-party.txt','https://raw.githubusercontent.com/dotnet/runtime/release/8.0/THIRD-PARTY-NOTICES.TXT']]){
@@ -69,7 +69,7 @@ export async function buildRelease({source=fileURLToPath(new URL('../',import.me
  const integrity={schemaVersion:1,files:{}};
  async function hashTree(path=''){for(const entry of await readdir(join(app,path),{withFileTypes:true})){const name=path?path+'/'+entry.name:entry.name;if(entry.isDirectory())await hashTree(name);else integrity.files[name]=sha(await readFile(join(app,name)));}}
  await hashTree();await writeFile(join(app,'release-files.json'),JSON.stringify(integrity));
- const zip=join(directory,`Milan-Uprising-${version}-windows-x64.zip`);
+ const zip=join(directory,`TCE-${version}-windows-x64.zip`);
  await run('powershell.exe',['-NoProfile','-NonInteractive','-Command','Compress-Archive -LiteralPath $env:MILAN_RELEASE_APP -DestinationPath $env:MILAN_RELEASE_ZIP'],{windowsHide:true,timeout:300000,env:{...process.env,MILAN_RELEASE_APP:app,MILAN_RELEASE_ZIP:zip}});
  await writeFile(zip+'.sha256',sha(await readFile(zip))+'  '+zip.split(/[\\/]/).at(-1)+'\n');
  console.log('Review package:',zip);return {app,zip};

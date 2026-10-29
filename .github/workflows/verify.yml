@@ -1,4 +1,4 @@
-name: Verify portable edition
+name: Verify TCE portable edition
 on: [push, pull_request]
 jobs:
   public-tests:

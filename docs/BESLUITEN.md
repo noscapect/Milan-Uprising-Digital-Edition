@@ -1,5 +1,9 @@
 # Architectuurbeslissingen — 21 oktober 2026
 
+## Projectnaam — 29 oktober 2026
+
+Het project heet voortaan **Teburu Core Emulator (TCE)**; de GitHub-repository heet `Teburu-Core-Emulator`. Dit betreft uitsluitend de naam, zichtbare projectbranding en pakket-/launchernamen. Milan Uprising blijft de bestaande spelmodule. De volgende refactorering voor meer spelmodules is afzonderlijk werk. Sessie-/profiel-ID's, interne formaatnamen en bestaande opslag blijven behouden; deze naamswijziging is geen nieuw compatibiliteitsbewijs.
+
 ## Windows-releasekandidaat — 29 oktober 2026
 
 De releasebuilder gebruikt alleen publieke bronmappen, verpakt Node/Python en self-contained .NET-helpers, bewaart third-party notices en voegt een bestandsmanifest toe. De per-user installer bewaart private instellingen bij bijwerken. Android-tools worden pas na afzonderlijke toestemming rechtstreeks van Google gedownload; Linux-pakketten en de eigen geïsoleerde helperomgeving worden via vaste opdrachten voorbereid. Tablettoestemming, voorgrondapp en schermresolutie worden gecontroleerd; taal en oriëntatie blijven een expliciete gebruikersbevestiging. Normaal stoppen geeft uitsluitend de door onze sessie geregistreerde radio-overdracht terug; na geforceerd afsluiten is herstel expliciet. De releaseworkflow is alleen handmatig en mag niet voor de review worden uitgevoerd. Geen fysieke tweede-machineacceptatie of volledige campagnevalidatie geclaimd.
