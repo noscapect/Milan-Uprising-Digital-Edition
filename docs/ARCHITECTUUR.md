@@ -1,5 +1,9 @@
 # Architectuur — modulair tabletop-platform
 
+## Actuele scope — 29 oktober 2026
+
+De optionele gekoppelde runtime staat nu als eigen broncode in `integration/runtime/`; WSL2 is de vaste Bluetooth-route voor Windows met een Android-tablet. De releasebuilder verpakt runtimes en helpers, terwijl instellingen, identifiers en campagnes in `private/` blijven. De SDK zelf wordt niet verspreid. Zie [installatie](INSTALLATION.md), [release-review](RELEASE-REVIEW.md) en [validatie](VALIDATIE.md). Uitspraken hieronder over ontbreken van netwerk-/appintegratie beschrijven de oorspronkelijke sandboxdoorsnede, niet de toegevoegde optionele adapter. De laaggrenzen blijven gelden; volledige campagne- en tweede-machineacceptatie blijven open.
+
 Architectuur vastgesteld en eerste sandboxdoorsnede geïmplementeerd op 21 oktober 2026. Milan Uprising heeft een afzonderlijke game-module met neutrale profieldata; echte spelregels en locaties ontbreken nog. Prioriteit: getrouwe functionele 2D-reproductie, daarna automatisering en optionele visuele uitbreiding.
 
 Uitbreiding 0.5 op 22 oktober: een apart schema-2-retailpakket bevat brongecontroleerde fysieke onderdelen en identiteiten. Generieke componentzijden worden als IDs in de engine bijgehouden; categorieën, bronverwijzingen en kleuren blijven in data/projecties. Regels en volledige locatiekaart blijven open. De oudere neutrale profielen en hun saves blijven werken.

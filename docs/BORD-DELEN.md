@@ -1,5 +1,9 @@
 # Speelbord op een andere pc openen
 
+## Huidige bronversie — 29 oktober 2026
+
+Start eerst de gekoppelde tafel en voer vanuit de broncheckout `node tools/share-board.mjs JOUW-PC-LAN-IP` uit. De tool bewaart het actuele adres en de tijdelijke code in `private/linked/board-share-state.json`; het Control Center toont ze zodra de deelserver bereikbaar is. De huidige releasekandidaat start deze optionele deelserver niet automatisch en bevat deze bron-CLI niet. Beschrijvingen hieronder van automatisch delen door private launchers horen bij de oudere ontwikkelopstelling. Zie [installatie](INSTALLATION.md) voor de huidige hoofdroute. De toegangsgrenzen hieronder blijven gelden.
+
 De private gekoppelde tafel kan via het lokale netwerk op een tweede scherm worden geopend. De officiële Milan-app en de Core blijven op hun bestaande apparaten draaien; beide browsers gebruiken dezelfde tafelsessie.
 
 De normale adressen op `127.0.0.1` werken alleen op de pc waarop de servers draaien. De aparte bordlink gebruikt het LAN-adres van die pc en poort **5182**, bijvoorbeeld `http://192.168.2.23:5182/board`. Gebruik op het tweede apparaat deze link en voer de zescijferige toegangscode in die de delende pc toont. De code staat niet in de URL. De code verandert als de deelserver opnieuw wordt gestart; de browsersessie blijft maximaal twaalf uur bewaard.

@@ -1,10 +1,16 @@
 # Synchronisatie zonder Codex
 
+## Actuele start- en stoproute — 29 oktober 2026
+
+Voor de gepubliceerde runtime gebruik je `Start-Milan.cmd`; de geïnstalleerde kandidaat maakt een snelkoppeling **Milan Uprising**. Volg de Windows-/helpervoorbereiding en tabletcontrole in [INSTALLATION.md](INSTALLATION.md). De nieuwe **Stop Core** sluit de eigen helper en geeft de door onze sessie geregistreerde radio-overdracht terug aan Windows. **Quit app and return Bluetooth to Windows** sluit ook beide webservices. Na een crash is herstel expliciet; alleen de browser sluiten stopt de services niet. LAN-deling wordt niet automatisch gestart door de nieuwe launcher; zie [bord delen](BORD-DELEN.md).
+
+De beschrijving hieronder documenteert de oudere, afzonderlijk ingerichte private pc-launchers en hun proeven van 23–28 oktober. Hun snelkoppelingen en het oude stopgedrag zijn geen instructies voor een verse clone of de nieuwe kandidaat. De benodigde runtimecode staat nu in `integration/runtime/`, terwijl machinegegevens en waarnemingen lokaal blijven.
+
 De koppeling voert de herkenning en bordopdrachten zelf uit in lokale programmacode. Er is geen model, chat, AI-API of handmatige Codex-opdracht nodig om een ondersteunde bordinstructie te verwerken. De officiële Milan-app blijft de uitkomst bepalen.
 
 De private pc-adapter draait een eigen achtergrondtaak. Die leest het geautoriseerde appscherm, controleert de instructies en bewaart bevestigde wijzigingen. Een browser toont de opgeslagen tafel; het sluiten van de browser stopt de synchronisatie niet. Iedere leescyclus wordt afgerond vóór de volgende begint. Een leesfout wordt vastgelegd, waarna de taak bij de volgende cyclus opnieuw probeert. Een onbekend scherm blijft een onbekend scherm: de taak verzint geen wijzigingen.
 
-## Starten op de ingerichte pc
+## Historisch: starten op de ingerichte private pc
 
 Dubbelklik op **Milan Control Center** op het bureaublad. De launcher start ontbrekende bordservices en opent een lokaal startvenster op `http://127.0.0.1:5180/`. Daar vind je **Start Core**, **Stop Core**, **Open tabletop** en het actuele remote bordadres met toegangscode en kopieerknoppen. De verbindingsstatus wordt automatisch bijgewerkt. De code wordt uit de draaiende bordserver gelezen en is niet vast ingebouwd.
 

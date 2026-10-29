@@ -19,7 +19,7 @@
 - [x] Corrigeer de LED-segmentoriëntatie in de presentatie; vier verschillende kleuren gecontroleerd in een geïsoleerde browserproef. Zie [Prospero](PROSPERO.md).
 - [ ] Valideer een volledige geladen campagneopstelling en volledige ringanimaties; de beperkte proeven hierboven bewijzen dit niet.
 
-De gedateerde prioriteiten hieronder beschrijven eerdere onderzoeksfasen. Actuele verificatie: 94 publieke tests en 26 private Core-scenario’s geslaagd; details in [VALIDATIE.md](VALIDATIE.md).
+De gedateerde prioriteiten hieronder beschrijven eerdere onderzoeksfasen. Actuele publieke verificatie op 29 oktober: 109 tests geslaagd. De 26 private Core-scenario's horen bij de afzonderlijke eerdere integratieproeven; details en bewijsgrenzen staan in [VALIDATIE.md](VALIDATIE.md).
 
 ## Hoofddoel en eerstvolgende integratiemijlpalen
 

@@ -25,7 +25,7 @@ Run the public test suite with:
 node --test
 ```
 
-If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest implementation check on 28 October 2026 passed all 94 public tests, including automatic Day-phase companion cleanup, the fixed Haven layout and side persistence, Investigation marker transitions, influence stack counts, and placement of visible components within map regions.
+If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest Windows check on 29 October 2026 passed all 109 public tests with the bundled Node 22 runtime, including release staging, installer integrity, tablet checks and Bluetooth lifecycle ordering alongside the board regressions. See [validation](docs/VALIDATIE.md) for separate browser, package and hardware evidence. Temporary copies under ignored work directories may be discovered by a bare `node --test`; the recorded 109-test result covers the public `test/` and `tests/` suites only.
 
 ## Current features and limits
 
@@ -33,11 +33,12 @@ If npm is available, `npm start` and `npm test` are equivalent shortcuts. The la
 | --- | --- | --- |
 | Sandbox table | Place, move, remove, and flip components; export and restore sessions; undo/redo | Does not implement Milan's campaign rules |
 | Base game and six expansions | Separate inventories, 233 total components, expansion filters | Full expansion campaigns have not been validated |
-| Linked table | App-led input, observed board updates, shared LAN board | Private local integration; only recognized scenes and observations are supported |
+| Linked table | Published optional runtime for app-led input and observed board updates; source tools support LAN sharing | Only recognized scenes and observations are supported; the packaged candidate does not start LAN sharing automatically |
 | Allies and ghouls | Optional Sunset deployment, pending confirmation, and automatic return to stock on confirmed Day | Cleanup tested with recorded Day observations; arbitrary story-driven removals are not fully covered |
 | Haven rooms | All ten fixed room types, standard/upgraded effects, recorded side controls, and optional upgraded artwork | Standard starting sides are used unless an upgrade is recorded; purchases and room actions remain in Milan |
 | LED ring | App-led colors with segment orientation matching Teburu; simulated firmware and battery status | Static colors only; full hardware animations remain unvalidated |
-| Local artwork | Optional images loaded from ignored local storage | Protected artwork is not distributed with the repository |
+| Artwork | 156 images included in one archive and installed automatically | Publication authorized for this selection; other protected resources and the original SDK remain excluded |
+| Windows candidate | Bundled runtimes, per-user installer, helper preparation, tablet wizard and Bluetooth recovery | Built and tested locally; no release published and clean-machine physical acceptance remains open |
 
 See [ally and ghoul deployment](docs/ALLIES-EN-GHOULS.md) and [location tiles and Haven bonuses](docs/LOCATIETEGELS.md) for current instructions and evidence.
 
@@ -49,7 +50,7 @@ Hold the left mouse button and drag a miniature to a destination, then release. 
 
 In the sandbox, component positions are manual. Save a JSON export before closing or reloading the page. Import validates the profile, events, and state before replacing the session. Undo/redo keeps up to 100 local operations in the current tab; redo preserves recorded dice results. These controls do not change the official app.
 
-On the private linked table, Milan determines which miniature may move. The board does not treat sending a sensor contact as proof of a persistent position. Use the linked board for supported app-led input, and follow Milan for phase changes and campaign decisions.
+On the linked table, Milan determines which miniature may move. The board does not treat sending a sensor contact as proof of a persistent position. Use the linked board for supported app-led input, and follow Milan for phase changes and campaign decisions.
 
 Stable positive character observations on Milan's city map update already placed characters as well as missing ones. Unseen or covered characters keep their previous positions. A pending move can also be confirmed by two matching map observations taken after the original placement request; this resolves the request without replaying sensor input if Milan advanced to a different screen.
 
@@ -83,7 +84,7 @@ For city districts, **Location → Board tiles** explains the tile symbol and le
 
 See [faster movement feedback](docs/SNELLERE-TERUGKOPPELING.md) for the pending destination display, targeted confirmation and measured timing limits.
 
-When resuming a loaded game, the private adapter also reads visible NPC portraits on the **Scenario setup → NPC placement** map after two matching observations. Agnese was verified at Washington; this does not restore hidden pieces or establish a complete save import.
+When resuming a loaded game, the linked adapter also reads visible NPC portraits on the **Scenario setup → NPC placement** map after two matching observations. Agnese was verified at Washington; this does not restore hidden pieces or establish a complete save import.
 
 See [placement synchronization and corrections](docs/PLAATSINGSSYNC.md) for named NPC outcomes, all-component copy controls, and automatic recognition limits.
 
@@ -101,7 +102,7 @@ Detailed historical guides: [clearing and resyncing](docs/TAFEL-LEGEN.md), [save
 
 The city map contains 30 named city districts and ten Haven rooms. Its presentation is an approximation of the printed layout, not a verified adjacency map or a complete official campaign starting state.
 
-Choose **Milan · base game + 6 expansion packs** for all 233 components, including 101 expansion components. The private linked table has 26 scannable miniatures and separate manual expansion-marker controls. Expansion selection, stories, and rules remain in Milan. See [expansion inventory](docs/UITBREIDINGEN.md).
+Choose **Milan · base game + 6 expansion packs** for all 233 components, including 101 expansion components. The linked table has 26 scannable miniatures and separate manual expansion-marker controls. Expansion selection, stories, and rules remain in Milan. See [expansion inventory](docs/UITBREIDINGEN.md).
 
 Older city, retail, neutral-table, and sensor-study profiles remain available for their existing sessions. The retail base inventory contains 132 components. The neutral and reference profiles are demonstrations, not official Milan setups. Session compatibility is validated on import rather than silently migrated.
 
@@ -132,6 +133,9 @@ The engine, game rules, game data, UI, and presentation are separate. Milan is a
 The recent usage guides and this README are in English. Earlier architecture and research records retain their existing filenames and may still be in Dutch:
 
 - [Development plan](docs/PLAN.md)
+- [Documentation guide](docs/README.md)
+- [Installation](docs/INSTALLATION.md)
+- [Release review](docs/RELEASE-REVIEW.md)
 - [Architecture](docs/ARCHITECTUUR.md)
 - [Decisions](docs/BESLUITEN.md)
 - [Implemented contracts](docs/CONTRACTEN.md)

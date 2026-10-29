@@ -1,5 +1,9 @@
 # Onderzoeksregister
 
+## Huidige bewijsstatus — 29 oktober 2026
+
+De gedateerde passages hieronder bewaren eerdere onderzoeksfasen. Inmiddels is beperkte interactie met de ongewijzigde officiële app lokaal aangetoond; de eigen afgeleide runtimecode en het toegestane artwork zijn gepubliceerd. Dit bewijst geen volledige campagnecompatibiliteit of fabrikantondersteuning. De oorspronkelijke SDK blijft uitgesloten. Zie [actuele validatie](VALIDATIE.md), [Teburu-onderzoek](TEBURU-DEEPSEARCH.md) en [release-review](RELEASE-REVIEW.md). De releaseworkflow is nog niet uitgevoerd en fysieke acceptatie op een schone tweede machine blijft open.
+
 Gecontroleerd: 21 oktober 2026. Openbare informatie bewijst geen interoperabiliteit.
 
 Actuele runtime-uitkomst op 22 oktober 2026: de normale Windows-setup is inmiddels deels uitgevoerd. Single Device en Main Device wachten op een Core; Controller vraagt koppeling met een bestaande Main. Er is geen campagne gestart. De afzonderlijke private SDK-builds en lokale runtimeproef zijn geslaagd; de normale Milan-Main-setup leverde geen verbinding met deze proef op. Zie [APP-VALIDATIE.md](APP-VALIDATIE.md) voor scope en uitkomsten; eerdere passages over niet starten beschrijven de voorafgaande onderzoeksfase.

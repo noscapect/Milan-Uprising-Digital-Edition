@@ -1,5 +1,9 @@
 # Contracten v1 — eerste doorsnede
 
+## Leeswijzer — 29 oktober 2026
+
+Dit document bewaart de opeenvolgende engine- en modulecontracten. De engine heeft nog steeds uitsluitend sandboxregels; de gekoppelde runtime is een optionele adapter met de officiële app als regelautoriteit. Oudere inventaristabellen met “officiële app niet verbonden” beschrijven die eerdere doorsnede. De benodigde eigen adaptercode staat inmiddels in `integration/runtime/`; actuele distributie en verificatie staan in [installatie](INSTALLATION.md), [release-review](RELEASE-REVIEW.md) en [validatie](VALIDATIE.md). Historische contractbeperkingen zijn geen actuele verklaring dat appcontact nooit is aangetoond.
+
 ## Uitbreidingsvoorraad 0.8
 
 `withExpansions(base, catalog, selected)` voegt uitsluitend de gekozen Milan-voorraden toe op een kopie van het basisprofiel. Componenten krijgen een `expansionId` en presentatielabel; generieke zone-/componentopdrachten blijven gelijk. Het uitgebreide profiel heeft een eigen release-ID en pakketversie. `extendTableSession` is een expliciete additieve conversie van onze eigen basisbordexports, met validatie en replay vóór en na conversie. De gewone import blijft profielgebonden. Zie [pakketten, bediening en private adaptergrenzen](UITBREIDINGEN.md).
