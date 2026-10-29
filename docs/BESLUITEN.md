@@ -1,5 +1,9 @@
 # Architectuurbeslissingen — 21 oktober 2026
 
+## Overdraagbare distributie — 29 oktober 2026
+
+De projecteigenaar heeft publicatie van het geselecteerde artwork en de eigen afgeleide integratiecode expliciet toegestaan. Het artwork wordt als één archief meegeleverd en automatisch lokaal uitgepakt. De benodigde eigen runtimecode wordt onder `integration/runtime/` beheerd; de launcher maakt daaruit een afzonderlijke genegeerde werkmap `private/linked/`. Machineconfiguratie, spelstanden, observaties en willekeurig gegenereerde identities blijven lokaal. De oorspronkelijke SDK, libraries, voorbeelden en documentatie blijven uitgesloten. De bestaande private ontwikkelopstelling wordt niet gekopieerd of gewijzigd. De gekoppelde route vereist nog steeds expliciete configuratie van de eigen radio en tablet; een volledige campagne of iedere machine is hiermee niet bewezen. Zie [installatie](INSTALLATION.md).
+
 ## Verdieping na bronnenonderzoek
 
 - Officiële app gebruiken zonder fysieke spelonderdelen is het einddoel; sandbox en eigen regels zijn ondersteunend, geen stilzwijgende vervanging van dat doel.

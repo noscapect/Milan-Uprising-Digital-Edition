@@ -1,0 +1,132 @@
+[
+  {
+    "componentId": "character-brujah",
+    "slot": 1,
+    "label": "Simona Ferrari"
+  },
+  {
+    "componentId": "character-nosferatu",
+    "slot": 2,
+    "label": "Orlando Bianchi"
+  },
+  {
+    "componentId": "character-toreador",
+    "slot": 3,
+    "label": "Latebra Uberto Ascheri"
+  },
+  {
+    "componentId": "character-tremere",
+    "slot": 4,
+    "label": "Dante Brunieri"
+  },
+  {
+    "componentId": "character-ventrue",
+    "slot": 5,
+    "label": "Chao-Yang Marco Hu"
+  },
+  {
+    "componentId": "character-malkavian",
+    "slot": 6,
+    "label": "Arianna Zanni"
+  },
+  {
+    "componentId": "character-gangrel",
+    "slot": 7,
+    "label": "Rosa De Lorenzo"
+  },
+  {
+    "componentId": "ally-carabinieri-officer",
+    "slot": 8,
+    "label": "Carabinieri Officer"
+  },
+  {
+    "componentId": "ally-reporter",
+    "slot": 9,
+    "label": "Reporter"
+  },
+  {
+    "componentId": "ghoul-con-artist",
+    "slot": 10,
+    "label": "Con Artist"
+  },
+  {
+    "componentId": "ghoul-fixer",
+    "slot": 11,
+    "label": "Fixer"
+  },
+  {
+    "componentId": "character-hecata",
+    "slot": 12,
+    "label": "Jamilah Ianni"
+  },
+  {
+    "componentId": "character-lasombra",
+    "slot": 13,
+    "label": "Domenica Amato"
+  },
+  {
+    "componentId": "character-ministry",
+    "slot": 14,
+    "label": "Aristide Demiana"
+  },
+  {
+    "componentId": "character-tzimisce",
+    "slot": 15,
+    "label": "Romeo De Carlo"
+  },
+  {
+    "componentId": "ally-food-delivery-driver",
+    "slot": 16,
+    "label": "Food Delivery Driver"
+  },
+  {
+    "componentId": "ally-paramedic",
+    "slot": 17,
+    "label": "Paramedic"
+  },
+  {
+    "componentId": "ally-taxi-driver",
+    "slot": 18,
+    "label": "Taxi Driver"
+  },
+  {
+    "componentId": "ghoul-blood-addict",
+    "slot": 19,
+    "label": "Blood Addict"
+  },
+  {
+    "componentId": "ghoul-enforcer",
+    "slot": 20,
+    "label": "Enforcer"
+  },
+  {
+    "componentId": "ghoul-punk",
+    "slot": 21,
+    "label": "Punk"
+  },
+  {
+    "componentId": "ally-investigator",
+    "slot": 22,
+    "label": "Investigator"
+  },
+  {
+    "componentId": "ghoul-burglar",
+    "slot": 23,
+    "label": "Burglar"
+  },
+  {
+    "componentId": "ally-hacker",
+    "slot": 24,
+    "label": "Hacker"
+  },
+  {
+    "componentId": "ally-real-estate-agent",
+    "slot": 25,
+    "label": "Real Estate Agent"
+  },
+  {
+    "componentId": "ghoul-vagrant",
+    "slot": 26,
+    "label": "Vagrant"
+  }
+]

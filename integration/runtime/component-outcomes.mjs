@@ -1,0 +1,23 @@
+const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+export function readComponentOutcomes(raw,profile){
+ if(!raw.available||raw.mapGeometry!=='android-city-v1'||!Array.isArray(raw.lines))return null;
+ if(/anerrorocc|indexwasoutofrange|lostnetworkconnection/.test(normalize(raw.lines.map(l=>l.text).join(' '))))return null;
+ const lines=raw.lines.filter(l=>l.x>raw.width*.50&&l.x<raw.width*.70&&l.y>raw.height*.20&&l.y<raw.height*.87).sort((a,b)=>a.y-b.y||a.x-b.x),groups=[];
+ for(const line of lines){if(!groups.length||line.y-groups.at(-1).at(-1).y>raw.height*.05)groups.push([]);groups.at(-1).push(line);}
+ const latest=new Map(),unsupported=[];
+ for(const group of groups){
+  const text=group.map(l=>l.text).join(' '),compact=normalize(text);
+  const placed=compact.match(/^(.+?)(?:placedin|placedat|movedto)(.+)$/),removed=compact.match(/^remove(.+?)from(?:the)?map$/)||compact.match(/^(.+?)removedfrom(?:the)?map$/);
+  if(!placed&&!removed)continue;
+  const name=(placed||removed)[1],matches=profile.components.filter(c=>normalize(c.label.split('·')[0])===name);
+  if(matches.length!==1){unsupported.push(text);continue;}
+  const componentId=matches[0].id;
+  if(placed&&compact.includes('movedto')&&matches[0].groupId==='characters')continue;
+  if(removed){latest.set(componentId,{componentId,operation:'remove'});continue;}
+  const zone=profile.zones.find(z=>z.area==='city'&&normalize(z.label)===placed[2]);
+  if(!zone){latest.set(componentId,null);unsupported.push(text);continue;}
+  latest.set(componentId,{componentId,operation:'place',zoneId:zone.id});
+ }
+ const instructions=[...latest.values()].filter(Boolean).sort((a,b)=>a.componentId.localeCompare(b.componentId));
+ return instructions.length||unsupported.length?{instructions,unsupported,scope:'explicit-named-component-feed-cards'}:null;
+}

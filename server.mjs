@@ -1,4 +1,4 @@
-import { loadLocalArtwork } from './server/local-artwork.mjs';
+import { installArtwork } from './server/artwork-bundle.mjs';
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { readFile, readdir } from 'node:fs/promises';
@@ -16,7 +16,7 @@ async function registerAssets(directory) {
   }
 }
 for (const directory of ['src', 'data/games', 'legacy']) await registerAssets(directory);
-const artwork = await loadLocalArtwork(fileURLToPath(new URL('./private/artwork/', import.meta.url)));
+const artwork = await installArtwork(new URL('./resources/milan-artwork.json.gz', import.meta.url), fileURLToPath(new URL('./private/bundled-artwork/', import.meta.url)));
 const server = http.createServer(async (req, res) => {
   const route = req.url?.split('?')[0];
   if (['GET','HEAD'].includes(req.method) && route === '/local-artwork/catalog.json') {

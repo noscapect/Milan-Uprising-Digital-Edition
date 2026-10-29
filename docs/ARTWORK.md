@@ -1,5 +1,9 @@
 # Lokaal artwork (0.7)
 
+## Distributie-update — 29 oktober 2026
+
+De projecteigenaar heeft expliciet toestemming bevestigd voor publicatie van het geselecteerde artwork. Alle 156 actuele afbeeldingen staan nu met een opgeschoond manifest in `resources/milan-artwork.json.gz`. De server pakt dit automatisch uit naar genegeerd `private/bundled-artwork/`; een lokale officiële-appinstallatie of extractietool is hiervoor niet nodig. Bronpaden en oude manifesten zijn niet opgenomen. Zie [installatie op een andere computer](INSTALLATION.md). Hieronder blijft de historische extractie- en onderzoeksbeschrijving behouden; uitspraken over uitsluitend private opslag beschrijven de eerdere distributiesituatie.
+
 De geïnstalleerde officiële Windows-app 1.0.9 bevat leesbare Unity-textures. De lokale tafel gebruikt hiervan 79 originele PNG-exporten: 30 locatiebeelden, 19 personen met icoon en volledig portret, drie kubusiconen, vijf fichesymbolen, een Masquerade-fiche, logo en stadskaart. Geen nieuw artwork gegenereerd. De app is niet gestart, aangepast of gepatcht; er zijn geen versleuteling of beveiligingen omzeild. Verhaal, audio, scripts en scenario's zijn niet geëxporteerd.
 
 ## Bestanden en starten

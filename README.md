@@ -2,14 +2,14 @@
 
 An independent, modular digital tabletop project, with **Vampire: The Masquerade – Milan Uprising** as its first game module. The goal is to use the unmodified official game app with a virtual table, without physical game components. The official app remains responsible for rules, story, and campaign progress.
 
-The public application is a standalone sandbox. A separate private adapter has demonstrated limited interaction with the official app, including character registration, movement, dice interaction, resuming a campaign, and copying observed board changes. This is not evidence that every phase, expansion, or hardware behavior works.
+The default application is a standalone sandbox with the included artwork. The optional linked-table runtime is also included as source, with a setup procedure for a Windows PC and the official app on an Android tablet. It has demonstrated limited interaction with the official app, including character registration, movement, dice interaction, resuming a campaign, and copying observed board changes. This is not evidence that every phase, expansion, or hardware behavior works. See [installation on another computer](docs/INSTALLATION.md).
 
 ## Quick start
 
-Requires Node.js 22 or later. The public demo has no external runtime dependencies and needs no package installation.
+Requires Node.js 22 or later. The standalone table has no external runtime dependencies and needs no package installation. Its 156 artwork images are bundled in one archive and unpacked automatically on first start.
 
 ```powershell
-cd 'C:\CODE\Milan-Uprising-Digital-Edition'
+cd Milan-Uprising-Digital-Edition
 node server.mjs
 ```
 
@@ -103,7 +103,7 @@ Older city, retail, neutral-table, and sensor-study profiles remain available fo
 
 The sensor study explicitly separates temporary contact from persistent position. It is a local behavior simulation, not an RFID/BLE emulator. The original demo remains at http://127.0.0.1:5178/legacy/index.html; its old export format is not imported into the current engine.
 
-Optional original images from the locally installed app remain under ignored `private/artwork/`. The server serves only an allowlisted local catalog. The public demo also works without those files. Image counts vary with the local extraction; no protected artwork is included in Git. See [artwork handling](docs/ARTWORK.md).
+The selected original images are included in `resources/milan-artwork.json.gz`, with publication explicitly authorized by the project owner. The server automatically installs them into ignored `private/bundled-artwork/` and serves only an allowlisted catalog. No files from the developer's private workspace are needed. See [installation](docs/INSTALLATION.md) and [artwork handling](docs/ARTWORK.md).
 
 ## Architecture and repository
 
@@ -121,7 +121,9 @@ The engine, game rules, game data, UI, and presentation are separate. Milan is a
 | `test/` | Current public engine, module, adapter, and replay tests |
 | `tests/` | Original regression tests |
 | `legacy/`, `src/model.js` | Preserved original reference implementation |
-| `private/` | Ignored local integration, observations, identifiers, and assets |
+| `integration/runtime/` | Reviewed integration source, codec and readers; no original SDK |
+| `resources/` | Included artwork archive and provenance note |
+| `private/` | Ignored generated runtime, settings, sessions, observations and identifiers |
 
 The recent usage guides and this README are in English. Earlier architecture and research records retain their existing filenames and may still be in Dutch:
 
@@ -139,6 +141,6 @@ The recent usage guides and this README are in English. Earlier architecture and
 
 This project is not affiliated with Xplored, Teburu, or the owners of Vampire: The Masquerade. Names identify the relevant products and components. No public software license has been selected.
 
-Do not distribute protected artwork, app binaries, audio, story content, confidential SDK material, or private hardware identifiers. Private use does not automatically grant redistribution rights. Do not bypass security, authentication, or licensing, clone RFID identities, or patch firmware. Do not present compatibility as proven without a reproducible test in the official app.
+Publication of the selected artwork and this project's derived integration code was explicitly authorized by the project owner on 29 October 2026. That authorization does not include the original SDK, SDK libraries, documentation or examples. Do not distribute other protected assets, app binaries, audio, story content, confidential SDK material, or private hardware identifiers. Do not bypass security, authentication, or licensing, clone RFID identities, or patch firmware. Do not present compatibility as proven without a reproducible test in the official app.
 
-The public sandbox and optional private integration are separate deliverables. The objective remains use of the unmodified official app; the sandbox is an intermediate tool.
+The standalone sandbox and optional linked table share the same engine and presentation. The objective remains use of the unmodified official app; the sandbox is an intermediate tool. The linked table requires machine-specific transport setup; see [installation](docs/INSTALLATION.md).

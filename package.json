@@ -1,1 +1,15 @@
-{"name":"milan-uprising-digital-edition","version":"0.1.0","private":true,"type":"module","scripts":{"start":"node server.mjs","test":"node --test"},"engines":{"node":">=22"}}
+{
+  "name": "milan-uprising-digital-edition",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test",
+    "linked": "node tools/start-linked.mjs",
+    "setup:linked": "node tools/setup-linked.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

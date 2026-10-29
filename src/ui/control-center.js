@@ -18,7 +18,7 @@ async function refresh(){
     const share=latest.share;
     $('remote-details').hidden=!share?.available;$('remote-unavailable').hidden=!!share?.available;
     if(share?.available){$('remote-address').textContent=share.url;$('remote-address').href=share.url;$('remote-code').textContent=share.pin;}
-    else $('remote-unavailable').textContent='Remote tabletop is not running. Reopen the Control Center using the desktop shortcut to start it.';
+    else $('remote-unavailable').textContent='Remote tabletop is not running. Start it with node tools/share-board.mjs followed by this PC’s LAN IP address.';
   }catch(error){$('core-status').textContent='Control service unavailable';$('message').textContent=error.message;$('start-core').disabled=$('stop-core').disabled=true;}
   finally{reading=false;}
 }

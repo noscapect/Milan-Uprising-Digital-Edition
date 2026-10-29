@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "source": "Local unmodified Milan Windows 1.0.9 unencrypted location table",
+  "scope": "QT8 runtime verified during four synthetic character selections; other transforms derived, not separately tested",
+  "locations": [
+    {
+      "zoneId": "ronchetto",
+      "label": "Ronchetto",
+      "appSensor": 10,
+      "rawIndex": 2,
+      "linkedAppSensors": [
+        11,
+        15,
+        16
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "giambellino",
+      "label": "Giambellino",
+      "appSensor": 11,
+      "rawIndex": 10,
+      "linkedAppSensors": [
+        10,
+        12,
+        16,
+        17
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "bande-nere",
+      "label": "Bande Nere",
+      "appSensor": 12,
+      "rawIndex": 18,
+      "linkedAppSensors": [
+        11,
+        13,
+        17
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "san-siro",
+      "label": "San Siro",
+      "appSensor": 13,
+      "rawIndex": 26,
+      "linkedAppSensors": [
+        12,
+        14,
+        17,
+        18
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "qt8",
+      "label": "QT8",
+      "appSensor": 14,
+      "rawIndex": 34,
+      "linkedAppSensors": [
+        13,
+        18,
+        19
+      ],
+      "runtimeVerified": true
+    },
+    {
+      "zoneId": "barona",
+      "label": "Barona",
+      "appSensor": 15,
+      "rawIndex": 3,
+      "linkedAppSensors": [
+        10,
+        16,
+        20
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "solari",
+      "label": "Solari",
+      "appSensor": 16,
+      "rawIndex": 11,
+      "linkedAppSensors": [
+        10,
+        11,
+        15,
+        17,
+        20,
+        21
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "washington",
+      "label": "Washington",
+      "appSensor": 17,
+      "rawIndex": 19,
+      "linkedAppSensors": [
+        11,
+        12,
+        13,
+        16,
+        18,
+        21,
+        22,
+        23
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "city-life",
+      "label": "City Life",
+      "appSensor": 18,
+      "rawIndex": 27,
+      "linkedAppSensors": [
+        13,
+        14,
+        17,
+        19,
+        23
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "portello",
+      "label": "Portello",
+      "appSensor": 19,
+      "rawIndex": 35,
+      "linkedAppSensors": [
+        14,
+        18,
+        23,
+        24
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "sant-ambrogio",
+      "label": "Sant\u2019Ambrogio",
+      "appSensor": 20,
+      "rawIndex": 4,
+      "linkedAppSensors": [
+        15,
+        16,
+        21,
+        25,
+        26
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "navigli",
+      "label": "Navigli",
+      "appSensor": 21,
+      "rawIndex": 12,
+      "linkedAppSensors": [
+        16,
+        17,
+        20,
+        22,
+        26,
+        27
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "cadorna",
+      "label": "Cadorna",
+      "appSensor": 22,
+      "rawIndex": 20,
+      "linkedAppSensors": [
+        17,
+        21,
+        23,
+        27
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "sempione",
+      "label": "Sempione",
+      "appSensor": 23,
+      "rawIndex": 28,
+      "linkedAppSensors": [
+        17,
+        18,
+        19,
+        22,
+        24,
+        27,
+        28
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "monumentale",
+      "label": "Monumentale",
+      "appSensor": 24,
+      "rawIndex": 36,
+      "linkedAppSensors": [
+        19,
+        23,
+        28,
+        29
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "ripamonti",
+      "label": "Ripamonti",
+      "appSensor": 25,
+      "rawIndex": 5,
+      "linkedAppSensors": [
+        20,
+        26,
+        30
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "bocconi",
+      "label": "Bocconi",
+      "appSensor": 26,
+      "rawIndex": 13,
+      "linkedAppSensors": [
+        20,
+        21,
+        25,
+        27,
+        30,
+        31,
+        32
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "duomo",
+      "label": "Duomo",
+      "appSensor": 27,
+      "rawIndex": 21,
+      "linkedAppSensors": [
+        21,
+        22,
+        23,
+        26,
+        28,
+        32,
+        33
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "garibaldi",
+      "label": "Garibaldi",
+      "appSensor": 28,
+      "rawIndex": 29,
+      "linkedAppSensors": [
+        23,
+        24,
+        27,
+        29,
+        33,
+        34
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "isola",
+      "label": "Isola",
+      "appSensor": 29,
+      "rawIndex": 37,
+      "linkedAppSensors": [
+        24,
+        28,
+        34
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "vigentino",
+      "label": "Vigentino",
+      "appSensor": 30,
+      "rawIndex": 6,
+      "linkedAppSensors": [
+        25,
+        26,
+        31,
+        35
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "porta-romana",
+      "label": "Porta Romana",
+      "appSensor": 31,
+      "rawIndex": 14,
+      "linkedAppSensors": [
+        26,
+        30,
+        32,
+        35,
+        36,
+        37
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "cinque-giornate",
+      "label": "Cinque Giornate",
+      "appSensor": 32,
+      "rawIndex": 22,
+      "linkedAppSensors": [
+        26,
+        27,
+        31,
+        33,
+        37,
+        38
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "buenos-aires",
+      "label": "Buenos Aires",
+      "appSensor": 33,
+      "rawIndex": 30,
+      "linkedAppSensors": [
+        27,
+        28,
+        32,
+        34,
+        38,
+        39
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "centrale",
+      "label": "Centrale",
+      "appSensor": 34,
+      "rawIndex": 38,
+      "linkedAppSensors": [
+        28,
+        29,
+        33,
+        39
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "corvetto",
+      "label": "Corvetto",
+      "appSensor": 35,
+      "rawIndex": 7,
+      "linkedAppSensors": [
+        30,
+        31,
+        36
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "calvairate",
+      "label": "Calvairate",
+      "appSensor": 36,
+      "rawIndex": 15,
+      "linkedAppSensors": [
+        31,
+        35,
+        37
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "argonne",
+      "label": "Argonne",
+      "appSensor": 37,
+      "rawIndex": 23,
+      "linkedAppSensors": [
+        31,
+        32,
+        36,
+        38
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "citta-studi",
+      "label": "Citt\u00e0 Studi",
+      "appSensor": 38,
+      "rawIndex": 31,
+      "linkedAppSensors": [
+        32,
+        33,
+        37,
+        39
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "nolo",
+      "label": "NoLo",
+      "appSensor": 39,
+      "rawIndex": 39,
+      "linkedAppSensors": [
+        33,
+        34,
+        38
+      ],
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-1l",
+      "label": "Haven 1L",
+      "appSensor": 4,
+      "rawIndex": 32,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-1r",
+      "label": "Haven 1R",
+      "appSensor": 9,
+      "rawIndex": 33,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-2l",
+      "label": "Haven 2L",
+      "appSensor": 3,
+      "rawIndex": 24,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-2r",
+      "label": "Haven 2R",
+      "appSensor": 8,
+      "rawIndex": 25,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-3l",
+      "label": "Haven 3L",
+      "appSensor": 2,
+      "rawIndex": 16,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-3r",
+      "label": "Haven 3R",
+      "appSensor": 7,
+      "rawIndex": 17,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-4l",
+      "label": "Haven 4L",
+      "appSensor": 1,
+      "rawIndex": 8,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-4r",
+      "label": "Haven 4R",
+      "appSensor": 6,
+      "rawIndex": 9,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-5l",
+      "label": "Haven 5L",
+      "appSensor": 0,
+      "rawIndex": 0,
+      "runtimeVerified": false
+    },
+    {
+      "zoneId": "haven-5r",
+      "label": "Haven 5R",
+      "appSensor": 5,
+      "rawIndex": 1,
+      "runtimeVerified": false
+    }
+  ]
+}

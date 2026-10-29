@@ -1,0 +1,13 @@
+import {networkInterfaces} from 'node:os';
+import {writeFile,mkdir} from 'node:fs/promises';
+import {createBoardShare} from '../server/board-share.mjs';
+const address=process.argv[2];
+const local=Object.values(networkInterfaces()).flat().some(item=>item.family==='IPv4'&&!item.internal&&item.address===address);
+if(!local)throw Error('Supply this PC’s own LAN IPv4 address: node tools/share-board.mjs YOUR-LAN-IP');
+const sharing=createBoardShare({address});
+await new Promise((resolve,reject)=>{sharing.server.once('error',reject);sharing.server.listen(sharing.port,sharing.address,resolve);});
+const info={url:`http://${sharing.address}:${sharing.port}`,pin:sharing.pin};
+await mkdir(new URL('../private/linked/',import.meta.url),{recursive:true});
+await writeFile(new URL('../private/linked/board-share-state.json',import.meta.url),JSON.stringify(info));
+console.log(info);
+for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>sharing.server.close());

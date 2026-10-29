@@ -1,0 +1,46 @@
+[
+  {
+    "definitionId": 1,
+    "componentId": "character-brujah"
+  },
+  {
+    "definitionId": 2,
+    "componentId": "character-gangrel"
+  },
+  {
+    "definitionId": 3,
+    "componentId": "character-malkavian"
+  },
+  {
+    "definitionId": 4,
+    "componentId": "character-nosferatu"
+  },
+  {
+    "definitionId": 5,
+    "componentId": "character-toreador"
+  },
+  {
+    "definitionId": 6,
+    "componentId": "character-tremere"
+  },
+  {
+    "definitionId": 7,
+    "componentId": "character-ventrue"
+  },
+  {
+    "definitionId": 8,
+    "componentId": "character-hecata"
+  },
+  {
+    "definitionId": 9,
+    "componentId": "character-lasombra"
+  },
+  {
+    "definitionId": 10,
+    "componentId": "character-ministry"
+  },
+  {
+    "definitionId": 11,
+    "componentId": "character-tzimisce"
+  }
+]

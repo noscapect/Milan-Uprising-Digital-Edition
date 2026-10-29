@@ -12,5 +12,6 @@ Onderscheid tijdelijke sensorcontacten van blijvende spelpositie. De lokale virt
 Alle events in src/model.js zijn eigen domeinevents, geen Teburu-protocol.
 Presenteer appcompatibiliteit of emulatie nooit als bewezen zonder reproduceerbare hardwaretest.
 Geen beveiligingsomzeiling, gekloonde RFID-identiteiten, firmwarepatches of beschermde assets.
+Distributie-uitzondering bevestigd door de projecteigenaar op 29 oktober 2026: geselecteerd artwork in resources/milan-artwork.json.gz en onze afgeleide integratieruntime mogen op GitHub. De SDK zelf, SDK-libraries, documentatie en voorbeelden blijven uitgesloten. Machinegegevens, spelstanden en identifiers blijven onder private/. Zie docs/INSTALLATION.md.
 Bewaar eventuele eigen hardwarewaarnemingen en identifiers uitsluitend onder private/ (genegeerd).
 Wijzig of installeer niets aan de officiële app of hardware zonder concrete opdracht.

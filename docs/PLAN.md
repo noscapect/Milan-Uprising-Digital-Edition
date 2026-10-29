@@ -1,5 +1,12 @@
 # Gefaseerd ontwikkelplan
 
+## Overdraagbare distributie — 29 oktober 2026
+
+- [x] Neem toegestaan artwork als één automatisch geïnstalleerd archief op en publiceer de benodigde eigen integratieruntime zonder de SDK zelf.
+- [x] Scheid runtimecode van machineconfiguratie, identifiers en campagnes; start een nieuwe installatie met een lege tafel.
+- [x] Controleer een schone kopie zonder de oorspronkelijke private werkmap, de complete afbeeldingencatalogus en desktop-/mobielweergave. Zie [installatie](INSTALLATION.md) en [validatie](VALIDATIE.md).
+- [ ] Herhaal een fysieke appverbinding op een tweede computer met diens eigen adapter en tabletconfiguratie.
+
 ## Actuele voortgang — 28 oktober 2026
 
 - [x] Herken zichtbare NPC-portretten bij de hervatstap NPC placement; Agnese in Washington live bevestigd. Geen volledige save-import: verborgen onderdelen en overige NPC-portretten blijven afzonderlijk te toetsen. Zie [plaatsingssynchronisatie](PLAATSINGSSYNC.md).

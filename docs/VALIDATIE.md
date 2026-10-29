@@ -1,5 +1,14 @@
 # Validatie — 21 oktober 2026
 
+## Overdraagbare installatie — 29 oktober 2026
+
+- `node --test`: 95 tests geslaagd, nul fouten, inclusief archiefherstel, afwijzen van padontsnapping en integriteitscontrole.
+- Een schone bestandskopie zonder de oorspronkelijke `private/`-map start beide webservices en de gekoppelde tafel. Alle 156 afbeeldingen geven HTTP 200. De nieuwe tafelsessie heeft revisie nul en geen geplaatste onderdelen; geen campagne of apparaatinstelling is overgenomen.
+- Browsercontrole op desktop (1440 × 1000) en mobiel (390 × 844): fysieke kaart geladen, tien Haven-labels aanwezig, geen paginafouten en geen horizontale overflow. Ook de gekoppelde bordpagina start zonder de oorspronkelijke ontwikkelbestanden.
+- Beide .NET-programma's gebouwd met `dotnet publish` uit uitsluitend de meegeleverde eigen broncode, zonder SDK-libraries. De Bluetooth-radio is bij deze controles niet gestart en de officiële app is niet gewijzigd. Een verse fysieke verbinding op een tweede computer is nog niet uitgevoerd.
+
+De oudere uitspraken hieronder over uitgesloten artwork en volledig private adaptercode beschrijven de eerdere distributiesituatie. Publicatietoestemming en installatie staan in [INSTALLATION.md](INSTALLATION.md).
+
 ## Actuele controle — 28 oktober 2026
 
 - Publiek: `node --test` geslaagd, 94 tests, nul fouten; uitgevoerd vóór commit `fe0a5fa`. Private adaptercode, identifiers en artwork zijn niet opgenomen in Git.
