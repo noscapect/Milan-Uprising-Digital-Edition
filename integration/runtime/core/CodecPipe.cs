@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 namespace Milan.PrivateCore;
 static class CodecPipe {
   public static void Run(){
-    var directory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"../state"));
+    var directory=Path.GetFullPath(Environment.GetEnvironmentVariable("MILAN_CORE_STATE_DIRECTORY")??Path.Combine(AppContext.BaseDirectory,"../state"));
     byte[] Identity(string name){var file=Path.Combine(directory,name+".bin");Directory.CreateDirectory(directory);if(!File.Exists(file)){var bytes=RandomNumberGenerator.GetBytes(8);if(name=="core")bytes[1]=0;File.WriteAllBytes(file,bytes);}var result=File.ReadAllBytes(file);if(result.Length!=8)throw new Exception("Invalid own identity");return result;}
     var codec=new CoreCodec(Identity("core"),new SimulatedFirmware(Path.Combine(directory,"simulated-firmware.json")));
     var dice=new VirtualDice(codec,i=>Identity("die-"+i));

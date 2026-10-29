@@ -1,5 +1,12 @@
 # Validatie — 21 oktober 2026
 
+## Windows-releasekandidaat, lokaal — 29 oktober 2026
+
+- De lokale builder heeft een Windows x64-reviewpakket gemaakt met Node 22, Python 3.13.17, gepinde Windows NumPy/OpenCV-wheels en self-contained .NET-helpers. Officiële Node-/Python- en PyPI-hashes zijn gecontroleerd. De Teburu-SDK, private configuratie, campagnes en identifiers zijn niet opgenomen. De GitHub-releaseworkflow is niet gestart.
+- De meegeleverde Node, Python/vision en Core starten in de smokeproef met ontwikkelruntimepaden verwijderd. De browserproef gebruikt de meegeleverde Node en laadt alle 156 afbeeldingen; helpertoestemming, tabletstappen, expliciete taal-/oriëntatiebevestiging en herstelknop werken op desktop en mobiel zonder paginafouten of horizontale overflow. Installatie- en hardware-antwoorden zijn gesimuleerd.
+- De installer is naar een geïsoleerde werkmap gekopieerd zonder bureaublad-/Startmenuwijzigingen. Afzonderlijke Windows-tests bevestigen behoud van private saves, afwijzen van beschadigde bestanden en weigeren van paden buiten het pakket. De afsluitknop sluit beide echte webservices netjes af; de tweede start hergebruikt de bestaande instantie. Bij deze proeven was geen radio door de app overgedragen.
+- De publieke suite bevat nu 109 tests, inclusief staging van bronbestanden zonder SDK-binaries, USB-toestemming/meerdere apparaten, scherm-/appcontrole, helpertoestemming/voortgang, de stop-voor-detach-volgorde, terugdraaien van mislukte Core-start en installercontroles. Een aanvullende Python-proef gebruikt nagemaakte sysfs-bestanden en callbacks om te bevestigen dat uitsluitend één unieke geselecteerde USB-radio toegang krijgt, en dat ambiguïteit geen permissies wijzigt. Zie [reviewchecklist](RELEASE-REVIEW.md) voor de nog vereiste schone Windows-/Linux-installatie en fysieke radio-/tablettests. Een lokale smokeproef vervangt die niet.
+
 ## Begeleide Windows-voorbereiding — 29 oktober 2026
 
 - Publieke suite expliciet uit `test/` en `tests/`: 102 tests geslaagd, nul fouten. Een volledige `node --test`-run slaagde eveneens, maar ontdekte daarnaast kopieen van oudere suites in genegeerde tijdelijke werkmappen; die zijn niet als extra dekking geteld.

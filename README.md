@@ -17,6 +17,8 @@ Open http://127.0.0.1:5178. Stop the server with Ctrl+C. Open the page through t
 
 On Windows, `Start-Milan.cmd` opens the linked-table Control Center with guided WSL2/usbipd installation and Bluetooth-adapter preparation. Installation starts only after an explicit confirmation. A source checkout still needs Node.js and the app-helper prerequisites; see [first-time setup](docs/INSTALLATION.md).
 
+A Windows release-candidate builder now packages the runtimes and prebuilt helpers, adds per-user installation, Linux-helper preparation, a tablet wizard and Bluetooth cleanup/recovery. This work is awaiting review; the release workflow has not been executed. See [release review](docs/RELEASE-REVIEW.md).
+
 Run the public test suite with:
 
 ```powershell

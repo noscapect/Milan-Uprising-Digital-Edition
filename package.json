@@ -7,7 +7,9 @@
     "start": "node server.mjs",
     "test": "node --test",
     "linked": "node tools/start-linked.mjs",
-    "setup:linked": "node tools/setup-linked.mjs"
+    "setup:linked": "node tools/setup-linked.mjs",
+    "build:release": "node tools/build-release.mjs",
+    "check:release": "node tools/smoke-release.mjs"
   },
   "engines": {
     "node": ">=22"

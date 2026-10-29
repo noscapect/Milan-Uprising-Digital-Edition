@@ -1,0 +1,21 @@
+import {readdir,readFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {execFile,spawn} from 'node:child_process';
+import {promisify} from 'node:util';
+import assert from 'node:assert/strict';
+const run=promisify(execFile),root=fileURLToPath(new URL('../',import.meta.url));
+const builds=(await readdir(join(root,'work'))).filter(name=>/^release-\d+$/.test(name)).sort();
+const app=process.argv[2]||join(root,'work',builds.at(-1)||'missing','Milan-Uprising');
+const env={...process.env,DOTNET_ROOT:join(app,'does-not-exist'),MILAN_CORE_STATE_DIRECTORY:join(root,'private','release-smoke'),PYTHONDONTWRITEBYTECODE:'1',PYTHONHOME:'',PYTHONPATH:'',PATH:process.env.SystemRoot+'\\System32;'+process.env.SystemRoot};
+await run(join(app,'runtime','node.exe'),['--version'],{env,windowsHide:true});
+await run(join(app,'runtime','python','python.exe'),['-c','import cv2,numpy'],{env,windowsHide:true});
+await run(join(app,'runtime','python','python.exe'),[join(root,'tools','test-usb-access.py')],{env,windowsHide:true});
+const executable=join(app,'integration','runtime','windows-core','ring-telemetry-build','CoreContract.exe');
+const {stdout:ocr}=await run(join(app,'integration','runtime','app-observer','build','AppObserver.exe'),['--readiness'],{env,windowsHide:true});assert.equal(typeof JSON.parse(ocr).englishOcrAvailable,'boolean');
+// No device or app input: unsupported action validates the self-contained launch only.
+await new Promise((resolve,reject)=>{const child=spawn(executable,['--codec-json-lines'],{env,windowsHide:true,stdio:['pipe','ignore','pipe']});child.once('error',reject);child.once('exit',code=>code===0?resolve():reject(Error(`Core exit ${code}`)));child.stdin.end();});
+const release=JSON.parse(await readFile(join(app,'release.json'),'utf8'));assert.equal(release.format,'milan-windows-release');
+const manifest=JSON.parse(await readFile(join(app,'release-files.json'),'utf8'));
+for(const name of Object.keys(manifest.files))assert(!/^(private|\.git|work|sdk)\//i.test(name));
+console.log('Packaged Node, Python/vision and Core start without system development runtimes; no radio opened.');

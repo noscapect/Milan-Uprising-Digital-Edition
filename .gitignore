@@ -2,6 +2,7 @@ node_modules/
 work/
 private/
 *.log
+dist/
 integration/**/bin/
 integration/**/obj/
 integration/**/__pycache__/

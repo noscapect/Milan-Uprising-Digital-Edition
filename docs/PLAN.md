@@ -3,7 +3,8 @@
 ## Overdraagbare distributie — 29 oktober 2026
 
 - [x] Voeg begeleide WSL2-/usbipd-voorbereiding toe met statuscontrole, expliciete installatieknoppen, UAC, voortgang/herstartmeldingen en Bluetooth-adapterselectie zonder automatische overdracht.
-- [ ] Verpak de toepassing en vooraf gebouwde helpers met runtimes in een GitHub-release; test de echte installatie op een schone Windows-machine.
+- [x] Bouw lokaal een Windows-reviewpakket met runtimes, vooraf gebouwde helpers, installer, Linux-voorbereiding, tabletwizard en beheerde Bluetooth-teruggave/herstel.
+- [ ] Laat de eigenaar het werk reviewen voordat de handmatige GitHub-releaseworkflow wordt uitgevoerd; test de echte installatie op een schone Windows-machine met fysieke tablet/radio.
 
 - [x] Neem toegestaan artwork als één automatisch geïnstalleerd archief op en publiceer de benodigde eigen integratieruntime zonder de SDK zelf.
 - [x] Scheid runtimecode van machineconfiguratie, identifiers en campagnes; start een nieuwe installatie met een lege tafel.

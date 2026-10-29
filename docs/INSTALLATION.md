@@ -1,5 +1,13 @@
 # Install on another computer
 
+## Windows release candidate
+
+The local release-candidate build includes Node, Python/NumPy/OpenCV and self-contained .NET helpers. Extract its ZIP and run **Install-Milan.cmd**, then use the desktop shortcut. This installs for your Windows account and preserves private settings on upgrade. **Start-Milan.cmd** also runs directly from the extracted folder. No system Node, Python, .NET SDK or build commands are needed for this packaged edition.
+
+In Control Center, complete **Prepare this PC**, select the radio, then **Prepare app helpers**. The latter asks for approval of Linux package installation and Google's Android tools terms. It downloads the Android USB tools directly from Google, prepares the Linux environment, and reports progress/errors. Connect one tablet, approve USB debugging, choose **Check tablet**, confirm English/landscape and start Core. The automatic display reader currently supports 2560 × 1600. Stop Core returns this app's radio transfer to Windows; use **Quit app and return Bluetooth to Windows** to also close the services. After a crash, use the explicit previous-session recovery button. Closing the browser alone does not quit the app.
+
+These release changes are awaiting owner review. The GitHub release workflow has not been run, and a complete clean-machine/hardware acceptance test is still required. See [release review and acceptance checklist](RELEASE-REVIEW.md). The instructions below also document the source edition, which still needs development tools.
+
 ## Table with the included artwork
 
 Install Node.js 22 or later, then clone or download this repository:
@@ -18,7 +26,7 @@ The table starts with its own empty sandbox session. Export/import your tabletop
 
 ### Guided Windows preparation
 
-On Windows, double-click `Start-Milan.cmd` to open the Control Center. A source checkout still requires Node.js 22 or later; the launcher also supports a future packaged release's `runtime/node.exe`. A complete installer with bundled runtimes is not included yet.
+On Windows, double-click `Start-Milan.cmd` to open the Control Center. A source checkout still requires Node.js 22 or later; the packaged candidate uses its included `runtime/node.exe`.
 
 The **Prepare this PC** panel checks WSL, Debian's WSL version, usbipd and available USB Bluetooth adapters. Checking does not install software, share a USB device or start Core. You can then choose:
 
@@ -29,7 +37,7 @@ The **Prepare this PC** panel checks WSL, Debian's WSL version, usbipd and avail
 
 Progress, cancellation, installation failures and restart notices appear in the panel. Reopening the app after an interrupted operation never automatically repeats an installer: use **Check again** and retry the required step. Existing distributions are never removed, the default distribution is not changed, and no automatic firmware, official-app or radio-driver modifications are performed by our setup helper. usbipd itself is installed through its normal Windows installer.
 
-For this source edition, the .NET/Python/ADB prerequisites and app-helper build below are still needed. Once the panel has saved an adapter, `npm run setup:linked` can reuse the saved adapter and distribution without typing their identifiers. Prepare the Windows components before running that command; restart `npm run linked` after the helper build. This guided prerequisite preparation is not yet a complete packaged application installer.
+For the source edition, the .NET/Python/ADB prerequisites and app-helper build below are still needed. Once the panel has saved an adapter, `npm run setup:linked` can reuse the saved adapter and distribution without typing their identifiers. Prepare the Windows components before running that command; restart `npm run linked` after the helper build. In the packaged candidate, use **Prepare app helpers** instead.
 
 Implementation references: [Microsoft WSL installation](https://learn.microsoft.com/en-us/windows/wsl/install), [WSL commands](https://learn.microsoft.com/en-us/windows/wsl/basic-commands), [USB setup](https://learn.microsoft.com/en-us/windows/wsl/connect-usb), and [usbipd-win](https://github.com/dorssel/usbipd-win).
 
@@ -50,7 +58,7 @@ npm run linked
 ```
 
 5. Open http://127.0.0.1:5180 and press **Start Core on PC**. Only this explicit action attaches the configured shared adapter to WSL. Use Milan's normal Core connection flow. Open **Tabletop** to use the linked board. Follow Milan for rules, story and campaign choices.
-6. Use **Stop Core on PC** when finished. To return the radio to Windows, run `usbipd detach --busid YOUR-BUS-ID` for the same adapter. Stopping advertising alone does not detach USB.
+6. Use **Stop Core** when finished: the app stops its helper and returns the radio transfer it recorded. Use **Quit app and return Bluetooth to Windows** to also close both web services. For a radio you manually attached outside this app, detach that device yourself with `usbipd detach --busid YOUR-BUS-ID`; the app does not automatically detach someone else's transfer.
 
 `npm run linked` prepares source in ignored `private/linked/`, starts both local web services and leaves Bluetooth stopped until requested. A new machine generates its own synthetic identities, HTTP control secret and virtual radio address. Configuration is written only to `private/linked/machine.json`. Sessions, captured images and diagnostics stay in that private workspace. The existing developer workspace under `private/integration/` is neither read nor copied.
 

@@ -3,10 +3,11 @@ import {promisify} from 'node:util';
 import {readFileSync,writeFileSync,renameSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {readSaveProfile} from './save-profile.mjs';
+import {adbExecutable} from './machine-config.mjs';
 const run=promisify(execFile);
 const definitionMapping=JSON.parse(readFileSync(new URL('./character-save-mapping.json',import.meta.url)));
-const adb=process.env.MILAN_ADB || 'adb';
 async function fromTablet(){
+  const adb=adbExecutable();
   const {stdout}=await run(adb,['devices'],{windowsHide:true,timeout:5000});
   const devices=stdout.split(/\r?\n/).filter(l=>/^\S+\s+device$/.test(l.trim())).map(l=>l.trim().split(/\s+/)[0]);
   if(devices.length!==1)throw Error('Connect exactly one authorised tablet.');

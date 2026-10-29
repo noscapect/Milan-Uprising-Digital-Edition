@@ -1,5 +1,9 @@
 # Architectuurbeslissingen — 21 oktober 2026
 
+## Windows-releasekandidaat — 29 oktober 2026
+
+De releasebuilder gebruikt alleen publieke bronmappen, verpakt Node/Python en self-contained .NET-helpers, bewaart third-party notices en voegt een bestandsmanifest toe. De per-user installer bewaart private instellingen bij bijwerken. Android-tools worden pas na afzonderlijke toestemming rechtstreeks van Google gedownload; Linux-pakketten en de eigen geïsoleerde helperomgeving worden via vaste opdrachten voorbereid. Tablettoestemming, voorgrondapp en schermresolutie worden gecontroleerd; taal en oriëntatie blijven een expliciete gebruikersbevestiging. Normaal stoppen geeft uitsluitend de door onze sessie geregistreerde radio-overdracht terug; na geforceerd afsluiten is herstel expliciet. De releaseworkflow is alleen handmatig en mag niet voor de review worden uitgevoerd. Geen fysieke tweede-machineacceptatie of volledige campagnevalidatie geclaimd.
+
 ## Windows-voorbereiding — 29 oktober 2026
 
 Bluetooth via WSL2 is de vaste transportkeuze voor de Windows-/Android-route. Het Control Center controleert de Windows-onderdelen en biedt expliciete installatieacties voor WSL, Debian en usbipd, plus selectie en delen van één gedetecteerde Bluetooth-adapter. Alle installatie- en UAC-vensters blijven zichtbaar. Er is geen automatische herstart, verwijdering/conversie van bestaande distributies of adapteroverdracht bij een statuscontrole. Acties zijn vast begrensd en alleen beschikbaar via de lokale same-origin bediening. Machineconfiguratie en voortgang blijven in private/. Een broncheckout is hiermee nog geen complete gebundelde release. Zie [installatie](INSTALLATION.md).

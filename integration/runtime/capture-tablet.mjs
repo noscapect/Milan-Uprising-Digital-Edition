@@ -5,9 +5,10 @@ import {fileURLToPath} from 'node:url';
 import {randomUUID} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {adbExecutable} from './machine-config.mjs';
 const run=promisify(execFile);
-const adb=process.env.MILAN_ADB || 'adb';
 export async function captureTablet({teburu=false,raw=false}={}){
+  const adb=adbExecutable();
   let stdout;
   try{({stdout}=await run(adb,['devices'],{timeout:5000,windowsHide:true,maxBuffer:100000}));}
   catch(error){

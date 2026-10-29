@@ -1,5 +1,7 @@
 const $=id=>document.getElementById(id);
 let busy=false,disposed=false,reading=false,latest=null;
+let helpersReady=null,helpersPreparing=false,tabletReady=false;
+document.addEventListener('milan:helpers-ready',event=>{helpersReady=event.detail.ready;helpersPreparing=event.detail.preparing;tabletReady=event.detail.tabletReady;if(!helpersReady||helpersPreparing||!tabletReady)$('start-core').disabled=true;});
 async function api(path,body){
   const response=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});
   const value=await response.json();if(!response.ok)throw Error(value.error||'The local control service did not respond.');return value;
@@ -10,7 +12,7 @@ async function refresh(){
     latest=await api('/api/control-center');const core=latest.core;
     $('core-status').textContent=busy||latest.starting?'Starting Core…':core.connected?'Connected to Milan':core.running?'Waiting for Milan':core.available?'Core stopped':'Core service stopped';
     $('core-detail').textContent=core.connected?'Milan is connected. You can open the tabletop.':core.running?'Open Milan on the tablet and connect using Single Device.':'Start Core prepares the local service and Bluetooth connection.';
-    $('start-core').disabled=busy||latest.starting||core.running;
+    $('start-core').disabled=busy||latest.starting||core.running||helpersReady===false||helpersPreparing||!tabletReady;
     $('stop-core').disabled=busy||latest.starting||!core.running;
     const firmware=core.firmware;
     $('firmware-status').textContent=!firmware?'Start the updated PC Core service to read its simulated versions.':`Core ${firmware.core.reportedVersion} → ${firmware.core.targetVersion} · Dice ${firmware.dice.map(d=>d.reportedVersion).join(', ')} → ${firmware.dice[0]?.targetVersion} · LED ring ${firmware.ring?.reportedVersion||'unavailable'} → ${firmware.ring?.targetVersion||'unavailable'} · ${firmware.phase==='completed'?(firmware.updateRequired?'New simulation available':'Simulation completed'):firmware.phase==='interrupted'?'Previous simulation interrupted; retry available':firmware.phase==='updating'?'Updating simulation…':'Not updated'}`;
@@ -24,7 +26,7 @@ async function refresh(){
 }
 async function act(path,label){
   if(busy)return;busy=true;$('start-core').disabled=$('stop-core').disabled=true;$('message').textContent=label;
-  try{await api(path,{});$('message').textContent=path.endsWith('/start')?'Core started. Connect Milan on the tablet.':'Core stopped.';}
+  try{await api(path,path.endsWith('/start')?{displayConfirmed:document.getElementById('confirm-display')?.checked===true}:{});$('message').textContent=path.endsWith('/start')?'Core started. Connect Milan on the tablet.':'Core stopped and its Bluetooth adapter returned to Windows.';}
   catch(error){$('message').textContent=error.message;}
   finally{busy=false;await refresh();}
 }

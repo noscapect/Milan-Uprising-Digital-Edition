@@ -8,6 +8,10 @@ using Windows.Graphics.Imaging;
 using Windows.Media.Ocr;
 using Windows.Storage.Streams;
 
+if(args.Length==1&&args[0]=="--readiness"){
+  bool available=false;try{available=OcrEngine.TryCreateFromLanguage(new Language("en-US"))!=null;}catch{}
+  Console.WriteLine(JsonSerializer.Serialize(new{englishOcrAvailable=available}));return;
+}
 Native.SetProcessDpiAwarenessContext(new IntPtr(-4));
 Native.SetThreadDpiAwarenessContext(new IntPtr(-4));
 var process=Process.GetProcessesByName("VTMTEBURU").FirstOrDefault(p=>p.MainWindowHandle!=IntPtr.Zero);

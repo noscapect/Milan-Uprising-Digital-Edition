@@ -1,0 +1,58 @@
+name: Build reviewed Windows release
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish a draft release after review (leave false for a build artifact only)
+        type: boolean
+        default: false
+      reviewed_commit:
+        description: Full reviewed commit SHA (required for publication)
+        type: string
+        required: false
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: node --test
+      - name: Build self-contained review package
+        run: node tools/build-release.mjs
+      - name: Smoke-test package without system runtimes
+        run: node tools/smoke-release.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: milan-windows-x64
+          path: |
+            work/release-*/*.zip
+            work/release-*/*.sha256
+          if-no-files-found: error
+  draft-release:
+    needs: build
+    if: inputs.publish && inputs.reviewed_commit == github.sha
+    runs-on: ubuntu-latest
+    environment: release-review
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: milan-windows-x64
+          path: release-files
+      - name: Create draft only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          shopt -s globstar nullglob
+          assets=(release-files/**/*.zip release-files/**/*.sha256)
+          test "${#assets[@]}" -gt 0
+          gh release create "review-${GITHUB_SHA:0:12}" "${assets[@]}" --draft --target "$GITHUB_SHA" --title "Windows release candidate" --notes "Review candidate; see docs/RELEASE-REVIEW.md for unvalidated hardware checks."

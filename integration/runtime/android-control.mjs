@@ -5,8 +5,16 @@ import {recordComponentInstructions,boardStatus,moveFromBoard,resolveCompanionPl
 import {coreTarget,selectCoreTarget,windowsCore} from './core-target.mjs';
 import {createPollingWorker} from '../../src/adapters/polling-worker.js';
 import {boardTiles,updateBoardTile} from './location-tiles-store.mjs';
-import {startPcCore,coreStarting} from './pc-core-start.mjs';
+import {startPcCore,coreStarting,releasePcCore} from './pc-core-start.mjs';
 import {createWindowsSetup} from '../../server/windows-setup.mjs';
+import {createPreparationJob,inspectTablet} from '../../server/connection-wizard.mjs';
+import {prepareReleaseHelpers} from '../../tools/prepare-release-helpers.mjs';
+import {machineSettings} from './machine-config.mjs';
+let previousHelperJob=null;
+try{previousHelperJob=JSON.parse(readFileSync(new URL('./helper-job.json',import.meta.url),'utf8'));}catch{}
+const helperJob=createPreparationJob({initialJob:previousHelperJob,prepare:prepareReleaseHelpers,save:job=>writeFileSync(new URL('./helper-job.json',import.meta.url),JSON.stringify(job))});
+let tabletCheck={ready:false,stage:'usb',message:'Connect your tablet and choose Check tablet.'};
+let displayConfirmed=false;
 let previousSetupJob=null;
 try{previousSetupJob=JSON.parse(readFileSync(new URL('./prerequisites-job.json',import.meta.url),'utf8'));}catch(error){if(error.code!=='ENOENT')previousSetupJob={phase:'interrupted',message:'Previous setup progress could not be read. Check this PC again before retrying.'};}
 let selectedSetupBus=null;
@@ -90,6 +98,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.headers.host!=='127.0.0.1:5180'){res.writeHead(403).end();return;}
   if(req.headers.origin&&req.headers.origin!=='http://127.0.0.1:5180'){res.writeHead(403).end();return;}
   try{
+    if(req.url==='/api/application-instance'&&req.method==='GET'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({application:'milan-uprising'}));return;}
     if(req.url==='/'&&req.method==='GET'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(readFileSync(new URL('../../control-center.html',import.meta.url)));return;}
     if(req.url==='/diagnostics'&&req.method==='GET'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(page);return;}
     if(req.url==='/control-center.js'&&req.method==='GET'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(readFileSync(new URL('../../src/ui/control-center.js',import.meta.url)));return;}
@@ -115,13 +124,35 @@ const server=http.createServer(async(req,res)=>{
       res.end(Buffer.from(await upstream.arrayBuffer()));return;
     }
     let result;
-    if(req.url==='/api/windows-setup'&&req.method==='GET')result=await windowsSetup.check();
+    if(req.url==='/api/connection'&&req.method==='GET'){
+      const settings=machineSettings();let recoveryNeeded=false;
+      try{const record=JSON.parse(readFileSync(new URL('./radio-ownership.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));recoveryNeeded=(record.attachedByUs||record.attemptedByUs)&&!record.released&&(record.sessionId!==process.env.MILAN_SESSION_ID||!record.attachedByUs);}catch{}
+      let restartRequired=false;try{restartRequired=JSON.parse(readFileSync(new URL('./native-update.json',import.meta.url),'utf8')).pending===true;}catch{}
+      result={helpersReady:!!(settings.corePython&&settings.visionPython&&settings.adb)&&!restartRequired,preparation:helperJob.status(),tablet:tabletCheck,recoveryNeeded,restartRequired};
+    }
+    else if(['/api/connection/prepare','/api/connection/check','/api/connection/quit','/api/connection/recover'].includes(req.url)&&req.method==='POST'){
+      if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
+      const request=await body(req);
+      if(req.url.endsWith('/prepare')){
+        if(windowsSetup.snapshot().job?.phase==='running')throw Error('Finish the Windows setup step first.');
+        result={preparation:helperJob.start(request)};
+      }
+      else if(req.url.endsWith('/check')){tabletCheck=await inspectTablet({adb:machineSettings().adb});result={tablet:tabletCheck};}
+      else{
+        if(request.confirm!==true)throw Error('Confirm stopping the app and returning its Bluetooth adapter.');
+        if(helperJob.status()?.phase==='running'||windowsSetup.snapshot().job?.phase==='running')throw Error('Finish the current preparation step before quitting.');
+        await releasePcCore({recover:req.url.endsWith('/recover')});result={released:true};
+        if(req.url.endsWith('/quit'))setTimeout(()=>process.send?.({type:'milan-quit'}),100);
+      }
+    }
+    else if(req.url==='/api/windows-setup'&&req.method==='GET')result=await windowsSetup.check();
     else if(req.url==='/api/windows-setup/check'&&req.method==='POST'){
       if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
       await body(req);result=await windowsSetup.check(true);
     }
     else if(req.url==='/api/windows-setup/action'&&req.method==='POST'){
       if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
+      if(helperJob.status()?.phase==='running')throw Error('Finish app-helper preparation first.');
       result=windowsSetup.start(await body(req));
     }
     else if(req.url==='/api/control-center'&&req.method==='GET'){
@@ -150,13 +181,18 @@ const server=http.createServer(async(req,res)=>{
       selectCoreTarget(value);setFeedbackSource(value==='windows'?'android':'windows');result={target:value};
     }else if(req.url==='/api/windows-core/start'&&req.method==='POST'){
       if(!req.headers['content-type']?.startsWith('application/json'))throw Error('JSON vereist.');
+      const request=await body(req);
+      if(!tabletCheck.ready||request.displayConfirmed!==true)throw Error('Check your tablet and confirm English and landscape orientation first.');
+      try{const record=JSON.parse(readFileSync(new URL('./radio-ownership.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));if((record.attachedByUs||record.attemptedByUs)&&!record.released&&(record.sessionId!==process.env.MILAN_SESSION_ID||!record.attachedByUs))throw Error('Return the interrupted Bluetooth transfer first.');}catch(error){if(error.code!=='ENOENT')throw error;}
+      displayConfirmed=true;
       if(coreTarget()!=='windows')throw Error('Kies eerst Milan op tablet.');
+      if(helperJob.status()?.phase==='running'||windowsSetup.snapshot().job?.phase==='running')throw Error('Finish preparation before starting Bluetooth.');
       let old=null;try{old=await androidPhone('/status');}catch{}
       if(old?.running)throw Error('Druk eerst op Stop in de oude Android-helper.');
       result=await startPcCore();
     }else if(req.url==='/api/windows-core/stop'&&req.method==='POST'){
       if(!req.headers['content-type']?.startsWith('application/json'))throw Error('JSON vereist.');
-      result=await windowsCore('/stop',{});
+      result=await releasePcCore();
     }else if(req.url==='/api/pair'&&req.method==='POST'){
       if(!req.headers['content-type']?.startsWith('application/json'))throw Error('JSON vereist.');
       result=await startPair((await body(req)).address);
@@ -249,7 +285,12 @@ const server=http.createServer(async(req,res)=>{
   }catch(e){res.writeHead(400,{'Content-Type':'application/json; charset=utf-8'});res.end(JSON.stringify({error:e.name==='TimeoutError'?'Android-helper niet bereikbaar. Controleer dezelfde wifi en houd de helper open.':e.message}));}
 });
 server.listen(5180,'127.0.0.1',()=>console.log('Core-bediening: http://127.0.0.1:5180'));
-const syncWorker=createPollingWorker({run:()=>boardStatus(),interval:50,onState:state=>writeFileSync(new URL('./sync-worker-status.json',import.meta.url),JSON.stringify({...state,pid:process.pid,updatedAt:new Date().toISOString(),browserRequired:false,codexRequired:false},null,2))});
+const syncWorker=createPollingWorker({run:()=>displayConfirmed?boardStatus():Promise.resolve({paused:true}),interval:50,onState:state=>writeFileSync(new URL('./sync-worker-status.json',import.meta.url),JSON.stringify({...state,pid:process.pid,updatedAt:new Date().toISOString(),browserRequired:false,codexRequired:false},null,2))});
 server.on('listening',()=>syncWorker.start());
 server.on('close',()=>syncWorker.stop());
-for(const signal of ['SIGINT','SIGTERM'])process.once(signal,async()=>{await syncWorker.stop();server.close();});
+async function close(){await syncWorker.stop();server.close();}
+process.on('message',async message=>{if(message?.type==='milan-shutdown'){
+  try{await releasePcCore();await close();process.send?.({type:'milan-stopped'});process.exitCode=0;}
+  catch(error){process.send?.({type:'milan-stop-failed',message:error.message});}
+}});
+for(const signal of ['SIGINT','SIGTERM'])process.once(signal,async()=>{try{await releasePcCore();}catch(error){console.error('Bluetooth cleanup:',error.message);}await close();});

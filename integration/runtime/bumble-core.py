@@ -173,6 +173,7 @@ class Core:
 
 
 async def serve(transport_spec):
+    shutdown_requested = asyncio.Event()
     from aiohttp import web
     from bumble.transport import open_transport
     if not transport_spec.startswith('usb:') or transport_spec == 'usb:0':
@@ -267,6 +268,9 @@ async def serve(transport_spec):
                         raise
             elif request.path == '/stop':
                 await stop()
+            elif request.path == '/shutdown':
+                await stop()
+                shutdown_requested.set()
             elif request.path == '/firmware/simulate-update':
                 body = await request.json()
                 if body != {'confirmSimulation': True}:
@@ -333,7 +337,7 @@ async def serve(transport_spec):
     try:
         await web.TCPSite(runner, '127.0.0.1', 5181).start()
         print('Private Bumble Core voorbereid op 127.0.0.1:5181; radio nog niet geopend.', flush=True)
-        await asyncio.Event().wait()
+        await shutdown_requested.wait()
     finally:
         presence_task.cancel()
         with contextlib.suppress(asyncio.CancelledError):
