@@ -1,5 +1,14 @@
 # Validatie — 21 oktober 2026
 
+## Begeleide Windows-voorbereiding — 29 oktober 2026
+
+- Publieke suite expliciet uit `test/` en `tests/`: 102 tests geslaagd, nul fouten. Een volledige `node --test`-run slaagde eveneens, maar ontdekte daarnaast kopieen van oudere suites in genegeerde tijdelijke werkmappen; die zijn niet als extra dekking geteld.
+
+- Zeven nieuwe geisoleerde tests controleren uitsluitend lezen bij statuscontrole, gedeelde/gecachete uitlezingen, expliciete bevestiging, begrensde acties, keuze van een gedetecteerde adapter, blokkeren van gelijktijdige installaties, annuleren van UAC, installatiefouten en herstartmeldingen. Reeds gedeelde adapters worden zonder installer of overdracht geselecteerd; onderbroken installaties starten niet automatisch opnieuw.
+- Browsercontrole op desktop en mobiel geslaagd: geen installatieverzoek voor bevestiging, annuleren doet niets, voortgang blokkeert nieuwe acties, herstartmelding zichtbaar, adapterkeuze correct en geen paginafouten of horizontale overflow. De installatie-antwoorden zijn gesimuleerd; er is geen echte installer gestart.
+- De PowerShell-statuscontrole is op de ontwikkelcomputer uitgevoerd en herkent WSL, Debian op WSL2, usbipd en de gedeelde Bluetooth-adapter. De nieuwe actie-API weigert verzoeken zonder lokale Origin en onbekende acties. Geen radio-overdracht, software-installatie, firmware- of officiele-appwijziging uitgevoerd.
+- Een complete installatie met echte UAC, downloads en Windows-herstart op een schone tweede machine blijft te toetsen. De gebundelde release met runtimes en vooraf gebouwde helpers blijft een volgende stap.
+
 ## Overdraagbare installatie — 29 oktober 2026
 
 - `node --test`: 95 tests geslaagd, nul fouten, inclusief archiefherstel, afwijzen van padontsnapping en integriteitscontrole.

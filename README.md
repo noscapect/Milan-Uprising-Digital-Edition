@@ -15,6 +15,8 @@ node server.mjs
 
 Open http://127.0.0.1:5178. Stop the server with Ctrl+C. Open the page through the server rather than directly from the filesystem.
 
+On Windows, `Start-Milan.cmd` opens the linked-table Control Center with guided WSL2/usbipd installation and Bluetooth-adapter preparation. Installation starts only after an explicit confirmation. A source checkout still needs Node.js and the app-helper prerequisites; see [first-time setup](docs/INSTALLATION.md).
+
 Run the public test suite with:
 
 ```powershell

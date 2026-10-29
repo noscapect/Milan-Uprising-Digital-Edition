@@ -6,6 +6,16 @@ import {coreTarget,selectCoreTarget,windowsCore} from './core-target.mjs';
 import {createPollingWorker} from '../../src/adapters/polling-worker.js';
 import {boardTiles,updateBoardTile} from './location-tiles-store.mjs';
 import {startPcCore,coreStarting} from './pc-core-start.mjs';
+import {createWindowsSetup} from '../../server/windows-setup.mjs';
+let previousSetupJob=null;
+try{previousSetupJob=JSON.parse(readFileSync(new URL('./prerequisites-job.json',import.meta.url),'utf8'));}catch(error){if(error.code!=='ENOENT')previousSetupJob={phase:'interrupted',message:'Previous setup progress could not be read. Check this PC again before retrying.'};}
+let selectedSetupBus=null;
+try{selectedSetupBus=JSON.parse(readFileSync(new URL('./machine.json',import.meta.url),'utf8')).usbBusId;}catch(error){if(error.code!=='ENOENT')throw error;}
+const windowsSetup=createWindowsSetup({initialJob:previousSetupJob,initialBusId:selectedSetupBus,save:job=>writeFileSync(new URL('./prerequisites-job.json',import.meta.url),JSON.stringify(job)),configure:adapter=>{
+  const path=new URL('./machine.json',import.meta.url);let settings={};
+  try{settings=JSON.parse(readFileSync(path,'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
+  writeFileSync(path,JSON.stringify({...settings,usbAdapter:adapter.vidPid,usbBusId:adapter.busId,wslDistribution:settings.wslDistribution||'Debian'},null,2));
+}});
 setFeedbackSource(coreTarget()==='windows'?'android':'windows');
 const scanMiniatures=JSON.parse(readFileSync(new URL('./miniature-scan-mapping.json',import.meta.url),'utf8'));
 const configPath=new URL('./phone-config.json',import.meta.url);
@@ -105,7 +115,16 @@ const server=http.createServer(async(req,res)=>{
       res.end(Buffer.from(await upstream.arrayBuffer()));return;
     }
     let result;
-    if(req.url==='/api/control-center'&&req.method==='GET'){
+    if(req.url==='/api/windows-setup'&&req.method==='GET')result=await windowsSetup.check();
+    else if(req.url==='/api/windows-setup/check'&&req.method==='POST'){
+      if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
+      await body(req);result=await windowsSetup.check(true);
+    }
+    else if(req.url==='/api/windows-setup/action'&&req.method==='POST'){
+      if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
+      result=windowsSetup.start(await body(req));
+    }
+    else if(req.url==='/api/control-center'&&req.method==='GET'){
       let core={available:false,running:false,connected:false};
       try{const s=await windowsCore('/status');core={available:true,running:!!s.running,connected:!!s.connected,firmware:s.firmware||null};}catch{}
       let share={available:false};

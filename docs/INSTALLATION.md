@@ -16,13 +16,32 @@ The table starts with its own empty sandbox session. Export/import your tabletop
 
 ## Connect the unmodified official app
 
+### Guided Windows preparation
+
+On Windows, double-click `Start-Milan.cmd` to open the Control Center. A source checkout still requires Node.js 22 or later; the launcher also supports a future packaged release's `runtime/node.exe`. A complete installer with bundled runtimes is not included yet.
+
+The **Prepare this PC** panel checks WSL, Debian's WSL version, usbipd and available USB Bluetooth adapters. Checking does not install software, share a USB device or start Core. You can then choose:
+
+- **Install WSL**: opens Microsoft's installer with a Windows administrator prompt. It installs WSL without installing or deleting a distribution. If Windows requests a reboot, save your work, restart and reopen the app. The app never reboots Windows itself.
+- **Install Debian**: installs the supported Linux distribution for the current user, keeping existing distributions. **Finish Linux setup** opens Debian for any account setup prompts. An existing WSL1 Debian is not automatically converted; the panel links to Microsoft's conversion instructions so users can back up their data first.
+- **Install usbipd**: opens the Windows Package Manager installer for the exact `dorssel.usbipd-win` package. Its prompts and agreements remain visible. This installer adds its normal USB-sharing service and local-subnet firewall rule. If Package Manager is missing, the panel links to Microsoft's App Installer.
+- Select a detected **Bluetooth adapter** and choose **Prepare selected adapter**. After a separate confirmation, Windows asks for administrator permission to share only that adapter. An already shared radio can be saved with **Use selected adapter**. Neither button attaches it to WSL or starts Bluetooth. Selection is saved only in `private/linked/machine.json`, including the chosen USB bus, so two identical adapter models are not silently interchanged.
+
+Progress, cancellation, installation failures and restart notices appear in the panel. Reopening the app after an interrupted operation never automatically repeats an installer: use **Check again** and retry the required step. Existing distributions are never removed, the default distribution is not changed, and no automatic firmware, official-app or radio-driver modifications are performed by our setup helper. usbipd itself is installed through its normal Windows installer.
+
+For this source edition, the .NET/Python/ADB prerequisites and app-helper build below are still needed. Once the panel has saved an adapter, `npm run setup:linked` can reuse the saved adapter and distribution without typing their identifiers. Prepare the Windows components before running that command; restart `npm run linked` after the helper build. This guided prerequisite preparation is not yet a complete packaged application installer.
+
+Implementation references: [Microsoft WSL installation](https://learn.microsoft.com/en-us/windows/wsl/install), [WSL commands](https://learn.microsoft.com/en-us/windows/wsl/basic-commands), [USB setup](https://learn.microsoft.com/en-us/windows/wsl/connect-usb), and [usbipd-win](https://github.com/dorssel/usbipd-win).
+
+### App helpers and tablet connection
+
 The optional linked table includes the project's own integration source, Core codec, Bluetooth transport and screenshot readers. The original Teburu SDK, its libraries, examples and documentation are not included or required to build this runtime. Publishing the artwork and the project's derived integration code was explicitly authorized by the project owner on 29 October 2026. This does not grant permission to redistribute the SDK itself.
 
 The supported setup is a Windows 10/11 PC and the official Milan app on an Android tablet. The app needs its own normal installation. This remains an experimental integration with the limited validation documented in [README](../README.md); an entire campaign and arbitrary tablet layouts have not been validated. Screenshot recognition is calibrated to English, landscape 2560 × 1600. It requires an authorized USB debugging connection, Android Platform Tools (`adb` on PATH), Windows English OCR, .NET 8 SDK, Python 3 with the `py` launcher, WSL2 with a Linux distribution and Python 3/venv, and usbipd-win. These tools are prerequisites for the integration, not for the standalone table.
 
 1. Connect your own tablet over USB and approve USB debugging. `adb devices` must list exactly one authorized device. Open Milan yourself; the capture reader refuses other apps.
 2. Use `usbipd list` to identify the Bluetooth adapter you intend to use. Record its VID:PID and bus ID. Do not copy the original developer's adapter settings. Sharing this radio with WSL temporarily disconnects its Windows Bluetooth devices; choose an appropriate adapter for your machine.
-3. In an administrator terminal, explicitly share only that adapter using `usbipd bind --busid YOUR-BUS-ID`. The setup tool does not bind a radio, change drivers, rename the PC, install firmware or modify the official app.
+3. Prefer **Prepare this PC** to select and share the adapter with a Windows confirmation. For manual preparation, use an administrator terminal to share only that adapter with `usbipd bind --busid YOUR-BUS-ID`. Neither path starts the radio. No PC rename, firmware installation or official-app modification is performed.
 4. Run the build/setup below, substituting your adapter and installed WSL distribution. This builds the two local .NET executables and installs the Python dependencies in dedicated environments. For an ADB outside PATH add `--adb=C:\path\to\adb.exe` (quote the complete option if it contains spaces).
 
 ```powershell

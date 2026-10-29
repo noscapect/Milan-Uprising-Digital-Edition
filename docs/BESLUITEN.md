@@ -1,5 +1,9 @@
 # Architectuurbeslissingen — 21 oktober 2026
 
+## Windows-voorbereiding — 29 oktober 2026
+
+Bluetooth via WSL2 is de vaste transportkeuze voor de Windows-/Android-route. Het Control Center controleert de Windows-onderdelen en biedt expliciete installatieacties voor WSL, Debian en usbipd, plus selectie en delen van één gedetecteerde Bluetooth-adapter. Alle installatie- en UAC-vensters blijven zichtbaar. Er is geen automatische herstart, verwijdering/conversie van bestaande distributies of adapteroverdracht bij een statuscontrole. Acties zijn vast begrensd en alleen beschikbaar via de lokale same-origin bediening. Machineconfiguratie en voortgang blijven in private/. Een broncheckout is hiermee nog geen complete gebundelde release. Zie [installatie](INSTALLATION.md).
+
 ## Overdraagbare distributie — 29 oktober 2026
 
 De projecteigenaar heeft publicatie van het geselecteerde artwork en de eigen afgeleide integratiecode expliciet toegestaan. Het artwork wordt als één archief meegeleverd en automatisch lokaal uitgepakt. De benodigde eigen runtimecode wordt onder `integration/runtime/` beheerd; de launcher maakt daaruit een afzonderlijke genegeerde werkmap `private/linked/`. Machineconfiguratie, spelstanden, observaties en willekeurig gegenereerde identities blijven lokaal. De oorspronkelijke SDK, libraries, voorbeelden en documentatie blijven uitgesloten. De bestaande private ontwikkelopstelling wordt niet gekopieerd of gewijzigd. De gekoppelde route vereist nog steeds expliciete configuratie van de eigen radio en tablet; een volledige campagne of iedere machine is hiermee niet bewezen. Zie [installatie](INSTALLATION.md).

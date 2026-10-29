@@ -4,9 +4,12 @@ $settings=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'machine.json') -Raw
 if($settings.usbAdapter -notmatch '^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$'){throw 'Run the linked setup with your USB adapter VID:PID first.'}
 if(-not $settings.wslDistribution -or -not $settings.corePython){throw 'Run the linked setup first.'}
 if(Get-NetTCPConnection -LocalPort 5181 -State Listen -ErrorAction SilentlyContinue){return}
-$usbip=(Get-Command usbipd.exe -ErrorAction Stop).Source
+$usbCommand=Get-Command usbipd.exe -ErrorAction SilentlyContinue
+if($usbCommand){$usbip=$usbCommand.Source}
+else{$usbip=Join-Path $env:ProgramFiles 'usbipd-win/usbipd.exe';if(-not (Test-Path -LiteralPath $usbip)){throw 'Install usbipd in Prepare this PC, then check again.'}}
 $adapterPattern=[regex]::Escape($settings.usbAdapter)
 $rows=@((& $usbip list) | Where-Object {$_ -match ('^\s*\d+-\d+\s+'+$adapterPattern+'\s')})
+if($settings.usbBusId){$selectedBus=[regex]::Escape($settings.usbBusId);$rows=@($rows | Where-Object {$_ -match ('^\s*'+$selectedBus+'\s')})}
 if($rows.Count -ne 1 -or $rows[0] -notmatch '^\s*(\d+-\d+)\s'){throw 'The selected USB adapter was not found uniquely.'}
 $busId=$Matches[1]
 if($rows[0] -match '\bNot shared\s*$'){throw 'Share this adapter explicitly with usbipd bind --busid before starting. This requires administrator rights.'}
