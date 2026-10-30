@@ -2,7 +2,9 @@
 
 ## Actuele scope — 29 oktober 2026
 
-De optionele gekoppelde runtime staat nu als eigen broncode in `integration/runtime/`; WSL2 is de vaste Bluetooth-route voor Windows met een Android-tablet. De releasebuilder verpakt runtimes en helpers, terwijl instellingen, identifiers en campagnes in `private/` blijven. De SDK zelf wordt niet verspreid. Zie [installatie](INSTALLATION.md), [release-review](RELEASE-REVIEW.md) en [validatie](VALIDATIE.md). Uitspraken hieronder over ontbreken van netwerk-/appintegratie beschrijven de oorspronkelijke sandboxdoorsnede, niet de toegevoegde optionele adapter. De laaggrenzen blijven gelden; volledige campagne- en tweede-machineacceptatie blijven open.
+`resources/addons.json` registreert versiegebonden spelmodules. De generieke engine, server, installer en Core/WSL-transport importeren geen Milan-module. Milan-schermen en presentatie staan onder `src/games/milan-uprising/`, gegevens onder `data/games/milan-uprising/` en de appadapter onder `integration/milan-uprising/`; `integration/runtime/` bevat gedeelde infrastructuur. Meerdere spellen kunnen onafhankelijk ingeschakeld zijn. De huidige gekoppelde launcher opent één spelsessie tegelijk en sluit de vorige gecontroleerd af bij wisselen. Zie [modulecontract](GAME-MODULES.md).
+
+Spelinstallatie gebruikt een bestaand artworkarchief of een geregistreerde download-/extractierecipe. De Windows-client wordt niet geïnstalleerd of uitgevoerd. Node bewaakt de gecontroleerde bron, integriteit en opruiming; een afzonderlijk Python-proces exporteert alleen geselecteerde afbeeldingen. Engine en regels blijven artworkvrij. WSL2 blijft de vaste Bluetooth-route; SDK en machinegegevens blijven uitgesloten van distributie. Zie [installatie](INSTALLATION.md) en [validatie](VALIDATIE.md).
 
 Architectuur vastgesteld en eerste sandboxdoorsnede geïmplementeerd op 21 oktober 2026. Milan Uprising heeft een afzonderlijke game-module met neutrale profieldata; echte spelregels en locaties ontbreken nog. Prioriteit: getrouwe functionele 2D-reproductie, daarna automatisering en optionele visuele uitbreiding.
 

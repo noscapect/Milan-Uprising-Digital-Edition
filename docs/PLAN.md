@@ -2,11 +2,16 @@
 
 ## Overdraagbare distributie — 29 oktober 2026
 
+- [x] Vereenvoudig het Control Center naar één automatische PC-voorbereiding na eenmalige toestemming, met voortgang, herstart-/retry-opvolging, automatische adapterkeuze waar eenduidig, geïsoleerd Linux-account en automatische tabletcontrole. Handmatige stappen blijven onder Advanced. Echte schone-machineacceptatie blijft open.
+
+- [x] Scheid TCE-infrastructuur en spelmodules, registreer expliciete modulecontracten en bewaar meerdere onafhankelijk ingeschakelde spellen. Houd bestaande Milan-sessies compatibel.
+- [x] Voeg éénknopsinstallatie toe met gecontroleerde automatische Windows-clientdownload en artworkextractie; lever Python/UnityPy mee zonder de game te installeren of uit te voeren.
+
 - [x] Voeg begeleide WSL2-/usbipd-voorbereiding toe met statuscontrole, expliciete installatieknoppen, UAC, voortgang/herstartmeldingen en Bluetooth-adapterselectie zonder automatische overdracht.
 - [x] Bouw lokaal een Windows-reviewpakket met runtimes, vooraf gebouwde helpers, installer, Linux-voorbereiding, tabletwizard en beheerde Bluetooth-teruggave/herstel.
 - [ ] Laat de eigenaar het werk reviewen voordat de handmatige GitHub-releaseworkflow wordt uitgevoerd; test de echte installatie op een schone Windows-machine met fysieke tablet/radio.
 
-- [x] Neem toegestaan artwork als één automatisch geïnstalleerd archief op en publiceer de benodigde eigen integratieruntime zonder de SDK zelf.
+- [x] Neem toegestaan artwork als één archief op, installeer dit via Game add-ons en publiceer de benodigde eigen integratieruntime zonder de SDK zelf.
 - [x] Scheid runtimecode van machineconfiguratie, identifiers en campagnes; start een nieuwe installatie met een lege tafel.
 - [x] Controleer een schone kopie zonder de oorspronkelijke private werkmap, de complete afbeeldingencatalogus en desktop-/mobielweergave. Zie [installatie](INSTALLATION.md) en [validatie](VALIDATIE.md).
 - [ ] Herhaal een fysieke appverbinding op een tweede computer met diens eigen adapter en tabletconfiguratie.
@@ -19,7 +24,7 @@
 - [x] Corrigeer de LED-segmentoriëntatie in de presentatie; vier verschillende kleuren gecontroleerd in een geïsoleerde browserproef. Zie [Prospero](PROSPERO.md).
 - [ ] Valideer een volledige geladen campagneopstelling en volledige ringanimaties; de beperkte proeven hierboven bewijzen dit niet.
 
-De gedateerde prioriteiten hieronder beschrijven eerdere onderzoeksfasen. Actuele publieke verificatie op 29 oktober: 109 tests geslaagd. De 26 private Core-scenario's horen bij de afzonderlijke eerdere integratieproeven; details en bewijsgrenzen staan in [VALIDATIE.md](VALIDATIE.md).
+De gedateerde prioriteiten hieronder beschrijven eerdere onderzoeksfasen. Actuele verificatie en aantallen staan in [VALIDATIE.md](VALIDATIE.md); nieuwe module- en installatietests vervangen eerdere kleinere suite-aantallen niet als hardwarebewijs.
 
 ## Hoofddoel en eerstvolgende integratiemijlpalen
 

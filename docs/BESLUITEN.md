@@ -1,5 +1,13 @@
 # Architectuurbeslissingen — 21 oktober 2026
 
+## Eén automatische PC-voorbereiding — 29 oktober 2026
+
+De losse primaire installatieknoppen zijn vervangen door **Set up automatically**, na eenmalige expliciete voorwaarden/toestemming. De backend doorloopt de bestaande begrensde acties zonder een bevestiging per component. Windows-UAC en eventuele herstart blijven OS-acties; een herstart wordt nooit automatisch uitgevoerd. Alleen bij meerdere/missende adapters wordt een keuze gevraagd. Linux krijgt een eigen niet-root helperaccount, zodat gebruikers normaal geen terminal/account hoeven voor te bereiden. Tabletstatus wordt automatisch gecontroleerd. Handmatige bediening blijft onder Advanced. Zie [automatische setup](AUTOMATIC-SETUP.md).
+
+## Optionele artworkarchieven — 29 oktober 2026
+
+Artwork kan gebundeld of afzonderlijk worden aangeleverd. Het eerdere voorstel zonder automatische clientextractie is vervangen: **Add game** gebruikt een bestaand archief of downloadt een gecontroleerde Windows-client-ZIP en extraheert uitsluitend de benodigde beelden. Geen installatie of uitvoering van de Windows-game; Android blijft verplicht voor gekoppeld spelen. Meerdere modules kunnen ingeschakeld blijven. Zie [modulecontract](GAME-MODULES.md).
+
 ## Projectnaam — 29 oktober 2026
 
 Het project heet voortaan **Teburu Core Emulator (TCE)**; de GitHub-repository heet `Teburu-Core-Emulator`. Dit betreft uitsluitend de naam, zichtbare projectbranding en pakket-/launchernamen. Milan Uprising blijft de bestaande spelmodule. De volgende refactorering voor meer spelmodules is afzonderlijk werk. Sessie-/profiel-ID's, interne formaatnamen en bestaande opslag blijven behouden; deze naamswijziging is geen nieuw compatibiliteitsbewijs.
@@ -14,7 +22,7 @@ Bluetooth via WSL2 is de vaste transportkeuze voor de Windows-/Android-route. He
 
 ## Overdraagbare distributie — 29 oktober 2026
 
-De projecteigenaar heeft publicatie van het geselecteerde artwork en de eigen afgeleide integratiecode expliciet toegestaan. Het artwork wordt als één archief meegeleverd en automatisch lokaal uitgepakt. De benodigde eigen runtimecode wordt onder `integration/runtime/` beheerd; de launcher maakt daaruit een afzonderlijke genegeerde werkmap `private/linked/`. Machineconfiguratie, spelstanden, observaties en willekeurig gegenereerde identities blijven lokaal. De oorspronkelijke SDK, libraries, voorbeelden en documentatie blijven uitgesloten. De bestaande private ontwikkelopstelling wordt niet gekopieerd of gewijzigd. De gekoppelde route vereist nog steeds expliciete configuratie van de eigen radio en tablet; een volledige campagne of iedere machine is hiermee niet bewezen. Zie [installatie](INSTALLATION.md).
+De projecteigenaar heeft publicatie van het geselecteerde artwork en de eigen afgeleide integratiecode expliciet toegestaan. Het artwork wordt standaard als één archief meegeleverd en via Game add-ons lokaal uitgepakt; een distributie mag het archief weglaten. De benodigde eigen runtimecode wordt onder `integration/runtime/` beheerd; de launcher maakt daaruit een afzonderlijke genegeerde werkmap `private/linked/`. Machineconfiguratie, spelstanden, observaties en willekeurig gegenereerde identities blijven lokaal. De oorspronkelijke SDK, libraries, voorbeelden en documentatie blijven uitgesloten. De bestaande private ontwikkelopstelling wordt niet gekopieerd of gewijzigd. De gekoppelde route vereist nog steeds expliciete configuratie van de eigen radio en tablet; een volledige campagne of iedere machine is hiermee niet bewezen. Zie [installatie](INSTALLATION.md).
 
 ## Verdieping na bronnenonderzoek
 

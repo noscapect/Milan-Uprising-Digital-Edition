@@ -1,5 +1,5 @@
 export function downloadSession(session) {
   const url = URL.createObjectURL(new Blob([JSON.stringify(session, null, 2)], { type: 'application/json' }));
-  const link = document.createElement('a'); link.href = url; link.download = 'milan-tabletop.json'; link.click();
+  const link = document.createElement('a'); link.href = url; link.download = 'tce-tabletop.json'; link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

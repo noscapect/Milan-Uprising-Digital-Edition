@@ -4,7 +4,9 @@ const run=promisify(execFile);
 export function parseAdbDevices(text){
  return text.split(/\r?\n/).flatMap(line=>{const match=line.trim().match(/^(\S+)\s+(device|unauthorized|offline)(?:\s|$)/);return match?[{serial:match[1],state:match[2]}]:[];});
 }
-export async function inspectTablet({adb,execute=run}={}){
+export async function inspectTablet({adb,application,execute=run}={}){
+ if(!application?.androidPackage||!application.display)throw Error('Select a game with a configured Android adapter first.');
+ const title=application.shortTitle||application.title||'the game';
  if(!adb)return {ready:false,stage:'helpers',message:'Prepare the app helpers first.'};
  try{
   const {stdout}=await execute(adb,['devices'],{windowsHide:true,timeout:10000,maxBuffer:100000});const devices=parseAdbDevices(stdout);
@@ -15,11 +17,12 @@ export async function inspectTablet({adb,execute=run}={}){
   if(device.state!=='device')return {ready:false,stage:'usb',message:'The tablet is offline. Reconnect its USB cable and check again.'};
   const options={windowsHide:true,timeout:10000,maxBuffer:2*1024*1024};
   const {stdout:window}=await execute(adb,['-s',device.serial,'shell','dumpsys','window'],options);
-  if(!window.split(/\r?\n/).some(line=>line.includes('mCurrentFocus=')&&/\bcom\.xplored\.teburu\.vtm\//.test(line)))return {ready:false,stage:'milan',message:'Open Milan on the tablet and keep it in the foreground.'};
+  if(!window.split(/\r?\n/).some(line=>line.includes('mCurrentFocus=')&&line.includes(application.androidPackage+'/')))return {ready:false,stage:'game',message:`Open ${title} on the tablet and keep it in the foreground.`};
   const {stdout:size}=await execute(adb,['-s',device.serial,'shell','wm','size'],options);
   const dimensions=[...size.matchAll(/(\d+)x(\d+)/g)].at(-1);
-  if(!dimensions||![[2560,1600],[1600,2560]].some(([w,h])=>Number(dimensions[1])===w&&Number(dimensions[2])===h))return {ready:false,stage:'display',message:'Automatic board reading currently supports a 2560 × 1600 tablet only. This display size has not been validated.'};
-  return {ready:true,stage:'connect',message:'Tablet authorized and Milan open. Use landscape orientation and English in Milan, then start Core and connect inside Milan.',languageVerified:false,orientationVerified:false};
+  const {width,height}=application.display;
+  if(!dimensions||![[width,height],[height,width]].some(([w,h])=>Number(dimensions[1])===w&&Number(dimensions[2])===h))return {ready:false,stage:'display',message:`This game currently supports a ${width} × ${height} tablet only. This display size has not been validated.`};
+  return {ready:true,stage:'connect',message:`Tablet authorized and ${title} open. Use landscape orientation and English, then start Core and connect inside the game.`,languageVerified:false,orientationVerified:false};
  }catch{return {ready:false,stage:'usb',message:'The tablet could not be read. Check its cable, USB permission and the app-helper installation.'};}
 }
 

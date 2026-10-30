@@ -1,5 +1,8 @@
 import http from 'node:http';
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {fileURLToPath} from 'node:url';
 import {randomBytes} from 'node:crypto';
 import {recordComponentInstructions,boardStatus,moveFromBoard,resolveCompanionPlacement,removeConfirmedCompanion,noteCharacterScan,prepareReaderInput,recoverBoard,clearBoard,setFeedbackSource,tableSession,applyConfirmedAppMarkers,applyConfirmedAppSetup,editExpansionPiece} from './app-feedback.mjs';
 import {coreTarget,selectCoreTarget,windowsCore} from './core-target.mjs';
@@ -7,14 +10,17 @@ import {createPollingWorker} from '../../src/adapters/polling-worker.js';
 import {boardTiles,updateBoardTile} from './location-tiles-store.mjs';
 import {startPcCore,coreStarting,releasePcCore} from './pc-core-start.mjs';
 import {createWindowsSetup} from '../../server/windows-setup.mjs';
+import {createAutomaticSetup} from '../../server/automatic-setup.mjs';
 import {createPreparationJob,inspectTablet} from '../../server/connection-wizard.mjs';
 import {prepareReleaseHelpers} from '../../tools/prepare-release-helpers.mjs';
 import {machineSettings} from './machine-config.mjs';
+const gameModule=JSON.parse(readFileSync(new URL('./game-module.json',import.meta.url),'utf8'));
 let previousHelperJob=null;
 try{previousHelperJob=JSON.parse(readFileSync(new URL('./helper-job.json',import.meta.url),'utf8'));}catch{}
-const helperJob=createPreparationJob({initialJob:previousHelperJob,prepare:prepareReleaseHelpers,save:job=>writeFileSync(new URL('./helper-job.json',import.meta.url),JSON.stringify(job))});
-let tabletCheck={ready:false,stage:'usb',message:'Connect your tablet and choose Check tablet.'};
+const helperJob=createPreparationJob({initialJob:previousHelperJob,prepare:options=>prepareReleaseHelpers({...options,runtime:new URL('./',import.meta.url)}),save:job=>writeFileSync(new URL('./helper-job.json',import.meta.url),JSON.stringify(job))});
+let tabletCheck={ready:false,stage:'usb',message:'Connect and unlock your Android tablet by USB. TCE checks the connection automatically.'};
 let displayConfirmed=false;
+async function gameActive(){try{const response=await fetch('http://127.0.0.1:5178/api/game-addons',{signal:AbortSignal.timeout(3000)});return response.ok&&(await response.json()).enabled.includes('milan-uprising');}catch{return false;}}
 let previousSetupJob=null;
 try{previousSetupJob=JSON.parse(readFileSync(new URL('./prerequisites-job.json',import.meta.url),'utf8'));}catch(error){if(error.code!=='ENOENT')previousSetupJob={phase:'interrupted',message:'Previous setup progress could not be read. Check this PC again before retrying.'};}
 let selectedSetupBus=null;
@@ -23,8 +29,16 @@ const windowsSetup=createWindowsSetup({initialJob:previousSetupJob,initialBusId:
   const path=new URL('./machine.json',import.meta.url);let settings={};
   try{settings=JSON.parse(readFileSync(path,'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
   writeFileSync(path,JSON.stringify({...settings,usbAdapter:adapter.vidPid,usbBusId:adapter.busId,wslDistribution:settings.wslDistribution||'Debian'},null,2));
+  writeFileSync(new URL('../tce-machine.json',import.meta.url),JSON.stringify({...settings,usbAdapter:adapter.vidPid,usbBusId:adapter.busId,wslDistribution:settings.wslDistribution||'Debian'},null,2));
 }});
-setFeedbackSource(coreTarget()==='windows'?'android':'windows');
+const setupExecute=promisify(execFile);
+let previousAutomaticJob=null;try{previousAutomaticJob=JSON.parse(readFileSync(new URL('./automatic-setup.json',import.meta.url),'utf8'));}catch{}
+function automaticHelpersReady(){const settings=machineSettings();let pending=false;try{pending=JSON.parse(readFileSync(new URL('./native-update.json',import.meta.url),'utf8')).pending===true;}catch{}return !pending&&settings.wslDistribution==='Debian'&&settings.setupVersion===2&&!!settings.linuxUser&&!!settings.corePython&&!!settings.adb&&existsSync(settings.adb)&&!!settings.visionPython&&existsSync(settings.visionPython);}
+const automaticSetup=createAutomaticSetup({windows:windowsSetup,initialJob:previousAutomaticJob,helpersReady:automaticHelpersReady,save:job=>writeFileSync(new URL('./automatic-setup.json',import.meta.url),JSON.stringify(job)),
+ assertAvailable:async()=>{for(const file of ['../../release.json','../../runtime/python/python.exe','./windows-core/ring-telemetry-build/CoreContract.exe','./app-observer/build/AppObserver.exe'])if(!existsSync(new URL(file,import.meta.url)))throw Error('Use the complete TCE Windows download for automatic setup. Source checkout setup is available under Advanced.');let pending=false;try{pending=JSON.parse(readFileSync(new URL('./native-update.json',import.meta.url),'utf8')).pending===true;}catch{}if(pending)throw Error('Quit TCE and reopen it to finish updating the connection tools, then continue setup.');},
+ ocrReady:async()=>{const {stdout}=await setupExecute(fileURLToPath(new URL('./app-observer/build/AppObserver.exe',import.meta.url)),['--readiness'],{windowsHide:true,timeout:30000,maxBuffer:100000});return JSON.parse(stdout).englishOcrAvailable===true;},
+ prepareHelpers:async onProgress=>{writeFileSync(new URL('./machine.json',import.meta.url),JSON.stringify({...machineSettings(),wslDistribution:'Debian'},null,2));await prepareReleaseHelpers({runtime:new URL('./',import.meta.url),onProgress});}});
+setFeedbackSource('android');
 const scanMiniatures=JSON.parse(readFileSync(new URL('./miniature-scan-mapping.json',import.meta.url),'utf8'));
 const configPath=new URL('./phone-config.json',import.meta.url);
 let connection=null;
@@ -98,14 +112,23 @@ const server=http.createServer(async(req,res)=>{
   if(req.headers.host!=='127.0.0.1:5180'){res.writeHead(403).end();return;}
   if(req.headers.origin&&req.headers.origin!=='http://127.0.0.1:5180'){res.writeHead(403).end();return;}
   try{
-    if(req.url==='/api/application-instance'&&req.method==='GET'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({application:'milan-uprising'}));return;}
-    if(req.url==='/'&&req.method==='GET'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(readFileSync(new URL('../../control-center.html',import.meta.url)));return;}
+    if(req.url==='/api/application-instance'&&req.method==='GET'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({application:'teburu-core-emulator',gameId:'milan-uprising'}));return;}
+    if(req.url==='/api/game-addons'&&['GET','POST'].includes(req.method)){
+      if(req.method==='POST'&&(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json'))){res.writeHead(403).end();return;}
+      const action=req.method==='POST'?await body(req):undefined;
+      if(['disable','open-linked'].includes(action?.operation))throw Error('Use the TCE game library to disable or switch linked games.');
+      const upstream=await fetch('http://127.0.0.1:5178/api/game-addons',{method:req.method,headers:action?{Origin:'http://127.0.0.1:5178','Content-Type':'application/json'}:{},body:action?JSON.stringify(action):undefined});
+      res.writeHead(upstream.status,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(await upstream.text());return;
+    }
+    if((req.url==='/board'||req.url==='/api/table-session'||req.url.startsWith('/api/board-')||req.url.startsWith('/api/confirmed-')||['/api/scan','/api/sensor','/api/dice/roll','/api/pair','/api/connect','/api/windows-core/start'].includes(req.url))&&!await gameActive())throw Error('Install and activate the Milan Uprising add-on with its artwork archive present first.');
+    if(req.url==='/'&&req.method==='GET'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(readFileSync(new URL('../../src/games/milan-uprising/control-center.html',import.meta.url)));return;}
     if(req.url==='/diagnostics'&&req.method==='GET'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(page);return;}
-    if(req.url==='/control-center.js'&&req.method==='GET'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(readFileSync(new URL('../../src/ui/control-center.js',import.meta.url)));return;}
+    if(req.url==='/control-center.js'&&req.method==='GET'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(readFileSync(new URL('../../src/games/milan-uprising/ui/control-center.js',import.meta.url)));return;}
+    if(['/connection-wizard.js','/game-enabled.js'].includes(req.url)&&req.method==='GET'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(readFileSync(new URL('../../src/games/milan-uprising/ui'+req.url,import.meta.url)));return;}
     if(req.method==='GET'&&req.url==='/board'){
-      const upstream=await fetch('http://127.0.0.1:5178/',{signal:AbortSignal.timeout(3000)});
+      const upstream=await fetch('http://127.0.0.1:5178/games/milan-uprising/table',{signal:AbortSignal.timeout(3000)});
       if(!upstream.ok)throw Error('Bordserver is niet beschikbaar.');
-      const html=(await upstream.text()).replace('src="src/app.js"','src="/board-client.mjs"');
+      const html=(await upstream.text()).replace('src="/src/games/milan-uprising/app.js"','src="/board-client.mjs"');
       res.setHeader('Content-Type','text/html; charset=utf-8');res.end(html);return;
     }
     if(req.method==='GET'&&req.url==='/board-loader.mjs'){
@@ -117,7 +140,7 @@ const server=http.createServer(async(req,res)=>{
     if(req.method==='GET'&&req.url==='/api/table-session'){
       res.setHeader('Content-Type','application/json; charset=utf-8');res.end(JSON.stringify(tableSession()));return;
     }
-    if(req.method==='GET'&&/^\/(src\/|data\/games\/|local-artwork\/)/.test(req.url)){
+    if(req.method==='GET'&&/^\/(src\/|data\/games\/|local-artwork\/|games\/)/.test(req.url)){
       // Fixed upstream exposes only the public demo's registered assets and local artwork.
       const upstream=await fetch('http://127.0.0.1:5178'+req.url,{signal:AbortSignal.timeout(3000),redirect:'error'});
       res.writeHead(upstream.status,{'Content-Type':upstream.headers.get('content-type')||'application/octet-stream'});
@@ -128,22 +151,29 @@ const server=http.createServer(async(req,res)=>{
       const settings=machineSettings();let recoveryNeeded=false;
       try{const record=JSON.parse(readFileSync(new URL('./radio-ownership.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));recoveryNeeded=(record.attachedByUs||record.attemptedByUs)&&!record.released&&(record.sessionId!==process.env.MILAN_SESSION_ID||!record.attachedByUs);}catch{}
       let restartRequired=false;try{restartRequired=JSON.parse(readFileSync(new URL('./native-update.json',import.meta.url),'utf8')).pending===true;}catch{}
-      result={helpersReady:!!(settings.corePython&&settings.visionPython&&settings.adb)&&!restartRequired,preparation:helperJob.status(),tablet:tabletCheck,recoveryNeeded,restartRequired};
+      result={helpersReady:!!(settings.corePython&&settings.visionPython&&settings.adb)&&!restartRequired,preparation:helperJob.status(),automatic:automaticSetup.snapshot().job,tablet:tabletCheck,recoveryNeeded,restartRequired};
     }
     else if(['/api/connection/prepare','/api/connection/check','/api/connection/quit','/api/connection/recover'].includes(req.url)&&req.method==='POST'){
       if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
       const request=await body(req);
       if(req.url.endsWith('/prepare')){
+        if(automaticSetup.snapshot().job?.phase==='running')throw Error('Automatic setup is running.');
         if(windowsSetup.snapshot().job?.phase==='running')throw Error('Finish the Windows setup step first.');
         result={preparation:helperJob.start(request)};
       }
-      else if(req.url.endsWith('/check')){tabletCheck=await inspectTablet({adb:machineSettings().adb});result={tablet:tabletCheck};}
+      else if(req.url.endsWith('/check')){tabletCheck=await inspectTablet({adb:machineSettings().adb,application:gameModule});result={tablet:tabletCheck};}
       else{
         if(request.confirm!==true)throw Error('Confirm stopping the app and returning its Bluetooth adapter.');
-        if(helperJob.status()?.phase==='running'||windowsSetup.snapshot().job?.phase==='running')throw Error('Finish the current preparation step before quitting.');
+        if(automaticSetup.snapshot().job?.phase==='running'||helperJob.status()?.phase==='running'||windowsSetup.snapshot().job?.phase==='running')throw Error('Finish the current preparation step before quitting.');
         await releasePcCore({recover:req.url.endsWith('/recover')});result={released:true};
-        if(req.url.endsWith('/quit'))setTimeout(()=>process.send?.({type:'milan-quit'}),100);
+        if(req.url.endsWith('/quit'))setTimeout(()=>process.send?.({type:'tce-quit'}),100);
       }
+    }
+    else if(req.url==='/api/automatic-setup'&&req.method==='GET')result=await automaticSetup.status();
+    else if(req.url==='/api/automatic-setup/start'&&req.method==='POST'){
+      if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
+      if(helperJob.status()?.phase==='running')throw Error('App helper preparation is already running.');
+      result=automaticSetup.start(await body(req));
     }
     else if(req.url==='/api/windows-setup'&&req.method==='GET')result=await windowsSetup.check();
     else if(req.url==='/api/windows-setup/check'&&req.method==='POST'){
@@ -152,7 +182,7 @@ const server=http.createServer(async(req,res)=>{
     }
     else if(req.url==='/api/windows-setup/action'&&req.method==='POST'){
       if(req.headers.origin!=='http://127.0.0.1:5180'||!req.headers['content-type']?.startsWith('application/json')){res.writeHead(403).end();return;}
-      if(helperJob.status()?.phase==='running')throw Error('Finish app-helper preparation first.');
+      if(automaticSetup.snapshot().job?.phase==='running'||helperJob.status()?.phase==='running')throw Error('Automatic setup or helper preparation is already running.');
       result=windowsSetup.start(await body(req));
     }
     else if(req.url==='/api/control-center'&&req.method==='GET'){
@@ -178,7 +208,7 @@ const server=http.createServer(async(req,res)=>{
       if(!req.headers['content-type']?.startsWith('application/json'))throw Error('JSON vereist.');
       const value=(await body(req)).target;
       if(value==='android'&&coreTarget()==='windows'){await windowsCore('/stop',{});}
-      selectCoreTarget(value);setFeedbackSource(value==='windows'?'android':'windows');result={target:value};
+      selectCoreTarget(value);setFeedbackSource('android');result={target:value};
     }else if(req.url==='/api/windows-core/start'&&req.method==='POST'){
       if(!req.headers['content-type']?.startsWith('application/json'))throw Error('JSON vereist.');
       const request=await body(req);
@@ -186,7 +216,7 @@ const server=http.createServer(async(req,res)=>{
       try{const record=JSON.parse(readFileSync(new URL('./radio-ownership.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));if((record.attachedByUs||record.attemptedByUs)&&!record.released&&(record.sessionId!==process.env.MILAN_SESSION_ID||!record.attachedByUs))throw Error('Return the interrupted Bluetooth transfer first.');}catch(error){if(error.code!=='ENOENT')throw error;}
       displayConfirmed=true;
       if(coreTarget()!=='windows')throw Error('Kies eerst Milan op tablet.');
-      if(helperJob.status()?.phase==='running'||windowsSetup.snapshot().job?.phase==='running')throw Error('Finish preparation before starting Bluetooth.');
+      if(automaticSetup.snapshot().job?.phase==='running'||helperJob.status()?.phase==='running'||windowsSetup.snapshot().job?.phase==='running')throw Error('Finish preparation before starting Bluetooth.');
       let old=null;try{old=await androidPhone('/status');}catch{}
       if(old?.running)throw Error('Druk eerst op Stop in de oude Android-helper.');
       result=await startPcCore();
@@ -285,12 +315,12 @@ const server=http.createServer(async(req,res)=>{
   }catch(e){res.writeHead(400,{'Content-Type':'application/json; charset=utf-8'});res.end(JSON.stringify({error:e.name==='TimeoutError'?'Android-helper niet bereikbaar. Controleer dezelfde wifi en houd de helper open.':e.message}));}
 });
 server.listen(5180,'127.0.0.1',()=>console.log('Core-bediening: http://127.0.0.1:5180'));
-const syncWorker=createPollingWorker({run:()=>displayConfirmed?boardStatus():Promise.resolve({paused:true}),interval:50,onState:state=>writeFileSync(new URL('./sync-worker-status.json',import.meta.url),JSON.stringify({...state,pid:process.pid,updatedAt:new Date().toISOString(),browserRequired:false,codexRequired:false},null,2))});
+const syncWorker=createPollingWorker({run:async()=>{if(displayConfirmed&&await gameActive())return boardStatus();await new Promise(resolve=>setTimeout(resolve,500));return {paused:true};},interval:50,onState:state=>writeFileSync(new URL('./sync-worker-status.json',import.meta.url),JSON.stringify({...state,pid:process.pid,updatedAt:new Date().toISOString(),browserRequired:false,codexRequired:false},null,2))});
 server.on('listening',()=>syncWorker.start());
 server.on('close',()=>syncWorker.stop());
 async function close(){await syncWorker.stop();server.close();}
-process.on('message',async message=>{if(message?.type==='milan-shutdown'){
-  try{await releasePcCore();await close();process.send?.({type:'milan-stopped'});process.exitCode=0;}
-  catch(error){process.send?.({type:'milan-stop-failed',message:error.message});}
+process.on('message',async message=>{if(message?.type==='tce-shutdown'){
+  try{await releasePcCore();await close();process.send?.({type:'tce-stopped'});process.exitCode=0;}
+  catch(error){process.send?.({type:'tce-stop-failed',message:error.message});}
 }});
 for(const signal of ['SIGINT','SIGTERM'])process.once(signal,async()=>{try{await releasePcCore();}catch(error){console.error('Bluetooth cleanup:',error.message);}await close();});

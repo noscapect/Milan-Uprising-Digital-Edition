@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {createPositiveObservations} from '../src/adapters/positive-observations.js';import {withPendingPlacement} from '../src/presentation/artwork.js';
+import test from 'node:test';import assert from 'node:assert/strict';import {createPositiveObservations} from '../src/adapters/positive-observations.js';import {withPendingPlacement} from '../src/games/milan-uprising/presentation/artwork.js';
 test('stabiele positieve onderdelen wachten niet op andere veranderende onderdelen',()=>{
  const reads=createPositiveObservations({key:x=>x.componentId+':'+x.zoneId}),a={componentId:'rosa',zoneId:'portello'},b={componentId:'aristide',zoneId:'qt8'};
  assert.deepEqual(reads.observe([a,b],1,100),[]);assert.deepEqual(reads.observe([a,{...b,zoneId:'city-life'}],1,200),[{...a,pairSince:100}]);assert.deepEqual(reads.observe([a],1,200),[]);assert.deepEqual(reads.observe([a],2,300),[]);assert.deepEqual(reads.observe([a],2,30000),[]);assert.deepEqual(reads.observe([],2,30100),[]);assert.deepEqual(reads.observe([a],2,30200),[]);

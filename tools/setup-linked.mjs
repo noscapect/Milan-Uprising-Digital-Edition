@@ -3,13 +3,14 @@ import {promisify} from 'node:util';
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {prepareLinkedRuntime} from './linked-runtime.mjs';
+import {prepareTextReader} from './prepare-text-reader.mjs';
 const run=promisify(execFile);
 if(process.platform!=='win32')throw Error('The linked-table setup currently supports Windows 10/11 only.');
 const options=Object.fromEntries(process.argv.slice(2).map(arg=>{const split=arg.indexOf('=');if(!arg.startsWith('--')||split<0)throw Error('Use --usb=VID:PID --distro=Debian [--adb=path]');return [arg.slice(2,split),arg.slice(split+1)];}));
-const root=await prepareLinkedRuntime();
+const root=await prepareLinkedRuntime(options.game);
 let settings={};try{settings=JSON.parse(await readFile(new URL('machine.json',root),'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
 const usbAdapter=options.usb||settings.usbAdapter,distribution=options.distro||settings.wslDistribution;
-if(Object.keys(options).some(key=>!['usb','distro','adb'].includes(key))||!/^[0-9a-f]{4}:[0-9a-f]{4}$/i.test(usbAdapter||'')||!distribution)throw Error('Choose a Bluetooth adapter in Control Center first, or specify --usb=VID:PID --distro=Debian');
+if(Object.keys(options).some(key=>!['usb','distro','adb','game'].includes(key))||!/^[0-9a-f]{4}:[0-9a-f]{4}$/i.test(usbAdapter||'')||!distribution)throw Error('Choose a Bluetooth adapter in Control Center first, or specify --usb=VID:PID --distro=Debian');
 async function command(executable,args){console.log(executable,...args);const {stdout,stderr}=await run(executable,args,{windowsHide:true,timeout:300000,maxBuffer:4*1024*1024});if(stdout)console.log(stdout.trim());if(stderr)console.error(stderr.trim());return stdout.trim();}
 const adb=options.adb||settings.adb||'adb';
 await command(adb,['version']);
@@ -18,7 +19,9 @@ await command('dotnet',['publish',fileURLToPath(new URL('app-observer/AppObserve
 await command('py',['-3','-m','venv',fileURLToPath(new URL('vision-env/',root))]);
 const visionPython=fileURLToPath(new URL('vision-env/Scripts/python.exe',root));
 await command(visionPython,['-m','pip','install','opencv-python-headless==5.0.0.93','numpy==2.5.4']);
-const wsl=['-d',distribution,'--exec'];
+const pythonBase=await command(visionPython,['-c','import sys; print(sys.base_prefix)']);
+await prepareTextReader({directory:fileURLToPath(new URL('app-observer/build/',root)),python:pythonBase,numpyLibraries:fileURLToPath(new URL('vision-env/Lib/site-packages/numpy.libs/',root))});
+const wsl=['-d',distribution,...(settings.linuxUser?['-u',settings.linuxUser]:[]),'--exec'];
 const coreEnvironment=await command('wsl.exe',[...wsl,'python3','-c',"from pathlib import Path; print(Path.home()/'.local/share/milan-core/venv')"]);
 if(!coreEnvironment.startsWith('/')||coreEnvironment.includes('\n'))throw Error('Invalid WSL environment path.');
 await command('wsl.exe',[...wsl,'python3','-m','venv',coreEnvironment]);

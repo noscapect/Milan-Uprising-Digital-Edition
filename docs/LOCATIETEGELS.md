@@ -45,11 +45,25 @@ For Office, Gym, Library, and Gallery, the second side represents the purchased 
 The earlier approach incorrectly treated the fixed room layout and effect text as information that needed to be observed in Milan. The experimental Haven screenshot worker is no longer scheduled and no longer updates room state in the private adapter. No ten-room overview is required. Legacy observation helpers remain compatible with saved side data, but the normal board obtains its room identity and effect text from the fixed catalog.
 
 
+## Saved-game setup synchronization — 30 October 2026
+
+### Preserve tiles through the next setup step
+
+The automatic **Components setup** reset now clears component positions without clearing location tiles or Haven-room sides. Previously that transition called the same full reset as the user's explicit **Clear table**, erasing tiles copied by the preceding Board tiles step. The original tile-reader/browser checks did not exercise that transition. A new isolated test runs the real adapter through both steps, repeats the component observation, verifies that tiles and room upgrades remain identical, and separately verifies that an explicit user clear still clears them.
+
+The running older adapter is covered by a temporary compatibility worker: it restores only the exact automatic component-reset backup when the tile revision matches that reset and the tile store is empty. It does not restore an intentional user clear or overwrite later tile edits. The current board's 63 placed pieces were preserved while its tiles were restored; local and LAN browser checks again confirmed QT8 Haven and Portello Underground after setup had advanced to companion placement. Subsequent ordinary adapter launches load the corrected reset directly.
+
+The adapter now reads **Scenario setup → Board tiles**, including the instruction to flip Location Bonus and Special Location tiles. That screen was previously recognized without applying any tile state. A registered left-hand map reader identifies visible gold tile symbols and matches printed map texture for supported back-side records. The enlarged example on the right is excluded. Two matching observations in the same input generation are required before applying a side. Missing or covered icons alone do not produce a back-side command.
+
+The fixed bonus type of all thirty districts is recorded in `data/games/milan-uprising/location-bonuses.json`, checked against the unmodified Windows Milan 1.0.9 location definitions. This catalog supplies type, never unlocked visibility. In the recorded resumed setup, QT8 shows Haven and Portello Underground. Twenty-nine locations met the automatic evidence checks; Washington's back side was visually checked and recorded through the existing correction API because its texture match remained below the threshold. Existing Haven-room upgrades and unobserved tile sides are preserved. Other Special Location illustrations beyond the visible Haven are not yet automatically classified.
+
+Visible city tiles are represented on the tabletop by symbols only. Explanation text stays in **Table pieces → Location**. Both the local and shared board passed browser checks for QT8, Portello, no city-tile text overlays, and opening their details. An isolated replay of the normal adapter confirmed no application after the first image and application after the second. The public suite passed all 143 tests with Node 26. No official-app input, sensor replay or Core restart was used. A temporary setup worker supplies the same guarded updates to the running adapter; it exits when that adapter ends. Subsequent ordinary launches load the integrated reader.
+
 ## City location tiles
 
 Select a city district and open **Location → Board tiles** to see the tile symbol, meaning, and usage. **Flip tile** switches between its back and symbol sides. Use **Copy or correct a tile** to record a tile shown in Milan. This works on the schematic map and the shared linked board.
 
-The [official game manual, page 7](https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf#page=7) describes Haven, Herd, Income, Media Office, Possible Haven, Secret Bar, and Underground bonuses. A complete verified mapping of both physical tile sides to every district is not built in. Unknown tiles remain unconfigured or unidentified. Selecting a bonus does not perform its associated game action; Milan handles that action.
+The [official game manual, page 7](https://teburu.com/downloads/VtM/VTM_MU_GameManual.pdf#page=7) describes Haven, Herd, Income, Media Office, Possible Haven, Secret Bar, and Underground bonuses. Fixed district bonus types are now cataloged; the current side still requires observed evidence or a manual record. The Special Location catalog and recognition remain incomplete. Unknown tiles remain unconfigured or unidentified. Selecting a bonus does not perform its associated game action; Milan handles that action.
 
 The observed Android **Scenario setup → Board tiles** screen showed a house symbol in QT8. The board labels this **Haven** and explains its purpose. The former labels “Haven 11” and “Haven 12” were not supported as distinct rule terms. Their legacy storage values remain readable, but the UI no longer presents them as different Haven types or room numbers. Mapping every physical tile side remains open.
 

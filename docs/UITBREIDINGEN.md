@@ -28,7 +28,7 @@ Selecteren of filteren op onze tafel activeert geen uitbreidingsverhaal in de of
 `expansions.json` bevat zes afzonderlijke, bronverwezen voorraden. `withExpansions` stelt daaruit een eigen Milan-profiel samen; de generieke engine heeft geen uitbreidingsafhankelijkheid. De opgenomen combinatie in `city-expansions.json` is reproduceerbaar met:
 
 ```powershell
-node tools/build-expansion-profile.mjs
+node tools/milan-build-expansion-profile.mjs
 ```
 
 Iedere combinatie heeft een eigen release-ID. De importcontrole blijft de exacte profielversie vereisen. Er is geen stilzwijgende verruiming van de generieke save-import.

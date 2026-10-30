@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "bonuses": {
+    "qt8": "possibleHaven", "portello": "underground", "monumentale": "herd", "isola": "secretBar", "centrale": "underground", "nolo": "possibleHaven",
+    "san-siro": "income", "city-life": "media", "sempione": "income", "garibaldi": "media", "buenos-aires": "secretBar", "citta-studi": "media",
+    "bande-nere": "secretBar", "washington": "herd", "cadorna": "media", "duomo": "possibleHaven", "cinque-giornate": "income", "argonne": "secretBar",
+    "giambellino": "income", "solari": "underground", "navigli": "secretBar", "bocconi": "possibleHaven", "porta-romana": "underground", "calvairate": "herd",
+    "ronchetto": "herd", "barona": "possibleHaven", "sant-ambrogio": "media", "ripamonti": "underground", "vigentino": "herd", "corvetto": "income"
+  }
+}

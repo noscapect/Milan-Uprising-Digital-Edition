@@ -1,5 +1,5 @@
 using System.Text.Json;
-namespace Milan.PrivateCore;
+namespace Tce.Core;
 // Our emulator compatibility state only. No firmware image is executed or modified.
 public sealed class SimulatedFirmware {
   public record Revision(byte Major,byte Minor){public override string ToString()=>$"{Major}.{Minor}.0";}

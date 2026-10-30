@@ -5,9 +5,20 @@ $destination=[System.IO.Path]::GetFullPath($Destination)
 if(-not (Test-Path -LiteralPath (Join-Path $source 'release.json'))){throw 'Run this installer from an extracted TCE release.'}
 $manifest=Get-Content -LiteralPath (Join-Path $source 'release-files.json') -Raw | ConvertFrom-Json
 if($manifest.schemaVersion -ne 1){throw 'Unsupported release manifest.'}
+$optionalArchives=@()
+$addonCatalog=Join-Path $source 'resources/addons.json'
+if(Test-Path -LiteralPath $addonCatalog){
+ $definitions=Get-Content -LiteralPath $addonCatalog -Raw|ConvertFrom-Json
+ $optionalArchives=@(foreach($gameEntry in $definitions.games){
+  $game=$gameEntry
+  if($gameEntry.module){if($gameEntry.id -notmatch '^[a-z0-9]+(-[a-z0-9]+)*$' -or $gameEntry.module -cne ('games/'+$gameEntry.id+'/module.json')){throw 'Unsafe game module path.'};$game=Get-Content -LiteralPath (Join-Path $source $gameEntry.module) -Raw|ConvertFrom-Json}
+  if($game.archive -is [string] -and $game.archive.EndsWith('.json.gz')){'resources/'+$game.archive}
+ })
+}
 foreach($file in $manifest.files.PSObject.Properties){
  if($file.Name -match '(^[\\/]|(^|[\\/])\.\.([\\/]|$)|[:\x00-\x1F]|^(private|work|\.git)[\\/])'){throw 'Unsafe release path.'}
  $inputFile=Join-Path $source $file.Name
+ if($file.Name -in $optionalArchives -and -not (Test-Path -LiteralPath $inputFile)){continue}
  $stream=[System.IO.File]::OpenRead($inputFile);$hasher=[System.Security.Cryptography.SHA256]::Create()
  try{$digest=[System.BitConverter]::ToString($hasher.ComputeHash($stream)).Replace('-','')}finally{$stream.Dispose();$hasher.Dispose()}
  if($digest -ne $file.Value){throw ('Release file is damaged: '+$file.Name)}
@@ -19,7 +30,7 @@ if($source -ne $destination){
   }
   $null=New-Item -ItemType Directory -Path $destination -Force
   # Preserve private settings and campaigns when upgrading; never copy private files.
-  foreach($file in $manifest.files.PSObject.Properties){$target=Join-Path $destination $file.Name;$null=New-Item -ItemType Directory -Path ([System.IO.Path]::GetDirectoryName($target)) -Force;Copy-Item -LiteralPath (Join-Path $source $file.Name) -Destination $target -Force}
+  foreach($file in $manifest.files.PSObject.Properties){$inputFile=Join-Path $source $file.Name;if($file.Name -in $optionalArchives -and -not (Test-Path -LiteralPath $inputFile)){continue};$target=Join-Path $destination $file.Name;$null=New-Item -ItemType Directory -Path ([System.IO.Path]::GetDirectoryName($target)) -Force;Copy-Item -LiteralPath $inputFile -Destination $target -Force}
   Copy-Item -LiteralPath (Join-Path $source 'release-files.json') -Destination $destination -Force
 }
 if(-not $NoShortcuts){$shell=New-Object -ComObject WScript.Shell

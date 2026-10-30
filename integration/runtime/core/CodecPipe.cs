@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Security.Cryptography;
-namespace Milan.PrivateCore;
+namespace Tce.Core;
 static class CodecPipe {
   public static void Run(){
     var directory=Path.GetFullPath(Environment.GetEnvironmentVariable("MILAN_CORE_STATE_DIRECTORY")??Path.Combine(AppContext.BaseDirectory,"../state"));

@@ -2,6 +2,10 @@ name: Build reviewed TCE Windows release
 on:
   workflow_dispatch:
     inputs:
+      include_artwork:
+        description: Include the supported game artwork archives
+        type: boolean
+        default: true
       publish:
         description: Publish a draft release after review (leave false for a build artifact only)
         type: boolean
@@ -25,7 +29,10 @@ jobs:
           dotnet-version: 8.0.x
       - run: node --test
       - name: Build self-contained review package
-        run: node tools/build-release.mjs
+        env:
+          TCE_INCLUDE_ARTWORK: ${{ inputs.include_artwork }}
+        run: |
+          if ($env:TCE_INCLUDE_ARTWORK -eq 'false') { node tools/build-release.mjs --without-artwork } else { node tools/build-release.mjs }
       - name: Smoke-test package without system runtimes
         run: node tools/smoke-release.mjs
       - uses: actions/upload-artifact@v4

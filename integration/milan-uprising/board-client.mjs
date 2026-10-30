@@ -1,4 +1,4 @@
-import {withPendingPlacement} from '/src/presentation/artwork.js';
+import {withPendingPlacement} from '/src/games/milan-uprising/presentation/artwork.js';
 import {waitingMiniatures,unplacedMiniatures,isScanScene} from '/src/games/milan-uprising/scan-options.js';
 import {prosperoAccessory,ringPresentation} from '/src/games/milan-uprising/prospero.js';
 import {milanDieFace} from '/src/games/milan-uprising/dice-faces.js';
@@ -7,7 +7,7 @@ import {mountPlayLayout} from '/src/ui/play-layout.js';
 import {createSingleFlight} from '/src/adapters/single-flight.js';
 import {createTabletop} from '/src/application/tabletop.js';
 import {milanModule} from '/src/games/milan-uprising/module.js';
-import {mountTabletop} from '/src/ui/controller.js';
+import {mountTabletop} from '/src/games/milan-uprising/ui/controller.js';
 import {downloadSession} from '/src/adapters/download.js';
 import {decorateLocationTiles} from '/src/games/milan-uprising/location-tiles.js';
 import {isCompanion,validateCompanionPlacement} from '/src/games/milan-uprising/companion-placement.js';
@@ -19,7 +19,7 @@ async function api(path,body){
 try {
   const [profile,artwork,initial,tileResult]=await Promise.all([
     fetch('/data/games/milan-uprising/city-expansions.json').then(r=>r.json()),
-    fetch('/local-artwork/catalog.json').then(r=>r.json()),
+    fetch('/games/milan-uprising/artwork/catalog.json').then(r=>r.json()),
     api('/api/table-session'),api('/api/board-tiles')
   ]);
   const local=createTabletop({profile,module:milanModule,random:()=>{throw Error('Roll the dice in Milan.');}});

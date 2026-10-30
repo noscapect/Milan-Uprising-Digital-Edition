@@ -9,12 +9,19 @@ using Windows.Media.Ocr;
 using Windows.Storage.Streams;
 
 if(args.Length==1&&args[0]=="--readiness"){
-  bool available=false;try{available=OcrEngine.TryCreateFromLanguage(new Language("en-US"))!=null;}catch{}
-  Console.WriteLine(JsonSerializer.Serialize(new{englishOcrAvailable=available}));return;
+  try {
+    using var reader=new TextReader();
+    using var sample=new Bitmap(700,90);using(var graphics=Graphics.FromImage(sample)){graphics.Clear(Color.White);using var font=new Font("Arial",26);graphics.DrawString("NIGHT 2 DAY",font,Brushes.Black,10,15);}
+    using var pixels=BitmapInput.Software(sample);var read=await reader.RecognizeAsync(pixels);
+    bool available=read.Text.Contains("NIGHT")&&read.Text.Contains("DAY")&&read.Text.Contains("2");
+    Console.WriteLine(JsonSerializer.Serialize(new{englishOcrAvailable=available,textRecognitionAvailable=available,backend=reader.Backend}));
+  }catch(Exception error){Console.WriteLine(JsonSerializer.Serialize(new{englishOcrAvailable=false,textRecognitionAvailable=false,error=error.Message}));}
+  return;
 }
 Native.SetProcessDpiAwarenessContext(new IntPtr(-4));
 Native.SetThreadDpiAwarenessContext(new IntPtr(-4));
-var process=Process.GetProcessesByName("VTMTEBURU").FirstOrDefault(p=>p.MainWindowHandle!=IntPtr.Zero);
+var targetProcess=Environment.GetEnvironmentVariable("TCE_GAME_PROCESS");
+var process=string.IsNullOrEmpty(targetProcess)?null:Process.GetProcessesByName(targetProcess).FirstOrDefault(p=>p.MainWindowHandle!=IntPtr.Zero);
 bool focusRead=args.Length==3&&args[2]=="--focus";
 bool rawImage=(args.Length==2||focusRead)&&args[0]=="--raw";
 bool external=(args.Length==2||focusRead)&&(args[0]=="--image"||rawImage);
@@ -32,8 +39,7 @@ using(var graphics=Graphics.FromImage(bitmap)){
     if(!captured)throw new Exception("App window capture failed");}
 }
 using var software=BitmapInput.Software(bitmap);
-var engine=OcrEngine.TryCreateFromLanguage(new Language("en-US"))??OcrEngine.TryCreateFromUserProfileLanguages();
-if(engine==null)throw new Exception("No Windows OCR language available");
+using var engine=new TextReader();
 // During a pending move, read only the location header and active-character footer.
 // Fall back to the complete observer when this is not an ordinary location screen.
 if(focusRead&&external&&width==2560&&height==1600){

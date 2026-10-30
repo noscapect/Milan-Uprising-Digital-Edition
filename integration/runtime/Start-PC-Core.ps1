@@ -3,6 +3,8 @@ $ErrorActionPreference='Stop'
 $settings=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'machine.json') -Raw | ConvertFrom-Json
 if($settings.usbAdapter -notmatch '^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$'){throw 'Run the linked setup with your USB adapter VID:PID first.'}
 if(-not $settings.wslDistribution -or -not $settings.corePython){throw 'Run the linked setup first.'}
+$linuxUserArgs=@()
+if($settings.linuxUser){if($settings.linuxUser -notmatch '^[a-z_][a-z0-9_-]{0,31}$'){throw 'Invalid Linux helper account.'};$linuxUserArgs=@('-u',$settings.linuxUser)}
 if(Get-NetTCPConnection -LocalPort 5181 -State Listen -ErrorAction SilentlyContinue){return}
 $usbCommand=Get-Command usbipd.exe -ErrorAction SilentlyContinue
 if($usbCommand){$usbip=$usbCommand.Source}
@@ -14,6 +16,8 @@ if($settings.usbBusId){$selectedBus=[regex]::Escape($settings.usbBusId);$rows=@(
 if($rows.Count -ne 1 -or $rows[0] -notmatch '^\s*(\d+-\d+)\s'){throw 'The selected USB adapter was not found uniquely.'}
 $busId=$Matches[1]
 if($rows[0] -match '\bNot shared\s*$'){throw 'Share this adapter explicitly with usbipd bind --busid before starting. This requires administrator rights.'}
+. (Join-Path $PSScriptRoot 'wsl-session.ps1')
+Invoke-WithWslSession -Distribution $settings.wslDistribution -LinuxUser $settings.linuxUser -Action {
 if($rows[0] -notmatch '\bAttached\s*$'){
   if($rows[0] -notmatch '\bShared\s*$'){throw 'Unexpected USB sharing state.'}
   $record=@{sessionId=$env:MILAN_SESSION_ID;busId=$busId;vidPid=$settings.usbAdapter;attemptedByUs=$true;attachedByUs=$false;released=$false}
@@ -24,20 +28,21 @@ if($rows[0] -notmatch '\bAttached\s*$'){
   $record.attachedByUs=$true
   $record|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $PSScriptRoot 'radio-ownership.json') -Encoding UTF8
 }
-$linuxScript=(& wsl.exe -d $settings.wslDistribution --exec wslpath -u (Join-Path $PSScriptRoot 'bumble-core.py')).Trim()
+$linuxScript=(& wsl.exe -d $settings.wslDistribution @linuxUserArgs --exec wslpath -u (Join-Path $PSScriptRoot 'bumble-core.py')).Trim()
 if($LASTEXITCODE){throw 'Could not resolve the runtime path in WSL.'}
-$linuxAccess=(& wsl.exe -d $settings.wslDistribution --exec wslpath -u (Join-Path $PSScriptRoot 'prepare-usb-access.py')).Trim()
-$linuxUser=(& wsl.exe -d $settings.wslDistribution --exec id -u).Trim()
+$linuxAccess=(& wsl.exe -d $settings.wslDistribution @linuxUserArgs --exec wslpath -u (Join-Path $PSScriptRoot 'prepare-usb-access.py')).Trim()
+$linuxUser=(& wsl.exe -d $settings.wslDistribution @linuxUserArgs --exec id -u).Trim()
 if($LASTEXITCODE -or $linuxUser -notmatch '^\d+$'){throw 'Could not identify your Linux user.'}
 & wsl.exe -d $settings.wslDistribution -u root --exec python3 $linuxAccess $settings.usbAdapter $linuxUser
 if($LASTEXITCODE){throw 'Could not grant your Linux helper access to the selected radio. No ambiguous USB devices were changed.'}
 $logs=Join-Path $PSScriptRoot 'logs'
 $null=New-Item -ItemType Directory -Path $logs -Force
 $stamp=Get-Date -Format 'yyyyMMdd-HHmmss-fff'
-$child=Start-Process -FilePath wsl.exe -ArgumentList @('-d',('"'+$settings.wslDistribution+'"'),'--exec',('"'+$settings.corePython+'"'),('"'+$linuxScript+'"'),'--serve',('usb:'+$settings.usbAdapter)) -WindowStyle Hidden -RedirectStandardOutput (Join-Path $logs "$stamp.out.log") -RedirectStandardError (Join-Path $logs "$stamp.err.log") -PassThru
+$child=Start-Process -FilePath wsl.exe -ArgumentList (@('-d',(ConvertTo-WslArgument $settings.wslDistribution))+$linuxUserArgs+@('--exec',(ConvertTo-WslArgument $settings.corePython),(ConvertTo-WslArgument $linuxScript),'--serve',('usb:'+$settings.usbAdapter))) -WindowStyle Hidden -RedirectStandardOutput (Join-Path $logs "$stamp.out.log") -RedirectStandardError (Join-Path $logs "$stamp.err.log") -PassThru
 for($attempt=0;$attempt -lt 100;$attempt++){
   if(Get-NetTCPConnection -LocalPort 5181 -State Listen -ErrorAction SilentlyContinue){return}
   if($child.HasExited){throw 'Core service stopped. Check private/linked/logs.'}
   Start-Sleep -Milliseconds 250
 }
 throw 'Core service did not start in time. Check private/linked/logs.'
+}

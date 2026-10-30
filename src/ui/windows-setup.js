@@ -6,7 +6,7 @@ const descriptions={
   'install-linux':'Download and install Debian for your Windows account. Existing Linux distributions are kept. This does not start Bluetooth.',
   'open-linux':'Open Debian so you can complete any Linux username and password prompts. Close the Linux window when finished and choose Check again.',
   'prepare-adapter':'Allow the selected Bluetooth adapter to be shared with WSL and save the selection for this PC. Windows will ask for administrator permission. Only this adapter is prepared. Sharing persists after restart; the adapter is not attached to WSL until you choose Start Core.',
-  'select-adapter':'Save this already shared Bluetooth adapter for Milan on this PC. This does not start Core, attach the radio, or change its current connection.'
+  'select-adapter':'Save this already shared Bluetooth adapter for the game on this PC. This does not start Core, attach the radio, or change its current connection.'
 };
 async function api(path,body){
  const response=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});

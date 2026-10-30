@@ -1,4 +1,4 @@
-import { buildCampaignArrangement } from '../games/milan-uprising/campaign-setup.js';
+import { buildCampaignArrangement } from '../campaign-setup.js';
 
 export function mountCampaignSetup(profile, tabletop, onApplied) {
   const container = document.getElementById('campaign-setup');

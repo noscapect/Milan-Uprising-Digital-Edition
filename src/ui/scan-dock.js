@@ -1,4 +1,4 @@
-import {artworkImage} from '../presentation/artwork.js';
+import {artworkImage} from '../games/milan-uprising/presentation/artwork.js';
 
 // A peripheral contact, deliberately separate from persistent board zones.
 export function mountScanDock(board,{scan,canScan,selected,onSelect,onHint}){
@@ -26,7 +26,7 @@ export function mountScanDock(board,{scan,canScan,selected,onSelect,onHint}){
   tray.append(trayHeading,search,waiting);dock.append(pad,hardwareMark,status);station.append(tray,dock);area.append(station,board);
   function filterWaiting(){const term=search.value.trim().toLocaleLowerCase();let matches=0;for(const card of waiting.children){card.hidden=!!term&&!card.dataset.search.includes(term);if(!card.hidden)matches++;}trayCount.textContent=term?`${matches}/${waiting.childElementCount}`:String(waiting.childElementCount);}
   search.oninput=filterWaiting;
-  const send=()=>{const id=selected(),permission=canScan(id);if(permission!==true){onHint(typeof permission==='string'?permission:'Milan is not requesting a miniature scan.');return;}Promise.resolve(scan(id)).catch(error=>onHint(error.message));};
+  const send=()=>{const id=selected(),permission=canScan(id);if(permission!==true){onHint(typeof permission==='string'?permission:'the game is not requesting a miniature scan.');return;}Promise.resolve(scan(id)).catch(error=>onHint(error.message));};
   pad.onclick=event=>{const miniature=event.target.closest('[data-component]');if(miniature){onSelect(miniature.dataset.component);return;}send();};
   pad.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();send();}};
   let waitingKey=null,previewId=null;
@@ -55,7 +55,7 @@ export function mountScanDock(board,{scan,canScan,selected,onSelect,onHint}){
       for(const element of board.querySelectorAll('[data-component]'))if(element.dataset.component===active.id)element.classList.add('at-scan-reader');
     }
     dock.dataset.stage=state.stage||'idle';dock.dataset.readerReady=String(canScan(selected())===true);
-    status.textContent=state.message||'Waiting for Milan';hint.textContent=active?'Drag to Milan’s indicated location':'Drop miniature here';
+    status.textContent=state.message||'Waiting for the game';hint.textContent=active?'Drag to the game’s indicated location':'Drop miniature here';
     pad.setAttribute('aria-disabled',String(canScan(selected())!==true));
   }
   return {element:station,fit({width,height}){const compact=width<650;const coreWidth=compact?48:80;const minimum=compact?96:128;const spare=width-height*2048/1295-coreWidth-24;station.style.setProperty('--miniature-tray-width',`${Math.max(minimum,Math.min(compact?96:260,spare))}px`);},target:{id:'core-rfid-reader',element:pad,label:'Core RFID reader',canDrop:canScan},update,dispose(){for(const e of board.querySelectorAll('.at-scan-reader'))e.classList.remove('at-scan-reader');area.before(board);area.remove();}};

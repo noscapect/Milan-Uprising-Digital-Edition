@@ -1,5 +1,5 @@
 // Interoperability implementation; publication authorized by the project owner.
-namespace Milan.PrivateCore;
+namespace Tce.Core;
 public sealed class CoreCodec(byte[] identity,SimulatedFirmware? firmware=null) {
   public SimulatedFirmware Firmware {get;}=firmware??new();
   public const string Service="82047f67-f217-45dc-b881-19f93c12d7ae",Command="0000ccdd-333a-666b-2018-01c2210776ab",Data="0000ddaa-333a-666b-2018-02c2210776ab";

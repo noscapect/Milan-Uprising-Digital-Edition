@@ -1,15 +1,16 @@
 const $=id=>document.getElementById(id);
-let current=null,reading=false,disposed=false;
+let current=null,reading=false,disposed=false,checkingTablet=false,lastTabletCheck=0,automaticRunning=false;
+document.addEventListener('tce:setup-running',event=>{automaticRunning=event.detail.running;if(current){if(event.detail.ready)current={...current,helpersReady:true,automatic:{phase:'completed'}};render();}});
 async function api(path,body){const response=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});const value=await response.json();if(!response.ok)throw Error(value.error||'Connection check failed.');return value;}
 function render(){
- const preparing=current?.preparation?.phase==='running';
- $('helper-status').textContent=current?.restartRequired?'An earlier helper is still running. Return the previous session’s Bluetooth adapter, quit this app and start it again to finish updating.':current?.preparation?.message||(current?.helpersReady?'App helpers are ready.':'Prepare the app helpers before connecting your tablet.');
+ const preparing=automaticRunning||current?.automatic?.phase==='running'||current?.preparation?.phase==='running';
+ $('helper-status').textContent=current?.restartRequired?'An earlier helper is still running. Return the previous session’s Bluetooth adapter, quit this app and start it again to finish updating.':preparing?'PC setup is preparing the connection tools…':current?.helpersReady?'Connection tools are ready.':current?.preparation?.message||'Use Set up automatically above to prepare this PC.';
  $('prepare-helpers').disabled=preparing;$('check-tablet').disabled=preparing||!current?.helpersReady;$('quit-app').disabled=preparing;
  $('recover-radio').hidden=!current?.recoveryNeeded;$('recover-radio').disabled=preparing;
  $('tablet-status').textContent=current?.tablet?.ready&&!$('confirm-display').checked?'USB is ready. Confirm that Milan is in English and landscape orientation below.':current?.tablet?.message||'Connect the tablet and choose Check tablet.';
  document.dispatchEvent(new CustomEvent('milan:helpers-ready',{detail:{ready:!!current?.helpersReady,preparing:preparing||current?.recoveryNeeded,tabletReady:!!current?.tablet?.ready&&$('confirm-display').checked}}));
 }
-async function refresh(){if(reading||disposed)return;reading=true;try{current=await api('/api/connection');render();}catch(error){$('connection-error').textContent=error.message;}finally{reading=false;}}
+async function refresh(){if(reading||disposed)return;reading=true;try{current=await api('/api/connection');render();if(current.helpersReady&&!current.recoveryNeeded&&!automaticRunning&&current.automatic?.phase!=='running'&&current.preparation?.phase!=='running'&&!checkingTablet&&Date.now()-lastTabletCheck>5000){checkingTablet=true;lastTabletCheck=Date.now();try{const result=await api('/api/connection/check',{});current={...current,tablet:result.tablet};render();}finally{checkingTablet=false;}}}catch(error){$('connection-error').textContent=error.message;}finally{reading=false;}}
 $('prepare-helpers').onclick=()=>{$('android-terms').checked=false;$('helpers-start').disabled=true;$('helpers-confirm').showModal();};
 $('android-terms').onchange=()=>{$('helpers-start').disabled=!$('android-terms').checked;};
 $('confirm-display').onchange=()=>render();

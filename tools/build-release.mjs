@@ -4,16 +4,20 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
+import {loadGameModules} from '../server/game-modules.mjs';
+import {prepareTextReader} from './prepare-text-reader.mjs';
 const run=promisify(execFile);
-export const releaseRoots=['src','server','data','legacy','integration/runtime','resources','docs'];
-export const releaseFiles=['index.html','control-center.html','server.mjs','package.json','Start-TCE.cmd','Start-Milan.cmd','README.md','tools/start-linked.mjs','tools/linked-runtime.mjs','tools/windows-prerequisites.ps1','tools/prepare-release-helpers.mjs','tools/linux-helper-setup.ps1','tools/install-release.ps1','tools/launch-release.ps1'];
-export async function copyReleaseSources(source,destination){
+export const releaseRoots=['src','server','data','legacy','integration/runtime','games','resources','docs'];
+export const releaseFiles=['index.html','server.mjs','package.json','Start-TCE.cmd','Start-Milan.cmd','README.md','tools/start-linked.mjs','tools/linked-game-launcher.mjs','tools/linked-runtime.mjs','tools/extract-unity-artwork.py','tools/windows-prerequisites.ps1','tools/prepare-release-helpers.mjs','tools/linux-helper-setup.ps1','tools/install-release.ps1','tools/launch-release.ps1'];
+export async function copyReleaseSources(source,destination,{includeArtwork=true}={}){
+ const games=await loadGameModules(source,JSON.parse(await readFile(join(source,'resources/addons.json'),'utf8')));
+ const resources=['README.md','addons.json',...(includeArtwork?games.map(game=>game.archive):[])];
  async function copy(path){
   await mkdir(join(destination,path),{recursive:true});
   for(const entry of await readdir(join(source,path),{withFileTypes:true})){
    if(['bin','obj','__pycache__','private','work','.git','sdk','state'].includes(entry.name.toLowerCase()))continue;
    const name=join(path,entry.name);
-   if(path==='resources'&&!['README.md','milan-artwork.json.gz'].includes(entry.name))continue;
+   if(name.replaceAll('\\','/').startsWith('resources/')){const resource=name.replaceAll('\\','/').slice('resources/'.length);if(!resources.some(allowed=>allowed===resource||allowed.startsWith(resource+'/')))continue;}
    if(name.replaceAll('\\','/').startsWith('integration/runtime/')&&extname(name)==='.json'&&!['character-save-mapping.json','location-mapping.json','map-hit-regions.json','miniature-scan-mapping.json'].includes(entry.name))continue;
    if(entry.isDirectory())await copy(name);
    else if(entry.isFile()&&['.js','.mjs','.json','.html','.css','.md','.cs','.csproj','.py','.ps1','.gz'].includes(extname(entry.name))){await copyFile(join(source,name),join(destination,name));}
@@ -22,14 +26,15 @@ export async function copyReleaseSources(source,destination){
   }
  }
  for(const root of releaseRoots)await copy(root);
+ for(const game of games)if(game.linked&&!releaseRoots.includes(game.linked.source))await copy(game.linked.source);
  for(const name of releaseFiles){await mkdir(dirname(join(destination,name)),{recursive:true});await copyFile(join(source,name),join(destination,name));}
 }
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
-export async function buildRelease({source=fileURLToPath(new URL('../',import.meta.url)),output}={}){
+export async function buildRelease({source=fileURLToPath(new URL('../',import.meta.url)),output,includeArtwork=true}={}){
  if(process.platform!=='win32'||process.arch!=='x64')throw Error('Build the Windows x64 release on Windows x64.');
  const version=JSON.parse(await readFile(join(source,'package.json'),'utf8')).version;
  const directory=output||join(source,'work',`release-${Date.now()}`),app=join(directory,'TCE');
- await mkdir(app,{recursive:true});await copyReleaseSources(source,app);
+ await mkdir(app,{recursive:true});await copyReleaseSources(source,app,{includeArtwork});
  const downloads=join(directory,'downloads');await mkdir(downloads,{recursive:true});
  async function download(url,name,expected){
   console.log('Downloading',name);const response=await fetch(url);if(!response.ok)throw Error(`Download failed (${response.status}): ${url}`);
@@ -56,12 +61,21 @@ export async function buildRelease({source=fileURLToPath(new URL('../',import.me
   materials.push({name,version,sha256:wheel.digests.sha256});
  }
  await run(join(python,'python.exe'),['-B','-c','import cv2,numpy; print(cv2.__version__,numpy.__version__)'],{windowsHide:true});
+ const artworkWheels=JSON.parse(await readFile(join(source,'tools/artwork-wheels.json'),'utf8'));
+ if(artworkWheels.schemaVersion!==1||artworkWheels.python!=='cp313'||artworkWheels.platform!=='win_amd64')throw Error('Invalid artwork dependency lock.');
+ for(const wheel of artworkWheels.wheels){if(!/-(cp313-cp313-win_amd64|cp3(?:[7-9]|1[0-3])-abi3-win_amd64|py3-none-any)\.whl$/.test(wheel.filename))throw Error('Incompatible artwork wheel: '+wheel.filename);await unzip(await download(wheel.url,wheel.filename,wheel.sha256),join(python,'Lib/site-packages'));materials.push({name:wheel.name,version:wheel.version,sha256:wheel.sha256});}
+ await run(join(python,'python.exe'),['-B','-c','import UnityPy; assert UnityPy.__version__ == "1.23.0"'],{windowsHide:true});
  for(const [project,destination] of [['core/CoreContract.csproj','windows-core/ring-telemetry-build'],['app-observer/AppObserver.csproj','app-observer/build']]){
-  console.log('Publishing',project);await run('dotnet',['publish',join(source,'integration/runtime',project),'-c','Release','-r','win-x64','--self-contained','true','-p:PublishSingleFile=true','-p:IncludeNativeLibrariesForSelfExtract=true','-p:DebugType=None','-o',join(app,'integration/runtime',destination)],{windowsHide:true,timeout:300000,maxBuffer:4*1024*1024});
+  console.log('Publishing',project);await run('dotnet',['publish',join(source,'integration/runtime',project),'-c','Release','-r','win-x64','--self-contained','true',`-p:PublishSingleFile=${!project.startsWith('app-observer/')}`,'-p:IncludeNativeLibrariesForSelfExtract=true','-p:DebugType=None','-o',join(app,'integration/runtime',destination)],{windowsHide:true,timeout:300000,maxBuffer:4*1024*1024});
  }
+ const textReader=join(app,'integration/runtime/app-observer/build');
+ await prepareTextReader({directory:textReader,python});
+ const {stdout:readerCheck}=await run(join(textReader,'AppObserver.exe'),['--readiness'],{windowsHide:true,timeout:30000,env:{...process.env,TCE_OCR_BACKEND:'portable'}});
+ if(JSON.parse(readerCheck).textRecognitionAvailable!==true)throw Error('The bundled OCR reader failed its recognition check.');
+ materials.push({name:'Tesseract',version:'5.2.0'},{name:'tessdata_fast/eng',sha256:'7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2'});
  await writeFile(join(app,'release.json'),JSON.stringify({format:'milan-windows-release',schemaVersion:1,version,architecture:'x64',node:nodeEntry[1],python:pythonVersion,dependencies:materials},null,2));
  await writeFile(join(app,'Install-TCE.cmd'),'@echo off\r\npowershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\\install-release.ps1"\r\nif errorlevel 1 pause\r\n');
- await writeFile(join(app,'THIRD-PARTY.txt'),'Node license: runtime/LICENSE\nPython license: runtime/python/LICENSE.txt\nNumPy/OpenCV licenses: runtime/python/Lib/site-packages/*.dist-info/\n.NET notices: https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT\nAndroid Platform Tools is downloaded separately after consent to Google terms.\nTeburu SDK is not included.\n');
+ await writeFile(join(app,'THIRD-PARTY.txt'),'Node license: runtime/LICENSE\nPython license: runtime/python/LICENSE.txt\nNumPy/OpenCV/UnityPy and artwork dependency licenses: runtime/python/Lib/site-packages/*.dist-info/\n.NET notices: https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT\nAndroid Platform Tools is downloaded separately after consent to Google terms.\nTeburu SDK is not included.\n');
  await mkdir(join(app,'notices'),{recursive:true});
  for(const [name,url] of [['dotnet-license.txt','https://raw.githubusercontent.com/dotnet/runtime/release/8.0/LICENSE.TXT'],['dotnet-third-party.txt','https://raw.githubusercontent.com/dotnet/runtime/release/8.0/THIRD-PARTY-NOTICES.TXT']]){
   const response=await fetch(url);if(!response.ok)throw Error('Runtime license download failed');await writeFile(join(app,'notices',name),await response.text());
@@ -74,4 +88,4 @@ export async function buildRelease({source=fileURLToPath(new URL('../',import.me
  await writeFile(zip+'.sha256',sha(await readFile(zip))+'  '+zip.split(/[\\/]/).at(-1)+'\n');
  console.log('Review package:',zip);return {app,zip};
 }
-if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))await buildRelease();
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))await buildRelease({includeArtwork:!process.argv.includes('--without-artwork')});

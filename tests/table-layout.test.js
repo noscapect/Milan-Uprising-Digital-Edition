@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createTabletop } from '../src/application/tabletop.js';
 import { milanModule } from '../src/games/milan-uprising/module.js';
-import { milanMap } from '../src/presentation/2d/milan-map.js';
+import { milanMap } from '../src/games/milan-uprising/presentation/milan-map.js';
 const profile = JSON.parse(await readFile(new URL('../data/games/milan-uprising/city.json', import.meta.url),'utf8'));
 
 test('opdrachten buiten de UI melden wijzigingen, herstel en import via dezelfde headless sessie', () => {

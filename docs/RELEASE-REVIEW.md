@@ -8,12 +8,13 @@ The ZIP is named `TCE-<version>-windows-x64.zip` and contains a folder `TCE`. Ex
 
 First start:
 
-1. **Prepare this PC** installs/checks WSL2, Debian and usbipd after explicit confirmation and Windows UAC where needed. Existing distributions are kept; restart Windows only when requested by Windows.
-2. Select the intended USB Bluetooth adapter. Preparing it shares that one device but does not attach/start it.
-3. **Prepare app helpers** asks for approval of Linux package installation and Google's Android tools terms. It first checks Windows English OCR without capturing a screen. If missing, a link opens Windows language settings so English text recognition can be added. It downloads Android Platform Tools directly from Google and prepares Python/venv/libusb and the isolated Bumble/aiohttp environment in the selected Debian. No Python/.NET development setup or build commands are needed. Internet access is required for this step. These are Android USB tools, not the Teburu SDK.
-4. Connect one Android tablet, allow USB debugging, open Milan and choose **Check tablet**. The wizard distinguishes no device, unauthorized/offline, multiple devices, another foreground app and unsupported physical display resolution. Supported resolution is 2560 × 1600; the user explicitly confirms English/landscape. This confirmation is not automated language/orientation verification.
-5. **Start Core** transfers the selected shared radio to WSL and grants the Linux helper access only if that VID:PID is unique within WSL. Another attached identical radio is refused. Connect using Milan's normal Core flow and open the tabletop.
-6. **Stop Core** stops the local helper and returns only the radio transfer recorded by this app session. **Quit app and return Bluetooth to Windows** also closes both web services. Closing a browser tab leaves the services running. Forced process termination, Windows shutdown and power loss cannot be guaranteed to run cleanup; on reopening, use the explicit previous-session recovery button. Devices not attached by this app are never automatically detached.
+In **Your games**, choose **Add game**, then **Connect Android** for Milan. Existing artwork installs immediately; otherwise the packaged extraction runtime downloads and verifies the reviewed official Windows ZIP and exports the required images automatically. Test both bundled and missing-archive paths, and multiple independently enabled modules. The Windows game is never installed or started. `--without-artwork` and the manual workflow’s **include_artwork** option control packaging. Changing that option does not authorize executing the workflow. See [game installation](GAME-ADDONS.md) and [module contract](GAME-MODULES.md).
+
+1. Accept the setup/package/Android terms once, then choose **Set up automatically**. TCE installs missing components, prepares one radio and the helpers, with progress in the same card. Existing components are reused; manual controls are under Advanced.
+2. Approve Windows administrator prompts. If requested, restart Windows, reopen TCE and choose **Continue setup**. No automatic reboot is performed. Adapter selection is asked only when ambiguous or the saved radio is missing.
+3. Connect one Android tablet, allow USB debugging, open Milan in English/landscape and confirm that display setting. Tablet checks run automatically. The calibrated resolution remains 2560 × 1600.
+4. Choose **Start Core**, connect through Milan's normal flow and open the linked tabletop. Setup alone never attaches the adapter or starts Core.
+5. **Stop Core** returns this session's Bluetooth transfer. **Quit app and return Bluetooth to Windows** closes the services. Browser closure does not quit TCE; crash recovery remains explicit.
 
 Local review checks:
 
@@ -27,12 +28,13 @@ The smoke check launches the included Node, Python/vision and Core with developm
 Required physical acceptance before calling the release ready:
 
 - Clean Windows x64 installation without Node, Python or .NET; manifest checks and per-user shortcuts.
-- Fresh WSL2/usbipd/Debian installation, UAC cancel/retry, real reboot and first Linux account setup.
+- Fresh one-action WSL2/usbipd/Debian/helper installation, UAC cancel/retry and continuation after a real reboot. Verify bundled OCR without any Windows OCR language pack or machine-wide C++ runtime installation. Verify unprivileged helper-account creation without manual Linux account setup, plus multiple/missing radio selection.
 - Linux helper preparation with internet loss/retry and default Linux USB permissions.
 - Real authorized Android tablet, English/landscape, unsupported resolution and disconnected/reconnected USB.
 - Core discovery/connection in the unmodified official app; supported scans, moves, dice and observed board updates.
 - Stop, quit, adapter returned to Windows; start failure rollback, app crash/relaunch and explicit recovery. No unrelated adapter may be detached.
 - Existing private settings and saved tabletop preserved on upgrade.
+- TCE startup without artwork; one-click download/extraction/install/enabling, interruption/retry, temporary-file cleanup and separately supplied archives. Missing archives must block game use despite an existing cache. Multiple enabled modules and switching with successful/failed Bluetooth cleanup must remain independent.
 
 No test on the development PC substitutes for these clean-machine and real-hardware checks. A full campaign and arbitrary adapters/tablet sizes remain unproven.
 

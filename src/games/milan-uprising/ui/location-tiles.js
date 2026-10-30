@@ -1,7 +1,7 @@
-import {bonusTypes,specialTypes,blankTile} from '../games/milan-uprising/location-tiles.js';
-import {describeLocationTile} from '../games/milan-uprising/location-tile-info.js';
-import {tileSymbol} from '../presentation/2d/tile-symbol.js';
-import {havenRoomTypes,havenRoomLabel,referenceHavenRoom,fixedHavenRooms} from '../games/milan-uprising/haven-rooms.js';
+import {bonusTypes,specialTypes,blankTile} from '../location-tiles.js';
+import {describeLocationTile} from '../location-tile-info.js';
+import {tileSymbol} from '../../../presentation/2d/tile-symbol.js';
+import {havenRoomTypes,havenRoomLabel,referenceHavenRoom,fixedHavenRooms} from '../haven-rooms.js';
 export function mountLocationTiles(container,tabletop,act){
   if(!tabletop.setLocationTile)return ()=>{};
   const section=document.createElement('fieldset');section.className='location-tile-controls';

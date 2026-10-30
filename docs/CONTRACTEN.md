@@ -1,5 +1,9 @@
 # Contracten v1 — eerste doorsnede
 
+## Game-add-ons — 29 oktober 2026
+
+`GET /api/game-addons` rapporteert modules, hun afzonderlijke installatie-/ingeschakelde status, downloadvoortgang en de geselecteerde game. Privé-opslag schema 2 heeft `installed`, `enabled[]` en `selected`; schema 1 migreert met behoud van installatie en sessies. `active` blijft een API-alias voor selectie. Lokale same-origin JSON-acties ondersteunen `add` (installeren en inschakelen, eventueel met achtergrondacquisitie), `disable`, `select`, `acquire` en de oudere `install`/`activate`. `open-linked` start de moduleadapter via de launcher. Alleen een aanwezige passende artworkinstallatie maakt gebruik mogelijk. Zie [module- en lifecyclecontract](GAME-MODULES.md).
+
 ## Leeswijzer — 29 oktober 2026
 
 Dit document bewaart de opeenvolgende engine- en modulecontracten. De engine heeft nog steeds uitsluitend sandboxregels; de gekoppelde runtime is een optionele adapter met de officiële app als regelautoriteit. Oudere inventaristabellen met “officiële app niet verbonden” beschrijven die eerdere doorsnede. De benodigde eigen adaptercode staat inmiddels in `integration/runtime/`; actuele distributie en verificatie staan in [installatie](INSTALLATION.md), [release-review](RELEASE-REVIEW.md) en [validatie](VALIDATIE.md). Historische contractbeperkingen zijn geen actuele verklaring dat appcontact nooit is aangetoond.

@@ -1,5 +1,6 @@
 import {visionPython,visionArguments} from './machine-config.mjs';
 import {readLocationBonusOutcomes} from './location-bonus-outcomes.mjs';
+import {readSetupLocationTiles,buildSetupTileActions} from '../../src/games/milan-uprising/setup-location-tiles.js';
 import {independentInfluenceUpdates} from '../../src/games/milan-uprising/influence-observations.js';
 import {createPositiveObservations} from '../../src/adapters/positive-observations.js';
 import {buildComponentInstructions} from '../../src/games/milan-uprising/component-instructions.js';
@@ -37,6 +38,8 @@ const relocationReads=createPositiveObservations({key:m=>m.componentId+':'+m.zon
 const componentReads=createPositiveObservations({key:i=>JSON.stringify(i)});
 const influenceReads=createPositiveObservations({key:u=>u.zoneId+':'+u.faction+':'+u.count});
 const bonusReads=createPositiveObservations({key:t=>t.zoneId+':'+t.value});
+const setupTileReads=createPositiveObservations({key:t=>[t.zoneId,t.kind,t.face,t.value].join(':')});
+const setupTileCatalog=JSON.parse(readFileSync(new URL('../../data/games/milan-uprising/location-bonuses.json',import.meta.url)));
 const baseProfile=JSON.parse(readFileSync(new URL('../../data/games/milan-uprising/city.json',import.meta.url),'utf8'));
 const profile=JSON.parse(readFileSync(new URL('../../data/games/milan-uprising/city-expansions.json',import.meta.url),'utf8'));
 // An isolated private state directory lets unattended acceptance tests avoid live campaign writes.
@@ -98,10 +101,10 @@ export async function recoverBoard(phone){
   try{const s=await phone('/status');if(s.connected&&Array.isArray(s.sensors)&&s.sensors.length===40)for(let index=0;index<40;index++)if(s.sensors[index]){await phone('/sensor',{index,active:false});released++;}}catch{}
   return {recovered:true,contactsReleased:released,positionsPreserved:true};
 }
-function clearTable(reason){
+function clearTable(reason,{preserveLocationTiles=false}={}){
   writeFileSync(stateFile('before-table-clear.json'),JSON.stringify({reason,clearedAt:new Date().toISOString(),session:table.exportSession(),locationTiles:boardTiles()},null,2));
   resetInputFlow(reason);
-  table.reset();persist();resetBoardTiles();
+  table.reset();persist();if(!preserveLocationTiles)resetBoardTiles();
   setupNeedsReset=true;setupClearedResearch=[];
   recovery={...recovery,positionsPreserved:false,resyncRequested:true};
   writeFileSync(stateFile('last-input-recovery.json'),JSON.stringify(recovery,null,2));
@@ -274,6 +277,10 @@ export async function observe(force=false){
       try{
         if(stdout){
           const frame=JSON.parse(stdout),header=normalize(frame.lines.filter(l=>l.y<frame.height*.2).map(l=>l.text).join(' '));
+          if(header.includes('scenariosetup')&&header.includes('boardtiles')){
+            const {stdout:tiles}=await run(visionPython,visionArguments('read-setup-tiles.py',argumentsList[1]),{timeout:15000,windowsHide:true,maxBuffer:200000});
+            frame.setupLocationTiles=JSON.parse(tiles);stdout=JSON.stringify(frame);
+          }
           if(normalize(frame.lines.filter(l=>l.x>frame.width*.25&&l.x<frame.width*.7&&l.y>frame.height*.3&&l.y<frame.height*.65).map(l=>l.text).join(' ')).includes('movementmoveyourcharactertoanyotherlocation')){
             const linux=p=>'/mnt/'+p[0].toLowerCase()+p.slice(2).replaceAll('\\','/'),root=fileURLToPath(new URL('./',import.meta.url));
             const {stdout:portrait}=await run(visionPython,visionArguments('read-movement-portrait.py',argumentsList[1]),{timeout:10000,windowsHide:true,maxBuffer:200000});
@@ -312,6 +319,8 @@ export async function observe(force=false){
     const influenceSummary=value.daySummary||value.cityOutcomes;
     if(influenceSummary){const context=JSON.stringify([inputGeneration,influenceSummary.phase]);influenceSummary.confirmedUpdates=influenceReads.observe(independentInfluenceUpdates(profile,influenceSummary),context,value.receivedAt);}else influenceReads.reset();
     value.locationBonusOutcomes=readLocationBonusOutcomes(raw,profile.zones);
+    value.setupLocationTiles=readSetupLocationTiles(raw,profile.zones,setupTileCatalog);
+    if(value.setupLocationTiles)value.setupLocationTiles.confirmedTiles=setupTileReads.observe(value.setupLocationTiles.tiles,inputGeneration,value.receivedAt);else setupTileReads.reset();
     if(value.locationBonusOutcomes)value.locationBonusOutcomes.confirmedTiles=bonusReads.observe(value.locationBonusOutcomes.tiles,inputGeneration,value.receivedAt);else bonusReads.reset();
     value.componentOutcomes=readComponentOutcomes(raw,profile);
     if(value.componentOutcomes){value.componentOutcomes.generation=inputGeneration;value.componentOutcomes.confirmedInstructions=componentReads.observe(value.componentOutcomes.instructions,inputGeneration,value.receivedAt);value.componentOutcomes.stable=value.componentOutcomes.confirmedInstructions.length>0;}else componentReads.observe([],inputGeneration,value.receivedAt);
@@ -348,7 +357,7 @@ export async function observe(force=false){
     if(value.stable&&value.screen==='components-setup'){
       if(setupNeedsReset){
         if(busy||pendingMove)return value;
-        clearTable('scenario-component-setup');
+        clearTable('scenario-component-setup',{preserveLocationTiles:true});
       }
       const cleared=updateMap(value.setupMap.locations,{resetResearch:setupNeedsReset});if(setupNeedsReset)setupClearedResearch=cleared;setupNeedsReset=false;
       value.setupMap.clearedResearch=setupClearedResearch;
@@ -453,6 +462,9 @@ export async function observe(force=false){
     }
     if(value.locationBonusOutcomes?.confirmedTiles.length&&value.screen!=='error'){
       try{for(const tile of value.locationBonusOutcomes.confirmedTiles)updateBoardTile({...tile,expectedRevision:boardTiles().revision});value.locationBonusOutcomes.applied=true;}catch(error){value.locationBonusOutcomes.error=error.message;}
+    }
+    if(value.setupLocationTiles?.confirmedTiles.length&&value.screen==='board-tiles-setup'){
+      try{for(const tile of buildSetupTileActions(boardTiles(),value.setupLocationTiles.confirmedTiles))updateBoardTile({...tile,expectedRevision:boardTiles().revision});value.setupLocationTiles.applied=true;}catch(error){value.setupLocationTiles.error=error.message;}
     }
     writeFileSync(stateFile('app-observation.json'),JSON.stringify(raw));
     return value;

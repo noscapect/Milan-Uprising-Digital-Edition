@@ -22,13 +22,13 @@ test('LAN-bordlink vereist code, deelt alleen bordroutes en bewaakt de oorsprong
     const joined=await fetch(base+'/join',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded',Origin:base},body:'pin=123456',redirect:'manual'});
     assert.equal(joined.status,303);assert.equal(joined.headers.get('location'),'/board');
     const cookie=joined.headers.get('set-cookie').split(';')[0];assert.match(joined.headers.get('set-cookie'),/HttpOnly; SameSite=Strict/);
-    for(const path of ['/board','/api/table-session','/api/board-status','/api/board-tiles','/board-client.mjs','/src/style.css','/data/games/test.json','/local-artwork/test.png']){
+    for(const path of ['/board','/api/table-session','/api/board-status','/api/board-tiles','/board-client.mjs','/src/games/milan-uprising/style.css','/data/games/test.json','/local-artwork/test.png','/games/milan-uprising/artwork/catalog.json','/games/milan-uprising/artwork/zones/qt8.png']){
       assert.equal((await fetch(base+path,{headers:{Cookie:cookie}})).status,200);
     }
     const count=received.length;
     assert.equal((await fetch(base+'/api/board-clear',{method:'POST',headers:{'Content-Type':'application/json'},body:'{"confirm":true}'})).status,401);
     assert.equal((await fetch(base+'/api/board-clear',{method:'POST',headers:{Cookie:cookie,Origin:'http://example.com','Content-Type':'application/json'},body:'{"confirm":true}'})).status,403);
-    for(const path of ['/api/status','/api/windows-core/start','/api/control-center','/control-center.js','/diagnostics','/api/confirmed-app-setup','/private/secret.json','/api/pair']){
+    for(const path of ['/api/status','/api/windows-core/start','/api/control-center','/control-center.js','/diagnostics','/api/confirmed-app-setup','/private/secret.json','/api/pair','/games/milan-uprising/module.json','/games/milan-uprising/table']){
       assert.equal((await fetch(base+path,{headers:{Cookie:cookie}})).status,404);
     }
     assert.equal(received.length,count);

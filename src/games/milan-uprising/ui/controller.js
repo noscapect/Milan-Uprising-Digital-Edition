@@ -1,9 +1,9 @@
 import { withArtwork, artworkImage } from '../presentation/artwork.js';
-import { renderBoard } from '../presentation/2d/board.js';
-import { installPieceDrag } from './piece-drag.js';
+import { renderBoard } from '../presentation/board.js';
+import { installPieceDrag } from '../../../ui/piece-drag.js';
 import { mountLocationTiles } from './location-tiles.js';
-import { mountScanDock } from './scan-dock.js';
-import { mountMiniatureStand } from './miniature-stand.js';
+import { mountScanDock } from '../../../ui/scan-dock.js';
+import { mountMiniatureStand } from '../../../ui/miniature-stand.js';
 export function mountTabletop(tabletop, download, core = null, artwork = null, locationArtwork = false) {
   const $ = id => document.getElementById(id);
   const project = () => withArtwork(tabletop.project(), artwork, { locationArtwork });

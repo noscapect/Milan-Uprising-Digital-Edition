@@ -2,7 +2,7 @@
 
 ## Distributie-update — 29 oktober 2026
 
-De projecteigenaar heeft expliciet toestemming bevestigd voor publicatie van het geselecteerde artwork. Alle 156 actuele afbeeldingen staan nu met een opgeschoond manifest in `resources/milan-artwork.json.gz`. De server pakt dit automatisch uit naar genegeerd `private/bundled-artwork/`; een lokale officiële-appinstallatie of extractietool is hiervoor niet nodig. Bronpaden en oude manifesten zijn niet opgenomen. Zie [installatie op een andere computer](INSTALLATION.md). Hieronder blijft de historische extractie- en onderzoeksbeschrijving behouden; uitspraken over uitsluitend private opslag beschrijven de eerdere distributiesituatie.
+De geselecteerde 156 Milan-afbeeldingen mogen met toestemming van de projecteigenaar worden meegeleverd in `resources/milan-artwork.json.gz`. **Add game** installeert en schakelt Milan in. Ontbreekt het archief, dan kan de Windows-release de officiële client-ZIP downloaden, verifiëren en de vereiste Texture2D-/Sprite-afbeeldingen extraheren. De Windows-game wordt niet geïnstalleerd of gestart; tijdelijke clientbestanden worden opgeruimd. Android blijft de begeleidende game-app. Zie [game-add-ons](GAME-ADDONS.md) en [modulecontract](GAME-MODULES.md). Hieronder blijven eerdere extractie- en onderzoeksfasen historisch behouden.
 
 De geïnstalleerde officiële Windows-app 1.0.9 bevat leesbare Unity-textures. De lokale tafel gebruikt hiervan 79 originele PNG-exporten: 30 locatiebeelden, 19 personen met icoon en volledig portret, drie kubusiconen, vijf fichesymbolen, een Masquerade-fiche, logo en stadskaart. Geen nieuw artwork gegenereerd. De app is niet gestart, aangepast of gepatcht; er zijn geen versleuteling of beveiligingen omzeild. Verhaal, audio, scripts en scenario's zijn niet geëxporteerd.
 
@@ -20,7 +20,7 @@ Voor een eigen lokale installatie is er de optionele voorbereidingstool:
 
 ```powershell
 python -m pip install UnityPy==1.23.0
-python tools/extract-artwork.py --app-data 'C:\pad\naar\VTMTEBURU_Data'
+python tools/milan-extract-artwork.py --app-data 'C:\pad\naar\VTMTEBURU_Data'
 ```
 
 De tool selecteert uitsluitend textures met exact passende namen en afmetingen uit `resources.assets` en `sharedassets0.assets`. Meerdere matches worden overgeslagen. Het manifest bewaart texture-naam, bestand, objectindex, afmetingen en SHA-256 voor herleidbaarheid. De bron wordt alleen gelezen; uitvoer gaat naar `private/artwork/`. Python/UnityPy zijn alleen nodig voor deze voorbereiding, niet voor de tafel.

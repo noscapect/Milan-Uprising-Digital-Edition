@@ -1,5 +1,5 @@
 import test from'node:test';import assert from'node:assert/strict';
-import{layoutPieces,fitsPiece}from'../src/presentation/2d/piece-layout.js';import{milanMap}from'../src/presentation/2d/milan-map.js';
+import{layoutPieces,fitsPiece}from'../src/presentation/2d/piece-layout.js';import{milanMap}from'../src/games/milan-uprising/presentation/milan-map.js';
 test('drukke kaartgebieden behouden ieder onderdeel binnen hun eigen grens zonder overlap',()=>{
  for(const [id,geometry]of Object.entries(milanMap.zones))for(const count of [1,6,16,32]){
   const components=Array.from({length:count},(_,i)=>({id:'component-'+i,kind:i<3?'piece':i%2?'cube':'token',portrait:i<3?'/test.png':null})),before=structuredClone(components);

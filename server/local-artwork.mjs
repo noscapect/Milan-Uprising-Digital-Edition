@@ -1,16 +1,17 @@
 import { readFile, realpath, stat } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 const idPattern = /^[a-z0-9][a-z0-9-]{0,80}$/;
-export async function loadLocalArtwork(directory) {
+export async function loadLocalArtwork(directory,{gameId,urlPrefix='/local-artwork'}={}) {
   const empty = { available:false, assets:{}, components:{}, zones:{}, groups:{}, faces:{}, branding:{} };
   const files = new Map();
   try {
     const manifestPath = resolve(directory, 'manifest.json');
     if ((await stat(manifestPath)).size > 256 * 1024) return { catalog:empty, files };
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-    if (manifest.format !== 'tabletop-local-artwork' || manifest.schemaVersion !== 1 || manifest.gameId !== 'milan-uprising') return { catalog:empty, files };
+    if (manifest.format !== 'tabletop-local-artwork' || manifest.schemaVersion !== 1 || typeof manifest.gameId!=='string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(manifest.gameId) || gameId&&manifest.gameId!==gameId) return { catalog:empty, files };
     const root = await realpath(resolve(directory, 'images'));
     const catalog = structuredClone(empty);
+    catalog.gameId=manifest.gameId;
     for (const [id, asset] of Object.entries(manifest.assets || {}).slice(0, 256)) {
       if (!idPattern.test(id) || !/^[a-z0-9-]+\.png$/.test(asset.file)) continue;
       try {
@@ -21,7 +22,7 @@ export async function loadLocalArtwork(directory) {
         if (!info.isFile() || info.size > 25 * 1024 * 1024) continue;
         const data = await readFile(path);
         if (!data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) continue;
-        const url = `/local-artwork/${id}.png`;
+        const url = `${urlPrefix}/${id}.png`;
         files.set(url, path);
         catalog.assets[id] = url;
       } catch { /* One missing image must not disable the table. */ }

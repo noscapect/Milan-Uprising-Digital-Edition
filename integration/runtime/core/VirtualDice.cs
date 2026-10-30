@@ -1,6 +1,6 @@
 // Private synthetic hardware state; no Milan rules or real hardware identities.
 using System.Security.Cryptography;
-namespace Milan.PrivateCore;
+namespace Tce.Core;
 public sealed class VirtualDice {
   readonly CoreCodec codec;
   readonly byte[][] ids;

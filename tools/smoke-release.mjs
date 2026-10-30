@@ -10,9 +10,10 @@ const app=process.argv[2]||join(root,'work',builds.at(-1)||'missing','TCE');
 const env={...process.env,DOTNET_ROOT:join(app,'does-not-exist'),MILAN_CORE_STATE_DIRECTORY:join(root,'private','release-smoke'),PYTHONDONTWRITEBYTECODE:'1',PYTHONHOME:'',PYTHONPATH:'',PATH:process.env.SystemRoot+'\\System32;'+process.env.SystemRoot};
 await run(join(app,'runtime','node.exe'),['--version'],{env,windowsHide:true});
 await run(join(app,'runtime','python','python.exe'),['-c','import cv2,numpy'],{env,windowsHide:true});
+await run(join(app,'runtime','python','python.exe'),['-c','import UnityPy; assert UnityPy.__version__ == "1.23.0"'],{env,windowsHide:true});
 await run(join(app,'runtime','python','python.exe'),[join(root,'tools','test-usb-access.py')],{env,windowsHide:true});
 const executable=join(app,'integration','runtime','windows-core','ring-telemetry-build','CoreContract.exe');
-const {stdout:ocr}=await run(join(app,'integration','runtime','app-observer','build','AppObserver.exe'),['--readiness'],{env,windowsHide:true});assert.equal(typeof JSON.parse(ocr).englishOcrAvailable,'boolean');
+const {stdout:ocr}=await run(join(app,'integration','runtime','app-observer','build','AppObserver.exe'),['--readiness'],{env:{...env,TCE_OCR_BACKEND:'portable'},windowsHide:true});assert.equal(JSON.parse(ocr).textRecognitionAvailable,true);assert.equal(JSON.parse(ocr).backend,'bundled-tesseract');
 // No device or app input: unsupported action validates the self-contained launch only.
 await new Promise((resolve,reject)=>{const child=spawn(executable,['--codec-json-lines'],{env,windowsHide:true,stdio:['pipe','ignore','pipe']});child.once('error',reject);child.once('exit',code=>code===0?resolve():reject(Error(`Core exit ${code}`)));child.stdin.end();});
 const release=JSON.parse(await readFile(join(app,'release.json'),'utf8'));assert.equal(release.format,'milan-windows-release');

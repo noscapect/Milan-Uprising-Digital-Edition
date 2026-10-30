@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "games": [
+    {
+      "id": "milan-uprising",
+      "module": "games/milan-uprising/module.json"
+    }
+  ]
+}

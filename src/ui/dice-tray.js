@@ -7,7 +7,7 @@ export function mountDiceTray({onRoll,onWake,describeFace=value=>({id:'number',l
   const dialog=make('dialog','dice-tray-dialog');dialog.id='dice-tray-dialog';dialog.setAttribute('aria-labelledby','dice-tray-title');
   const header=make('div','dialog-header'),title=make('h2','','Dice tray');title.id='dice-tray-title';
   const close=make('button','','Close');close.type='button';header.append(title,close);
-  const body=make('div','dice-tray-body'),hint=make('p','dice-tray-hint','Choose 1–5 dice, as requested in Milan.');
+  const body=make('div','dice-tray-body'),hint=make('p','dice-tray-hint','Choose 1–5 dice, as requested in the game.');
   const felt=make('div','dice-tray-felt');felt.setAttribute('aria-label','Five virtual d10 dice');
   const buttons=[];
   for(let index=1;index<=5;index++){
@@ -44,7 +44,7 @@ export function mountDiceTray({onRoll,onWake,describeFace=value=>({id:'number',l
     roll.disabled=!ready||state.canRoll===false||active||!selected.size;roll.textContent=rollingSelection?'Rolling…':selected.size?`Roll ${selected.size} ${selected.size===1?'die':'dice'}`:'Select dice';
     wake.disabled=!ready||active;
     open.dataset.rolling=String(!!state.rolling||!!rollingSelection);
-    if(!active)status.textContent=state.connected&&state.ready&&feedback?feedback:!state.connected?'Connect Milan to the Core.':!state.ready?'Milan has not opened its dice channel.':state.canRoll===false?'Wake the dice, then continue setup in Milan.':selected.size?`${selected.size} selected`:'Select at least one die.';
+    if(!active)status.textContent=state.connected&&state.ready&&feedback?feedback:!state.connected?'Connect the game to the Core.':!state.ready?'the game has not opened its dice channel.':state.canRoll===false?'Wake the dice, then continue setup in the game.':selected.size?`${selected.size} selected`:'Select at least one die.';
   }
   async function act(kind){
     if(busy||state.rolling||!state.connected||!state.ready||(kind==='roll'&&(!selected.size||state.canRoll===false)))return;

@@ -7,7 +7,7 @@ const exec=promisify(execFile);
 const script=fileURLToPath(new URL('../tools/windows-prerequisites.ps1',import.meta.url));
 const actions=new Map([
   ['install-wsl','InstallWsl'],['install-usbipd','InstallUsbipd'],
-  ['install-linux','InstallLinux'],['open-linux','OpenLinux'],['prepare-adapter','BindAdapter'],['select-adapter',null]
+  ['install-linux','InstallLinux'],['install-ocr','InstallOcr'],['open-linux','OpenLinux'],['prepare-adapter','BindAdapter'],['select-adapter',null]
 ]);
 
 export function createWindowsSetup({platform=process.platform,probe,execute,configure=()=>{},save=()=>{},initialJob=null,initialBusId=null,now=Date.now}={}) {
@@ -15,7 +15,7 @@ export function createWindowsSetup({platform=process.platform,probe,execute,conf
   let selectedBusId=typeof initialBusId==='string'&&/^\d+-\d+$/.test(initialBusId)?initialBusId:null;
   let job=initialJob?{...initialJob,...(initialJob.phase==='running'?{phase:'interrupted',message:'Setup was interrupted. Check again before retrying.'}:{})}:null;
   const inspect=probe||(()=>runWindowsSetup('Check'));
-  const perform=execute||((action,adapter)=>runWindowsSetup(actions.get(action),adapter));
+  const perform=execute||((action,adapter,options)=>runWindowsSetup(actions.get(action),adapter,options));
   function snapshot(){return structuredClone({supported:platform==='win32',report,job,selectedBusId,checking:!!checking});}
   async function check(force=false){
     if(platform!=='win32'){report={error:'Automatic preparation is available on Windows only.'};return snapshot();}
@@ -31,6 +31,7 @@ export function createWindowsSetup({platform=process.platform,probe,execute,conf
   function start(request){
     if(platform!=='win32')throw Error('Automatic preparation is available on Windows only.');
     if(!request||request.confirm!==true||!actions.has(request.action))throw Error('Choose a listed setup action and confirm it.');
+    if(request.unattended&&request.acceptPackageTerms!==true)throw Error('Accept package installation terms before unattended setup.');
     if(job?.phase==='running')throw Error('A setup step is already running.');
     const action=request.action;
     if(!report||report.error)throw Error('Check this PC before starting setup.');
@@ -51,7 +52,7 @@ export function createWindowsSetup({platform=process.platform,probe,execute,conf
     job={id:randomUUID(),action,phase:'running',startedAt:new Date(now()).toISOString(),message:'A Windows setup window may appear. Complete its prompts, then return here.'};save(structuredClone(job));
     void (async()=>{
       try{
-        const result=action==='select-adapter'?{ok:true,message:'The selected adapter is saved for this PC. It has not been attached or started.'}:await perform(action,adapter);
+        const result=action==='select-adapter'?{ok:true,message:'The selected adapter is saved for this PC. It has not been attached or started.'}:await (request.unattended?perform(action,adapter,{unattended:true}):perform(action,adapter));
         if(result.ok&&adapter){await configure(adapter);selectedBusId=adapter.busId;}
         job={...job,phase:result.cancelled?'cancelled':result.ok?'completed':'failed',message:result.message||'Check again to verify this step.',restartRequired:!!result.restartRequired};
       }catch(error){job={...job,phase:'failed',message:error.message};}
@@ -63,7 +64,7 @@ export function createWindowsSetup({platform=process.platform,probe,execute,conf
   return {check,start,snapshot};
 }
 
-export async function runWindowsSetup(action,adapter){
+export async function runWindowsSetup(action,adapter,{unattended=false}={}){
   if(action==='Check'){
     const {stdout}=await exec('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',script,'-Action','Check'],{windowsHide:true,timeout:30000,maxBuffer:1024*1024,encoding:'utf8'});
     return JSON.parse(stdout.replace(/^\uFEFF/,'').trim());
@@ -73,6 +74,7 @@ export async function runWindowsSetup(action,adapter){
   const resultFile=new URL(`${randomUUID()}.json`,directory);
   const args=['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',script,'-Action',action,'-ResultPath',fileURLToPath(resultFile)];
   if(adapter)args.push('-BusId',adapter.busId,'-ExpectedVidPid',adapter.vidPid);
+  if(unattended)args.push('-Unattended');
   // The helper opens an interactive Windows/UAC window only after a setup button is clicked.
   await exec('powershell.exe',args,{windowsHide:true,timeout:30*60*1000,maxBuffer:1024*1024});
   return JSON.parse(await readFile(resultFile,'utf8'));

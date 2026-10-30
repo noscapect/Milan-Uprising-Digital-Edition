@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { loadLocalArtwork } from '../server/local-artwork.mjs';
-import { withArtwork } from '../src/presentation/artwork.js';
+import { withArtwork } from '../src/games/milan-uprising/presentation/artwork.js';
 import { readFile } from 'node:fs/promises';
 
 test('lokale artworkcatalogus deelt alleen geselecteerde PNG-bestanden, geen private paden', async () => {

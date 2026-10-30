@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "milan-uprising",
+  "version": "0.1.0",
+  "title": "Vampire: The Masquerade – Milan Uprising",
+  "shortTitle": "Milan Uprising",
+  "archive": "milan-artwork.json.gz",
+  "cacheDirectory": "bundled-artwork",
+  "androidPackage": "com.xplored.teburu.vtm",
+  "display": {"width": 2560, "height": 1600},
+  "client": {
+    "table": "src/games/milan-uprising/table.html",
+    "app": "src/games/milan-uprising/app.js",
+    "control": "src/games/milan-uprising/control-center.html"
+  },
+  "linked": {"source": "integration/milan-uprising", "entry": "android-control.mjs", "workspace": "linked"},
+  "acquisition": {
+    "kind": "unity-windows-zip",
+    "version": "1.0.9",
+    "url": "https://teburu.com/downloads/VtM/BuildWindows/VTMTEBURU_v1.0.9.zip",
+    "sourcePage": "https://xplo.red/VtM-Win-Download",
+    "bytes": 1014542313,
+    "sha256": "789e5c968445c18cdb8cd83ec7ae393fe6b3e58eb64ed4ba742c0ade75e3ee56",
+    "recipe": "data/games/milan-uprising/artwork-recipe.json"
+  }
+}

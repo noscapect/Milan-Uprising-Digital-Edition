@@ -2,22 +2,22 @@
 
 Teburu Core Emulator (TCE) is an independent, modular digital tabletop project, with **Vampire: The Masquerade – Milan Uprising** as its first game module. The goal is to use the unmodified official game app with a virtual table, without physical game components. The official app remains responsible for rules, story, and campaign progress.
 
-Renamed from Milan Uprising: Digital Edition on 29 October 2026. This change updates the project identity only; the next module refactoring is separate work. The current compatibility and validation limits still apply.
+Renamed from Milan Uprising: Digital Edition on 29 October 2026. TCE now separates its shared engine/Core infrastructure from game-specific code, data, screens and app adapters. Milan is the first implemented module; see [the module contract](docs/GAME-MODULES.md) for adding other games. Existing compatibility and validation limits still apply.
 
 The default application is a standalone sandbox with the included artwork. The optional linked-table runtime is also included as source, with a setup procedure for a Windows PC and the official app on an Android tablet. It has demonstrated limited interaction with the official app, including character registration, movement, dice interaction, resuming a campaign, and copying observed board changes. This is not evidence that every phase, expansion, or hardware behavior works. See [installation on another computer](docs/INSTALLATION.md).
 
 ## Quick start
 
-Requires Node.js 22 or later. The standalone table has no external runtime dependencies and needs no package installation. Its 156 artwork images are bundled in one archive and unpacked automatically on first start.
+Requires Node.js 22 or later. The standalone source edition needs no package installation when its artwork archive is included. Choose **Add game** for Milan; installation and enabling happen together. The packaged Windows edition also includes the tools to download and extract missing artwork automatically.
 
 ```powershell
 cd Teburu-Core-Emulator
 node server.mjs
 ```
 
-Open http://127.0.0.1:5178. Stop the server with Ctrl+C. Open the page through the server rather than directly from the filesystem.
+Open http://127.0.0.1:5178 for **Your games**, choose **Add game**, then **Open tabletop**. Multiple supported games can stay enabled independently. If an archive is missing, the packaged edition downloads the reviewed official Windows client and extracts only the required artwork; it never installs or starts that client. The source edition additionally needs Python/UnityPy for that optional extraction route. The archive must remain present for the game to be usable, including when an extracted cache remains. See [adding games](docs/GAME-ADDONS.md). Stop the standalone server with Ctrl+C.
 
-On Windows, `Start-TCE.cmd` opens the linked-table Control Center with guided WSL2/usbipd installation and Bluetooth-adapter preparation. Installation starts only after an explicit confirmation. A source checkout still needs Node.js and the app-helper prerequisites; see [first-time setup](docs/INSTALLATION.md).
+On Windows, `Start-TCE.cmd` opens the TCE game library. **Connect Android** starts only the selected game adapter and opens its Control Center, with one **Set up automatically** action after one-time terms consent. Missing WSL2/usbipd, Linux helpers and Android tools are prepared in sequence; tablet detection is automatic. Text recognition is included, without a Windows language-pack installation. See [automatic PC setup](docs/AUTOMATIC-SETUP.md). The official Android game app remains required for linked play. Shared PC prerequisites are reused across games. A source checkout still needs Node and the app-helper prerequisites; see [first-time setup](docs/INSTALLATION.md).
 
 `Start-Milan.cmd` remains a compatibility shortcut to `Start-TCE.cmd`. Existing session formats, game IDs and the installation's storage directory are preserved.
 
@@ -29,7 +29,7 @@ Run the public test suite with:
 node --test
 ```
 
-If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest Windows check on 29 October 2026 passed all 109 public tests with the bundled Node 22 runtime, including release staging, installer integrity, tablet checks and Bluetooth lifecycle ordering alongside the board regressions. See [validation](docs/VALIDATIE.md) for separate browser, package and hardware evidence. Temporary copies under ignored work directories may be discovered by a bare `node --test`; the recorded 109-test result covers the public `test/` and `tests/` suites only.
+If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest Windows checks on 30 October 2026 passed all 144 public tests with both Node 26 and the bundled Node 22 runtime, including setup-tile observations and preservation through component setup, portable OCR packaging, WSL startup, add-on availability, optional artwork, release staging, installer integrity, tablet checks and Bluetooth lifecycle ordering alongside the board regressions. See [validation](docs/VALIDATIE.md) for separate browser, package and hardware evidence. Temporary copies under ignored work directories may be discovered by a bare `node --test`; the recorded 144-test result covers the public `test/` and `tests/` suites only.
 
 ## Current features and limits
 
@@ -41,14 +41,14 @@ If npm is available, `npm start` and `npm test` are equivalent shortcuts. The la
 | Allies and ghouls | Optional Sunset deployment, pending confirmation, and automatic return to stock on confirmed Day | Cleanup tested with recorded Day observations; arbitrary story-driven removals are not fully covered |
 | Haven rooms | All ten fixed room types, standard/upgraded effects, recorded side controls, and optional upgraded artwork | Standard starting sides are used unless an upgrade is recorded; purchases and room actions remain in Milan |
 | LED ring | App-led colors with segment orientation matching Teburu; simulated firmware and battery status | Static colors only; full hardware animations remain unvalidated |
-| Artwork | 156 images included in one archive and installed automatically | Publication authorized for this selection; other protected resources and the original SDK remain excluded |
+| Artwork | One-click game installation; uses a bundled archive or downloads/extracts a reviewed Windows client in the background | Milan: 156 images; Windows game never installed or started; the original SDK remains excluded |
 | Windows candidate | Bundled runtimes, per-user installer, helper preparation, tablet wizard and Bluetooth recovery | Built and tested locally; no release published and clean-machine physical acceptance remains open |
 
 See [ally and ghoul deployment](docs/ALLIES-EN-GHOULS.md) and [location tiles and Haven bonuses](docs/LOCATIETEGELS.md) for current instructions and evidence.
 
 ## Using the table
 
-The board uses the available screen width, with **Stock**, **Location**, and **Session** controls. With local artwork available, it opens the physical map presentation; without it, the schematic board remains usable.
+The activated board uses the available screen width, with **Stock**, **Location**, and **Session** controls. Missing game artwork keeps that game unavailable; TCE's add-on screen remains accessible.
 
 Hold the left mouse button and drag a miniature to a destination, then release. Escape or dropping outside the board cancels the move. Selecting a component and clicking a destination is also supported. Every miniature and token remains visible in crowded locations; there is no four-component cutoff or `+n` counter. Influence follows Milan's display: one cube per faction and district, with no number for one influence, and a **2** or **3** for two or three. Individual cube identities remain in the session and location list. Invalid sandbox counts above three are not silently clamped. The physical-map renderer spreads the displayed components within each approximate region and reduces their size when needed. Zoom in to inspect crowded districts. This is presentation only.
 
@@ -112,7 +112,7 @@ Older city, retail, neutral-table, and sensor-study profiles remain available fo
 
 The sensor study explicitly separates temporary contact from persistent position. It is a local behavior simulation, not an RFID/BLE emulator. The original demo remains at http://127.0.0.1:5178/legacy/index.html; its old export format is not imported into the current engine.
 
-The selected original images are included in `resources/milan-artwork.json.gz`, with publication explicitly authorized by the project owner. The server automatically installs them into ignored `private/bundled-artwork/` and serves only an allowlisted catalog. No files from the developer's private workspace are needed. See [installation](docs/INSTALLATION.md) and [artwork handling](docs/ARTWORK.md).
+The selected original images remain available in `resources/milan-artwork.json.gz`, with publication explicitly authorized by the project owner. **Add game** installs and enables Milan in one step. Without that archive, the packaged edition downloads the official Windows ZIP, verifies its pinned hash and extracts the 156 selected images. Temporary client resources and the ZIP are removed after success. Game artwork caches, adapter workspaces and enabled state are isolated; existing saves remain compatible. See [game add-ons](docs/GAME-ADDONS.md) and [module architecture](docs/GAME-MODULES.md).
 
 ## Architecture and repository
 
@@ -123,14 +123,16 @@ The engine, game rules, game data, UI, and presentation are separate. Milan is a
 | `src/engine/` | Generic state, commands, events, validation, and replay |
 | `src/games/milan-uprising/` | Milan module, setup builders, tile state, and companion placement validation |
 | `src/application/` | Tabletop orchestration and session handling |
-| `src/ui/`, `src/presentation/` | Controls, artwork decoration, and board rendering |
+| `src/ui/`, `src/presentation/` | Shared game library, PC preparation and reusable presentation primitives |
 | `src/adapters/` | Public adapters, including local sensor behavior simulation |
 | `data/games/` | Versioned board and component profiles |
 | `server/`, `server.mjs` | Local serving and restricted board sharing |
 | `test/` | Current public engine, module, adapter, and replay tests |
 | `tests/` | Original regression tests |
 | `legacy/`, `src/model.js` | Preserved original reference implementation |
-| `integration/runtime/` | Reviewed integration source, codec and readers; no original SDK |
+| `integration/runtime/` | Shared Core codec, WSL/Bluetooth and OCR infrastructure; no original SDK |
+| `integration/<game-id>/` | Game-specific app adapter, recognition and miniature definitions |
+| `games/<game-id>/module.json` | Versioned client, adapter and artwork-source contract |
 | `resources/` | Included artwork archive and provenance note |
 | `private/` | Ignored generated runtime, settings, sessions, observations and identifiers |
 

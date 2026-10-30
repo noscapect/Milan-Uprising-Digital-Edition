@@ -2,7 +2,7 @@
 export function withArtwork(view, catalog, { locationArtwork = true } = {}) {
   const url = id => {
     const value = catalog?.assets?.[id];
-    return typeof value === 'string' && /^\/local-artwork\/[a-z0-9-]+\.png$/.test(value) ? value : null;
+    return typeof value === 'string' && /^(?:\/local-artwork|\/games\/[a-z0-9-]+\/artwork)\/[a-z0-9-]+\.png$/.test(value) ? value : null;
   };
   const decorate = component => ({ ...component,
     icon: url(catalog?.faces?.[component.faceId]) || url(catalog?.components?.[component.id]?.icon) || url(catalog?.groups?.[component.groupId]),

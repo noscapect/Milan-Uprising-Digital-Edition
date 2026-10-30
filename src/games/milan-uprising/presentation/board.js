@@ -1,9 +1,10 @@
-import { artworkImage } from '../artwork.js';
+import { artworkImage } from './artwork.js';
 import { milanMap } from './milan-map.js';
-import {describeLocationTile} from '../../games/milan-uprising/location-tile-info.js';
-import {layoutPieces,pieceBounds} from './piece-layout.js';
-import {groupInfluenceCubes} from './influence-stacks.js';
-import {havenRoomLabel} from '../../games/milan-uprising/haven-rooms.js';
+import {describeLocationTile} from '../location-tile-info.js';
+import {layoutPieces,pieceBounds} from '../../../presentation/2d/piece-layout.js';
+import {groupInfluenceCubes} from '../../../presentation/2d/influence-stacks.js';
+import {havenRoomLabel} from '../haven-rooms.js';
+import {tileSymbol} from '../../../presentation/2d/tile-symbol.js';
 
 function pieceElement(component, index, options, interactive = false) {
   const piece = document.createElement(interactive ? 'button' : 'span');
@@ -58,7 +59,7 @@ export function renderBoard(container, projection, onZone, options = {}) {
     const attributes = document.createElement('span'); attributes.className = 'zone-attributes';
     const labels = { physical:'Physical', mental:'Mental', social:'Social' };
     attributes.textContent = (zone.attributes || []).map(attribute => labels[attribute] || attribute).join(' · ');
-    cell.replaceChildren(title, attributes, ...havenBadges(zone), occupants);
+    cell.replaceChildren(title, attributes, ...havenBadges(zone), ...locationSymbols(zone), occupants);
     cell.setAttribute('aria-label', zoneDescription(zone));
     cell.onclick = () => onZone(zone.id);
     return cell;
@@ -103,6 +104,13 @@ function renderMap(container, projection, onZone, options) {
     hit.onclick = () => onZone(zone.id);
     const pieces = wrapper.querySelector('.zone-pieces');
     wrapper.querySelector('.location-tile-badges')?.remove();
+    wrapper.querySelector('.location-symbols')?.remove();
+    for(const symbols of locationSymbols(zone)){
+      const index=Object.keys(milanMap.zones).filter(id=>!id.startsWith('haven-')).indexOf(zone.id);
+      symbols.classList.add('map-tile-symbols');
+      Object.assign(symbols.style,{left:`${(312.5+125*(index%6))/milanMap.width*100}%`,top:`${(98.5+125*Math.floor(index/6))/milanMap.height*100}%`});
+      wrapper.append(symbols);
+    }
     wrapper.querySelector('.map-zone-content').append(...havenBadges(zone));
     const active = document.activeElement?.closest('.board-piece')?.dataset.component;
     const displayed=groupInfluenceCubes(zone.occupants);
@@ -125,4 +133,16 @@ function havenBadges(zone) {
   badge.textContent = info.bonus; badge.title = `${info.title} · ${info.bonus}`;
   badges.append(badge);
   return [badges];
+}
+function locationSymbols(zone){
+  if(zone.area!=='city')return [];
+  const visible=Object.entries(zone.locationTiles||{}).filter(([,tile])=>tile.face==='visible'&&tile.value!=='unknown');
+  if(!visible.length)return [];
+  const symbols=document.createElement('span');symbols.className='location-symbols';
+  for(const [kind,tile] of visible){
+    const info=describeLocationTile(kind,tile,zone.label),symbol=tileSymbol(info.symbol);
+    symbol.dataset.tileKind=kind;symbol.dataset.tileValue=tile.value;symbol.title=info.title;
+    symbol.setAttribute('aria-label',info.title);symbols.append(symbol);
+  }
+  return [symbols];
 }

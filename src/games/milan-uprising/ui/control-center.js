@@ -1,6 +1,10 @@
 const $=id=>document.getElementById(id);
 let busy=false,disposed=false,reading=false,latest=null;
 let helpersReady=null,helpersPreparing=false,tabletReady=false;
+let gameActive=false;
+let setupRunning=false;
+document.addEventListener('tce:setup-running',event=>{setupRunning=event.detail.running;if(setupRunning)$('start-core').disabled=true;});
+document.addEventListener('tce:game-active',event=>{gameActive=event.detail.enabled.includes('milan-uprising');$('linked-tabletop').hidden=!gameActive;if(!gameActive)$('start-core').disabled=true;});
 document.addEventListener('milan:helpers-ready',event=>{helpersReady=event.detail.ready;helpersPreparing=event.detail.preparing;tabletReady=event.detail.tabletReady;if(!helpersReady||helpersPreparing||!tabletReady)$('start-core').disabled=true;});
 async function api(path,body){
   const response=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});
@@ -12,7 +16,7 @@ async function refresh(){
     latest=await api('/api/control-center');const core=latest.core;
     $('core-status').textContent=busy||latest.starting?'Starting Core…':core.connected?'Connected to Milan':core.running?'Waiting for Milan':core.available?'Core stopped':'Core service stopped';
     $('core-detail').textContent=core.connected?'Milan is connected. You can open the tabletop.':core.running?'Open Milan on the tablet and connect using Single Device.':'Start Core prepares the local service and Bluetooth connection.';
-    $('start-core').disabled=busy||latest.starting||core.running||helpersReady===false||helpersPreparing||!tabletReady;
+    $('start-core').disabled=busy||setupRunning||latest.starting||core.running||helpersReady===false||helpersPreparing||!tabletReady||!gameActive;
     $('stop-core').disabled=busy||latest.starting||!core.running;
     const firmware=core.firmware;
     $('firmware-status').textContent=!firmware?'Start the updated PC Core service to read its simulated versions.':`Core ${firmware.core.reportedVersion} → ${firmware.core.targetVersion} · Dice ${firmware.dice.map(d=>d.reportedVersion).join(', ')} → ${firmware.dice[0]?.targetVersion} · LED ring ${firmware.ring?.reportedVersion||'unavailable'} → ${firmware.ring?.targetVersion||'unavailable'} · ${firmware.phase==='completed'?(firmware.updateRequired?'New simulation available':'Simulation completed'):firmware.phase==='interrupted'?'Previous simulation interrupted; retry available':firmware.phase==='updating'?'Updating simulation…':'Not updated'}`;
@@ -20,7 +24,7 @@ async function refresh(){
     const share=latest.share;
     $('remote-details').hidden=!share?.available;$('remote-unavailable').hidden=!!share?.available;
     if(share?.available){$('remote-address').textContent=share.url;$('remote-address').href=share.url;$('remote-code').textContent=share.pin;}
-    else $('remote-unavailable').textContent='Remote tabletop is not running. Start it with node tools/share-board.mjs followed by this PC’s LAN IP address.';
+    else $('remote-unavailable').textContent='Remote tabletop is not enabled. You can play on this PC.';
   }catch(error){$('core-status').textContent='Control service unavailable';$('message').textContent=error.message;$('start-core').disabled=$('stop-core').disabled=true;}
   finally{reading=false;}
 }

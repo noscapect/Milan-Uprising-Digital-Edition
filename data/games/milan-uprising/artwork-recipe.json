@@ -1,0 +1,1614 @@
+{
+  "schemaVersion": 1,
+  "gameId": "milan-uprising",
+  "assets": {
+    "character-brujah-icon": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 216,
+      "textureName": "simona_ferrari",
+      "width": 256,
+      "height": 255
+    },
+    "character-brujah-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 296,
+      "textureName": "simona_ferrari",
+      "width": 614,
+      "height": 1024
+    },
+    "character-gangrel-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 204,
+      "textureName": "rosa_de_lorenzo",
+      "width": 256,
+      "height": 255
+    },
+    "character-gangrel-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 326,
+      "textureName": "rosa_de_lorenzo",
+      "width": 614,
+      "height": 1024
+    },
+    "character-malkavian-icon": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 80,
+      "textureName": "arianna_zanni",
+      "width": 256,
+      "height": 255
+    },
+    "character-malkavian-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 308,
+      "textureName": "arianna_zanni",
+      "width": 614,
+      "height": 1024
+    },
+    "character-nosferatu-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 104,
+      "textureName": "orlando_bianchi",
+      "width": 256,
+      "height": 255
+    },
+    "character-nosferatu-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 220,
+      "textureName": "orlando_bianchi",
+      "width": 614,
+      "height": 1024
+    },
+    "character-toreador-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 236,
+      "textureName": "latebra_uberto_ascheri",
+      "width": 256,
+      "height": 255
+    },
+    "character-toreador-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 324,
+      "textureName": "latebra_uberto_ascheri",
+      "width": 614,
+      "height": 1024
+    },
+    "character-tremere-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 383,
+      "textureName": "dante_brunieri",
+      "width": 256,
+      "height": 255
+    },
+    "character-tremere-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 191,
+      "textureName": "dante_brunieri",
+      "width": 614,
+      "height": 1024
+    },
+    "character-ventrue-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 191,
+      "textureName": "chao_yang_marco_hu",
+      "width": 256,
+      "height": 255
+    },
+    "character-ventrue-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 134,
+      "textureName": "chao_yang_marco_hu",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-carabinieri-officer-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 209,
+      "textureName": "police_officer",
+      "width": 240,
+      "height": 240
+    },
+    "ally-carabinieri-officer-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 31,
+      "textureName": "police_officer",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-reporter-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 137,
+      "textureName": "reporter",
+      "width": 240,
+      "height": 240
+    },
+    "ally-reporter-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 350,
+      "textureName": "reporter",
+      "width": 614,
+      "height": 1024
+    },
+    "ghoul-con-artist-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 102,
+      "textureName": "con_artist",
+      "width": 240,
+      "height": 240
+    },
+    "ghoul-con-artist-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 23,
+      "textureName": "con_artist",
+      "width": 614,
+      "height": 1024
+    },
+    "ghoul-fixer-icon": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 112,
+      "textureName": "fixer",
+      "width": 240,
+      "height": 240
+    },
+    "ghoul-fixer-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 68,
+      "textureName": "fixer",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-agnese-della-luna-icon": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 315,
+      "textureName": "agnese",
+      "width": 240,
+      "height": 240
+    },
+    "npc-agnese-della-luna-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 286,
+      "textureName": "agnese",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-hasanah-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 333,
+      "textureName": "hasanah",
+      "width": 240,
+      "height": 240
+    },
+    "npc-hasanah-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 202,
+      "textureName": "hasanah",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-helena-varga-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 85,
+      "textureName": "helena",
+      "width": 240,
+      "height": 240
+    },
+    "npc-helena-varga-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 49,
+      "textureName": "helena",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-il-dottore-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 63,
+      "textureName": "dottore",
+      "width": 240,
+      "height": 240
+    },
+    "npc-il-dottore-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 427,
+      "textureName": "dottore",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-lafcadio-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 304,
+      "textureName": "lafcadio",
+      "width": 240,
+      "height": 240
+    },
+    "npc-lafcadio-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 93,
+      "textureName": "lafcadio",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-leandro-costa-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 50,
+      "textureName": "leandro",
+      "width": 240,
+      "height": 240
+    },
+    "npc-leandro-costa-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 60,
+      "textureName": "leandro",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-ruslana-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 441,
+      "textureName": "ruslana",
+      "width": 240,
+      "height": 240
+    },
+    "npc-ruslana-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 178,
+      "textureName": "ruslana",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-salvador-espartelo-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 96,
+      "textureName": "salvador",
+      "width": 240,
+      "height": 240
+    },
+    "npc-salvador-espartelo-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 372,
+      "textureName": "salvador",
+      "width": 614,
+      "height": 1024
+    },
+    "location-qt8": {
+      "sourceFile": "resources.assets",
+      "pathId": 34,
+      "textureName": "QT8",
+      "width": 1024,
+      "height": 576
+    },
+    "location-portello": {
+      "sourceFile": "resources.assets",
+      "pathId": 146,
+      "textureName": "Portello",
+      "width": 1024,
+      "height": 576
+    },
+    "location-monumentale": {
+      "sourceFile": "resources.assets",
+      "pathId": 296,
+      "textureName": "Monumentale",
+      "width": 1024,
+      "height": 576
+    },
+    "location-isola": {
+      "sourceFile": "resources.assets",
+      "pathId": 237,
+      "textureName": "Isola",
+      "width": 1024,
+      "height": 576
+    },
+    "location-centrale": {
+      "sourceFile": "resources.assets",
+      "pathId": 163,
+      "textureName": "Centrale",
+      "width": 1024,
+      "height": 576
+    },
+    "location-nolo": {
+      "sourceFile": "resources.assets",
+      "pathId": 148,
+      "textureName": "NoLo",
+      "width": 1024,
+      "height": 576
+    },
+    "location-san-siro": {
+      "sourceFile": "resources.assets",
+      "pathId": 61,
+      "textureName": "SanSiro",
+      "width": 1024,
+      "height": 576
+    },
+    "location-city-life": {
+      "sourceFile": "resources.assets",
+      "pathId": 326,
+      "textureName": "CityLife",
+      "width": 1024,
+      "height": 576
+    },
+    "location-sempione": {
+      "sourceFile": "resources.assets",
+      "pathId": 186,
+      "textureName": "Sempione",
+      "width": 1024,
+      "height": 576
+    },
+    "location-garibaldi": {
+      "sourceFile": "resources.assets",
+      "pathId": 188,
+      "textureName": "Garibaldi",
+      "width": 1024,
+      "height": 576
+    },
+    "location-buenos-aires": {
+      "sourceFile": "resources.assets",
+      "pathId": 267,
+      "textureName": "BuenosAires",
+      "width": 1024,
+      "height": 576
+    },
+    "location-citta-studi": {
+      "sourceFile": "resources.assets",
+      "pathId": 143,
+      "textureName": "CittàStudi",
+      "width": 1024,
+      "height": 576
+    },
+    "location-bande-nere": {
+      "sourceFile": "resources.assets",
+      "pathId": 38,
+      "textureName": "BandeNere",
+      "width": 1024,
+      "height": 576
+    },
+    "location-washington": {
+      "sourceFile": "resources.assets",
+      "pathId": 254,
+      "textureName": "Washington",
+      "width": 1024,
+      "height": 576
+    },
+    "location-cadorna": {
+      "sourceFile": "resources.assets",
+      "pathId": 290,
+      "textureName": "Cadorna",
+      "width": 1024,
+      "height": 576
+    },
+    "location-duomo": {
+      "sourceFile": "resources.assets",
+      "pathId": 22,
+      "textureName": "Duomo",
+      "width": 1024,
+      "height": 576
+    },
+    "location-cinque-giornate": {
+      "sourceFile": "resources.assets",
+      "pathId": 190,
+      "textureName": "CinqueGiornate",
+      "width": 1024,
+      "height": 576
+    },
+    "location-argonne": {
+      "sourceFile": "resources.assets",
+      "pathId": 231,
+      "textureName": "Argonne",
+      "width": 1024,
+      "height": 576
+    },
+    "location-giambellino": {
+      "sourceFile": "resources.assets",
+      "pathId": 226,
+      "textureName": "Giambellino",
+      "width": 1024,
+      "height": 576
+    },
+    "location-solari": {
+      "sourceFile": "resources.assets",
+      "pathId": 43,
+      "textureName": "Solari",
+      "width": 1024,
+      "height": 576
+    },
+    "location-navigli": {
+      "sourceFile": "resources.assets",
+      "pathId": 276,
+      "textureName": "Navigli",
+      "width": 1024,
+      "height": 576
+    },
+    "location-bocconi": {
+      "sourceFile": "resources.assets",
+      "pathId": 198,
+      "textureName": "Bocconi",
+      "width": 1024,
+      "height": 576
+    },
+    "location-porta-romana": {
+      "sourceFile": "resources.assets",
+      "pathId": 234,
+      "textureName": "PortaRomana",
+      "width": 1024,
+      "height": 576
+    },
+    "location-calvairate": {
+      "sourceFile": "resources.assets",
+      "pathId": 194,
+      "textureName": "Calvairate",
+      "width": 1024,
+      "height": 576
+    },
+    "location-ronchetto": {
+      "sourceFile": "resources.assets",
+      "pathId": 251,
+      "textureName": "Ronchetto",
+      "width": 1024,
+      "height": 576
+    },
+    "location-barona": {
+      "sourceFile": "resources.assets",
+      "pathId": 84,
+      "textureName": "Barona",
+      "width": 1024,
+      "height": 576
+    },
+    "location-sant-ambrogio": {
+      "sourceFile": "resources.assets",
+      "pathId": 95,
+      "textureName": "SantAmbrogio",
+      "width": 1024,
+      "height": 576
+    },
+    "location-ripamonti": {
+      "sourceFile": "resources.assets",
+      "pathId": 57,
+      "textureName": "Ripamonti",
+      "width": 1024,
+      "height": 576
+    },
+    "location-vigentino": {
+      "sourceFile": "resources.assets",
+      "pathId": 418,
+      "textureName": "Vigentino",
+      "width": 1024,
+      "height": 576
+    },
+    "location-corvetto": {
+      "sourceFile": "resources.assets",
+      "pathId": 436,
+      "textureName": "Corvetto",
+      "width": 1024,
+      "height": 576
+    },
+    "group-anarch-cubes": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 93,
+      "textureName": "anarchs_cube",
+      "width": 72,
+      "height": 73
+    },
+    "group-camarilla-cubes": {
+      "sourceFile": "resources.assets",
+      "pathId": 430,
+      "textureName": "camarilla_cube",
+      "width": 72,
+      "height": 73
+    },
+    "group-ambrose-cubes": {
+      "sourceFile": "resources.assets",
+      "pathId": 205,
+      "textureName": "inquisition_cube",
+      "width": 72,
+      "height": 73
+    },
+    "face-anarchs": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 279,
+      "textureName": "anarchs",
+      "width": 79,
+      "height": 79
+    },
+    "face-camarilla": {
+      "sourceFile": "resources.assets",
+      "pathId": 37,
+      "textureName": "camarilla",
+      "width": 79,
+      "height": 79
+    },
+    "face-ambrose": {
+      "sourceFile": "resources.assets",
+      "pathId": 329,
+      "textureName": "inquisition",
+      "width": 79,
+      "height": 79
+    },
+    "face-investigation": {
+      "sourceFile": "resources.assets",
+      "pathId": 210,
+      "textureName": "token_investigation",
+      "width": 128,
+      "height": 128
+    },
+    "face-restricted": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 180,
+      "textureName": "token_forbiddenlocation",
+      "width": 256,
+      "height": 256
+    },
+    "token-masquerade": {
+      "sourceFile": "resources.assets",
+      "pathId": 44,
+      "textureName": "token_masquerade",
+      "width": 256,
+      "height": 256
+    },
+    "map-milan": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 147,
+      "textureName": "map_Milan",
+      "width": 2048,
+      "height": 1295
+    },
+    "logo-milan": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 289,
+      "textureName": "logo-MilanUprising",
+      "width": 1024,
+      "height": 412
+    },
+    "dice-double-success": {
+      "sourceFile": "resources.assets",
+      "pathId": 117,
+      "textureName": "diceblack_double_ankh",
+      "width": 256,
+      "height": 243
+    },
+    "dice-skull": {
+      "sourceFile": "resources.assets",
+      "pathId": 302,
+      "textureName": "diceblack_skull",
+      "width": 256,
+      "height": 243
+    },
+    "dice-success": {
+      "sourceFile": "resources.assets",
+      "pathId": 345,
+      "textureName": "diceblack_ankh",
+      "width": 256,
+      "height": 243
+    },
+    "dice-blank": {
+      "sourceFile": "resources.assets",
+      "pathId": 437,
+      "textureName": "diceblack_empty",
+      "width": 256,
+      "height": 243
+    },
+    "prospero-led-ring": {
+      "sourceFile": "resources.assets",
+      "pathId": 916,
+      "textureName": "LedRing",
+      "width": 949,
+      "height": 440,
+      "type": "Sprite"
+    },
+    "prospero-miniature": {
+      "sourceFile": "resources.assets",
+      "pathId": 980,
+      "textureName": "ProsperoMiniature_0",
+      "width": 304,
+      "height": 438,
+      "type": "Sprite"
+    },
+    "character-hecata-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 94,
+      "textureName": "jamilah_ianni",
+      "width": 256,
+      "height": 255
+    },
+    "character-hecata-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 231,
+      "textureName": "jamilah_ianni",
+      "width": 614,
+      "height": 1024
+    },
+    "character-lasombra-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 391,
+      "textureName": "domenica_amato",
+      "width": 256,
+      "height": 255
+    },
+    "character-lasombra-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 300,
+      "textureName": "domenica_amato",
+      "width": 614,
+      "height": 1024
+    },
+    "character-ministry-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 439,
+      "textureName": "aristide_demiana",
+      "width": 256,
+      "height": 255
+    },
+    "character-ministry-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 141,
+      "textureName": "aristide_demiana",
+      "width": 614,
+      "height": 1024
+    },
+    "character-tzimisce-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 435,
+      "textureName": "romeo_de_carlo",
+      "width": 256,
+      "height": 255
+    },
+    "character-tzimisce-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 241,
+      "textureName": "romeo_de_carlo",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-food-delivery-driver-icon": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 272,
+      "textureName": "food_delivery_driver",
+      "width": 240,
+      "height": 240
+    },
+    "ally-food-delivery-driver-portrait": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 228,
+      "textureName": "food_delivery_driver",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-paramedic-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 171,
+      "textureName": "paramedic",
+      "width": 240,
+      "height": 240
+    },
+    "ally-paramedic-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 72,
+      "textureName": "paramedic",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-taxi-driver-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 30,
+      "textureName": "taxi_driver",
+      "width": 240,
+      "height": 240
+    },
+    "ally-taxi-driver-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 147,
+      "textureName": "taxi_driver",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-investigator-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 138,
+      "textureName": "investigator",
+      "width": 240,
+      "height": 240
+    },
+    "ally-investigator-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 310,
+      "textureName": "investigator",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-hacker-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 158,
+      "textureName": "hacker",
+      "width": 240,
+      "height": 240
+    },
+    "ally-hacker-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 417,
+      "textureName": "hacker",
+      "width": 614,
+      "height": 1024
+    },
+    "ally-real-estate-agent-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 66,
+      "textureName": "real_estate_agent",
+      "width": 240,
+      "height": 240
+    },
+    "ally-real-estate-agent-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 323,
+      "textureName": "real_estate_agent",
+      "width": 614,
+      "height": 1024
+    },
+    "ghoul-blood-addict-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 173,
+      "textureName": "blood_addict",
+      "width": 240,
+      "height": 240
+    },
+    "ghoul-blood-addict-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 214,
+      "textureName": "blood_addict",
+      "width": 614,
+      "height": 1024
+    },
+    "ghoul-enforcer-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 240,
+      "textureName": "enforcer",
+      "width": 240,
+      "height": 240
+    },
+    "ghoul-enforcer-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 337,
+      "textureName": "enforcer",
+      "width": 614,
+      "height": 1024
+    },
+    "ghoul-punk-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 24,
+      "textureName": "punk",
+      "width": 240,
+      "height": 240
+    },
+    "ghoul-punk-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 307,
+      "textureName": "punk",
+      "width": 614,
+      "height": 1024
+    },
+    "ghoul-burglar-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 164,
+      "textureName": "burglar",
+      "width": 240,
+      "height": 240
+    },
+    "ghoul-burglar-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 223,
+      "textureName": "burglar",
+      "width": 614,
+      "height": 1024
+    },
+    "ghoul-vagrant-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 189,
+      "textureName": "vagrant",
+      "width": 240,
+      "height": 240
+    },
+    "ghoul-vagrant-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 432,
+      "textureName": "vagrant",
+      "width": 614,
+      "height": 1024
+    },
+    "npc-professor-jacopo-spano-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 386,
+      "textureName": "spano",
+      "width": 240,
+      "height": 240
+    },
+    "npc-rahim-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 239,
+      "textureName": "rahim",
+      "width": 240,
+      "height": 240
+    },
+    "npc-andreu-la-torre-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 259,
+      "textureName": "latorre",
+      "width": 240,
+      "height": 240
+    },
+    "npc-andreu-la-torre-portrait": {
+      "sourceFile": "resources.assets",
+      "pathId": 366,
+      "textureName": "latorre",
+      "width": 611,
+      "height": 1024
+    },
+    "amulet-location-1-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 357,
+      "textureName": "talismaninvestigation1",
+      "width": 128,
+      "height": 128
+    },
+    "amulet-location-2-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 402,
+      "textureName": "talismaninvestigation2",
+      "width": 128,
+      "height": 128
+    },
+    "amulet-location-3-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 242,
+      "textureName": "talismaninvestigation3",
+      "width": 128,
+      "height": 128
+    },
+    "amulet-location-4-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 275,
+      "textureName": "talismaninvestigation4",
+      "width": 128,
+      "height": 128
+    },
+    "special-location-1-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 152,
+      "textureName": "DuomoSpecialMM",
+      "width": 128,
+      "height": 128
+    },
+    "special-location-2-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 109,
+      "textureName": "RipamontiSpecialMM",
+      "width": 128,
+      "height": 128
+    },
+    "npc-cult-fanatic-1-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 299,
+      "textureName": "cultleader_physical",
+      "width": 240,
+      "height": 240
+    },
+    "npc-cult-fanatic-2-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 217,
+      "textureName": "cultleader_social",
+      "width": 240,
+      "height": 240
+    },
+    "npc-cult-fanatic-3-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 412,
+      "textureName": "cultleader_mental",
+      "width": 240,
+      "height": 240
+    },
+    "npc-cult-fanatic-4-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 116,
+      "textureName": "cultleader_mixed",
+      "width": 240,
+      "height": 240
+    },
+    "expansion-prop-anarchs": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 337,
+      "textureName": "prop_anarchs",
+      "width": 128,
+      "height": 128
+    },
+    "expansion-prop-camarilla": {
+      "sourceFile": "resources.assets",
+      "pathId": 25,
+      "textureName": "prop_camarilla",
+      "width": 128,
+      "height": 128
+    },
+    "expansion-prop-inquisition": {
+      "sourceFile": "resources.assets",
+      "pathId": 285,
+      "textureName": "prop_inquisition",
+      "width": 128,
+      "height": 128
+    },
+    "expansion-prop-sabbat": {
+      "sourceFile": "resources.assets",
+      "pathId": 175,
+      "textureName": "prop_sabbat",
+      "width": 128,
+      "height": 128
+    },
+    "expansion-sabbat-cube": {
+      "sourceFile": "resources.assets",
+      "pathId": 19,
+      "textureName": "sabbat_cube",
+      "width": 72,
+      "height": 73
+    },
+    "expansion-nephilim-cube": {
+      "sourceFile": "resources.assets",
+      "pathId": 400,
+      "textureName": "nephilim_cube",
+      "width": 72,
+      "height": 73
+    },
+    "npc-military-helicopter-icon": {
+      "sourceFile": "resources.assets",
+      "pathId": 136,
+      "textureName": "helicopter",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-3-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 79,
+      "textureName": "HavenPersonalUpgraded3",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-4-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 90,
+      "textureName": "HavenPersonalUpgraded4",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-1-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 100,
+      "textureName": "HavenPersonalUpgraded1",
+      "width": 256,
+      "height": 256
+    },
+    "haven-living-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 110,
+      "textureName": "HavenLivingUpgraded",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-2": {
+      "sourceFile": "resources.assets",
+      "pathId": 129,
+      "textureName": "HavenPersonal2",
+      "width": 256,
+      "height": 256
+    },
+    "haven-office-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 144,
+      "textureName": "HavenOfficeUpgraded",
+      "width": 256,
+      "height": 256
+    },
+    "haven-gallery": {
+      "sourceFile": "resources.assets",
+      "pathId": 157,
+      "textureName": "HavenGallery",
+      "width": 256,
+      "height": 256
+    },
+    "haven-gallery-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 162,
+      "textureName": "HavenGalleryUpgraded",
+      "width": 256,
+      "height": 256
+    },
+    "haven-library": {
+      "sourceFile": "resources.assets",
+      "pathId": 176,
+      "textureName": "HavenLibrary",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-2-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 218,
+      "textureName": "HavenPersonalUpgraded2",
+      "width": 256,
+      "height": 256
+    },
+    "haven-meditation-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 220,
+      "textureName": "HavenMeditationUpgraded",
+      "width": 256,
+      "height": 256
+    },
+    "haven-gym-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 221,
+      "textureName": "HavenGymUpgraded",
+      "width": 256,
+      "height": 256
+    },
+    "haven-gym": {
+      "sourceFile": "resources.assets",
+      "pathId": 224,
+      "textureName": "HavenGym",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-4": {
+      "sourceFile": "resources.assets",
+      "pathId": 229,
+      "textureName": "HavenPersonal4",
+      "width": 256,
+      "height": 256
+    },
+    "haven-library-upgraded": {
+      "sourceFile": "resources.assets",
+      "pathId": 230,
+      "textureName": "HavenLibraryUpgraded",
+      "width": 256,
+      "height": 256
+    },
+    "haven-living": {
+      "sourceFile": "resources.assets",
+      "pathId": 340,
+      "textureName": "HavenLiving",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-3": {
+      "sourceFile": "resources.assets",
+      "pathId": 359,
+      "textureName": "HavenPersonal3",
+      "width": 256,
+      "height": 256
+    },
+    "haven-meditation": {
+      "sourceFile": "resources.assets",
+      "pathId": 394,
+      "textureName": "HavenMeditation",
+      "width": 256,
+      "height": 256
+    },
+    "haven-office": {
+      "sourceFile": "resources.assets",
+      "pathId": 429,
+      "textureName": "HavenOffice",
+      "width": 256,
+      "height": 256
+    },
+    "haven-personal-1": {
+      "sourceFile": "sharedassets0.assets",
+      "pathId": 145,
+      "textureName": "HavenPersonal1",
+      "width": 256,
+      "height": 256
+    }
+  },
+  "bindings": {
+    "components": {
+      "character-brujah": {
+        "icon": "character-brujah-icon",
+        "detail": "character-brujah-portrait"
+      },
+      "character-gangrel": {
+        "icon": "character-gangrel-icon",
+        "detail": "character-gangrel-portrait"
+      },
+      "character-malkavian": {
+        "icon": "character-malkavian-icon",
+        "detail": "character-malkavian-portrait"
+      },
+      "character-nosferatu": {
+        "icon": "character-nosferatu-icon",
+        "detail": "character-nosferatu-portrait"
+      },
+      "character-toreador": {
+        "icon": "character-toreador-icon",
+        "detail": "character-toreador-portrait"
+      },
+      "character-tremere": {
+        "icon": "character-tremere-icon",
+        "detail": "character-tremere-portrait"
+      },
+      "character-ventrue": {
+        "icon": "character-ventrue-icon",
+        "detail": "character-ventrue-portrait"
+      },
+      "ally-carabinieri-officer": {
+        "icon": "ally-carabinieri-officer-icon",
+        "detail": "ally-carabinieri-officer-portrait"
+      },
+      "ally-reporter": {
+        "icon": "ally-reporter-icon",
+        "detail": "ally-reporter-portrait"
+      },
+      "ghoul-con-artist": {
+        "icon": "ghoul-con-artist-icon",
+        "detail": "ghoul-con-artist-portrait"
+      },
+      "ghoul-fixer": {
+        "icon": "ghoul-fixer-icon",
+        "detail": "ghoul-fixer-portrait"
+      },
+      "npc-agnese-della-luna": {
+        "icon": "npc-agnese-della-luna-icon",
+        "detail": "npc-agnese-della-luna-portrait"
+      },
+      "npc-hasanah": {
+        "icon": "npc-hasanah-icon",
+        "detail": "npc-hasanah-portrait"
+      },
+      "npc-helena-varga": {
+        "icon": "npc-helena-varga-icon",
+        "detail": "npc-helena-varga-portrait"
+      },
+      "npc-il-dottore": {
+        "icon": "npc-il-dottore-icon",
+        "detail": "npc-il-dottore-portrait"
+      },
+      "npc-lafcadio": {
+        "icon": "npc-lafcadio-icon",
+        "detail": "npc-lafcadio-portrait"
+      },
+      "npc-leandro-costa": {
+        "icon": "npc-leandro-costa-icon",
+        "detail": "npc-leandro-costa-portrait"
+      },
+      "npc-ruslana": {
+        "icon": "npc-ruslana-icon",
+        "detail": "npc-ruslana-portrait"
+      },
+      "npc-salvador-espartelo": {
+        "icon": "npc-salvador-espartelo-icon",
+        "detail": "npc-salvador-espartelo-portrait"
+      },
+      "masquerade": {
+        "icon": "token-masquerade"
+      },
+      "character-hecata": {
+        "icon": "character-hecata-icon",
+        "detail": "character-hecata-portrait"
+      },
+      "character-lasombra": {
+        "icon": "character-lasombra-icon",
+        "detail": "character-lasombra-portrait"
+      },
+      "character-ministry": {
+        "icon": "character-ministry-icon",
+        "detail": "character-ministry-portrait"
+      },
+      "character-tzimisce": {
+        "icon": "character-tzimisce-icon",
+        "detail": "character-tzimisce-portrait"
+      },
+      "ally-food-delivery-driver": {
+        "icon": "ally-food-delivery-driver-icon",
+        "detail": "ally-food-delivery-driver-portrait"
+      },
+      "ally-paramedic": {
+        "icon": "ally-paramedic-icon",
+        "detail": "ally-paramedic-portrait"
+      },
+      "ally-taxi-driver": {
+        "icon": "ally-taxi-driver-icon",
+        "detail": "ally-taxi-driver-portrait"
+      },
+      "ally-investigator": {
+        "icon": "ally-investigator-icon",
+        "detail": "ally-investigator-portrait"
+      },
+      "ally-hacker": {
+        "icon": "ally-hacker-icon",
+        "detail": "ally-hacker-portrait"
+      },
+      "ally-real-estate-agent": {
+        "icon": "ally-real-estate-agent-icon",
+        "detail": "ally-real-estate-agent-portrait"
+      },
+      "ghoul-blood-addict": {
+        "icon": "ghoul-blood-addict-icon",
+        "detail": "ghoul-blood-addict-portrait"
+      },
+      "ghoul-enforcer": {
+        "icon": "ghoul-enforcer-icon",
+        "detail": "ghoul-enforcer-portrait"
+      },
+      "ghoul-punk": {
+        "icon": "ghoul-punk-icon",
+        "detail": "ghoul-punk-portrait"
+      },
+      "ghoul-burglar": {
+        "icon": "ghoul-burglar-icon",
+        "detail": "ghoul-burglar-portrait"
+      },
+      "ghoul-vagrant": {
+        "icon": "ghoul-vagrant-icon",
+        "detail": "ghoul-vagrant-portrait"
+      },
+      "npc-professor-jacopo-spano": {
+        "icon": "npc-professor-jacopo-spano-icon"
+      },
+      "npc-rahim": {
+        "icon": "npc-rahim-icon"
+      },
+      "npc-andreu-la-torre": {
+        "icon": "npc-andreu-la-torre-icon",
+        "detail": "npc-andreu-la-torre-portrait"
+      },
+      "amulet-location-1": {
+        "icon": "amulet-location-1-icon"
+      },
+      "amulet-location-2": {
+        "icon": "amulet-location-2-icon"
+      },
+      "amulet-location-3": {
+        "icon": "amulet-location-3-icon"
+      },
+      "amulet-location-4": {
+        "icon": "amulet-location-4-icon"
+      },
+      "special-location-1": {
+        "icon": "special-location-1-icon"
+      },
+      "special-location-2": {
+        "icon": "special-location-2-icon"
+      },
+      "npc-cult-fanatic-1": {
+        "icon": "npc-cult-fanatic-1-icon"
+      },
+      "npc-cult-fanatic-2": {
+        "icon": "npc-cult-fanatic-2-icon"
+      },
+      "npc-cult-fanatic-3": {
+        "icon": "npc-cult-fanatic-3-icon"
+      },
+      "npc-cult-fanatic-4": {
+        "icon": "npc-cult-fanatic-4-icon"
+      },
+      "faction-anarchs-1": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-2": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-3": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-4": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-5": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-6": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-7": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-8": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-9": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-10": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-11": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-12": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-13": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-14": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-15": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-16": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-17": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-18": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-19": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-anarchs-20": {
+        "icon": "expansion-prop-anarchs"
+      },
+      "faction-camarilla-1": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-2": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-3": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-4": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-5": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-6": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-7": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-8": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-9": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-10": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-11": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-12": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-13": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-14": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-15": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-16": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-17": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-18": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-19": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-camarilla-20": {
+        "icon": "expansion-prop-camarilla"
+      },
+      "faction-ambrose-1": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-2": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-3": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-4": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-5": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-6": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-7": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-8": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-9": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-ambrose-10": {
+        "icon": "expansion-prop-inquisition"
+      },
+      "faction-sabbat-1": {
+        "icon": "expansion-prop-sabbat"
+      },
+      "faction-sabbat-2": {
+        "icon": "expansion-prop-sabbat"
+      },
+      "faction-sabbat-3": {
+        "icon": "expansion-prop-sabbat"
+      },
+      "faction-sabbat-4": {
+        "icon": "expansion-prop-sabbat"
+      },
+      "faction-sabbat-5": {
+        "icon": "expansion-prop-sabbat"
+      },
+      "faction-sabbat-6": {
+        "icon": "expansion-prop-sabbat"
+      },
+      "influence-sabbat-1": {
+        "icon": "expansion-sabbat-cube"
+      },
+      "influence-sabbat-2": {
+        "icon": "expansion-sabbat-cube"
+      },
+      "influence-sabbat-3": {
+        "icon": "expansion-sabbat-cube"
+      },
+      "influence-sabbat-4": {
+        "icon": "expansion-sabbat-cube"
+      },
+      "influence-sabbat-5": {
+        "icon": "expansion-sabbat-cube"
+      },
+      "influence-sabbat-6": {
+        "icon": "expansion-sabbat-cube"
+      },
+      "influence-nephilim-1": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-2": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-3": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-4": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-5": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-6": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-7": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-8": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-9": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "influence-nephilim-10": {
+        "icon": "expansion-nephilim-cube"
+      },
+      "npc-military-helicopter": {
+        "icon": "npc-military-helicopter-icon"
+      }
+    },
+    "zones": {
+      "qt8": {
+        "background": "location-qt8"
+      },
+      "portello": {
+        "background": "location-portello"
+      },
+      "monumentale": {
+        "background": "location-monumentale"
+      },
+      "isola": {
+        "background": "location-isola"
+      },
+      "centrale": {
+        "background": "location-centrale"
+      },
+      "nolo": {
+        "background": "location-nolo"
+      },
+      "san-siro": {
+        "background": "location-san-siro"
+      },
+      "city-life": {
+        "background": "location-city-life"
+      },
+      "sempione": {
+        "background": "location-sempione"
+      },
+      "garibaldi": {
+        "background": "location-garibaldi"
+      },
+      "buenos-aires": {
+        "background": "location-buenos-aires"
+      },
+      "citta-studi": {
+        "background": "location-citta-studi"
+      },
+      "bande-nere": {
+        "background": "location-bande-nere"
+      },
+      "washington": {
+        "background": "location-washington"
+      },
+      "cadorna": {
+        "background": "location-cadorna"
+      },
+      "duomo": {
+        "background": "location-duomo"
+      },
+      "cinque-giornate": {
+        "background": "location-cinque-giornate"
+      },
+      "argonne": {
+        "background": "location-argonne"
+      },
+      "giambellino": {
+        "background": "location-giambellino"
+      },
+      "solari": {
+        "background": "location-solari"
+      },
+      "navigli": {
+        "background": "location-navigli"
+      },
+      "bocconi": {
+        "background": "location-bocconi"
+      },
+      "porta-romana": {
+        "background": "location-porta-romana"
+      },
+      "calvairate": {
+        "background": "location-calvairate"
+      },
+      "ronchetto": {
+        "background": "location-ronchetto"
+      },
+      "barona": {
+        "background": "location-barona"
+      },
+      "sant-ambrogio": {
+        "background": "location-sant-ambrogio"
+      },
+      "ripamonti": {
+        "background": "location-ripamonti"
+      },
+      "vigentino": {
+        "background": "location-vigentino"
+      },
+      "corvetto": {
+        "background": "location-corvetto"
+      }
+    },
+    "groups": {
+      "anarch-cubes": "group-anarch-cubes",
+      "camarilla-cubes": "group-camarilla-cubes",
+      "ambrose-cubes": "group-ambrose-cubes"
+    },
+    "faces": {
+      "anarchs": "face-anarchs",
+      "camarilla": "face-camarilla",
+      "ambrose": "face-ambrose",
+      "investigation": "face-investigation",
+      "restricted": "face-restricted",
+      "dice-double-success": "dice-double-success",
+      "dice-skull": "dice-skull",
+      "dice-success": "dice-success",
+      "dice-blank": "dice-blank"
+    },
+    "branding": {
+      "map": "map-milan",
+      "logo": "logo-milan"
+    }
+  }
+}

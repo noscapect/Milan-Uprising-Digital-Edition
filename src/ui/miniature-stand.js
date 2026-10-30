@@ -22,7 +22,7 @@ export function mountMiniatureStand(host,config){
     const observed=state?.observed===true&&state.colors?.length===4;
     [...ring.querySelectorAll('path')].forEach((led,i)=>{const color=observed?state.colors[lightIndices[i]]:'#343b3c';led.style.setProperty('--led-color',color);led.dataset.lit=String(observed&&color!=='#000000');});
     ring.setAttribute('aria-label',observed?'LED ring · '+state.colors.map((c,i)=>`light ${i+1}: ${c}`).join(', '):'LED ring · four lights · no signal received');
-    status.textContent=observed?'LED ring · Milan':'LED ring · awaiting Milan';stand.dataset.observed=String(observed);
+    status.textContent=observed?'LED ring · the game':'LED ring · awaiting the game';stand.dataset.observed=String(observed);
   }
   update();return {element:stand,update,dispose(){stand.remove();}};
 }
