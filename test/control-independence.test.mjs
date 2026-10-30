@@ -1,0 +1,40 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {cp,mkdir,mkdtemp,writeFile,readFile,rm} from 'node:fs/promises';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {createTabletop} from '../src/application/tabletop.js';
+import {milanModule} from '../src/games/milan-uprising/module.js';
+import {buildVisibleControlArrangement} from '../src/games/milan-uprising/control-update.js';
+
+test('real adapter applies Control independently of an unreadable Influence card and later accepts verified Influence and bonus',async t=>{
+ const root=await mkdtemp(join(tmpdir(),'tce-control-replay-'));t.after(()=>rm(root,{recursive:true,force:true}));
+ const source=fileURLToPath(new URL('../',import.meta.url)),runtime=join(root,'private','linked'),state=join(root,'state'),frame=join(root,'frame.json');
+ const filter=path=>!path.split(/[\\/]/).some(part=>['bin','obj','build','__pycache__'].includes(part));
+ await mkdir(runtime,{recursive:true});await mkdir(state);
+ await Promise.all(['src','data'].map(name=>cp(join(source,name),join(root,name),{recursive:true,filter})));
+ await cp(join(source,'integration','runtime'),runtime,{recursive:true,filter});await cp(join(source,'integration','milan-uprising'),runtime,{recursive:true,filter});await writeFile(join(runtime,'machine.json'),'{}');
+ const profile=JSON.parse(await readFile(join(root,'data/games/milan-uprising/city-expansions.json'),'utf8'));
+ const table=createTabletop({profile,module:milanModule});table.place('character-nosferatu','qt8');table.place('investigation-1','washington');table.flip('investigation-1');table.arrange(buildVisibleControlArrangement(profile,table.snapshot(),[{zoneId:'city-life',faction:'camarilla'}]));
+ for(const name of ['current-chronicle-table-expansions.json','tablet-chronicle-table-expansions.json'])await writeFile(join(state,name),JSON.stringify(table.exportSession()));
+ const raw={available:true,width:2560,height:1600,mapGeometry:'android-city-v1',lines:[{text:'NIGHT 4 HOUR 2 SUSPICION MASQUERADE',x:300,y:80},...[['Anarch is now',1398,821],['controlling CityLife',1347,872],['CityLife has now Z 1',1348,993],['Anarch Influence',1346,1047],['Media Office Locatiorv',1511,1167],['Bonus revealed in',1512,1220],['CityLife',1512,1267]].map(([text,x,y])=>({text,x,y}))]};
+ await writeFile(frame,JSON.stringify(raw));
+ const script=`
+ import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
+ import {observe,setFeedbackSource,tableSession} from ${JSON.stringify(pathToFileURL(join(runtime,'app-feedback.mjs')).href)};
+ import {boardTiles} from ${JSON.stringify(pathToFileURL(join(runtime,'location-tiles-store.mjs')).href)};
+ const profile=JSON.parse(await readFile(${JSON.stringify(join(root,'data/games/milan-uprising/city-expansions.json'))},'utf8'));
+ const control=()=>{const state=tableSession().state,token=profile.components.find(c=>c.groupId==='control'&&state.placements[c.id]==='city-life');return state.faces[token.id]};
+ const count=()=>{const state=tableSession().state;return profile.components.filter(c=>c.groupId==='anarch-cubes'&&state.placements[c.id]==='city-life').length};
+ setFeedbackSource('android');await observe(true);assert.equal(control(),'camarilla');
+ const confirmed=await observe(true);assert.equal(confirmed.cityOutcomes.confirmedControlApplied,true);assert.equal(control(),'anarchs');assert.equal(count(),0);
+ const frame=JSON.parse(await readFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,'utf8'));for(const line of frame.lines)line.text=line.text.replace('has now Z 1','has now 1').replace('Locatiorv','Location');await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(frame));
+ await observe(true);await observe(true);assert.equal(count(),1);assert.equal(boardTiles().tiles['city-life'].bonus.value,'media');assert.equal(boardTiles().tiles['city-life'].bonus.face,'visible');
+ assert.equal(tableSession().state.placements['character-nosferatu'],'qt8');assert.equal(tableSession().state.faces['investigation-1'],'restricted');
+ const revision=tableSession().state.revision;await observe(true);assert.equal(tableSession().state.revision,revision);console.log('independent Control and verified later outcomes passed');`;
+ const {stdout}=await promisify(execFile)(process.execPath,['--input-type=module','-e',script],{windowsHide:true,timeout:30000,env:{...process.env,MILAN_FEEDBACK_STATE_DIR:state,MILAN_FEEDBACK_REPLAY_OBSERVATION:frame,MILAN_FEEDBACK_REPLAY_IMAGE:''}});
+ assert.match(stdout,/independent Control and verified later outcomes passed/);
+});

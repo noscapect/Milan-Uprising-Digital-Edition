@@ -1,5 +1,13 @@
 # Validatie — 21 oktober 2026
 
+## Onafhankelijke controle en schone feedtekst — 30 oktober 2026
+
+Alle 150 publieke tests slagen met Node 26 en gebundelde Node 22. De regressie doorloopt de echte adapter met een geldige controlewissel naast een onleesbare invloedstekst in hetzelfde district: alleen de controle wordt bevestigd; pas twee latere leesbare beelden leveren de invloed en bonus. Beide OCR-engines herkennen de opgenomen CityLife-meldingen na het uitsluiten van gekleurde iconen uit de feedtekst. De actuele dertig leesbare invloedstanden en alle positief herkende controlekleuren komen overeen met het bord; er zijn geen actuele synchronisatie-issues. De lokale en LAN-browsercontrole bevestigt Anarch-controle en Media Office. Milan bleef verbonden. Zie [de scope en oorzaak](PHASE-SYNC.md#citylife-isolate-control-and-exclude-colored-ocr-icons--30-october-2026).
+
+## NPC-verplaatsing met expliciete herkomst — 30 oktober 2026
+
+Alle 147 publieke tests slagen met Node 26 en de gebundelde Node 22. De opgenomen melding voor Agnese Washington → Duomo is door de echte adapter in een geïsoleerde replay verwerkt na twee waarnemingen, met behoud van andere miniaturen en een Restricted-fiche. Twee nieuwe livebeelden bevestigden dezelfde verplaatsing; de browser toont Agnese in Duomo. Milan bleef verbonden en er is geen app- of sensorinvoer verstuurd. De parser test beide voltooide verplaatsingsvormen, afgebroken/onbekende routes en het onderdrukken van oudere meldingen. Zie [plaatsingssynchronisatie](PLAATSINGSSYNC.md#agnese-moved-from-washington-to-duomo--30-october-2026).
+
 ## Tegelbehoud tijdens vervolgsetup — 30 oktober 2026
 
 Alle 144 publieke tests slagen met Node 26 en de gebundelde Node 22. De nieuwe regressie doorloopt de echte adapter van Board tiles naar Components setup: tegelstand en kamerupgrades blijven identiek, ook na herhaalde componentwaarneming; expliciet leegmaken blijft alles wissen. De live verdwenen tegels zijn uit de exacte automatische-resetback-up hersteld zonder de 63 geplaatste onderdelen te wijzigen. Lokale en LAN-browsercontrole bevestigen beide symbolen nadat Milan al naar companion placement is gegaan. Zie [de overgangscorrectie](LOCATIETEGELS.md#preserve-tiles-through-the-next-setup-step).

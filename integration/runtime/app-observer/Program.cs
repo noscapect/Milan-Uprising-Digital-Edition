@@ -63,6 +63,19 @@ if(focusRead&&external&&width==2560&&height==1600){
  }
 }
 var result=await engine.RecognizeAsync(software);
+// OCR can mistake colored Influence cubes for letters. Read
+// calibrated feed text as neutral light ink, without red/purple/gold icons.
+if(external&&width==2560&&height==1600&&result.Lines.Any(line=>line.Text.Contains("SUSPICION",StringComparison.OrdinalIgnoreCase))){
+  const int fx=1330,fy=320,fw=630,fh=1072;
+  using var feed=new Bitmap(fw,fh);
+  for(int y=0;y<fh;y++)for(int x=0;x<fw;x++){
+    var pixel=bitmap.GetPixel(x+fx,y+fy);int low=Math.Min(pixel.R,Math.Min(pixel.G,pixel.B)),high=Math.Max(pixel.R,Math.Max(pixel.G,pixel.B));
+    feed.SetPixel(x,y,low>145&&high-low<60?Color.Black:Color.White);
+  }
+  using var feedPixels=BitmapInput.Software(feed);var clean=await engine.RecognizeAsync(feedPixels);
+  result.Lines.RemoveAll(line=>line.Words.Min(word=>word.BoundingRect.X)>width*.5&&line.Words.Min(word=>word.BoundingRect.X)<width*.7&&line.Words.Min(word=>word.BoundingRect.Y)>fy&&line.Words.Min(word=>word.BoundingRect.Y)<fy+fh);
+  result.Lines.AddRange(clean.Lines.Select(line=>new ReadLine(line.Words.Select(word=>new ReadWord(word.Text,new Windows.Foundation.Rect(word.BoundingRect.X+fx,word.BoundingRect.Y+fy,word.BoundingRect.Width,word.BoundingRect.Height))).ToList())));
+}
 var supplementalLines=new List<object>();
 bool recoveredPhaseHeader=false;
 // Whole-frame OCR sometimes drops NIGHT/number while the day feed scrolls.

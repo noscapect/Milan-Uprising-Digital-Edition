@@ -29,7 +29,7 @@ Run the public test suite with:
 node --test
 ```
 
-If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest Windows checks on 30 October 2026 passed all 144 public tests with both Node 26 and the bundled Node 22 runtime, including setup-tile observations and preservation through component setup, portable OCR packaging, WSL startup, add-on availability, optional artwork, release staging, installer integrity, tablet checks and Bluetooth lifecycle ordering alongside the board regressions. See [validation](docs/VALIDATIE.md) for separate browser, package and hardware evidence. Temporary copies under ignored work directories may be discovered by a bare `node --test`; the recorded 144-test result covers the public `test/` and `tests/` suites only.
+If npm is available, `npm start` and `npm test` are equivalent shortcuts. The latest Windows checks on 30 October 2026 passed all 150 public tests with both Node 26 and the bundled Node 22 runtime, including independent Control updates, completed NPC movement, setup-tile preservation, portable OCR packaging, WSL startup, add-on availability, optional artwork, release staging, installer integrity, tablet checks and Bluetooth lifecycle ordering alongside the board regressions. See [validation](docs/VALIDATIE.md) for separate browser, package and hardware evidence. Temporary copies under ignored work directories may be discovered by a bare `node --test`; the recorded 150-test result covers the public `test/` and `tests/` suites only.
 
 ## Current features and limits
 

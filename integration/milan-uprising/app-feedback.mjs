@@ -1,7 +1,7 @@
 import {visionPython,visionArguments} from './machine-config.mjs';
 import {readLocationBonusOutcomes} from './location-bonus-outcomes.mjs';
 import {readSetupLocationTiles,buildSetupTileActions} from '../../src/games/milan-uprising/setup-location-tiles.js';
-import {independentInfluenceUpdates} from '../../src/games/milan-uprising/influence-observations.js';
+import {independentInfluenceUpdates,independentControlUpdates} from '../../src/games/milan-uprising/influence-observations.js';
 import {createPositiveObservations} from '../../src/adapters/positive-observations.js';
 import {buildComponentInstructions} from '../../src/games/milan-uprising/component-instructions.js';
 import {readComponentOutcomes} from './component-outcomes.mjs';
@@ -39,6 +39,7 @@ const componentReads=createPositiveObservations({key:i=>JSON.stringify(i)});
 const influenceReads=createPositiveObservations({key:u=>u.zoneId+':'+u.faction+':'+u.count});
 const bonusReads=createPositiveObservations({key:t=>t.zoneId+':'+t.value});
 const setupTileReads=createPositiveObservations({key:t=>[t.zoneId,t.kind,t.face,t.value].join(':')});
+const controlReads=createPositiveObservations({key:item=>item.zoneId+':'+item.faction});
 const setupTileCatalog=JSON.parse(readFileSync(new URL('../../data/games/milan-uprising/location-bonuses.json',import.meta.url)));
 const baseProfile=JSON.parse(readFileSync(new URL('../../data/games/milan-uprising/city.json',import.meta.url),'utf8'));
 const profile=JSON.parse(readFileSync(new URL('../../data/games/milan-uprising/city-expansions.json',import.meta.url),'utf8'));
@@ -317,6 +318,7 @@ export async function observe(force=false){
     if(value.companionPhase)value.companionPhase.stable=previous?.companionPhase?.phase==='day'&&previous.companionPhase.night===value.companionPhase.night&&previous.companionPhase.generation===inputGeneration;
     if(value.cityOutcomes)value.cityOutcomes.stable=!!previous?.cityOutcomes&&JSON.stringify([value.cityOutcomes.updates,value.cityOutcomes.announcements,value.cityOutcomes.unsupported])===JSON.stringify([previous.cityOutcomes.updates,previous.cityOutcomes.announcements,previous.cityOutcomes.unsupported]);
     const influenceSummary=value.daySummary||value.cityOutcomes;
+    if(influenceSummary)influenceSummary.confirmedControlUpdates=controlReads.observe(independentControlUpdates(profile,influenceSummary),JSON.stringify([inputGeneration,influenceSummary.phase]),value.receivedAt);else controlReads.reset();
     if(influenceSummary){const context=JSON.stringify([inputGeneration,influenceSummary.phase]);influenceSummary.confirmedUpdates=influenceReads.observe(independentInfluenceUpdates(profile,influenceSummary),context,value.receivedAt);}else influenceReads.reset();
     value.locationBonusOutcomes=readLocationBonusOutcomes(raw,profile.zones);
     value.setupLocationTiles=readSetupLocationTiles(raw,profile.zones,setupTileCatalog);
@@ -324,7 +326,7 @@ export async function observe(force=false){
     if(value.locationBonusOutcomes)value.locationBonusOutcomes.confirmedTiles=bonusReads.observe(value.locationBonusOutcomes.tiles,inputGeneration,value.receivedAt);else bonusReads.reset();
     value.componentOutcomes=readComponentOutcomes(raw,profile);
     if(value.componentOutcomes){value.componentOutcomes.generation=inputGeneration;value.componentOutcomes.confirmedInstructions=componentReads.observe(value.componentOutcomes.instructions,inputGeneration,value.receivedAt);value.componentOutcomes.stable=value.componentOutcomes.confirmedInstructions.length>0;}else componentReads.observe([],inputGeneration,value.receivedAt);
-    value.characterRelocations=readCharacterRelocations(raw,profile.zones,characters);
+    value.characterRelocations=readCharacterRelocations(raw,profile.zones,characters,profile.components);
     if(value.characterRelocations)value.characterRelocations.stable=!!previous?.characterRelocations&&previous.characterRelocations.generation===inputGeneration&&JSON.stringify(value.characterRelocations.characterMoves)===JSON.stringify(previous.characterRelocations.characterMoves)&&JSON.stringify(value.characterRelocations.unsupported)===JSON.stringify(previous.characterRelocations.unsupported);
     if(value.characterRelocations)value.characterRelocations.generation=inputGeneration;
     if(value.characterRelocations){value.characterRelocations.confirmedMoves=relocationReads.observe(value.characterRelocations.characterMoves,inputGeneration,value.receivedAt);value.characterRelocations.stable=value.characterRelocations.confirmedMoves.length>0;}else relocationReads.observe([],inputGeneration,value.receivedAt);
@@ -442,6 +444,10 @@ export async function observe(force=false){
       }catch(error){value.cityOutcomes.error=error.message;}
     }
     const confirmedInfluence=(value.daySummary||value.cityOutcomes)?.confirmedUpdates||[];
+    const confirmedControl=(value.daySummary||value.cityOutcomes)?.confirmedControlUpdates||[];
+    if(value.available&&value.screen!=='error'&&confirmedControl.length){
+      try{const arrangement=buildVisibleControlArrangement(profile,table.snapshot(),confirmedControl);if(arrangement.changed){table.arrange(arrangement);persist();}(value.daySummary||value.cityOutcomes).confirmedControlApplied=true;}catch(error){(value.daySummary||value.cityOutcomes).confirmedControlError=error.message;}
+    }
     if(value.available&&value.screen!=='error'&&confirmedInfluence.length){
       try{const arrangement=buildInfluenceArrangement(profile,table.snapshot(),confirmedInfluence);if(arrangement.changed){table.arrange(arrangement);persist();}const summary=value.daySummary||value.cityOutcomes;summary.confirmedUpdatesApplied=true;}catch(error){(value.daySummary||value.cityOutcomes).confirmedUpdatesError=error.message;}
     }

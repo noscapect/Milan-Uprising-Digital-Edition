@@ -1,5 +1,13 @@
 # Day-phase synchronization
 
+## CityLife: isolate Control and exclude colored OCR icons — 30 October 2026
+
+The live city feed showed four character moves to CityLife, Anarch Control, one Anarch Influence, and a Media Office bonus reveal. The moves had been applied, but Control and the bonus remained stale. OCR read the red cube as an extra `Z` in `CityLife has now Z 1 Anarch Influence` and read `Location` as `Locatiorv`. The former unsupported card also blocked the independent, correctly read Control announcement.
+
+The calibrated reader now OCRs the feed's neutral light text separately from its colored symbols, preserving word coordinates. Both the Windows and bundled Tesseract backends read the recorded count and complete bonus phrase correctly after this preprocessing; no count is inferred from a malformed string. Independent positive Control announcements now have their own two-frame tracker. Only an unreadable Control card for the same district blocks that Control observation; an unreadable Influence card does not. A full-adapter regression proves the Control change applies while the malformed count remains unapplied, followed by the verified count and bonus after two clean observations.
+
+The corrected reader is active in the current local installation. The compatibility worker reuses distinct timestamped observations already recorded by the adapter for named NPC and Control recovery, rather than taking extra map captures. Ordinary future adapter launches load the integrated guard. All thirty visible Influence counts and all positively recognized Control icons were compared with the current table without differences; the observed feed then had no synchronization issues. Local and LAN browsers confirm Anarch Control and the visible Media Office camera symbol. Milan stayed connected. All 150 public tests passed under Node 26 and bundled Node 22. This validates those observed categories, not a complete campaign snapshot or every possible app screen.
+
 Updated 26 October 2026.
 
 ## Recognizing a scrolled day feed

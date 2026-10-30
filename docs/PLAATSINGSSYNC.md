@@ -4,7 +4,13 @@ The linked table copies observed official-app outcomes. It does not have a compl
 
 ## Named placements
 
-The private reader now handles complete, known-component feed cards of the forms **[name] placed in [district]**, **placed at**, and **moved to**. Completed player-character movement retains its separate reader and portrait-precedence rules. Explicit **Remove [name] from map** and **[name] removed from map** cards are supported. Cards are read in displayed order, the newest recognized instruction for each component wins, and an unreadable newest destination blocks an older placement. Two matching observations and calibrated map geometry are required. No missing-portrait inference is used.
+The reader handles complete, known-component feed cards of the forms **[name] placed in [district]**, **placed at**, **moved to**, and **moved from [origin] to [destination]**. Completed player-character movement retains its separate reader and portrait-precedence rules. Explicit **Remove [name] from map** and **[name] removed from map** cards are supported. Cards are read in displayed order, the newest recognized instruction for each component wins, and an unreadable newest destination blocks an older placement. Two matching observations and calibrated map geometry are required. No missing-portrait inference is used.
+
+### Agnese moved from Washington to Duomo — 30 October 2026
+
+The observed four-line card `Agnese Della Luna / moved from / Washington to / Duomo` was previously ignored: only the shorter `moved to` form was recognized. A shared headless parser now matches complete known origin/destination names; splitting at the first `to` would incorrectly split Washington itself. Unknown newer routes suppress older placements. Known NPC movement is handled by the component reader without an erroneous unknown-character warning from the separate player reader.
+
+Two fresh live observations confirmed the correction, and Agnese was copied to Duomo without sensor or official-app input. The temporary recovery worker handles named NPC outcomes while the existing adapter remains running; subsequent normal launches use the integrated parser. An isolated replay through the full adapter verified the two-read guard, preservation of an unrelated miniature and a Restricted token, and idempotence. The browser confirms Agnese in Duomo and absent from Washington. All 147 public tests passed with Node 26 and the bundled Node 22. General NPC portrait tracking on the ordinary city map remains unsupported; this fix relies on explicit feed outcomes.
 
 Agnese Della Luna is a named story miniature in the inventory, not one of the scannable ally-role miniatures. Her recorded Sunset card, **Agnese Della Luna placed in Cadorna**, exposed the previous omission. The new reader and isolated adapter replay place her at Cadorna without scanning or sending movement to Milan.
 
