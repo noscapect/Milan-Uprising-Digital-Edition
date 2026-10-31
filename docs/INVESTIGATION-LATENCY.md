@@ -2,6 +2,14 @@
 
 Updated 26 October 2026.
 
+## Recovery after setup and movement overlays — 31 October 2026
+
+A reported table had no Investigation tokens while the official app showed several behind its movement dialog. Whole-frame OCR supplied no ordinary city-map geometry on this dimmed scene, so the general piece workers were neither scheduled nor consumed. The adapter now also accepts the complete movement prompt in its calibrated dialog bounds. Both workers receive the existing dimming-compensation flag; marker matching and positive removal recognition explicitly exclude patches covered by the dialog. Map registration, matching thresholds, two independent observations, freshness and input-generation checks remain required. Missing or covered icons never imply removal.
+
+When the user exposed the normal map, the running adapter recovered eight positively observed locations: Barona, Cinque Giornate, Città Studi, Corvetto, Isola, Monumentale, Navigli and San Siro. The shared board rendered all eight without JavaScript errors. No gameplay or sensor input was sent and the Core was not restarted. The recorded movement image independently recognizes six uncovered markers; the other two were covered. A temporary recovery probe was stopped after checking the restored table. The integrated overlay correction is staged in source and the local portable adapter for its next start; this is distinct from the normal-map recovery already observed live.
+
+Validation: `node --test` passed 543 discovered tests, including temporary copies. The public suites passed 163 tests with `--test-concurrency=1`. Focused tests cover calibrated prompt recognition, unsupported/error layouts, adapter application of stable Investigation observations during movement, Restricted-token preservation and idempotence. Private captures and logs remain under `private/investigation-recovery/`.
+
 Investigation markers are read from the visible Android city map. Unlike directly recognized instructions or active-character location screens, this route needs image matching and two matching observations. The earlier worker started at most once every five seconds and completed investigation and portrait recognition together. A measured full pass took approximately 5.2 seconds, explaining delays beyond ten seconds for two observations.
 
 ## Changes
@@ -31,6 +39,14 @@ Regression checks retain the expected Cinque Giornate and Washington assignments
 
 
 ## Explicit visual removal crosses — 27 October 2026
+
+### Missed Città Studi removal — 31 October 2026
+
+The follow-up to the Cadorna correction exposed a separate Investigation removal in Città Studi. The red-X reader recognized it correctly in two distinct captures, but no piece worker ran because portraits obscured the observer's map-border calibration. The earlier Cadorna correction had addressed Influence, Control and bonus cards without resolving this separate visual removal.
+
+The piece-worker context now also accepts the calibrated city scene's complete Night/Hour, Suspicion and Masquerade headings. The image worker must still independently register the map artwork and pass the existing red-X shape and grid checks before producing a removal. This does not accept the observer's unclear Influence counters or weaken their full-map validation. Unsupported sizes, incomplete headings and error screens remain excluded.
+
+A temporary reader is active for the current adapter process and stops when that process exits. It requires two independent captures, uses the existing board-instruction builder to preserve Restricted-side tokens, and submits only revision-checked table corrections. It removed the Investigation-side Città Studi token; all seven other markers remained. The browser verified both removal and preservation without JavaScript errors. No sensor input or Core restart occurred. The integrated correction is staged for the next adapter start. Private screenshots, reader output and logs remain under `private/cadorna-recovery/` and `private/investigation-recovery/`.
 
 A recorded map showed the Investigation marker at Washington with Milan's red deletion cross, while the linked table still retained it. The existing positive marker reader intentionally did not remove anything merely because its normal icon was absent, but had no separate recognition for that explicit removal indicator.
 

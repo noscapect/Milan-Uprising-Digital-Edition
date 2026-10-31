@@ -37,7 +37,7 @@ If npm is available, `npm start` and `npm test` are equivalent shortcuts. The la
 | --- | --- | --- |
 | Sandbox table | Place, move, remove, and flip components; export and restore sessions; undo/redo | Does not implement Milan's campaign rules |
 | Base game and six expansions | Separate inventories, 233 total components, expansion filters | Full expansion campaigns have not been validated |
-| Linked table | Published optional runtime for app-led input and observed board updates; source tools support LAN sharing | Only recognized scenes and observations are supported; the packaged candidate does not start LAN sharing automatically |
+| Linked table | Published optional runtime for app-led input and observed board updates; source tools support LAN sharing | Only recognized scenes and observations are supported; LAN sharing starts with the linked adapter |
 | Allies and ghouls | Optional Sunset deployment, pending confirmation, and automatic return to stock on confirmed Day | Cleanup tested with recorded Day observations; arbitrary story-driven removals are not fully covered |
 | Haven rooms | All ten fixed room types, standard/upgraded effects, recorded side controls, and optional upgraded artwork | Standard starting sides are used unless an upgrade is recorded; purchases and room actions remain in Milan |
 | LED ring | App-led colors with segment orientation matching Teburu; simulated firmware and battery status | Static colors only; full hardware animations remain unvalidated |

@@ -22,16 +22,29 @@ _led_spec.loader.exec_module(_led_module)
 class Codec:
     async def start(self):
         self.lock = asyncio.Lock()
+        self.pending = set()
         self.process = await asyncio.create_subprocess_exec(
             str(CODEC), '--codec-json-lines', stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
         self.state = await self.call('status')
 
     async def call(self, action, **kwargs):
+        # Keep the request/reply pair serialized even if its HTTP caller leaves.
+        task = asyncio.create_task(self.exchange(action, **kwargs))
+        self.pending.add(task)
+        task.add_done_callback(self.finished)
+        return await asyncio.shield(task)
+
+    def finished(self, task):
+        self.pending.discard(task)
+        if not task.cancelled():
+            task.exception()
+
+    async def exchange(self, action, **kwargs):
         async with self.lock:
             self.process.stdin.write((json.dumps(dict(action=action, **kwargs))+'\n').encode())
             await self.process.stdin.drain()
-            line = await asyncio.wait_for(self.process.stdout.readline(), 5)
+            line = await self.process.stdout.readline()
             if not line:
                 raise RuntimeError('Codec gestopt')
             result = json.loads(line)

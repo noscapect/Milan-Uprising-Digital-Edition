@@ -1,11 +1,19 @@
 param()
 $ErrorActionPreference='Stop'
+. (Join-Path $PSScriptRoot 'core-readiness.ps1')
+$startupTimer=[System.Diagnostics.Stopwatch]::StartNew()
+$startupLog=Join-Path $PSScriptRoot 'core-startup-timing.jsonl'
+function Write-CoreStage([string]$Stage){
+  Write-Output ('TCE_STAGE:'+$Stage)
+  @{stage=$Stage;elapsedMs=$startupTimer.ElapsedMilliseconds;at=[DateTimeOffset]::UtcNow.ToString('o')} | ConvertTo-Json -Compress | Add-Content -LiteralPath $startupLog -Encoding UTF8
+}
+Write-CoreStage 'checking'
 $settings=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'machine.json') -Raw | ConvertFrom-Json
 if($settings.usbAdapter -notmatch '^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$'){throw 'Run the linked setup with your USB adapter VID:PID first.'}
 if(-not $settings.wslDistribution -or -not $settings.corePython){throw 'Run the linked setup first.'}
 $linuxUserArgs=@()
 if($settings.linuxUser){if($settings.linuxUser -notmatch '^[a-z_][a-z0-9_-]{0,31}$'){throw 'Invalid Linux helper account.'};$linuxUserArgs=@('-u',$settings.linuxUser)}
-if(Get-NetTCPConnection -LocalPort 5181 -State Listen -ErrorAction SilentlyContinue){return}
+if(Test-CoreListener){Write-CoreStage 'service-ready';return}
 $usbCommand=Get-Command usbipd.exe -ErrorAction SilentlyContinue
 if($usbCommand){$usbip=$usbCommand.Source}
 else{$usbip=Join-Path $env:ProgramFiles 'usbipd-win/usbipd.exe';if(-not (Test-Path -LiteralPath $usbip)){throw 'Install usbipd in Prepare this PC, then check again.'}}
@@ -16,8 +24,10 @@ if($settings.usbBusId){$selectedBus=[regex]::Escape($settings.usbBusId);$rows=@(
 if($rows.Count -ne 1 -or $rows[0] -notmatch '^\s*(\d+-\d+)\s'){throw 'The selected USB adapter was not found uniquely.'}
 $busId=$Matches[1]
 if($rows[0] -match '\bNot shared\s*$'){throw 'Share this adapter explicitly with usbipd bind --busid before starting. This requires administrator rights.'}
+Write-CoreStage 'linux'
 . (Join-Path $PSScriptRoot 'wsl-session.ps1')
 Invoke-WithWslSession -Distribution $settings.wslDistribution -LinuxUser $settings.linuxUser -Action {
+Write-CoreStage 'bluetooth'
 if($rows[0] -notmatch '\bAttached\s*$'){
   if($rows[0] -notmatch '\bShared\s*$'){throw 'Unexpected USB sharing state.'}
   $record=@{sessionId=$env:MILAN_SESSION_ID;busId=$busId;vidPid=$settings.usbAdapter;attemptedByUs=$true;attachedByUs=$false;released=$false}
@@ -35,14 +45,11 @@ $linuxUser=(& wsl.exe -d $settings.wslDistribution @linuxUserArgs --exec id -u).
 if($LASTEXITCODE -or $linuxUser -notmatch '^\d+$'){throw 'Could not identify your Linux user.'}
 & wsl.exe -d $settings.wslDistribution -u root --exec python3 $linuxAccess $settings.usbAdapter $linuxUser
 if($LASTEXITCODE){throw 'Could not grant your Linux helper access to the selected radio. No ambiguous USB devices were changed.'}
+Write-CoreStage 'service'
 $logs=Join-Path $PSScriptRoot 'logs'
 $null=New-Item -ItemType Directory -Path $logs -Force
 $stamp=Get-Date -Format 'yyyyMMdd-HHmmss-fff'
 $child=Start-Process -FilePath wsl.exe -ArgumentList (@('-d',(ConvertTo-WslArgument $settings.wslDistribution))+$linuxUserArgs+@('--exec',(ConvertTo-WslArgument $settings.corePython),(ConvertTo-WslArgument $linuxScript),'--serve',('usb:'+$settings.usbAdapter))) -WindowStyle Hidden -RedirectStandardOutput (Join-Path $logs "$stamp.out.log") -RedirectStandardError (Join-Path $logs "$stamp.err.log") -PassThru
-for($attempt=0;$attempt -lt 100;$attempt++){
-  if(Get-NetTCPConnection -LocalPort 5181 -State Listen -ErrorAction SilentlyContinue){return}
-  if($child.HasExited){throw 'Core service stopped. Check private/linked/logs.'}
-  Start-Sleep -Milliseconds 250
-}
-throw 'Core service did not start in time. Check private/linked/logs.'
+Wait-CoreListener -Child $child
+Write-CoreStage 'service-ready'
 }

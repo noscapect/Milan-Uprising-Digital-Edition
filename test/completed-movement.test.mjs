@@ -30,3 +30,29 @@ test('player characters use their own relocation path for both completed-move fo
   assert.deepEqual(readCharacterRelocations(frame,profile.zones,[character]).characterMoves,[{componentId:character.id,zoneId:'duomo'}]);
  }
 });
+
+test('Masquerade outcomes move all four named characters without requiring city-map geometry',()=>{
+ const characters=profile.components.filter(c=>c.groupId==='characters');
+ const names=['Orlando Bianchi','Rosa De Lorenzo','Aristide Demiana','Arianna Zanni'];
+ const lines=[{text:'MASQUERADE',x:1257,y:77},{text:'Confirm',x:2131,y:1444},...names.flatMap((name,i)=>[card(name,i*163+735),card('moved to Corvetto',i*163+787)])];
+ const frame={...raw(lines),mapGeometry:null};
+ const result=readCharacterRelocations(frame,profile.zones,characters);
+ assert.equal(result.characterMoves.length,4);assert(result.characterMoves.every(m=>m.zoneId==='corvetto'));
+ assert.equal(readCharacterRelocations({...frame,lines:lines.filter(l=>l.text!=='MASQUERADE')},profile.zones,characters),null);
+ assert.equal(readCharacterRelocations({...frame,lines:lines.filter(l=>l.text!=='Confirm')},profile.zones,characters).characterMoves.length,4);
+ assert.equal(readCharacterRelocations({...frame,width:1920},profile.zones,characters),null);
+ assert.equal(readCharacterRelocations({...frame,lines:[...lines,card('An error occurred')]},profile.zones,characters),null);
+ const requests={...frame,lines:lines.map(l=>l.text==='moved to Corvetto'?{...l,text:'Move to Corvetto'}:l)};
+ assert.equal(readCharacterRelocations(requests,profile.zones,characters),null);
+});
+
+test('Helena placement ignores a separate map counter but preserves unknown destination text',()=>{
+ const lines=[card('Helena Varga placed in',1225),{text:'4',x:1408,y:1261},card('Isola',1277)];
+ assert.deepEqual(readComponentOutcomes(raw(lines),profile).instructions,[{componentId:'npc-helena-varga',operation:'place',zoneId:'isola'}]);
+ const inline=readComponentOutcomes(raw([card('Helena Varga placed in 4 Isola',1225)]),profile);
+ assert.deepEqual(inline.instructions,[]);assert.equal(inline.unsupported.length,1);
+ const inside=readComponentOutcomes(raw(lines.map(l=>l.text==='4'?{...l,x:1511}:l)),profile);
+ assert.deepEqual(inside.instructions,[]);
+ const event={...raw([{text:'MASQUERADE',x:1257,y:77},...lines]),mapGeometry:null};
+ assert.equal(readComponentOutcomes(event,profile).instructions[0].zoneId,'isola');
+});

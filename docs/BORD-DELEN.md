@@ -4,7 +4,13 @@
 
 De deelproxy laat nu ook de publieke `/games/<game-id>/artwork/`-routes door. Na de modulemigratie werd de artworkcatalogus daar geladen, terwijl de proxy alleen de oudere artworkroutes kende. Dit veroorzaakte een 404 en voorkwam dat het gedeelde bord startte. De beheerroutes en overige modulepaden blijven geblokkeerd. De twee proxytests en een browserproef via het LAN-adres controleren aanmelding, zichtbare kaart, leesbare sessie en geweigerde Core-bediening. De lokale gekoppelde Core bleef tijdens het herstel verbonden. Op een bestaande installatie moet de firewallregel overeenkomen met het werkelijk gebruikte Node-programmapad; een regel voor een systeeminstallatie geldt niet voor de meegeleverde runtime.
 
-## Huidige bronversie — 29 oktober 2026
+## Automatisch starten — 30 oktober 2026
+
+De standaardlauncher start de deelserver nu automatisch zodra de gekoppelde speladapter gereed is, zowel vanuit de broncode als in het Windows-pakket. De server draait binnen de launcher en stopt bij afsluiten of wisselen van spel. Opnieuw openen controleert dat de server draait. Het actuele adres en een nieuwe toegangscode worden in de private spelwerkmap opgeslagen; het Control Center toont een concrete fout als delen niet kan starten. Een ontbrekende netwerkverbinding blokkeert de lokale tafel niet. De bestaande firewall moet het gebruikte Node-programma en poort 5182 voor het lokale subnet toestaan.
+
+Het laatst gebruikte LAN-adres wordt hergebruikt als dat nog op een fysieke interface bestaat. Bij één geschikte verbinding wordt die automatisch gekozen; bij meerdere verbindingen zonder geldige eerdere keuze volgt een foutmelding. De aparte bron-CLI blijft beschikbaar voor een expliciete adreskeuze. Tests controleren starten, dubbel openen, stoppen, opnieuw starten, adreskeuze en foutmeldingen.
+
+## Historische bronversie — 29 oktober 2026
 
 Start eerst de gekoppelde tafel en voer vanuit de broncheckout `node tools/share-board.mjs JOUW-PC-LAN-IP` uit. De tool bewaart het actuele adres en de tijdelijke code in `private/linked/board-share-state.json`; het Control Center toont ze zodra de deelserver bereikbaar is. De huidige releasekandidaat start deze optionele deelserver niet automatisch en bevat deze bron-CLI niet. Beschrijvingen hieronder van automatisch delen door private launchers horen bij de oudere ontwikkelopstelling. Zie [installatie](INSTALLATION.md) voor de huidige hoofdroute. De toegangsgrenzen hieronder blijven gelden.
 

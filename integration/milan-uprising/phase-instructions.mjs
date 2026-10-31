@@ -1,10 +1,11 @@
+import {readFeedCards} from './feed-cards.mjs';
 // Read-only transcription of visible English day-summary cards, calibrated to this tablet.
 const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 export function readPhaseSummary(raw, zones, characters=[], {allowCity=false}={}) {
   if (!raw.available || !Array.isArray(raw.lines)) return null;
   const all = normalize(raw.lines.map(l => l.text).join(' '));
   const header = raw.lines.filter(l => l.y < raw.height * .15).map(l => normalize(l.text)).join('');
-  const phase=/night[0-9oi]+sunset/.test(header)?'sunset':/night[0-9oi]+day/.test(header)?'day':/night[0-9oi]+hour[0-9oi]+/.test(header)&&/night[0-9oi]+hasbegun/.test(all)?'night':allowCity&&raw.mapGeometry==='android-city-v1'&&/night[0-9oi]+hour[0-9oi]+/.test(header)?'city':null;
+  const phase=/night[0-9oi]+sunset/.test(header)?'sunset':/night[0-9oi]+day/.test(header)?'day':/night[0-9oi]+hour[0-9oi]+/.test(header)&&/night[0-9oi]+hasbegun/.test(all)?'night':allowCity&&readFeedCards(raw)!==null&&/night[0-9oi]+hour[0-9oi]+/.test(header)?'city':null;
   if (!phase || /anerrorocc|indexwasoutofrange/.test(all)) return null;
   const lines = raw.lines.filter(l => l.x > raw.width * .50 && l.x < raw.width * .70 && l.y > raw.height * .25 && l.y < raw.height * .87).sort((a,b) => a.y-b.y || a.x-b.x);
   const groups = [];

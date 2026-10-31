@@ -1,3 +1,4 @@
+import {renderCoreStartup} from '/src/games/milan-uprising/ui/core-startup.js';
 const $=id=>document.getElementById(id);
 let busy=false,disposed=false,reading=false,latest=null;
 let helpersReady=null,helpersPreparing=false,tabletReady=false;
@@ -16,6 +17,8 @@ async function refresh(){
     latest=await api('/api/control-center');const core=latest.core;
     $('core-status').textContent=busy||latest.starting?'Starting Core…':core.connected?'Connected to Milan':core.running?'Waiting for Milan':core.available?'Core stopped':'Core service stopped';
     $('core-detail').textContent=core.connected?'Milan is connected. You can open the tabletop.':core.running?'Open Milan on the tablet and connect using Single Device.':'Start Core prepares the local service and Bluetooth connection.';
+    renderCoreStartup(document,latest);
+    if(!core.running&&!latest.starting&&!busy)$('core-detail').textContent=setupRunning?'PC setup is still running.':!gameActive?'Add Milan in the game library first.':helpersPreparing?'Connection tools are being prepared.':helpersReady===false?'Finish PC setup first.':!tabletReady?'Connect your tablet and confirm English and landscape above.':'Ready to start Core.';
     $('start-core').disabled=busy||setupRunning||latest.starting||core.running||helpersReady===false||helpersPreparing||!tabletReady||!gameActive;
     $('stop-core').disabled=busy||latest.starting||!core.running;
     const firmware=core.firmware;
@@ -24,22 +27,22 @@ async function refresh(){
     const share=latest.share;
     $('remote-details').hidden=!share?.available;$('remote-unavailable').hidden=!!share?.available;
     if(share?.available){$('remote-address').textContent=share.url;$('remote-address').href=share.url;$('remote-code').textContent=share.pin;}
-    else $('remote-unavailable').textContent='Remote tabletop is not enabled. You can play on this PC.';
+    else $('remote-unavailable').textContent=share?.error||'Remote tabletop is not available. Check that this PC is connected to your local network.';
   }catch(error){$('core-status').textContent='Control service unavailable';$('message').textContent=error.message;$('start-core').disabled=$('stop-core').disabled=true;}
   finally{reading=false;}
 }
 async function act(path,label){
-  if(busy)return;busy=true;$('start-core').disabled=$('stop-core').disabled=true;$('message').textContent=label;
-  try{await api(path,path.endsWith('/start')?{displayConfirmed:document.getElementById('confirm-display')?.checked===true}:{});$('message').textContent=path.endsWith('/start')?'Core started. Connect Milan on the tablet.':'Core stopped and its Bluetooth adapter returned to Windows.';}
+  if(busy)return;busy=true;$('start-core').disabled=$('stop-core').disabled=true;$('message').textContent=label;if(path.endsWith('/start'))renderCoreStartup(document,{core:{},starting:true,startup:{phase:'running',stage:'checking',startedAt:Date.now(),stageStartedAt:Date.now()}});
+  try{await api(path,path.endsWith('/start')?{displayConfirmed:document.getElementById('confirm-display')?.checked===true}:{});$('message').textContent=path.endsWith('/start')?'Core started successfully.':'Core stopped and its Bluetooth adapter returned to Windows.';}
   catch(error){$('message').textContent=error.message;}
   finally{busy=false;await refresh();}
 }
 $('start-core').onclick=()=>act('/api/windows-core/start','Preparing Bluetooth and starting Core…');
 $('stop-core').onclick=()=>act('/api/windows-core/stop','Stopping Core…');
 $('simulate-firmware').onclick=async()=>{
-  if(busy)return;busy=true;$('simulate-firmware').disabled=true;$('message').textContent='Simulating the Core, five dice and LED ring update…';
-  try{await api('/api/windows-core/firmware-simulate',{confirmSimulation:true});$('message').textContent='Simulated update saved. Reconnect Milan to read the new Core, dice and LED ring versions. No official firmware was installed.';}
-  catch(error){$('message').textContent=error.message;}
+  if(busy)return;busy=true;$('simulate-firmware').disabled=true;$('firmware-message').textContent='Updating simulated versions… Keep this window open; this may take a moment.';
+  try{await api('/api/windows-core/firmware-simulate',{confirmSimulation:true});$('firmware-message').textContent='Simulated update saved. Disconnect and reconnect Milan to refresh its cached versions. No official firmware was installed.';}
+  catch(error){$('firmware-message').textContent='Update could not be confirmed: '+error.message+'. Check the versions above; if updating is still shown, wait for completion.';}
   finally{busy=false;await refresh();}
 };
 $('recover-board').onclick=async()=>{

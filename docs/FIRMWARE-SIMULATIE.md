@@ -28,3 +28,10 @@ De ring meldt nu ook een stabiele gesimuleerde batterijwaarde via dezelfde berek
 De wijziging is actief. Na opnieuw verbinden met de echte Android-tablet toonde de ongewijzigde Teburu-app **1.15.0**, **Firmware up to date**, **46%** en **3852 mV**, zonder de eerdere waarschuwing voor beschikbare firmware of een lege batterij. De officiële updateknop is niet gebruikt. De campagne en bordposities zijn niet gewijzigd.
 
 Verificatie: alle 26 private Core-regressiescenario’s slagen, inclusief migratie van een oud statusbestand, afbreken, schrijffout, herstart en stabiele ringtelemetrie. De virtuele Bluetooth-proef en de Control Center-browserproef slagen eveneens. Deze acceptatie bevestigt versie- en batterijweergave; volledige ringanimaties blijven afzonderlijk te toetsen. Ruwe waarnemingen en implementatie blijven privaat.
+
+
+## Timeout handling — 30 October 2026
+
+The transport now keeps a codec command and its response serialized when the caller disconnects or its HTTP request times out. Previously, cancelling the five-second response read allowed a late response to be consumed by a subsequent command. The firmware HTTP request has a separate thirty-second deadline; the codec exchange continues safely after an HTTP timeout. Progress and errors now appear beside the simulation button, including the instruction to reconnect Milan after completion.
+
+Validation: a headless regression cancels a waiting caller and verifies that the next command receives its own response; nine targeted tests passed. An isolated Edge check exercised the simulation button and inline reconnect feedback. No official firmware update was performed. These source fixes require updating the packaged runtime before taking effect there.

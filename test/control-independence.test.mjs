@@ -19,6 +19,7 @@ test('real adapter applies Control independently of an unreadable Influence card
  await cp(join(source,'integration','runtime'),runtime,{recursive:true,filter});await cp(join(source,'integration','milan-uprising'),runtime,{recursive:true,filter});await writeFile(join(runtime,'machine.json'),'{}');
  const profile=JSON.parse(await readFile(join(root,'data/games/milan-uprising/city-expansions.json'),'utf8'));
  const table=createTabletop({profile,module:milanModule});table.place('character-nosferatu','qt8');table.place('investigation-1','washington');table.flip('investigation-1');table.arrange(buildVisibleControlArrangement(profile,table.snapshot(),[{zoneId:'city-life',faction:'camarilla'}]));
+ table.place(profile.components.find(c=>c.groupId==='anarch-cubes').id,'cadorna');
  for(const name of ['current-chronicle-table-expansions.json','tablet-chronicle-table-expansions.json'])await writeFile(join(state,name),JSON.stringify(table.exportSession()));
  const raw={available:true,width:2560,height:1600,mapGeometry:'android-city-v1',lines:[{text:'NIGHT 4 HOUR 2 SUSPICION MASQUERADE',x:300,y:80},...[['Anarch is now',1398,821],['controlling CityLife',1347,872],['CityLife has now Z 1',1348,993],['Anarch Influence',1346,1047],['Media Office Locatiorv',1511,1167],['Bonus revealed in',1512,1220],['CityLife',1512,1267]].map(([text,x,y])=>({text,x,y}))]};
  await writeFile(frame,JSON.stringify(raw));
@@ -34,7 +35,15 @@ test('real adapter applies Control independently of an unreadable Influence card
  const frame=JSON.parse(await readFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,'utf8'));for(const line of frame.lines)line.text=line.text.replace('has now Z 1','has now 1').replace('Locatiorv','Location');await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(frame));
  await observe(true);await observe(true);assert.equal(count(),1);assert.equal(boardTiles().tiles['city-life'].bonus.value,'media');assert.equal(boardTiles().tiles['city-life'].bonus.face,'visible');
  assert.equal(tableSession().state.placements['character-nosferatu'],'qt8');assert.equal(tableSession().state.faces['investigation-1'],'restricted');
- const revision=tableSession().state.revision;await observe(true);assert.equal(tableSession().state.revision,revision);console.log('independent Control and verified later outcomes passed');`;
+ const revision=tableSession().state.revision;await observe(true);assert.equal(tableSession().state.revision,revision);
+ const cadorna={available:true,width:2560,height:1600,mapGeometry:null,lines:[{text:'NIGHT 5 HOUR 2',x:396,y:77},{text:'MASQUERADE',x:1257,y:77},...[['Anarch is now',1398,666],['controlling Cadorna',1348,718],['Cadorna has now O',1348,841],['Anarch Influence',1346,892],['Media Office Location',1512,1008],['Bonus revealed in',1512,1060],['Cadorna',1512,1112]].map(([text,x,y])=>({text,x,y}))]};
+ await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(cadorna));
+ const cadornaCount=()=>profile.components.filter(c=>c.groupId==='anarch-cubes'&&tableSession().state.placements[c.id]==='cadorna').length;
+ await observe(true);assert.equal(cadornaCount(),1);await observe(true);assert.equal(cadornaCount(),0);
+ const final=tableSession().state,token=profile.components.find(c=>c.groupId==='control'&&final.placements[c.id]==='cadorna');assert.equal(final.faces[token.id],'anarchs');
+ assert.equal(boardTiles().tiles.cadorna.bonus.value,'media');assert.equal(final.placements['character-nosferatu'],'qt8');assert.equal(final.faces['investigation-1'],'restricted');
+ await observe(true);assert.equal(tableSession().state.revision,final.revision);
+ console.log('independent Control and verified later outcomes passed');`;
  const {stdout}=await promisify(execFile)(process.execPath,['--input-type=module','-e',script],{windowsHide:true,timeout:30000,env:{...process.env,MILAN_FEEDBACK_STATE_DIR:state,MILAN_FEEDBACK_REPLAY_OBSERVATION:frame,MILAN_FEEDBACK_REPLAY_IMAGE:''}});
  assert.match(stdout,/independent Control and verified later outcomes passed/);
 });

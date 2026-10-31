@@ -8,7 +8,7 @@ import {recordComponentInstructions,boardStatus,moveFromBoard,resolveCompanionPl
 import {coreTarget,selectCoreTarget,windowsCore} from './core-target.mjs';
 import {createPollingWorker} from '../../src/adapters/polling-worker.js';
 import {boardTiles,updateBoardTile} from './location-tiles-store.mjs';
-import {startPcCore,coreStarting,releasePcCore} from './pc-core-start.mjs';
+import {startPcCore,coreStarting,coreStartupProgress,releasePcCore} from './pc-core-start.mjs';
 import {createWindowsSetup} from '../../server/windows-setup.mjs';
 import {createAutomaticSetup} from '../../server/automatic-setup.mjs';
 import {createPreparationJob,inspectTablet} from '../../server/connection-wizard.mjs';
@@ -124,7 +124,7 @@ const server=http.createServer(async(req,res)=>{
     if(req.url==='/'&&req.method==='GET'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(readFileSync(new URL('../../src/games/milan-uprising/control-center.html',import.meta.url)));return;}
     if(req.url==='/diagnostics'&&req.method==='GET'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(page);return;}
     if(req.url==='/control-center.js'&&req.method==='GET'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(readFileSync(new URL('../../src/games/milan-uprising/ui/control-center.js',import.meta.url)));return;}
-    if(['/connection-wizard.js','/game-enabled.js'].includes(req.url)&&req.method==='GET'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(readFileSync(new URL('../../src/games/milan-uprising/ui'+req.url,import.meta.url)));return;}
+    if(['/connection-wizard.js','/game-enabled.js','/core-startup.js'].includes(req.url)&&req.method==='GET'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(readFileSync(new URL('../../src/games/milan-uprising/ui'+req.url,import.meta.url)));return;}
     if(req.method==='GET'&&req.url==='/board'){
       const upstream=await fetch('http://127.0.0.1:5178/games/milan-uprising/table',{signal:AbortSignal.timeout(3000)});
       if(!upstream.ok)throw Error('Bordserver is niet beschikbaar.');
@@ -189,8 +189,8 @@ const server=http.createServer(async(req,res)=>{
       let core={available:false,running:false,connected:false};
       try{const s=await windowsCore('/status');core={available:true,running:!!s.running,connected:!!s.connected,firmware:s.firmware||null};}catch{}
       let share={available:false};
-      try{const s=JSON.parse(readFileSync(new URL('./board-share-state.json',import.meta.url)));const u=new URL(s.url);if(u.protocol==='http:'&&/^\d{6}$/.test(s.pin)){const response=await fetch(u,{redirect:'manual',signal:AbortSignal.timeout(1500)});if(response.ok)share={available:true,url:s.url,pin:s.pin};}}catch{}
-      result={core,share,starting:coreStarting()};
+      try{const s=JSON.parse(readFileSync(new URL('./board-share-state.json',import.meta.url)));if(s.error)share={available:false,error:s.error};const u=new URL(s.url);if(u.protocol==='http:'&&/^\d{6}$/.test(s.pin)){const response=await fetch(u,{redirect:'manual',signal:AbortSignal.timeout(1500)});if(response.ok)share={available:true,url:s.url,pin:s.pin};}}catch{}
+      result={core,share,starting:coreStarting(),startup:coreStartupProgress()};
     }
     else if(req.url==='/api/windows-core/firmware-simulate'&&req.method==='POST'){
       if(!req.headers['content-type']?.startsWith('application/json'))throw Error('JSON is required.');

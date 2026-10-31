@@ -77,6 +77,21 @@ if(external&&width==2560&&height==1600&&result.Lines.Any(line=>line.Text.Contain
   result.Lines.AddRange(clean.Lines.Select(line=>new ReadLine(line.Words.Select(word=>new ReadWord(word.Text,new Windows.Foundation.Rect(word.BoundingRect.X+fx,word.BoundingRect.Y+fy,word.BoundingRect.Width,word.BoundingRect.Height))).ToList())));
 }
 var supplementalLines=new List<object>();
+// Gold setup titles can disappear in whole-frame OCR. Read their fixed
+// title area separately; only an explicitly recognized placement title counts.
+if(external&&width==2560&&height==1600&&result.Lines.Any(l=>System.Text.RegularExpressions.Regex.Replace(l.Text.ToLowerInvariant(),"[^a-z]","").Contains("scenariosetup"))){
+  const int sx=800,sy=175,sw=1000,sh=90;
+  using var setupTitle=new Bitmap(sw,sh);
+  for(int y=0;y<sh;y++)for(int x=0;x<sw;x++){
+    var pixel=bitmap.GetPixel(x+sx,y+sy);
+    setupTitle.SetPixel(x,y,pixel.R>120&&pixel.R>pixel.G*1.1&&pixel.G>pixel.B*1.15?Color.Black:Color.White);
+  }
+  using var setupPixels=BitmapInput.Software(setupTitle);
+  var setupResult=await engine.RecognizeAsync(setupPixels);
+  var setupText=System.Text.RegularExpressions.Regex.Replace(setupResult.Text.ToLowerInvariant(),"[^a-z]","");
+  if(new[]{"npcplacement","alliesplacement","ghoulsplacement"}.Contains(setupText))
+    foreach(var line in setupResult.Lines)supplementalLines.Add(new{text=line.Text,x=line.Words.Min(w=>w.BoundingRect.X)+sx,y=line.Words.Min(w=>w.BoundingRect.Y)+sy,words=line.Words.Select(w=>new{text=w.Text,x=w.BoundingRect.X+sx,y=w.BoundingRect.Y+sy,width=w.BoundingRect.Width,height=w.BoundingRect.Height})});
+}
 bool recoveredPhaseHeader=false;
 // Whole-frame OCR sometimes drops NIGHT/number while the day feed scrolls.
 // Read the fixed header area directly; require a complete recognized phase title.

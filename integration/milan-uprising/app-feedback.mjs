@@ -28,9 +28,10 @@ import {readEncounterMarkers} from './encounter-markers.mjs';
 import {validateCompanionPlacement} from '../../src/games/milan-uprising/companion-placement.js';
 import {buildCompanionCleanup} from '../../src/games/milan-uprising/companion-cleanup.js';
 import {scheduleMapPieces,scheduleTargetCharacter,mapPieces} from './map-piece-reader.mjs';
+import {mapPieceContext} from './map-piece-context.mjs';
 import {readPhaseSummary} from './phase-instructions.mjs';
 import {captureTablet} from './capture-tablet.mjs';
-import {validateSensorMapping,acceptsMovement,performBoardMove,movementConfirmation,movementStillAtOrigin} from './board-input.mjs';
+import {validateSensorMapping,acceptsMovement,performBoardMove,movementConfirmation,movementStillAtOrigin,movementSuperseded,matchesPendingRejection} from './board-input.mjs';
 const run=promisify(execFile);
 const executable=fileURLToPath(new URL('./app-observer/build/AppObserver.exe',import.meta.url));
 const focusedExecutable=fileURLToPath(new URL('./app-observer/build/AppObserver.exe',import.meta.url));
@@ -273,7 +274,7 @@ export async function observe(force=false){
       argumentsList=[capture.format==='rgba'?'--raw':'--image',capture.imagePath];
     }
     let stdout;
-    try{const focus=!!pendingMove&&profile.components.some(c=>c.id===pendingMove.action.componentId&&c.groupId==='characters')&&observingSource==='android';const startedAt=Date.now();({stdout}=await run(focus?focusedExecutable:executable,focus?[...argumentsList,'--focus']:argumentsList,{timeout:10000,maxBuffer:500000,windowsHide:true}));const frame=JSON.parse(stdout);frame.readerDurationMs=Date.now()-startedAt;frame.captureDurationMs=captureMs;frame.readerMode=focus?'focused-with-fallback':'full';stdout=JSON.stringify(frame);if(focus&&!replayImage&&!replayObservation){const overlay=normalize(frame.lines.map(l=>l.text).join(' ')).includes('movementmoveyourcharactertoanyotherlocation');scheduleTargetCharacter(argumentsList[1],observingGeneration,{componentId:pendingMove.action.componentId,overlay});}if(!replayImage&&!replayObservation&&observingSource==='android'&&(JSON.parse(stdout).mapGeometry==='android-city-v1'||readSetupMap(JSON.parse(stdout),mapping)?.ready))scheduleMapPieces(argumentsList[1],observingGeneration);}
+    try{const focus=!!pendingMove&&profile.components.some(c=>c.id===pendingMove.action.componentId&&c.groupId==='characters')&&observingSource==='android';const startedAt=Date.now();({stdout}=await run(focus?focusedExecutable:executable,focus?[...argumentsList,'--focus']:argumentsList,{timeout:10000,maxBuffer:500000,windowsHide:true}));const frame=JSON.parse(stdout);frame.readerDurationMs=Date.now()-startedAt;frame.captureDurationMs=captureMs;frame.readerMode=focus?'focused-with-fallback':'full';stdout=JSON.stringify(frame);if(focus&&!replayImage&&!replayObservation){const overlay=normalize(frame.lines.map(l=>l.text).join(' ')).includes('movementmoveyourcharactertoanyotherlocation');scheduleTargetCharacter(argumentsList[1],observingGeneration,{componentId:pendingMove.action.componentId,overlay});}if(!replayImage&&!replayObservation&&observingSource==='android'&&(mapPieceContext(frame)||readSetupMap(frame,mapping)?.ready))scheduleMapPieces(argumentsList[1],observingGeneration,mapPieceContext(frame));}
     finally{if(observingSource==='android'&&argumentsList[1]){
       try{
         if(stdout){
@@ -333,7 +334,7 @@ export async function observe(force=false){
     value.encounterMarkers=value.available&&value.screen!=='error'?readEncounterMarkers(raw,profile.zones):null;
     if(value.encounterMarkers)value.encounterMarkers.stable=!!previous?.encounterMarkers&&JSON.stringify([value.encounterMarkers.investigationLocations,value.encounterMarkers.removeInvestigation])===JSON.stringify([previous.encounterMarkers.investigationLocations,previous.encounterMarkers.removeInvestigation]);
 
-    value.mapPieces=raw.mapPieces||((raw.mapGeometry==='android-city-v1'||value.setupMap?.ready||pendingMove)?mapPieces(inputGeneration):null);
+    value.mapPieces=raw.mapPieces||((mapPieceContext(raw)||value.setupMap?.ready||pendingMove)?mapPieces(inputGeneration):null);
     // The app animates the destination outline. Retain a twice-read destination
     // only inside the same character-placement scene; never across other scenes.
     if(!value.setupCharacter||value.screen==='error')setupCandidate=null;
@@ -396,6 +397,7 @@ export async function observe(force=false){
     // A setup reset invalidates the previous cached observation; retain this fresh frame.
     previous=value;last=value;
     if(pendingMove?.source===source&&movementConfirmation(pendingMove.before,pendingMove.action,value))finishPendingMove('late-app-confirmation');
+    if(pendingMove?.source===source&&!busy&&movementSuperseded(pendingMove.before,pendingMove.action,value))abandonPending('milan-requests-another-character');
     if(pendingMove?.source===source&&!busy){
       const origin=movementStillAtOrigin(pendingMove.before,pendingMove.action,value);
       if(origin){const id=pendingMove.action.componentId;if(table.snapshot().placements[id]!==origin){table.place(id,origin);persist();}abandonPending('app-still-requests-movement-at-confirmed-origin');savedRoster.markRegistered(id,origin);value.inputRecovery={componentId:id,zoneId:origin,reason:'Milan still requests movement; previous attempt unconfirmed. No input replayed.'};}
@@ -506,6 +508,7 @@ export async function moveFromBoard(action,phone){
 }
 export async function resolveCompanionPlacement({componentId,zoneId,sentAt,confirmation}){
   if(busy)throw Error('Wait until the sensor contact has been released.');
+  if(pendingMove?.source===source&&matchesPendingRejection(pendingMove,{componentId,zoneId,sentAt,confirmation})){abandonPending('user-reports-move-not-accepted');return {confirmed:false,session:table.exportSession()};}
   if(!['accepted','rejected'].includes(confirmation)||!pendingMove||pendingMove.source!==source||pendingMove.sentAt!==sentAt||pendingMove.action.componentId!==componentId||pendingMove.action.zoneId!==zoneId||!['companion-placement','component-placement'].includes(pendingMove.before.screen))throw Error('This pending placement has changed. Read Milan again.');
   validateCompanionPlacement(profile,table.snapshot().placements,{componentId,zoneId});
   if(confirmation==='accepted'){

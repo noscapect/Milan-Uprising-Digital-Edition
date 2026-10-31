@@ -75,3 +75,15 @@ test('Windows installer preserves private files, checks integrity and refuses es
   manifest.files={'../escape.txt':'invalid'};await writeFile(join(source,'release-files.json'),JSON.stringify(manifest));await assert.rejects(execute('powershell.exe',args,{windowsHide:true}),/Unsafe release path/);
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('Core startup exposes actual stages, shares overlapping starts and retains errors',async()=>{
+ let advance,release;const hold=new Promise(r=>release=r);
+ const starter=createCoreStarter({core:async path=>path==='/status'?{running:false}:{running:true},prepare:async progress=>{advance=progress;progress('linux');await hold;}});
+ const first=starter.start();await new Promise(r=>setImmediate(r));
+ assert.equal(starter.start(),first);assert.equal(starter.progress().stage,'linux');
+ advance('bluetooth');assert.equal(starter.progress().stage,'bluetooth');
+ advance('unknown');assert.equal(starter.progress().stage,'bluetooth');
+ release();await first;assert.equal(starter.progress().phase,'completed');assert.equal(starter.starting(),false);
+ const broken=createCoreStarter({core:async()=>{throw Error('offline');},prepare:async()=>{throw Error('Linux could not start');}});
+ await assert.rejects(broken.start(),/Linux could not start/);assert.equal(broken.progress().phase,'failed');assert.equal(broken.progress().error,'Linux could not start');
+});

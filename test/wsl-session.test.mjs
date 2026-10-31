@@ -21,3 +21,25 @@ test('WSL startup holds the session across attach/service work and closes it on 
  `],{windowsHide:true,env:{...process.env,TCE_WSL_SESSION_TEST:script}});
  assert.deepEqual(JSON.parse(stdout),['open','attach','service','close','open','failed-attach','close']);
 });
+
+test('Core readiness detects a listener and bounds startup by elapsed time',{skip:process.platform!=='win32'},async()=>{
+ const script=fileURLToPath(new URL('../integration/runtime/core-readiness.ps1',import.meta.url));
+ const {stdout}=await execute('powershell.exe',['-NoProfile','-NonInteractive','-Command',`
+ $ErrorActionPreference='Stop'
+ . $env:TCE_CORE_READINESS_TEST
+ $listener=[Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback,0)
+ $listener.Start()
+ try {
+   $port=$listener.LocalEndpoint.Port
+   if(-not (Test-CoreListener -Port $port)){throw 'Live listener missed'}
+   Wait-CoreListener -Child @{HasExited=$false} -Port $port -TimeoutMilliseconds 1000
+ } finally {$listener.Stop()}
+ if(Test-CoreListener -Port $port){throw 'Stopped listener detected'}
+ try {Wait-CoreListener -Child @{HasExited=$true} -Port $port;throw 'Expected child exit'}catch{if($_.Exception.Message -ne 'Core service stopped. Check private/linked/logs.'){throw}}
+ $timer=[Diagnostics.Stopwatch]::StartNew()
+ try {Wait-CoreListener -Child @{HasExited=$false} -Port $port -TimeoutMilliseconds 150;throw 'Expected timeout'}catch{if($_.Exception.Message -ne 'Core service did not start in time. Check private/linked/logs.'){throw}}
+ if($timer.ElapsedMilliseconds -gt 2000){throw 'Readiness exceeded wall-clock deadline'}
+ Write-Output 'passed'
+ `],{windowsHide:true,env:{...process.env,TCE_CORE_READINESS_TEST:script}});
+ assert.equal(stdout.trim(),'passed');
+});

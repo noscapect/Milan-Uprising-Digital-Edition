@@ -66,7 +66,7 @@ npm run linked
 
 If prerequisites are missing, the standalone artwork table remains available. A real app connection still requires the above hardware transport setup; cloning cannot configure or authorize another computer's Bluetooth adapter or tablet.
 
-From a source checkout, share the linked board on your LAN with `node tools/share-board.mjs YOUR-PC-LAN-IP` in another terminal. The Control Center displays the generated URL and access code. The packaged candidate does not include this optional source CLI or start LAN sharing automatically. Allow the Node service through your firewall for your private network if Windows asks. Technical Core controls remain local; this command does not change firewall rules automatically.
+From a source checkout, share the linked board on your LAN with `node tools/share-board.mjs YOUR-PC-LAN-IP` in another terminal. The Control Center displays the generated URL and access code. The linked launcher starts LAN sharing automatically; the source CLI remains available for selecting an address manually. Allow the Node service through your firewall for your private network if Windows asks. Technical Core controls remain local; this command does not change firewall rules automatically.
 
 ## Updating and verification
 

@@ -166,6 +166,15 @@ try {
     finally{recovery.disabled=false;}
   };
   dicePanel.after(recovery);
+  const rejectMove=document.createElement('button');rejectMove.id='reject-pending-move';rejectMove.type='button';rejectMove.className='secondary';rejectMove.textContent='Milan did not accept this move · clear pending attempt';rejectMove.hidden=true;
+  $('board-viewport').before(rejectMove);
+  rejectMove.onclick=async()=>{
+    const pending=latest?.pendingMove;if(!pending||moving||latest.busy)return;
+    rejectMove.disabled=true;
+    try{const result=await api('/api/board-move',{...pending.action,sentAt:pending.sentAt,confirmation:'rejected'});local.restoreSession(result.session);lastRevision=result.session.state.revision;optimisticMove=null;latest.pendingMove=null;update();$('status').textContent='Unconfirmed attempt cleared. Confirmed positions are kept. Follow the active character in Milan.';}
+    catch(error){$('status').textContent=error.message;}
+    finally{await poll();}
+  };
   const playLayout=mountPlayLayout({scanPanel,secondaryNodes:[info,syncInfo,dicePanel,recovery],wakeButton,showQuickDice:false});
   const companionPanel=document.createElement('section');companionPanel.id='companion-placement';companionPanel.hidden=true;
   companionPanel.style.cssText='padding:10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;border:1px solid #817157;border-radius:6px;margin:6px 0';
@@ -218,6 +227,7 @@ try {
       const placedCompanions=profile.components.filter(c=>isCompanion(c)&&latest.session.state.placements[c.id]);const nextRemovalKey=JSON.stringify(placedCompanions.map(c=>[c.id,latest.session.state.placements[c.id]]));
       if(removalKey!==nextRemovalKey){removalKey=nextRemovalKey;const selected=removalSelect.value;removalSelect.replaceChildren(...placedCompanions.map(c=>{const option=document.createElement('option');option.value=c.id;option.textContent=c.label+' · '+(profile.zones.find(z=>z.id===latest.session.state.placements[c.id])?.label||'on board');return option;}));if(placedCompanions.some(c=>c.id===selected))removalSelect.value=selected;}
       companionRemoval.hidden=!placedCompanions.length;removalButton.disabled=moving||!!latest.busy||!placedCompanions.length;
+      rejectMove.hidden=!latest.pendingMove;rejectMove.disabled=moving||!!latest.busy;
       const pendingCompanion=latest.pendingMove&&isCompanion(profile.components.find(c=>c.id===latest.pendingMove.action.componentId))?latest.pendingMove:null;
       companionPanel.hidden=o.screen!=='companion-placement'&&!pendingCompanion;
       companionZone.hidden=deployCompanion.hidden=!!pendingCompanion;

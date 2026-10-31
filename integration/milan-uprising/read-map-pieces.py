@@ -79,6 +79,7 @@ def detect_investigation():
    for size,icon,mask in templates:
     left=int(round(cx-size/2))-8;top=int(round(cy-size/2))-8
     if left<0 or top<250 or left+size+16>1310 or top+size+16>1330:continue
+    if movement_overlay and left+size+16>600 and top<1075 and top+size+16>530:continue
     canvas=image[top:top+size+16,left:left+size+16]
     scores=1-cv2.matchTemplate(canvas,icon,cv2.TM_CCOEFF_NORMED,mask=mask);scores[~np.isfinite(scores)]=10
     val,_,pos,_=cv2.minMaxLoc(scores)
@@ -96,6 +97,7 @@ def detect_investigation_removals():
    zone=investigation_zone(cx,cy)
    left=int(round(cx))-38;top=int(round(cy))-56
    if zone is None or left<0 or top<250 or left+77>1310 or top+91>1330:continue
+   if movement_overlay and left+77>600 and top<1075 and top+91>530:continue
    patch=image[top:top+91,left:left+77];rgb=patch.astype(np.int16)
    red=np.uint8((rgb[:,:,2]>130)&(rgb[:,:,2]>rgb[:,:,1]*2)&(rgb[:,:,2]>rgb[:,:,0]*2))
    n,labels,stats,centers=cv2.connectedComponentsWithStats(red)

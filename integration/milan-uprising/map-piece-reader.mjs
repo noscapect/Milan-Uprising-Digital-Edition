@@ -10,6 +10,7 @@ function schedule(kind,path,generation,focus=null){
  try{copyFileSync(path,copy);}catch{job.pending=false;return;}
  const args=visionArguments('read-map-pieces.py',copy);
  if(kind==='investigation')args.push('--investigation-only');
+ if(kind!=='target'&&focus?.overlay)args.push('--movement-overlay');
  if(kind==='target'){args.push('--character-only='+focus.componentId);if(focus.overlay)args.push('--movement-overlay');}
  void run(visionPython,args,{windowsHide:true,timeout:15000,maxBuffer:200000}).then(({stdout})=>{
   const value=JSON.parse(stdout);
@@ -19,7 +20,7 @@ function schedule(kind,path,generation,focus=null){
   job.last={...value,generation,stable:confirmed.length>0,confirmedCharacterMoves:confirmed.filter(m=>m.componentId.startsWith('character-')),confirmedCompanionMoves:confirmed.filter(m=>!m.componentId.startsWith('character-')&&!m.componentId.startsWith('investigation')),confirmedRemovedInvestigationLocations:confirmed.filter(m=>m.componentId==='investigation-remove').map(m=>m.zoneId),confirmedInvestigationLocations:confirmed.filter(m=>m.componentId==='investigation').map(m=>m.zoneId),stableSince:confirmed.length?Math.min(...confirmed.map(m=>m.pairSince)):capturedAt,capturedAt,receivedAt:Date.now(),durationMs:Date.now()-capturedAt,focusComponentId:focus?.componentId};
  }).catch(()=>{job.last={ready:false,reason:'Visual piece recovery unavailable',generation,receivedAt:Date.now()};job.track.reset();}).finally(()=>{job.pending=false;try{unlinkSync(copy);}catch{}});
 }
-export function scheduleMapPieces(path,generation){schedule('investigation',path,generation);schedule('portraits',path,generation);}
+export function scheduleMapPieces(path,generation,context=null){schedule('investigation',path,generation,context);schedule('portraits',path,generation,context);}
 export function scheduleTargetCharacter(path,generation,focus){schedule('target',path,generation,focus);}
 export function mapPieces(generation){
  const fresh=kind=>{const value=jobs[kind].last;return value?.ready&&value.generation===generation&&Date.now()-value.receivedAt<20000?value:null;};

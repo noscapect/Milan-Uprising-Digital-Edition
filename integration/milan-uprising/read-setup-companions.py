@@ -12,7 +12,9 @@ else:
 def stop(reason):
  print(json.dumps({'ready':False,'reason':reason}));sys.exit()
 if image.shape[:2]!=(1600,2560):stop('Unsupported size')
-sift=cv2.SIFT_create(nfeatures=12000)
+# The detailed map otherwise consumes the feature budget before every small
+# portrait is represented (notably Helena on the four-NPC setup map).
+sift=cv2.SIFT_create(nfeatures=30000)
 mask=np.zeros(image.shape[:2],np.uint8);mask[280:1380,:1320]=255
 target,td=sift.detectAndCompute(image,mask)
 def align(source,minimum):

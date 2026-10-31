@@ -153,3 +153,17 @@ Omgeving bevat Node.js 24, maar geen npm op PATH. Gebruik daarom de directe Node
 - Een plaatsing en verplaatsing direct via de applicatie, buiten de UI, worden zonder expliciete refresh zichtbaar. Een lege artworkcatalogus houdt alle handelingen via het schema beschikbaar. Geen browserexceptions tijdens deze controles.
 - Oudere profielen (retail, neutrale tafel, sensorstudie en referentie) gecontroleerd via het instellingenvenster, inclusief zoeken, toetsenbordplaatsing met focusbehoud en vrijgeven van sensorcontact. Een ontbrekend kaartbestand valt eveneens terug op het schema; 320 px heeft geen horizontale pagina-overloop.
 - Geen officiële app gestart of aangepast. Geen echte cityronde-, protocol- of hardwaretest. Appcompatibiliteit en automatische invloedsoverdracht blijven open.
+
+
+## Core startup feedback — 30 October 2026
+
+Control Center now reports actual Core startup stages from the PowerShell helper: service check, connection environment, Bluetooth preparation, service startup and activation. It displays elapsed time, identifies a slower step, and distinguishes PC startup complete / waiting for Milan from a connected game. Startup errors remain available after polling or reloading the Control Center; no estimated percentage is shown.
+
+Validation: all 151 public tests passed (`node --test test/*.test.mjs tests/*.test.js`), including startup serialization, stage updates and retained errors. An isolated Edge browser check exercised changing stages, elapsed/slow-step feedback, ready and connected states; screenshots were inspected under ignored `private/startup-ui/`. No physical restart or active-session interruption was performed. The running copy under `C:\Temp\TCE` was not updated.
+
+
+## Core readiness performance — 30 October 2026
+
+Replaced repeated `Get-NetTCPConnection`/CIM calls during startup with .NET listener inspection. Local read-only measurements: old checks 2863/2343/2025 ms; new checks 22/3/2 ms. Readiness now has a 25-second elapsed-time deadline rather than 100 iterations whose duration depended on a slow probe. Timestamped startup stages are written to the private runtime's `core-startup-timing.jsonl`; no adapter or tablet identifiers are recorded there.
+
+Eleven focused tests passed, including real ephemeral TCP listener detection, child exit, timeout and WSL session cleanup. The active portable copy received the two PowerShell startup helpers with verified copies and private backups, without restarting Core or transferring a radio. Its already-running-service preparation path completed in 316 ms. This does not establish cold-start or physical Bluetooth connection latency, and the full reported multi-minute regression is not yet reproduced.

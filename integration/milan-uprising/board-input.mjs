@@ -23,8 +23,18 @@ export function movementConfirmation(before,action,observed){
 // abandon an unconfirmed attempt, without declaring success or replaying input.
 export function movementStillAtOrigin(before,action,observed){
   const origin=before.originZoneId||before.zoneId;
-  if(!origin||origin===action.zoneId||!observed.available||!observed.stable||observed.screen!=='free-character-movement'||observed.componentId!==action.componentId)return null;
+  if(!origin||origin===action.zoneId||!observed.available||!observed.stable||observed.componentId!==action.componentId)return null;
+  if(observed.screen==='location'&&observed.zoneId===origin&&observed.receivedAt>=before.receivedAt+8000)return origin;
+  if(observed.screen!=='free-character-movement')return null;
   return observed.mapPieces?.confirmedCharacterMoves?.some(m=>m.componentId===action.componentId&&m.zoneId===origin&&m.pairSince>=before.receivedAt+8000)?origin:null;
+}
+// A fresh, stable request for another character supersedes an unconfirmed move.
+// This abandons only the attempt; it never confirms the destination or resends input.
+export function movementSuperseded(before,action,observed){
+  return Boolean(observed.available&&observed.stable&&Number.isFinite(before.receivedAt)&&observed.receivedAt>before.receivedAt&&['location','free-character-movement','haven-placement','setup-placement'].includes(observed.screen)&&observed.componentId&&observed.componentId!==action.componentId);
+}
+export function matchesPendingRejection(pending,action){
+ return Boolean(pending&&action.confirmation==='rejected'&&pending.action.componentId===action.componentId&&pending.action.zoneId===action.zoneId&&pending.sentAt===action.sentAt);
 }
 export async function performBoardMove(action,{mapping,movable,currentZone=()=>null,observe,phone,commit,report,validateCompanion,onSending=()=>{},sleep=ms=>new Promise(r=>setTimeout(r,ms)),now=Date.now,timeout=16000}){
   const target=mapping.find(z=>z.zoneId===action.zoneId),component=movable.find(c=>c.id===action.componentId);
