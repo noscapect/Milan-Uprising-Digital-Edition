@@ -7,6 +7,24 @@ import {readCharacterRelocations} from '../integration/milan-uprising/character-
 const profile=JSON.parse(readFileSync(new URL('../data/games/milan-uprising/city-expansions.json',import.meta.url)));
 const raw=lines=>({available:true,width:2560,height:1600,mapGeometry:'android-city-v1',lines});
 const card=(text,y=500)=>({text,x:1510,y});
+
+test('Il Dottore accepts the observed II OCR spelling for completed outcomes only',()=>{
+ const frame={...raw([card('II Dottore placed in Centrale')]),mapGeometry:null};frame.lines.unshift({text:'MASQUERADE',x:1257,y:77});
+ assert.deepEqual(readComponentOutcomes(frame,profile).instructions,[{componentId:'npc-il-dottore',operation:'place',zoneId:'centrale'}]);
+ for(const text of ['Il Dottore placed in Centrale','II Dottore moved to Centrale','II Dottore moved from Garibaldi to Centrale']){
+  frame.lines=[{text:'MASQUERADE',x:1257,y:77},card(text)];
+  assert.equal(readComponentOutcomes(frame,profile).instructions[0].componentId,'npc-il-dottore');
+  assert.deepEqual(readCharacterRelocations(frame,profile.zones,profile.components.filter(c=>c.groupId==='characters'),profile.components)?.unsupported||[],[]);
+ }
+ frame.lines=[{text:'MASQUERADE',x:1257,y:77},card('II Dottore removed from map')];
+ assert.deepEqual(readComponentOutcomes(frame,profile).instructions,[{componentId:'npc-il-dottore',operation:'remove'}]);
+ assert.equal(readCompletedMovement('II Dottore removed from map',profile.zones),null);
+ assert.deepEqual(readCharacterRelocations(frame,profile.zones,[],profile.components)?.unsupported||[],[]);
+ frame.lines=[{text:'MASQUERADE',x:1257,y:77},card('II Dottore Junior placed in Centrale')];
+ assert.equal(readComponentOutcomes(frame,profile).instructions.length,0);
+ frame.lines=[{text:'MASQUERADE',x:1257,y:77},card('II Dottore placed in Centrale')];
+ assert.equal(readComponentOutcomes(frame,{...profile,components:[...profile.components,{id:'ambiguous',label:'II Dottore'}]}).instructions.length,0);
+});
 test('completed moves match full origin names including Washington and preserve the old moved-to form',()=>{
  assert.deepEqual(readCompletedMovement('Agnese Della Luna moved from Washington to Duomo',profile.zones),{name:'agnesedellaluna',zoneId:'duomo',originZoneId:'washington'});
  assert.equal(readCompletedMovement('Agnese Della Luna moved to Cadorna',profile.zones).zoneId,'cadorna');

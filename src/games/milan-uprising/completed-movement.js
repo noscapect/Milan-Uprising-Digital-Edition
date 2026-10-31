@@ -1,6 +1,7 @@
 const normalize=text=>text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
 // Parse completed feed outcomes, never instructions to choose a destination.
 export function readCompletedMovement(text,zones){
+ if(/removedfrom(?:the)?map$/.test(normalize(text)))return null;
  const compact=normalize(text),direct=compact.match(/^(.+?)movedto(.+)$/),from=compact.match(/^(.+?)movedfrom(.+)$/);
  if(!direct&&!from)return null;
  const city=zones.filter(zone=>zone.area==='city');

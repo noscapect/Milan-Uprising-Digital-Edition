@@ -4,6 +4,14 @@ The linked table copies observed official-app outcomes. It does not have a compl
 
 ## Named placements
 
+### Sunset NPC batch and Il Dottore OCR — 31 October 2026
+
+The reported Sunset batch showed Salvador Espartelo in Garibaldi, Il Dottore in Centrale and Hasanah in Città Studi. At inspection the first and third were already recorded, while OCR consistently read Il Dottore as `II Dottore`, leaving his placement unsupported. The outcome reader now accepts that single observed spelling for `npc-il-dottore`; it does not broadly replace letters or fuzzy-match other names. The character reader uses the same identity check to avoid reporting known NPC movement as an unknown player character.
+
+The regression also exposed that `removed from map` contained the substring `moved from`, causing a false completed-movement parse. The shared movement parser now excludes explicit removal outcomes so the component-removal reader handles them. Tests cover canonical and observed spellings, placement, movement, removal, unknown extended names and ambiguous identities. A real-adapter replay verifies all three Sunset placements after two observations, unrelated-state preservation and idempotence.
+
+The current recovery reader was extended to confirm named NPC outcomes across independent captures and submit revision-checked table-only instructions, including on recognized Sunset feeds. Il Dottore was placed automatically in Centrale; the shared browser verified all three NPCs at the stated locations without JavaScript errors. No gameplay input, app modification or Core restart occurred. The integrated sources are staged for subsequent adapter starts; private screenshots, observations and recovery logs remain under `private/npc-sunset-recovery/`.
+
 The reader handles complete, known-component feed cards of the forms **[name] placed in [district]**, **placed at**, **moved to**, and **moved from [origin] to [destination]**. Completed player-character movement retains its separate reader and portrait-precedence rules. Explicit **Remove [name] from map** and **[name] removed from map** cards are supported. Cards are read in displayed order, the newest recognized instruction for each component wins, and an unreadable newest destination blocks an older placement. Two matching observations and calibrated map geometry are required. No missing-portrait inference is used.
 
 ### Agnese moved from Washington to Duomo — 30 October 2026

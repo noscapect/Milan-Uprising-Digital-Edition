@@ -58,6 +58,12 @@ test('setup portraits reach the real table after two observations, across NPC, a
  const orlando=await observe(true);assert.equal(orlando.componentId,'character-nosferatu');assert.equal(orlando.zoneId,'cinque-giornate');assert.equal(orlando.screen,'location');assert.equal(acceptsMovement(orlando),true);
  location.focusRead=true;location.lines=location.lines.filter(l=>l.text!=='Investigate');
  await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(location));await observe(true);assert.equal(acceptsMovement(await observe(true)),true);
+ const sunset={available:true,width:2560,height:1600,mapGeometry:null,lines:[{text:'NIGHT 6 SUNSET',x:396,y:77},{text:'MASQUERADE',x:1257,y:77},{text:'Salvador Espartelo',x:1511,y:900},{text:'placed in Garibaldi',x:1511,y:952},{text:'II Dottore placed in',x:1511,y:1070},{text:'Centrale',x:1511,y:1122},{text:'Hasanah placed in',x:1511,y:1240},{text:'Cittå Studi',x:1511,y:1292}]};
+ await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(sunset));await observe(true);assert.equal(tableSession().state.placements['npc-il-dottore'],null);
+ await new Promise(resolve=>setTimeout(resolve,2));const deployed=await observe(true);assert.deepEqual(deployed.componentOutcomes.unsupported,[]);
+ for(const [id,zone] of [['npc-salvador-espartelo','garibaldi'],['npc-il-dottore','centrale'],['npc-hasanah','citta-studi']])assert.equal(tableSession().state.placements[id],zone);
+ assert.equal(tableSession().state.faces['investigation-18'],'restricted');
+ const deployedRevision=tableSession().state.revision;await observe(true);assert.equal(tableSession().state.revision,deployedRevision);
  console.log('setup placements verified');`;
  const {stdout}=await promisify(execFile)(process.execPath,['--input-type=module','-e',script],{windowsHide:true,timeout:30000,env:{...process.env,MILAN_FEEDBACK_STATE_DIR:state,MILAN_FEEDBACK_REPLAY_OBSERVATION:frame,MILAN_FEEDBACK_REPLAY_IMAGE:''}});
  assert.match(stdout,/setup placements verified/);
