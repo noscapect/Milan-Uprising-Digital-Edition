@@ -19,6 +19,7 @@ test('setup portraits reach the real table after two observations, across NPC, a
  const script=`
  import assert from 'node:assert/strict';import {writeFile} from 'node:fs/promises';
  import {observe,setFeedbackSource,tableSession,recordComponentInstructions} from ${JSON.stringify(pathToFileURL(join(runtime,'app-feedback.mjs')).href)};
+ import {acceptsMovement} from ${JSON.stringify(pathToFileURL(join(runtime,'board-input.mjs')).href)};
  const steps=[['NPC PLACEMENT',[['npc-agnese-della-luna','duomo'],['npc-helena-varga','isola'],['npc-leandro-costa','calvairate'],['npc-ruslana','corvetto']]],['ALLIES PLACEMENT',[['ally-reporter','washington']]],['GHOULS PLACEMENT',[['ghoul-fixer','qt8']]]];
  setFeedbackSource('android');
  for(const [title,pieces] of steps){
@@ -40,6 +41,23 @@ test('setup portraits reach the real table after two observations, across NPC, a
  assert.equal(state.placements['investigation-18'],'washington');assert.equal(state.faces['investigation-18'],'restricted');
  await observe(true);assert.equal(tableSession().state.revision,state.revision);
  for(const [,pieces] of steps)for(const [id,zone] of pieces)assert.equal(tableSession().state.placements[id],zone);
+ const encounter={available:true,width:2560,height:1600,mapGeometry:null,lines:[{text:'NIGHT 5 HOUR 2',x:396,y:77},{text:'SUSPICION',x:882,y:77},{text:'MASQUERADE',x:1257,y:77},{text:'Cittå Studi - Next',x:1348,y:739},{text:'Encounter in',x:1348,y:792},{text:'Garibaldi.',x:1348,y:843}]};
+ await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(encounter));await observe(true);
+ const hasMarker=zone=>Object.entries(tableSession().state.placements).some(([id,z])=>id.startsWith('investigation-')&&z===zone&&tableSession().state.faces[id]==='investigation');
+ assert.equal(hasMarker('garibaldi'),false);await observe(true);assert.equal(hasMarker('garibaldi'),true);
+ encounter.lines.push({text:'Cittå Studi - Next',x:1348,y:956},{text:'Encounter in',x:1348,y:1009},{text:'Portello.',x:1348,y:1060});
+ await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(encounter));await observe(true);assert.equal(hasMarker('garibaldi'),true);
+ await observe(true);assert.equal(hasMarker('garibaldi'),false);assert.equal(hasMarker('portello'),true);
+ assert.equal(tableSession().state.faces['investigation-18'],'restricted');for(const zone of movement.mapPieces.investigationLocations)assert(hasMarker(zone));
+ const lastRevision=tableSession().state.revision;await observe(true);assert.equal(tableSession().state.revision,lastRevision);
+ const location={available:true,width:2560,height:1600,lines:[{text:'Main Sheet',x:716,y:65},{text:'9) Cinque-Giorfiate: Central; upscale area',x:110,y:233},{text:'Investigate',x:141,y:509},{text:'ORLANDO BIANCHI',x:328,y:1372},{text:'End Turn',x:2114,y:1445}]};
+ await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(location));
+ assert.equal(acceptsMovement(await observe(true)),false);assert.equal(acceptsMovement(await observe(true)),false);
+ location.lines.push({text:'Cinque Giornate: Central, upscale area',x:183,y:252});
+ await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(location));assert.equal(acceptsMovement(await observe(true)),false);
+ const orlando=await observe(true);assert.equal(orlando.componentId,'character-nosferatu');assert.equal(orlando.zoneId,'cinque-giornate');assert.equal(orlando.screen,'location');assert.equal(acceptsMovement(orlando),true);
+ location.focusRead=true;location.lines=location.lines.filter(l=>l.text!=='Investigate');
+ await writeFile(process.env.MILAN_FEEDBACK_REPLAY_OBSERVATION,JSON.stringify(location));await observe(true);assert.equal(acceptsMovement(await observe(true)),true);
  console.log('setup placements verified');`;
  const {stdout}=await promisify(execFile)(process.execPath,['--input-type=module','-e',script],{windowsHide:true,timeout:30000,env:{...process.env,MILAN_FEEDBACK_STATE_DIR:state,MILAN_FEEDBACK_REPLAY_OBSERVATION:frame,MILAN_FEEDBACK_REPLAY_IMAGE:''}});
  assert.match(stdout,/setup placements verified/);

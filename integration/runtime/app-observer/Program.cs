@@ -40,6 +40,18 @@ using(var graphics=Graphics.FromImage(bitmap)){
 }
 using var software=BitmapInput.Software(bitmap);
 using var engine=new TextReader();
+// The location title can merge with its illustrated background in whole-frame
+// OCR. Read its neutral light lettering independently, without fuzzy names.
+async Task<List<ReadLine>> ReadLocationTitle(){
+ const int tx=175,ty=235,tw=1200,th=110;
+ using var title=new Bitmap(tw,th);
+ for(int y=0;y<th;y++)for(int x=0;x<tw;x++){
+  var pixel=bitmap.GetPixel(x+tx,y+ty);int low=Math.Min(pixel.R,Math.Min(pixel.G,pixel.B)),high=Math.Max(pixel.R,Math.Max(pixel.G,pixel.B));
+  title.SetPixel(x,y,low>145&&high-low<60?Color.Black:Color.White);
+ }
+ using var pixels=BitmapInput.Software(title);var read=await engine.RecognizeAsync(pixels);
+ return read.Lines.Where(l=>l.Text.Contains(':')).Select(l=>new ReadLine(l.Words.Select(w=>new ReadWord(w.Text,new Windows.Foundation.Rect(w.BoundingRect.X+tx,w.BoundingRect.Y+ty,w.BoundingRect.Width,w.BoundingRect.Height))).ToList())).ToList();
+}
 // During a pending move, read only the location header and active-character footer.
 // Fall back to the complete observer when this is not an ordinary location screen.
 if(focusRead&&external&&width==2560&&height==1600){
@@ -55,6 +67,10 @@ if(focusRead&&external&&width==2560&&height==1600){
   }
  }
  var compact=System.Text.RegularExpressions.Regex.Replace(string.Join(" ",focusedText).ToLowerInvariant(),"[^a-z0-9]","");
+ if(compact.Contains("endturn")&&compact.Contains("main")&&compact.Contains("sheet"))foreach(var line in await ReadLocationTitle()){
+  locationHeading=true;
+  focusedLines.Add(new{text=line.Text,x=line.Words.Min(w=>w.BoundingRect.X),y=line.Words.Min(w=>w.BoundingRect.Y),words=line.Words.Select(w=>new{text=w.Text,x=w.BoundingRect.X,y=w.BoundingRect.Y,width=w.BoundingRect.Width,height=w.BoundingRect.Height})});
+ }
  int headerWhites=0;
  for(int y=60;y<125;y+=2)for(int x=700;x<875;x+=2){var pixel=bitmap.GetPixel(x,y);if(pixel.R>180&&pixel.G>180&&pixel.B>180)headerWhites++;}
  // Modal overlays dim the navigation. They must use full OCR, including errors.
@@ -63,6 +79,10 @@ if(focusRead&&external&&width==2560&&height==1600){
  }
 }
 var result=await engine.RecognizeAsync(software);
+if(external&&width==2560&&height==1600){
+ var locationScreen=System.Text.RegularExpressions.Regex.Replace(result.Text.ToLowerInvariant(),"[^a-z]","");
+ if(locationScreen.Contains("endturn")&&locationScreen.Contains("main")&&locationScreen.Contains("sheet"))result.Lines.AddRange(await ReadLocationTitle());
+}
 // OCR can mistake colored Influence cubes for letters. Read
 // calibrated feed text as neutral light ink, without red/purple/gold icons.
 if(external&&width==2560&&height==1600&&result.Lines.Any(line=>line.Text.Contains("SUSPICION",StringComparison.OrdinalIgnoreCase))){

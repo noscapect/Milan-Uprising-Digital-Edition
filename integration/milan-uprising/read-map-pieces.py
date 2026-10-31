@@ -16,7 +16,10 @@ if image.shape[:2]!=(1600,2560):print(json.dumps({'ready':False,'reason':'Unsupp
 # Compensate only the known movement overlay's dimming; its rectangle is masked below.
 if movement_overlay:image=cv2.convertScaleAbs(image,alpha=3.0)
 gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-base=cv2.resize(cv2.imread(str(assets/'map-milan.png')),(1000,632));sift=cv2.SIFT_create(nfeatures=2400)
+# A highlighted district/portrait can dominate a small feature budget and
+# produce a slightly shifted registration that misses the entire marker grid.
+# Keep the existing marker tolerances; register against more map detail.
+base=cv2.resize(cv2.imread(str(assets/'map-milan.png')),(1000,632));sift=cv2.SIFT_create(nfeatures=12000)
 kp,des=sift.detectAndCompute(cv2.cvtColor(base,cv2.COLOR_BGR2GRAY),None)
 roi=gray.copy();roi[:240]=0;roi[1340:]=0;roi[:,1320:]=0
 if movement_overlay:roi[530:1075,600:]=0

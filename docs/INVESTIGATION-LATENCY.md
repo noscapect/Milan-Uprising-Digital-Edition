@@ -2,6 +2,18 @@
 
 Updated 26 October 2026.
 
+## Garibaldi placement and registration drift — 31 October 2026
+
+The next report exposed a missing Garibaldi marker after the visible **Città Studi — Next Encounter in Garibaldi** outcome. Two routes failed: the encounter reader still required the observer's full-map geometry, and the image reader's 2,400-feature registration drifted by several pixels on the highlighted map. The latter could pass its map-anchor minimum yet miss most of the tightly bounded marker grid. The earlier scene-gate corrections alone did not address this registration error.
+
+Encounter cards now use the shared recognized-feed eligibility, including the calibrated Masquerade layout when observer geometry is unavailable. Ordered destinations, unknown-destination rejection and the adapter's two-observation requirement remain in place. Image registration now uses 12,000 features while preserving the existing geometry, marker-position and matching tolerances. On the reported image this increased registered anchors from 46 to 427 and recovered all eight visible Investigation destinations, including Garibaldi, instead of only two.
+
+The active recovery reader was updated to combine independently confirmed visual and explicit encounter outcomes, suppress superseded positive destinations and apply revision-checked marker-only corrections. It is bound to the existing adapter process; the integrated source is also staged in the portable adapter. Garibaldi was placed automatically, Città Studi remained empty, and the seven previous markers were preserved. The shared browser verified all destinations without JavaScript errors. No gameplay input, Core restart or app modification occurred.
+
+Recorded-image regressions cover the highlighted Garibaldi map, the dimmed movement overlay and the Città Studi removal cross. They recognized the expected eight/six/seven positive markers respectively and the explicit removal, with 407–556 registration anchors and approximately 1.9–2.4 seconds per read on this PC. These are reader measurements, not guaranteed end-to-end timings. Public parser and real-adapter replay regressions cover first-read preservation, second-read placement, ordered relocation to a later destination, idempotence, unrelated markers and Restricted-token preservation. Private evidence remains under `private/placement-sync-recovery/`.
+
+All 166 public tests passed with `--test-concurrency=1`. The initial broad `node --test` run discovered 546 tests including temporary copies and exposed one existing replay timing race: successive synthetic observations could share the same millisecond. The setup-tile replay now explicitly waits for distinct capture timestamps; its focused rerun passed alongside the encounter and full-adapter regressions.
+
 ## Recovery after setup and movement overlays — 31 October 2026
 
 A reported table had no Investigation tokens while the official app showed several behind its movement dialog. Whole-frame OCR supplied no ordinary city-map geometry on this dimmed scene, so the general piece workers were neither scheduled nor consumed. The adapter now also accepts the complete movement prompt in its calibrated dialog bounds. Both workers receive the existing dimming-compensation flag; marker matching and positive removal recognition explicitly exclude patches covered by the dialog. Map registration, matching thresholds, two independent observations, freshness and input-generation checks remain required. Missing or covered icons never imply removal.

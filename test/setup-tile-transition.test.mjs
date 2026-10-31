@@ -24,7 +24,9 @@ test('real adapter transition from Board tiles to Components setup preserves til
  const moduleUrl=pathToFileURL(join(runtime,'app-feedback.mjs')).href,storeUrl=pathToFileURL(join(runtime,'location-tiles-store.mjs')).href;
  const script=`
  import assert from 'node:assert/strict';import {writeFile,readFile} from 'node:fs/promises';
- import {observe,setFeedbackSource,clearBoard} from ${JSON.stringify(moduleUrl)};
+ import {observe as readObservation,setFeedbackSource,clearBoard} from ${JSON.stringify(moduleUrl)};
+ // Replayed captures must have distinct timestamps, like real tablet frames.
+ const observe=async force=>{await new Promise(resolve=>setTimeout(resolve,2));return readObservation(force);};
  import {boardTiles,updateBoardTile} from ${JSON.stringify(storeUrl)};
  setFeedbackSource('android');updateBoardTile({zoneId:'haven-1l',kind:'haven-room',room:{type:'personal',level:'upgraded',bonus:'+2 Willpower'},expectedRevision:0});
  await observe(true);await observe(true);const before=boardTiles();assert.equal(before.tiles.qt8.special.value,'haven');assert.equal(before.tiles.portello.bonus.value,'underground');

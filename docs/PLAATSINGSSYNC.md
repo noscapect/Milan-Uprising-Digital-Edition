@@ -68,6 +68,14 @@ Validatie: `node --test` slaagde met 542 ontdekte tests, inclusief tijdelijke ko
 
 ## Unconfirmed character movement recovery — 30 October 2026
 
+### Orlando location-heading recognition — 31 October 2026
+
+Whole-frame OCR read the active **Cinque Giornate** heading as `Cinque-Giorfiate`, while correctly recognizing Orlando Bianchi. With no exact known district, the adapter classified the screen as other and disallowed movement. The observer now independently reads neutral light lettering in the bounded location-title area on recognized Main/Sheet/End Turn screens. Both full and focused observation paths receive the observed title; district matching remains exact and does not guess from a character's previous position.
+
+The recorded image produced the correct heading with Windows and portable OCR, and the focused reader preserved it. The observer update was activated in the running portable session without restarting the Core. Live status subsequently allowed Orlando's movement from Cinque Giornate; the user moved him to Porta Romana and the adapter recorded that destination with no pending request. The board browser confirmed Orlando at Porta Romana. No destination or movement input was chosen by the recovery check. Private captures and logs remain under `private/orlando-recovery/`.
+
+The real-adapter replay verifies rejection of the misspelled heading, acceptance only after stable exact-title observations, and focused-screen movement eligibility. `node --test` passed all 546 discovered tests, including temporary copies.
+
 An unconfirmed character move no longer blocks subsequent characters indefinitely. Fresh, stable active-character feedback for another character abandons the old attempt without confirming its destination or replaying sensor input. When Milan remains on the original location screen for the same character, fresh stable origin feedback after eight seconds also releases the attempt. Missing observations, an error screen, an unchanged timestamp or an unstable character observation do not release it. These checks do not establish district adjacency or implement Milan movement rules.
 
 The linked board now offers a visible **Milan did not accept this move · clear pending attempt** button. Rejection matches the exact miniature, destination and request timestamp, preserves confirmed positions, and does not allow manual acceptance of character moves. Companion acceptance remains separately validated.
